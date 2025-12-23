@@ -5,8 +5,6 @@ import gsap from "gsap";
 
 const Hero = () => {
     const heroRef = useRef<HTMLDivElement>(null);
-    const titleRef = useRef(null);
-    const subtitleRef = useRef(null);
     const btnRef = useRef(null);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
@@ -25,25 +23,37 @@ const Hero = () => {
     }, []);
 
     useEffect(() => {
-        const tl = gsap.timeline();
+        // Use gsap.context for proper scoping and cleanup in React
+        const ctx = gsap.context(() => {
+            const tl = gsap.timeline();
+            const lines = gsap.utils.toArray(".clip-line");
 
-        tl.fromTo(
-            titleRef.current,
-            { opacity: 0, y: 50, filter: "blur(10px)" },
-            { opacity: 1, y: 0, filter: "blur(0px)", duration: 1.2, ease: "power4.out" }
-        )
-            .fromTo(
-                subtitleRef.current,
-                { opacity: 0, y: 30, filter: "blur(5px)" },
-                { opacity: 1, y: 0, filter: "blur(0px)", duration: 1, ease: "power3.out" },
-                "-=0.8"
-            )
+            // 1. Initial State for lines
+            gsap.set(lines, { 
+                clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
+                y: 80,
+                opacity: 0
+            });
+
+            // 2. Animate Clip Path Reveal for Title lines
+            tl.to(lines, {
+                clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+                y: 0,
+                opacity: 1,
+                duration: 1.2,
+                stagger: 0.15,
+                ease: "power4.out"
+            })
+            // 3. Animate Button separately
             .fromTo(
                 btnRef.current,
                 { opacity: 0, scale: 0.8 },
                 { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.7)" },
                 "-=0.5"
             );
+        }, heroRef);
+
+        return () => ctx.revert();
     }, []);
 
     return (
@@ -67,24 +77,23 @@ const Hero = () => {
             <div className="absolute top-[20%] left-[20%] w-[300px] h-[300px] bg-purple-600/20 dark:bg-purple-600/30 rounded-full blur-[120px] -z-10 animate-pulse" />
             <div className="absolute bottom-[20%] right-[20%] w-[400px] h-[400px] bg-blue-600/20 dark:bg-blue-600/30 rounded-full blur-[120px] -z-10 animate-pulse" style={{ animationDelay: "2s" }} />
 
-            <h1
-                ref={titleRef}
-                className="text-6xl md:text-8xl font-black tracking-tighter mb-6 text-foreground relative z-10"
-            >
-                Hi, I'm <br className="md:hidden"/>
-                <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 cursor-default hover:tracking-widest transition-all duration-500">
-                    Aayushman
-                </span>
-            </h1>
+            <div className="relative z-10 mb-6 font-black tracking-tighter text-foreground">
+                <h1 className="text-6xl md:text-8xl flex flex-col items-center">
+                    <span className="clip-line block">Hi, I'm</span>
+                    <span className="clip-line block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 cursor-default hover:tracking-widest transition-all duration-500 pb-2">
+                        Aayushman
+                    </span>
+                </h1>
+            </div>
             
-            <p
-                ref={subtitleRef}
-                className="text-xl md:text-3xl text-gray-600 dark:text-gray-300 max-w-3xl mb-12 font-light leading-relaxed relative z-10"
-            >
-                <span className="font-semibold text-foreground">Frontend Architect</span> & <span className="font-semibold text-foreground">React Specialist</span>.
-                <br />
-                Building digital experiences that are pixel-perfect and performant.
-            </p>
+            <div className="relative z-10 text-xl md:text-3xl text-gray-600 dark:text-gray-300 max-w-3xl mb-12 font-light leading-relaxed flex flex-col items-center gap-2">
+                <span className="clip-line block">
+                     <span className="font-semibold text-foreground">Frontend Architect</span> & <span className="font-semibold text-foreground">React Specialist</span>.
+                </span>
+                <span className="clip-line block">
+                    Building digital experiences that are pixel-perfect and performant.
+                </span>
+            </div>
 
             <div ref={btnRef} className="relative z-10">
                 <a
