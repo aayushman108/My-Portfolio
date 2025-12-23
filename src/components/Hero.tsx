@@ -35,21 +35,21 @@ const Hero = () => {
     <section
       id="home"
       ref={heroRef}
-      className="min-h-screen flex flex-col justify-center items-center text-center px-6 relative overflow-hidden"
+      className="min-h-screen flex flex-col justify-center items-center text-center px-6 relative overflow-hidden bg-background"
     >
         {/* Background gradient blob */}
-        <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[100px] -z-10 animate-pulse" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[100px] -z-10 animate-pulse" style={{ animationDelay: "2s" }} />
+        <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-purple-600/10 dark:bg-purple-600/20 rounded-full blur-[100px] -z-10 animate-pulse" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-blue-600/10 dark:bg-blue-600/20 rounded-full blur-[100px] -z-10 animate-pulse" style={{ animationDelay: "2s" }} />
 
       <h1
         ref={titleRef}
-        className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6"
+        className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-foreground"
       >
-        Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">Aayushman Sharma</span>
+        Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-600">Aayushman Sharma</span>
       </h1>
       <p
         ref={subtitleRef}
-        className="text-xl md:text-2xl text-gray-400 max-w-2xl mb-10"
+        className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mb-10"
       >
         Frontend React Developer crafting beautiful, high-performance web experiences.
       </p>
