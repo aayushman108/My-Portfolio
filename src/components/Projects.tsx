@@ -1,5 +1,7 @@
 "use client";
-
+import { useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
 const projects = [
@@ -33,6 +35,31 @@ const projects = [
 ];
 
 const Projects = () => {
+    useEffect(() => {
+        gsap.registerPlugin(ScrollTrigger);
+    
+        const ctx = gsap.context(() => {
+          gsap.fromTo(
+            ".project-card",
+            { opacity: 0, y: 50 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              stagger: 0.2,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: "#projects",
+                start: "top 75%",
+                toggleActions: "play none none reverse",
+              },
+            }
+          );
+        });
+    
+        return () => ctx.revert();
+      }, []);
+
   return (
     <section id="projects" className="py-20 px-6 bg-background">
       <div className="container mx-auto">
@@ -43,7 +70,7 @@ const Projects = () => {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-lg dark:shadow-none hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-300 group"
+              className="project-card bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-lg dark:shadow-none hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-300 group"
             >
               <div className={`h-48 w-full bg-gradient-to-br ${project.color} opacity-80 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center`}>
                   <span className="text-4xl font-bold text-white/50 dark:text-white/20">Preview</span>

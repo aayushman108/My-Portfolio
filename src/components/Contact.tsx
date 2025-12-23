@@ -1,11 +1,37 @@
 "use client";
-
+import { useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaEnvelope, FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
 
 const Contact = () => {
+    useEffect(() => {
+        gsap.registerPlugin(ScrollTrigger);
+    
+        const ctx = gsap.context(() => {
+          gsap.fromTo(
+            ".contact-container",
+            { opacity: 0, scale: 0.9 },
+            {
+              opacity: 1,
+              scale: 1,
+              duration: 1,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: "#contact",
+                start: "top 80%",
+                toggleActions: "play none none reverse",
+              },
+            }
+          );
+        });
+    
+        return () => ctx.revert();
+      }, []);
+
     return (
         <section id="contact" className="py-20 px-6 bg-gray-50 dark:bg-black/30">
-            <div className="container mx-auto text-center">
+            <div className="contact-container container mx-auto text-center">
                 <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-500 bg-clip-text text-transparent">
                     Get In Touch
                 </h2>
