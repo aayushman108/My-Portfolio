@@ -4,7 +4,7 @@ import { FaCode, FaRocket, FaUserSecret } from "react-icons/fa";
 
 const About = () => {
     return (
-        <section id="about" className="min-h-screen py-20 relative z-20">
+        <section id="about" className="min-h-screen relative z-20">
             {/* 
               Static Immersive Container
             */}

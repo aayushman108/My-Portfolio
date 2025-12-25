@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { BiHappyBeaming, BiMobileAlt } from "react-icons/bi";
+import { BiHappyBeaming } from "react-icons/bi";
 import { FaLaptopHouse, FaTools, FaFileContract } from "react-icons/fa";
 import { MdAnimation, MdDevices } from "react-icons/md";
 
@@ -73,7 +73,7 @@ const Questions = () => {
           scale: 1,
           duration: 0.8,
           stagger: 0.15,
-          ease: "back.out(1.2)",
+          ease: "power4.in",
           scrollTrigger: {
             trigger: ".questions-grid",
             start: "top 75%",
@@ -115,7 +115,7 @@ const Questions = () => {
       <div className="absolute top-20 left-0 w-72 h-72 bg-purple-500/5 rounded-full blur-3xl -z-10" />
       <div className="absolute bottom-20 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl -z-10" />
 
-      <div className="container mx-auto max-w-7xl">
+      <div className="container mx-auto max-w-7xl px-3">
         <div className="questions-header text-center mb-24 max-w-3xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-500 bg-clip-text text-transparent">
             Common Questions
@@ -132,7 +132,7 @@ const Questions = () => {
               className="question-card group relative rounded-2xl transition-all duration-300 hover:-translate-y-2"
             >
               {/* Animated Border Gradient Layer - Visible on Hover */}
-              <div className="absolute -inset-[1px] rounded-2xl overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+              <div className="absolute -inset-[2px] rounded-2xl overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                 <div className="absolute inset-[-100%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#0000_0%,#0000_50%,#9333ea_100%)] blur-[2px]" />
               </div>
 
@@ -161,17 +161,20 @@ const Questions = () => {
           </p>
           <button
             onClick={scrollToContact}
-            className="group relative inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white transition-all duration-200 bg-gray-900 dark:bg-white dark:text-black rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 hover:shadow-lg hover:-translate-y-0.5"
+            className="group relative inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white transition-all duration-200 bg-gray-900 dark:bg-white dark:text-black rounded-full hover:shadow-lg hover:-translate-y-0.5 overflow-hidden"
           >
-            <span>Let's Talk</span>
-            <svg
-              className="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+            <span className="relative z-10 flex items-center dark:group-hover:text-white transition-colors duration-200">
+              Let's Talk
+              <svg
+                className="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </span>
           </button>
         </div>
       </div>
