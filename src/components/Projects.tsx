@@ -1,65 +1,12 @@
 "use client";
 import { useEffect } from "react";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { FaGithub, FaExternalLinkAlt, FaArrowRight } from "react-icons/fa";
+import { projects } from "@/data/projects";
 
-const projects = [
-  {
-    title: "E-Commerce Dashboard",
-    description:
-      "A comprehensive dashboard for managing online stores, featuring real-time analytics and inventory management.",
-    tech: ["React", "Tailwind", "Recharts"],
-    github: "#",
-    live: "#",
-    color: "from-blue-500 to-cyan-500",
-  },
-  {
-    title: "AI Chat Application",
-    description:
-      "Real-time chat application powered by AI, supporting multiple concurrent conversations and voice input.",
-    tech: ["Next.js", "OpenAI API", "Socket.io"],
-    github: "#",
-    live: "#",
-     color: "from-purple-500 to-pink-500",
-  },
-  {
-    title: "Portfolio Website",
-    description:
-      "Modern portfolio website with smooth animations and responsive design showcasing creative work.",
-    tech: ["Next.js", "GSAP", "Tailwind"],
-    github: "#",
-    live: "#",
-     color: "from-green-500 to-emerald-500",
-  },
-  {
-    title: "E-Commerce Dashboard",
-    description:
-      "A comprehensive dashboard for managing online stores, featuring real-time analytics and inventory management.",
-    tech: ["React", "Tailwind", "Recharts"],
-    github: "#",
-    live: "#",
-    color: "from-blue-500 to-cyan-500",
-  },
-  {
-    title: "AI Chat Application",
-    description:
-      "Real-time chat application powered by AI, supporting multiple concurrent conversations and voice input.",
-    tech: ["Next.js", "OpenAI API", "Socket.io"],
-    github: "#",
-    live: "#",
-     color: "from-purple-500 to-pink-500",
-  },
-  {
-    title: "Portfolio Website",
-    description:
-      "Modern portfolio website with smooth animations and responsive design showcasing creative work.",
-    tech: ["Next.js", "GSAP", "Tailwind"],
-    github: "#",
-    live: "#",
-     color: "from-green-500 to-emerald-500",
-  },
-];
+
 
 const Projects = () => {
     useEffect(() => {
@@ -90,7 +37,7 @@ const Projects = () => {
   return (
     <section id="projects" className="py-20 px-6 bg-background">
       <div className="container mx-auto">
-        <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-500 bg-clip-text text-transparent">
+        <h2 className="text-4xl font-bold text-center mb-16 bg-linear-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-500 bg-clip-text text-transparent">
           Featured Projects
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -99,7 +46,7 @@ const Projects = () => {
               key={index}
               className="project-card bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-lg dark:shadow-none hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-300 group"
             >
-              <div className={`h-48 w-full bg-gradient-to-br ${project.color} opacity-80 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center`}>
+              <div className={`h-48 w-full bg-linear-to-br ${project.color} opacity-80 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center`}>
                   <span className="text-4xl font-bold text-white/50 dark:text-white/20">Preview</span>
               </div>
               
@@ -137,6 +84,15 @@ const Projects = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-16 text-center">
+          <Link
+            href="/projects"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white rounded-full font-bold text-lg hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:-translate-y-1"
+          >
+            View All Projects <FaArrowRight />
+          </Link>
         </div>
       </div>
     </section>
