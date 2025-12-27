@@ -1,100 +1,100 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { usePathname } from "next/navigation";
 import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(useGSAP);
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const pageName = pathname === "/" ? "Home" : pathname.substring(1).charAt(0).toUpperCase() + pathname.slice(2);
   const containerRef = useRef(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     // Lock scroll on mount
     document.body.style.overflow = "hidden";
     document.body.style.cursor = "wait";
 
-    const ctx = gsap.context(() => {
-        const overlay = document.getElementById("transition-overlay");
-        const logo = document.getElementById("transition-logo");
-        const content = document.getElementById("page-content");
-        const counterText = document.getElementById("loading-counter");
-        const progressBar = document.getElementById("progress-bar");
-        const progressContainer = document.getElementById("progress-container");
+    const overlay = document.getElementById("transition-overlay");
+    const logo = document.getElementById("transition-logo");
+    const content = document.getElementById("page-content");
+    const counterText = document.getElementById("loading-counter");
+    const progressBar = document.getElementById("progress-bar");
+    const progressContainer = document.getElementById("progress-container");
 
-        if (overlay && logo) {
-            const tl = gsap.timeline({
-                onComplete: () => {
-                    document.body.style.overflow = "";
-                    document.body.style.cursor = "default";
-                }
-            });
-            const counter = { val: 0 };
-            
-            // Reset states for a clean start
-            tl.set(overlay, { yPercent: 0, borderBottomLeftRadius: 0, borderBottomRightRadius: 0 })
-              .set(logo, { opacity: 0, y: 50 })
-              .set(content, { opacity: 0, y: 100, scale: 0.9 })
-              .set([progressBar, progressContainer], { opacity: 1, scaleX: 0, transformOrigin: "left" })
-              .set(progressContainer, { scaleX: 1 });
+    if (overlay && logo) {
+        const tl = gsap.timeline({
+            onComplete: () => {
+                document.body.style.overflow = "";
+                document.body.style.cursor = "default";
+            }
+        });
+        const counter = { val: 0 };
+        
+        // Reset states for a clean start
+        tl.set(overlay, { yPercent: 0, borderBottomLeftRadius: 0, borderBottomRightRadius: 0 })
+          .set(logo, { opacity: 0, y: 50 })
+          .set(content, { opacity: 0, y: 100, scale: 0.9 })
+          .set([progressBar, progressContainer], { opacity: 1, scaleX: 0, transformOrigin: "left" })
+          .set(progressContainer, { scaleX: 1 });
 
-            // 1. Premium Entrance
-            tl.to(logo, {
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                ease: "power4.out"
-            })
-            
-            // 2. Loading Progress (3s Simulation)
-            .to(counter, {
-                val: 100,
-                duration: 3.0, 
-                ease: "power2.inOut",
-                onUpdate: () => {
-                    if (counterText) counterText.innerText = Math.floor(counter.val).toString().padStart(3, '0');
-                }
-            })
-            .to(progressBar, {
-                scaleX: 1,
-                duration: 3.0,
-                ease: "power2.inOut"
-            }, "<")
-            
-            // 3. Exit Animations (Text)
-            .to([logo, counterText, progressContainer], {
-                opacity: 0,
-                y: -30,
-                duration: 0.5,
-                ease: "power2.in"
-            }, ">-0.5")
-            
-            // 4. Fluid Curved Exit (The "Bad" Out Transition Fixed)
-            .to(overlay, {
-                yPercent: -100,
-                borderBottomLeftRadius: "50% 20%",
-                borderBottomRightRadius: "50% 20%",
-                duration: 1.2,
-                ease: "power4.inOut",
-            }, "-=0.3")
-            
-            // 5. Content Reveal
-            .to(content, {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                duration: 1,
-                ease: "power4.out"
-            }, "-=1.0");
-        }
-    }, containerRef);
+        // 1. Premium Entrance
+        tl.to(logo, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power4.out"
+        })
+        
+        // 2. Loading Progress (3s Simulation)
+        .to(counter, {
+            val: 100,
+            duration: 3.0, 
+            ease: "power2.inOut",
+            onUpdate: () => {
+                if (counterText) counterText.innerText = Math.floor(counter.val).toString().padStart(3, '0');
+            }
+        })
+        .to(progressBar, {
+            scaleX: 1,
+            duration: 3.0,
+            ease: "power2.inOut"
+        }, "<")
+        
+        // 3. Exit Animations (Text)
+        .to([logo, counterText, progressContainer], {
+            opacity: 0,
+            y: -30,
+            duration: 0.5,
+            ease: "power2.in"
+        }, ">-0.5")
+        
+        // 4. Fluid Curved Exit (The "Bad" Out Transition Fixed)
+        .to(overlay, {
+            yPercent: -100,
+            borderBottomLeftRadius: "50% 20%",
+            borderBottomRightRadius: "50% 20%",
+            duration: 1.2,
+            ease: "power4.inOut",
+        }, "-=0.3")
+        
+        // 5. Content Reveal
+        .to(content, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1,
+            ease: "power4.out"
+        }, "-=1.0");
+    }
 
     return () => {
-        ctx.revert();
         document.body.style.overflow = "";
         document.body.style.cursor = "default";
     };
-  }, [pathname]);
+  }, { dependencies: [pathname], scope: containerRef });
 
   return (
     <div ref={containerRef}>

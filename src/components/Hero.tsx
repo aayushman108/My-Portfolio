@@ -1,60 +1,62 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 const Hero = () => {
     const heroRef = useRef<HTMLDivElement>(null);
     const btnRef = useRef(null);
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const spotlightRef = useRef(null);
 
-    useEffect(() => {
+    useGSAP(() => {
+        // Mouse Spotlight Effect with quickTo for performance
+        const xTo = gsap.quickTo(spotlightRef.current, "x", { duration: 0.1, ease: "power3" });
+        const yTo = gsap.quickTo(spotlightRef.current, "y", { duration: 0.1, ease: "power3" });
+
         const handleMouseMove = (e: MouseEvent) => {
             if (heroRef.current) {
                 const { left, top, width, height } = heroRef.current.getBoundingClientRect();
                 const x = (e.clientX - left) / width - 0.5;
                 const y = (e.clientY - top) / height - 0.5;
-                setMousePosition({ x, y });
+                
+                xTo(x * 50);
+                yTo(y * 50);
             }
         };
 
         window.addEventListener("mousemove", handleMouseMove);
+
+        // Clip Path Animation
+        const tl = gsap.timeline({delay: 4});
+        const lines = gsap.utils.toArray(".clip-line");
+
+        // 1. Initial State for lines
+        gsap.set(lines, { 
+            clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
+            y: 80,
+            opacity: 0
+        });
+
+        // 2. Animate Clip Path Reveal for Title lines
+        tl.to(lines, {
+            clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+            y: 0,
+            opacity: 1,
+            duration: 1.2,
+            stagger: 0.15,
+            ease: "power4.out"
+        })
+        // 3. Animate Button separately
+        .fromTo(
+            btnRef.current,
+            { opacity: 0, scale: 0.8 },
+            { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.7)" },
+            "-=0.5"
+        );
+
         return () => window.removeEventListener("mousemove", handleMouseMove);
-    }, []);
-
-    useEffect(() => {
-        // Use gsap.context for proper scoping and cleanup in React
-        const ctx = gsap.context(() => {
-            const tl = gsap.timeline();
-            const lines = gsap.utils.toArray(".clip-line");
-
-            // 1. Initial State for lines
-            gsap.set(lines, { 
-                clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
-                y: 80,
-                opacity: 0
-            });
-
-            // 2. Animate Clip Path Reveal for Title lines
-            tl.to(lines, {
-                clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-                y: 0,
-                opacity: 1,
-                duration: 1.2,
-                stagger: 0.15,
-                ease: "power4.out"
-            })
-            // 3. Animate Button separately
-            .fromTo(
-                btnRef.current,
-                { opacity: 0, scale: 0.8 },
-                { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.7)" },
-                "-=0.5"
-            );
-        }, heroRef);
-
-        return () => ctx.revert();
-    }, []);
+    }, { scope: heroRef });
 
     return (
         <section
@@ -67,10 +69,8 @@ const Hero = () => {
             
              {/* Mouse Spotlight */}
             <div 
-                className="absolute w-[800px] h-[800px] bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-[100px] -z-10 pointer-events-none transition-transform duration-100 ease-out"
-                style={{
-                    transform: `translate(${mousePosition.x * 50}px, ${mousePosition.y * 50}px)`
-                }}
+                ref={spotlightRef}
+                className="absolute w-[800px] h-[800px] bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-[100px] -z-10 pointer-events-none"
             />
 
             {/* Glowing Orbs */}

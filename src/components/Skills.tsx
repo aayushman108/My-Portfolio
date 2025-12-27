@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaReact, FaHtml5, FaCss3Alt, FaJs, FaGitAlt, FaNodeJs } from "react-icons/fa";
 import { SiNextdotjs, SiTailwindcss, SiTypescript, SiGreensock } from "react-icons/si";
@@ -23,11 +24,11 @@ const Skills = () => {
     const wrapperRef = useRef(null);
     const marqueeRef = useRef(null);
 
-    useEffect(() => {
+    useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
 
         // Intro animation
-         gsap.fromTo(wrapperRef.current, 
+        gsap.fromTo(wrapperRef.current, 
             { opacity: 0, y: 50 },
             {
                 opacity: 1, 
@@ -38,25 +39,21 @@ const Skills = () => {
                     start: "top 80%"
                 }
             }
-         );
+        );
 
-         // Infinite Marquee Loop
-         // Important: The track contains two identical sets of items.
-         // We move from x: 0% to x: -50%.
-         // Because the two sets are identical, x: -50% looks exactly like x: 0%.
-         const duration = 30;
+        // Infinite Marquee Loop
+        // Important: The track contains two identical sets of items.
+        // We move from x: 0% to x: -50%.
+        // Because the two sets are identical, x: -50% looks exactly like x: 0%.
+        const duration = 30;
 
-         const ctx = gsap.context(() => {
-             gsap.to(marqueeRef.current, {
-                 xPercent: -50, // Use xPercent for better responsiveness
-                 ease: "none",
-                 duration: duration,
-                 repeat: -1,
-             });
-         });
-
-         return () => ctx.revert();
-    }, []);
+        gsap.to(marqueeRef.current, {
+            xPercent: -50, // Use xPercent for better responsiveness
+            ease: "none",
+            duration: duration,
+            repeat: -1,
+        });
+    }, { scope: wrapperRef });
 
   return (
     <section id="skills" className="py-24 overflow-hidden bg-gray-50 dark:bg-black/30 w-full relative">

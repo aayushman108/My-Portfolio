@@ -1,7 +1,8 @@
 "use client";
-import { useEffect } from "react";
+import { useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaGithub, FaExternalLinkAlt, FaArrowRight } from "react-icons/fa";
 import { projects } from "@/data/projects";
@@ -9,33 +10,31 @@ import { projects } from "@/data/projects";
 
 
 const Projects = () => {
-    useEffect(() => {
+    const containerRef = useRef(null);
+
+    useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
     
-        const ctx = gsap.context(() => {
-          gsap.fromTo(
-            ".project-card",
-            { opacity: 0, y: 50 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.8,
-              stagger: 0.2,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: "#projects",
-                start: "top 75%",
-                toggleActions: "play none none reverse",
-              },
-            }
-          );
-        });
-    
-        return () => ctx.revert();
-      }, []);
+        gsap.fromTo(
+        ".project-card",
+        { opacity: 0, y: 50 },
+        {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power3.out",
+            scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 75%",
+            toggleActions: "play none none reverse",
+            },
+        }
+        );
+    }, { scope: containerRef });
 
   return (
-    <section id="projects" className="py-20 px-6 bg-background">
+    <section id="projects" ref={containerRef} className="py-20 px-6 bg-background">
       <div className="container mx-auto">
         <h2 className="text-4xl font-bold text-center mb-16 bg-linear-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-500 bg-clip-text text-transparent">
           Featured Projects

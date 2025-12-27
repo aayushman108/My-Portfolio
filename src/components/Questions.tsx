@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BiHappyBeaming } from "react-icons/bi";
 import { FaLaptopHouse, FaTools, FaFileContract } from "react-icons/fa";
@@ -43,64 +44,60 @@ const questions = [
 const Questions = () => {
   const containerRef = useRef(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    const ctx = gsap.context(() => {
-      // Header animation
-      gsap.fromTo(
-        ".questions-header",
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power4.out",
-          scrollTrigger: {
-            trigger: ".questions-header",
-            start: "top 85%",
-          },
-        }
-      );
+    // Header animation
+    gsap.fromTo(
+      ".questions-header",
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: ".questions-header",
+          start: "top 85%",
+        },
+      }
+    );
 
-      // Cards animation with stagger
-      gsap.fromTo(
-        ".question-card",
-        { opacity: 0, y: 50, scale: 0.95 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.8,
-          stagger: 0.15,
-          ease: "power4.in",
-          scrollTrigger: {
-            trigger: ".questions-grid",
-            start: "top 75%",
-          },
-        }
-      );
+    // Cards animation with stagger
+    gsap.fromTo(
+      ".question-card",
+      { opacity: 0, y: 50, scale: 0.95 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power4.in",
+        scrollTrigger: {
+          trigger: ".questions-grid",
+          start: "top 75%",
+        },
+      }
+    );
 
-      // Footer animation
-      gsap.fromTo(
-        ".questions-footer",
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          delay: 0.2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".questions-footer",
-            start: "top 90%",
-          },
-        }
-      );
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
+    // Footer animation
+    gsap.fromTo(
+      ".questions-footer",
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        delay: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".questions-footer",
+          start: "top 90%",
+        },
+      }
+    );
+  }, { scope: containerRef });
 
   const scrollToContact = () => {
     const contactSection = document.getElementById("contact");

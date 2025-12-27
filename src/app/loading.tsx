@@ -1,36 +1,33 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 export default function Loading() {
   const containerRef = useRef(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-        const logo = document.getElementById("loader-logo");
-        const bar = document.getElementById("loader-bar");
-        
-        // Continuous Loading Animation
-        gsap.to(logo, {
-            opacity: 0.5,
-            duration: 0.8,
-            yoyo: true,
-            repeat: -1,
-            ease: "sine.inOut"
-        });
+  useGSAP(() => {
+    const logo = document.getElementById("loader-logo");
+    const bar = document.getElementById("loader-bar");
+    
+    // Continuous Loading Animation
+    gsap.to(logo, {
+        opacity: 0.5,
+        duration: 0.8,
+        yoyo: true,
+        repeat: -1,
+        ease: "sine.inOut"
+    });
 
-        gsap.to(bar, {
-            xPercent: 100,
-            duration: 0.75,
-            repeat: -1,
-            ease: "power2.inOut",
-            yoyo: true
-        });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
+    gsap.to(bar, {
+        xPercent: 100,
+        duration: 0.75,
+        repeat: -1,
+        ease: "power2.inOut",
+        yoyo: true
+    });
+  }, { scope: containerRef });
 
   return (
     <div ref={containerRef} className="fixed inset-0 w-screen h-screen bg-[#050505] flex flex-col items-center justify-center z-[200] overflow-hidden">
