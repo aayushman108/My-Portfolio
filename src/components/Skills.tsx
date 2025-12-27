@@ -61,12 +61,24 @@ const Skills = () => {
        <div className="absolute top-0 left-0 w-32 h-full z-10 bg-gradient-to-r from-gray-50 to-transparent dark:from-black dark:to-transparent pointer-events-none" />
        <div className="absolute top-0 right-0 w-32 h-full z-10 bg-gradient-to-l from-gray-50 to-transparent dark:from-black dark:to-transparent pointer-events-none" />
 
-       <div ref={wrapperRef} className="container mx-auto px-6 mb-12 text-center">
-            <h2 className="text-5xl font-black bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-500 bg-clip-text text-transparent mb-6">
+       <div ref={wrapperRef} className="container mx-auto px-6 mb-16 text-center">
+            {/* Section Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-sm font-medium text-blue-600 dark:text-blue-400 mb-6">
+                <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400 animate-pulse"></span>
+                <span>Technologies & Tools</span>
+            </div>
+            
+            {/* Main Heading */}
+            <h2 className="text-5xl md:text-6xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-6 tracking-tight">
                 Tech Stack
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400">
-                My arsenal of modern web technologies.
+            
+            {/* Decorative Line */}
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 mx-auto mb-6 rounded-full"></div>
+            
+            {/* Subtitle */}
+            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                My arsenal of modern web technologies
             </p>
        </div>
 

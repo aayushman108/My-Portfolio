@@ -36,9 +36,28 @@ const Projects = () => {
   return (
     <section id="projects" ref={containerRef} className="py-20 px-6 bg-background">
       <div className="container mx-auto">
-        <h2 className="text-4xl font-bold text-center mb-16 bg-linear-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-500 bg-clip-text text-transparent">
-          Featured Projects
-        </h2>
+        {/* Section Header */}
+        <div className="text-center mb-20">
+          {/* Section Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-50 dark:bg-purple-500/10 border border-purple-200 dark:border-purple-500/20 text-sm font-medium text-purple-600 dark:text-purple-400 mb-6">
+            <span className="w-2 h-2 rounded-full bg-purple-600 dark:bg-purple-400 animate-pulse"></span>
+            <span>Portfolio Showcase</span>
+          </div>
+          
+          {/* Main Heading */}
+          <h2 className="text-5xl md:text-6xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-6 tracking-tight">
+            Featured Projects
+          </h2>
+          
+          {/* Decorative Line */}
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 mx-auto mb-6 rounded-full"></div>
+          
+          {/* Subtitle */}
+          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            Crafted with passion, built with precision
+          </p>
+        </div>
+        
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <div

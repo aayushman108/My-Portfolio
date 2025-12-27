@@ -114,11 +114,23 @@ const Questions = () => {
 
       <div className="container mx-auto max-w-7xl px-3">
         <div className="questions-header text-center mb-24 max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-500 bg-clip-text text-transparent">
+          {/* Section Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-200 dark:border-indigo-500/20 text-sm font-medium text-indigo-600 dark:text-indigo-400 mb-6">
+            <span className="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400 animate-pulse"></span>
+            <span>FAQ</span>
+          </div>
+          
+          {/* Main Heading */}
+          <h2 className="text-5xl md:text-6xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-6 tracking-tight">
             Common Questions
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 text-lg md:text-xl leading-relaxed">
-            Everything you need to know about my workflow, experience, and how we can create something amazing together.
+          
+          {/* Decorative Line */}
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 mx-auto mb-6 rounded-full"></div>
+          
+          {/* Subtitle */}
+          <p className="text-gray-600 dark:text-gray-400 text-xl md:text-2xl leading-relaxed">
+            Everything you need to know about my workflow, experience, and how we can create something amazing together
           </p>
         </div>
 

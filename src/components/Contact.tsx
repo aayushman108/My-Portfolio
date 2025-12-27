@@ -31,10 +31,22 @@ const Contact = () => {
     return (
         <section id="contact" ref={containerRef} className="py-20 px-6 bg-background">
             <div className="contact-container container mx-auto text-center">
-                <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-500 bg-clip-text text-transparent">
+                {/* Section Badge */}
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 dark:bg-green-500/10 border border-green-200 dark:border-green-500/20 text-sm font-medium text-green-600 dark:text-green-400 mb-6">
+                    <span className="w-2 h-2 rounded-full bg-green-600 dark:bg-green-400 animate-pulse"></span>
+                    <span>Let's Connect</span>
+                </div>
+                
+                {/* Main Heading */}
+                <h2 className="text-5xl md:text-6xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-6 tracking-tight">
                     Get In Touch
                 </h2>
-                <p className="text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+                
+                {/* Decorative Line */}
+                <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 mx-auto mb-6 rounded-full"></div>
+                
+                {/* Subtitle */}
+                <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
                     I'm currently looking for new opportunities. Whether you have a question or just want to say hi,
                     I'll try my best to get back to you!
                 </p>
