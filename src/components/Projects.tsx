@@ -66,11 +66,12 @@ const Projects = () => {
         {/* Projects List - Editorial Layout */}
         <div className="space-y-0">
           {projects.map((project, index) => (
-            <a
+            <div
               key={index}
-              href={project.live}
-              className="project-card group block border-t border-gray-200 dark:border-gray-800 last:border-b cursor-pointer"
+              className="project-card group block border-t border-gray-200 dark:border-gray-800 last:border-b relative"
             >
+              <a href={project.live} className="absolute inset-0 z-20" aria-label={`View ${project.title}`} />
+
               <div className="py-10 md:py-16">
                 <div className="grid grid-cols-12 gap-6 md:gap-8 items-center">
                   {/* Number */}
@@ -128,10 +129,9 @@ const Projects = () => {
                     </div>
 
                     {/* Project Links */}
-                    <div className="flex items-center gap-3 mt-2">
+                    <div className="flex items-center gap-3 mt-2 relative z-30">
                       <a
                         href={project.github}
-                        onClick={(e) => e.stopPropagation()}
                         className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-gray-900 dark:hover:border-white hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black transition-all duration-300"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -141,7 +141,6 @@ const Projects = () => {
                       </a>
                       <a
                         href={project.live}
-                        onClick={(e) => e.stopPropagation()}
                         className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full border border-purple-500 dark:border-purple-400 text-purple-600 dark:text-purple-400 hover:bg-purple-600 dark:hover:bg-purple-400 hover:text-white dark:hover:text-black transition-all duration-300"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -167,7 +166,7 @@ const Projects = () => {
                   </div>
                 </div>
               </div>
-            </a>
+            </div>
           ))}
         </div>
 
