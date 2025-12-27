@@ -87,9 +87,9 @@ const Questions = () => {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="py-32 px-6 bg-white dark:bg-black relative overflow-hidden">
-      {/* Minimal background accent */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-gray-50 dark:bg-zinc-900/30 -z-10" />
+    <section ref={containerRef} className="py-32 px-6 bg-gray-50 dark:bg-zinc-900 relative overflow-hidden">
+      {/* Minimal background accent - Inverted */}
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-white dark:bg-black -z-10" />
 
       <div className="container mx-auto">
         {/* Header */}
