@@ -1,5 +1,8 @@
 "use client";
 
+import { useEffect } from "react";
+import { createPortal } from "react-dom";
+import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
@@ -10,13 +13,19 @@ import Questions from "@/components/Questions";
 export default function Home() {
 
   return (
-    <main className="min-h-screen bg-background text-foreground selection:bg-purple-500/30">
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Questions />
-      <Contact />
-    </main>
+    <>
+      {typeof window !== 'undefined' && createPortal(
+        <Navbar />,
+        document.body
+      )}
+      <main className="min-h-screen bg-background text-foreground selection:bg-purple-500/30">
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Questions />
+        <Contact />
+      </main>
+    </>
   );
 }
