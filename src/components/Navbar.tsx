@@ -14,7 +14,7 @@ const Navbar = () => {
   useEffect(() => {
     setMounted(true);
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 60);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -33,9 +33,9 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed w-full z-50 transition-all duration-300 ${
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/80 dark:bg-black/80 backdrop-blur-md py-4 shadow-lg border-b border-gray-200 dark:border-gray-800"
+          ? "bg-white/80 dark:bg-black/80 backdrop-blur-md py-4 shadow-lg"
           : "bg-transparent py-6"
       }`}
     >
