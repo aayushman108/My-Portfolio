@@ -4,126 +4,164 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaReact, FaHtml5, FaCss3Alt, FaJs, FaGitAlt, FaNodeJs } from "react-icons/fa";
+import { FaReact, FaHtml5, FaCss3Alt, FaJs, FaGitAlt, FaNodeJs, FaFigma } from "react-icons/fa";
 import { SiNextdotjs, SiTailwindcss, SiTypescript, SiGreensock } from "react-icons/si";
 
-const skills = [
-  { name: "React", icon: <FaReact size={50} className="text-blue-500 dark:text-cyan-400" /> },
-  { name: "Next.js", icon: <SiNextdotjs size={50} className="text-black dark:text-white" /> },
-  { name: "TypeScript", icon: <SiTypescript size={50} className="text-blue-600 dark:text-blue-500" /> },
-  { name: "JavaScript", icon: <FaJs size={50} className="text-yellow-500 dark:text-yellow-400" /> },
-  { name: "Tailwind CSS", icon: <SiTailwindcss size={50} className="text-cyan-500 dark:text-cyan-300" /> },
-  { name: "GSAP", icon: <SiGreensock size={50} className="text-green-600 dark:text-green-500" /> },
-  { name: "HTML5", icon: <FaHtml5 size={50} className="text-orange-600 dark:text-orange-500" /> },
-  { name: "CSS3", icon: <FaCss3Alt size={50} className="text-blue-600 dark:text-blue-500" /> },
-  { name: "Git", icon: <FaGitAlt size={50} className="text-red-600 dark:text-red-500" /> },
-  { name: "Node.js", icon: <FaNodeJs size={50} className="text-green-700 dark:text-green-600" /> },
+const skillCategories = [
+  {
+    title: "Frontend",
+    skills: [
+      { name: "React", icon: <FaReact size={28} /> },
+      { name: "Next.js", icon: <SiNextdotjs size={28} /> },
+      { name: "TypeScript", icon: <SiTypescript size={28} /> },
+      { name: "JavaScript", icon: <FaJs size={28} /> },
+    ]
+  },
+  {
+    title: "Styling",
+    skills: [
+      { name: "Tailwind CSS", icon: <SiTailwindcss size={28} /> },
+      { name: "CSS3", icon: <FaCss3Alt size={28} /> },
+      { name: "HTML5", icon: <FaHtml5 size={28} /> },
+    ]
+  },
+  {
+    title: "Animation",
+    skills: [
+      { name: "GSAP", icon: <SiGreensock size={28} /> },
+    ]
+  },
+  {
+    title: "Tools",
+    skills: [
+      { name: "Git", icon: <FaGitAlt size={28} /> },
+      { name: "Node.js", icon: <FaNodeJs size={28} /> },
+      { name: "Figma", icon: <FaFigma size={28} /> },
+    ]
+  },
 ];
 
 const Skills = () => {
-    const wrapperRef = useRef(null);
-    const marqueeRef = useRef(null);
+  const containerRef = useRef(null);
 
-    useGSAP(() => {
-        gsap.registerPlugin(ScrollTrigger);
+  useGSAP(() => {
+    gsap.registerPlugin(ScrollTrigger);
 
-        // Intro animation
-        gsap.fromTo(wrapperRef.current, 
-            { opacity: 0, y: 50 },
-            {
-                opacity: 1, 
-                y: 0, 
-                duration: 1, 
-                scrollTrigger: {
-                    trigger: wrapperRef.current,
-                    start: "top 80%"
-                }
-            }
-        );
+    gsap.fromTo(
+      ".skills-header",
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 70%",
+        },
+      }
+    );
 
-        // Infinite Marquee Loop
-        // Important: The track contains two identical sets of items.
-        // We move from x: 0% to x: -50%.
-        // Because the two sets are identical, x: -50% looks exactly like x: 0%.
-        const duration = 30;
-
-        gsap.to(marqueeRef.current, {
-            xPercent: -50, // Use xPercent for better responsiveness
-            ease: "none",
-            duration: duration,
-            repeat: -1,
-        });
-    }, { scope: wrapperRef });
+    gsap.fromTo(
+      ".skill-category",
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".skills-grid",
+          start: "top 75%",
+        },
+      }
+    );
+  }, { scope: containerRef });
 
   return (
-    <section id="skills" className="py-24 overflow-hidden bg-gray-50 dark:bg-black/30 w-full relative">
-       {/* Gradient Masks */}
-       <div className="absolute top-0 left-0 w-32 h-full z-10 bg-gradient-to-r from-gray-50 to-transparent dark:from-black dark:to-transparent pointer-events-none" />
-       <div className="absolute top-0 right-0 w-32 h-full z-10 bg-gradient-to-l from-gray-50 to-transparent dark:from-black dark:to-transparent pointer-events-none" />
+    <section id="skills" ref={containerRef} className="py-32 px-6 bg-white dark:bg-black relative overflow-hidden">
+      {/* Minimal background accent */}
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-gray-50 dark:bg-zinc-900/30 -z-10" />
 
-       <div ref={wrapperRef} className="container mx-auto px-6 mb-16 text-center">
-            {/* Section Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-sm font-medium text-blue-600 dark:text-blue-400 mb-6">
-                <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400 animate-pulse"></span>
-                <span>Technologies & Tools</span>
+      <div className="container mx-auto">
+        {/* Header */}
+        <div className="skills-header mb-20">
+          <div className="flex items-end justify-between flex-wrap gap-8">
+            <div>
+              <span className="text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400 mb-4 block">
+                Expertise
+              </span>
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white leading-[1.1] tracking-tight">
+                Tech
+                <br />
+                <span className="text-gray-400 dark:text-gray-600">Stack</span>
+              </h2>
             </div>
-            
-            {/* Main Heading */}
-            <h2 className="text-5xl md:text-6xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-6 tracking-tight">
-                Tech Stack
-            </h2>
-            
-            {/* Decorative Line */}
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 mx-auto mb-6 rounded-full"></div>
-            
-            {/* Subtitle */}
-            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                My arsenal of modern web technologies
+            <p className="text-gray-600 dark:text-gray-400 text-lg md:text-xl max-w-md leading-relaxed">
+              Technologies and tools I use to bring ideas to life.
             </p>
-       </div>
+          </div>
+        </div>
 
-       {/* Marquee Track */}
-       <div className="w-full overflow-hidden">
-           <div 
-                ref={marqueeRef}
-                className="flex w-max"
-           >
-                {/* Chunk 1 */}
-               <div className="flex gap-16 px-8 items-center shrink-0">
-                   {[...skills, ...skills].map((skill, i) => (
-                       <div 
-                            key={`c1-${skill.name}-${i}`} 
-                            className="flex flex-col items-center gap-4 group cursor-default"
-                       >
-                            <div className="p-4 rounded-2xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                                {skill.icon}
-                            </div>
-                            <span className="font-bold text-lg text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                                {skill.name}
-                            </span>
-                       </div>
-                   ))}
-               </div>
+        {/* Skills Grid */}
+        <div className="skills-grid grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+          {skillCategories.map((category, categoryIndex) => (
+            <div
+              key={categoryIndex}
+              className="skill-category"
+            >
+              {/* Category Header */}
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-3xl font-black text-gray-200 dark:text-gray-800">
+                  {String(categoryIndex + 1).padStart(2, '0')}
+                </span>
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white uppercase tracking-wider">
+                  {category.title}
+                </h3>
+              </div>
 
-               {/* Chunk 2 (Identical Copy) */}
-               <div className="flex gap-16 px-8 items-center shrink-0">
-                   {[...skills, ...skills].map((skill, i) => (
-                       <div 
-                            key={`c2-${skill.name}-${i}`} 
-                            className="flex flex-col items-center gap-4 group cursor-default"
-                       >
-                            <div className="p-4 rounded-2xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                                {skill.icon}
-                            </div>
-                            <span className="font-bold text-lg text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                                {skill.name}
-                            </span>
-                       </div>
-                   ))}
-               </div>
-           </div>
-       </div>
+              {/* Skills List */}
+              <div className="space-y-0">
+                {category.skills.map((skill, skillIndex) => (
+                  <div
+                    key={skillIndex}
+                    className="group flex items-center gap-4 py-4 border-t border-gray-200 dark:border-gray-800 last:border-b cursor-default"
+                  >
+                    <span className="text-gray-400 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300">
+                      {skill.icon}
+                    </span>
+                    <span className="text-base md:text-lg font-medium text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-300">
+                      {skill.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
 
+        {/* Bottom Stats/Experience */}
+        <div className="skills-header mt-20 pt-12 border-t border-gray-200 dark:border-gray-800">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { value: "2+", label: "Years Experience" },
+              { value: "15+", label: "Projects Completed" },
+              { value: "10+", label: "Technologies" },
+              { value: "100%", label: "Code Quality" },
+            ].map((stat, index) => (
+              <div key={index} className="text-center md:text-left">
+                <span className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white block mb-2">
+                  {stat.value}
+                </span>
+                <span className="text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </section>
   );
 };

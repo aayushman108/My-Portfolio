@@ -1,41 +1,32 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { BiHappyBeaming } from "react-icons/bi";
-import { FaLaptopHouse, FaTools, FaFileContract } from "react-icons/fa";
-import { MdAnimation, MdDevices } from "react-icons/md";
 
 const questions = [
   {
-    icon: <BiHappyBeaming size={32} />,
     question: "What's your experience?",
     answer: "Two years building production interfaces with React, JavaScript, and GSAP. I focus on clean code and smooth user experiences."
   },
   {
-    icon: <FaLaptopHouse size={32} />,
     question: "Do you work remotely?",
     answer: "Yes. I work with teams across time zones and handle projects entirely online."
   },
   {
-    icon: <FaTools size={32} />,
     question: "What's your typical process?",
     answer: "I start by understanding the problem, then design and build solutions that balance aesthetics with performance."
   },
   {
-    icon: <MdAnimation size={32} />,
     question: "Can you handle animations?",
     answer: "Absolutely. GSAP is my tool of choice for creating performant, intentional motion design."
   },
   {
-    icon: <MdDevices size={32} />,
     question: "What about responsive design?",
     answer: "Every project I build works beautifully on mobile, tablet, and desktop. It's non-negotiable."
   },
   {
-    icon: <FaFileContract size={32} />,
     question: "How do we get started?",
     answer: "Reach out through the contact section. We'll discuss your project and see if we're a good fit."
   }
@@ -43,11 +34,11 @@ const questions = [
 
 const Questions = () => {
   const containerRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Header animation
     gsap.fromTo(
       ".questions-header",
       { opacity: 0, y: 50 },
@@ -55,136 +46,147 @@ const Questions = () => {
         opacity: 1,
         y: 0,
         duration: 1,
-        ease: "power4.out",
+        ease: "power3.out",
         scrollTrigger: {
           trigger: ".questions-header",
-          start: "top 85%",
+          start: "top 80%",
         },
       }
     );
 
-    // Cards animation with stagger
     gsap.fromTo(
-      ".question-card",
-      { opacity: 0, y: 50, scale: 0.95 },
+      ".question-item",
+      { opacity: 0, y: 30 },
       {
         opacity: 1,
         y: 0,
-        scale: 1,
         duration: 0.8,
-        stagger: 0.15,
-        ease: "power4.in",
+        stagger: 0.1,
+        ease: "power3.out",
         scrollTrigger: {
-          trigger: ".questions-grid",
+          trigger: ".questions-list",
           start: "top 75%",
         },
       }
     );
 
-    // Footer animation
     gsap.fromTo(
       ".questions-footer",
       { opacity: 0, y: 30 },
       {
         opacity: 1,
         y: 0,
-        duration: 1,
-        delay: 0.2,
+        duration: 0.8,
         ease: "power3.out",
         scrollTrigger: {
           trigger: ".questions-footer",
-          start: "top 90%",
+          start: "top 85%",
         },
       }
     );
   }, { scope: containerRef });
 
-  const scrollToContact = () => {
-    const contactSection = document.getElementById("contact");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
-    <section ref={containerRef} className="py-32 px-6 bg-gray-50 dark:bg-zinc-900/20 relative overflow-hidden">
-      {/* Decorative background elements */}
-      <div className="absolute top-20 left-0 w-72 h-72 bg-purple-500/5 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-20 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl -z-10" />
+    <section ref={containerRef} className="py-32 px-6 bg-white dark:bg-black relative overflow-hidden">
+      {/* Minimal background accent */}
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-gray-50 dark:bg-zinc-900/30 -z-10" />
 
-      <div className="container mx-auto max-w-7xl px-3">
-        <div className="questions-header text-center mb-24 max-w-3xl mx-auto">
-          {/* Section Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-200 dark:border-indigo-500/20 text-sm font-medium text-indigo-600 dark:text-indigo-400 mb-6">
-            <span className="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400 animate-pulse"></span>
-            <span>FAQ</span>
+      <div className="container mx-auto">
+        {/* Header */}
+        <div className="questions-header mb-20">
+          <div className="flex items-end justify-between flex-wrap gap-8">
+            <div>
+              <span className="text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400 mb-4 block">
+                FAQ
+              </span>
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white leading-[1.1] tracking-tight">
+                Common
+                <br />
+                <span className="text-gray-400 dark:text-gray-600">Questions</span>
+              </h2>
+            </div>
+            <p className="text-gray-600 dark:text-gray-400 text-lg md:text-xl max-w-md leading-relaxed">
+              Everything you need to know about working together.
+            </p>
           </div>
-          
-          {/* Main Heading */}
-          <h2 className="text-5xl md:text-6xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-6 tracking-tight">
-            Common Questions
-          </h2>
-          
-          {/* Decorative Line */}
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 mx-auto mb-6 rounded-full"></div>
-          
-          {/* Subtitle */}
-          <p className="text-gray-600 dark:text-gray-400 text-xl md:text-2xl leading-relaxed">
-            Everything you need to know about my workflow, experience, and how we can create something amazing together
-          </p>
         </div>
 
-        <div className="questions-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-32">
+        {/* Questions Accordion */}
+        <div className="questions-list mb-20">
           {questions.map((item, index) => (
             <div
               key={index}
-              className="question-card group relative rounded-2xl transition-all duration-300 hover:-translate-y-2"
+              className="question-item group border-t border-gray-200 dark:border-gray-800 last:border-b"
             >
-              {/* Animated Border Gradient Layer - Visible on Hover */}
-              <div className="absolute -inset-[2px] rounded-2xl overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                <div className="absolute inset-[-100%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#0000_0%,#0000_50%,#9333ea_100%)] blur-[2px]" />
-              </div>
-
-              {/* Card Content */}
-              <div className="relative h-full p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 group-hover:border-transparent dark:group-hover:border-transparent transition-all duration-300">
-                <div className="mb-6 p-4 rounded-xl bg-gray-50 dark:bg-zinc-800 w-fit group-hover:bg-purple-500/10 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-500">
-                  <div className="text-3xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
-                    {item.icon}
+              <button
+                onClick={() => setActiveIndex(activeIndex === index ? null : index)}
+                className="w-full py-8 md:py-10 flex items-start gap-6 md:gap-12 text-left cursor-pointer"
+              >
+                {/* Number */}
+                <span className={`text-4xl md:text-5xl font-black leading-none transition-colors duration-300 min-w-[60px] md:min-w-[80px] ${activeIndex === index ? 'text-purple-500 dark:text-purple-400' : 'text-gray-200 dark:text-gray-800 group-hover:text-purple-500 dark:group-hover:text-purple-400'}`}>
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                
+                {/* Content */}
+                <div className="flex-1">
+                  <div className="flex items-center justify-between gap-4">
+                    <h3 className={`text-xl md:text-2xl lg:text-3xl font-bold transition-colors duration-300 ${activeIndex === index ? 'text-purple-600 dark:text-purple-400' : 'text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400'}`}>
+                      {item.question}
+                    </h3>
+                    
+                    {/* Toggle Icon */}
+                    <div className={`w-10 h-10 md:w-12 md:h-12 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-300 ${activeIndex === index ? 'bg-purple-500 dark:bg-purple-400 border-purple-500 dark:border-purple-400 rotate-45' : 'border-gray-200 dark:border-gray-700 group-hover:border-purple-500 dark:group-hover:border-purple-400 group-hover:bg-purple-500 dark:group-hover:bg-purple-400'}`}>
+                      <svg 
+                        className={`w-5 h-5 md:w-6 md:h-6 transition-all duration-300 ${activeIndex === index ? 'text-white' : 'text-gray-400 group-hover:text-white'}`}
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke="currentColor"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                      </svg>
+                    </div>
+                  </div>
+                  
+                  {/* Answer - Expandable */}
+                  <div className={`overflow-hidden transition-all duration-500 ease-out ${activeIndex === index ? 'max-h-40 opacity-100 mt-6' : 'max-h-0 opacity-0'}`}>
+                    <p className="text-gray-600 dark:text-gray-400 text-lg md:text-xl leading-relaxed max-w-3xl">
+                      {item.answer}
+                    </p>
                   </div>
                 </div>
-                <h3 className="text-xl font-bold mb-4 text-foreground group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300">
-                  {item.question}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                  {item.answer}
-                </p>
-              </div>
+              </button>
             </div>
           ))}
         </div>
 
-        <div className="questions-footer text-center bg-gray-50 dark:bg-zinc-900/50 rounded-3xl p-12 max-w-4xl mx-auto border border-gray-100 dark:border-zinc-800">
-          <h3 className="text-3xl font-bold mb-4">Still have questions?</h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-8 text-lg">
-            I'm always open to discussing new projects and ideas.
-          </p>
-          <button
-            onClick={scrollToContact}
-            className="group relative inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white transition-all duration-200 bg-gray-900 dark:bg-white dark:text-black rounded-full hover:shadow-lg hover:-translate-y-0.5 overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-            <span className="relative z-10 flex items-center dark:group-hover:text-white transition-colors duration-200">
-              Let's Talk
-              <svg
-                className="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </span>
-          </button>
+        {/* Footer CTA */}
+        <div className="questions-footer">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 py-12 border-t border-gray-200 dark:border-gray-800">
+            <div>
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                Still have questions?
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-lg">
+                Let's start a conversation.
+              </p>
+            </div>
+            <a
+              href="#contact"
+              className="group inline-flex items-center gap-4 text-lg font-semibold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300"
+            >
+              <span>Get in Touch</span>
+              <div className="w-12 h-12 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">
+                <svg 
+                  className="w-5 h-5 transition-all duration-300 group-hover:text-white group-hover:translate-x-0.5"
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
     </section>

@@ -5,7 +5,6 @@ import { createPortal } from "react-dom";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
-import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import Questions from "@/components/Questions";
@@ -21,7 +20,6 @@ export default function Home() {
       <main className="min-h-screen bg-background text-foreground selection:bg-purple-500/30">
         <Hero />
         <About />
-        <Skills />
         <Projects />
         <Questions />
         <Contact />
