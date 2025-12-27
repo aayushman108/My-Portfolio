@@ -1,105 +1,107 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 const CustomCursor = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const followerRef = useRef<HTMLDivElement>(null);
+  const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
-  const [linkHovered, setLinkHovered] = useState(false);
-  const [hidden, setHidden] = useState(false);
 
-  useEffect(() => {
-    const addEventListeners = () => {
-      document.addEventListener("mousemove", onMouseMove);
-      document.addEventListener("mouseenter", onMouseEnter);
-      document.addEventListener("mouseleave", onMouseLeave);
-      document.addEventListener("mousedown", onMouseDown);
-      document.addEventListener("mouseup", onMouseUp);
+  useGSAP(() => {
+    // Hide default cursor
+    document.body.style.cursor = 'none';
+
+    // Center the cursor elements initially
+    gsap.set(cursorRef.current, { xPercent: -50, yPercent: -50 });
+    gsap.set(followerRef.current, { xPercent: -50, yPercent: -50 });
+
+    const moveCursor = (e: MouseEvent) => {
+        // Direct updates - fail-safe tracking
+        gsap.to(cursorRef.current, {
+            x: e.clientX,
+            y: e.clientY,
+            duration: 0.1, 
+            ease: "power2.out" 
+        });
+        
+        gsap.to(followerRef.current, {
+            x: e.clientX,
+            y: e.clientY,
+            duration: 0.6, // Physics lag
+            ease: "power3.out"
+        });
     };
 
-    const removeEventListeners = () => {
-      document.removeEventListener("mousemove", onMouseMove);
-      document.removeEventListener("mouseenter", onMouseEnter);
-      document.removeEventListener("mouseleave", onMouseLeave);
-      document.removeEventListener("mousedown", onMouseDown);
-      document.removeEventListener("mouseup", onMouseUp);
-    };
+    const handleMouseDown = () => setClicked(true);
+    const handleMouseUp = () => setClicked(false);
 
-    const onMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
-    };
+    const handleLinkHover = () => setHovered(true);
+    const handleLinkLeave = () => setHovered(false);
 
-    const onMouseDown = () => {
-      setClicked(true);
-    };
+    window.addEventListener("mousemove", moveCursor);
+    window.addEventListener("mousedown", handleMouseDown);
+    window.addEventListener("mouseup", handleMouseUp);
 
-    const onMouseUp = () => {
-      setClicked(false);
+    const addHoverListeners = () => {
+        document.querySelectorAll("a, button, input, textarea, .clickable").forEach((el) => {
+            el.addEventListener("mouseenter", handleLinkHover);
+            el.addEventListener("mouseleave", handleLinkLeave);
+        });
     };
+    addHoverListeners();
 
-    const onMouseLeave = () => {
-      setHidden(true);
-    };
-
-    const onMouseEnter = () => {
-      setHidden(false);
-    };
-
-    const handleLinkHoverEvents = () => {
-      document.querySelectorAll("a, button, .clickable").forEach((el) => {
-        el.addEventListener("mouseover", () => setLinkHovered(true));
-        el.addEventListener("mouseout", () => setLinkHovered(false));
-      });
-    };
-
-    addEventListeners();
-    handleLinkHoverEvents();
-    
-    // Re-attach listeners when DOM changes (optimistic approach for SPAs)
-    const observer = new MutationObserver(handleLinkHoverEvents);
+    const observer = new MutationObserver(addHoverListeners);
     observer.observe(document.body, { childList: true, subtree: true });
 
     return () => {
-      removeEventListeners();
+      document.body.style.cursor = 'auto';
+      window.removeEventListener("mousemove", moveCursor);
+      window.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("mouseup", handleMouseUp);
       observer.disconnect();
     };
   }, []);
 
-  const cursorClasses = `fixed top-0 left-0 w-8 h-8 rounded-full border-2 border-primary pointer-events-none z-50 transition-transform duration-150 ease-out flex items-center justify-center mix-blend-difference
-    ${clicked ? "scale-75 bg-primary" : "scale-100"}
-    ${linkHovered ? "scale-150 bg-white/20 border-transparent" : ""}
-    ${hidden ? "opacity-0" : "opacity-100"}
-  `;
-
-  // Separate movement and styling to avoid transform conflicts
-  // Outer div tracks position with partial smoothing
-  // Inner div handles scaling and visual changes
   return (
     <>
-        <div 
-             className="fixed top-0 left-0 z-50 pointer-events-none mix-blend-difference"
-             style={{ 
-                 transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
-             }}
-        >
-             <div 
-                className={`flex items-center justify-center -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full border-2 transition-all duration-300 ease-out
-                    ${linkHovered ? "bg-white/20 border-transparent scale-150" : "border-primary scale-100"}
-                    ${clicked ? "scale-75 bg-primary" : ""}
-                    ${hidden ? "opacity-0" : "opacity-100"}
-                `}
-             />
+      {/* Center Dot / Spotlight Lens */}
+      <div
+        ref={cursorRef}
+        className={`fixed top-0 left-0 pointer-events-none z-9999 mix-blend-difference -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-out rounded-full bg-white
+            ${hovered 
+                ? "w-20 h-20 opacity-100 mix-blend-difference" // Large spotlight on hover
+                : "w-2 h-2 opacity-100" // Small dot normally
+            }
+            ${clicked ? "scale-90" : "scale-100"}
+        `}
+      />
+
+      {/* Rotating Text Ring - Follows Smoothly */}
+      <div
+        ref={followerRef}
+        className={`fixed top-0 left-0 pointer-events-none z-9998 mix-blend-difference -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ease-out
+            ${hovered ? "scale-150 opacity-0" : "scale-100 opacity-100"} 
+        `}
+      >
+        <div className="w-28 h-28 animate-[spin_12s_linear_infinite]">
+            <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible">
+              <defs>
+                <path
+                  id="textCircle"
+                  d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
+                />
+              </defs>
+              <text className="font-light uppercase tracking-[4px] text-[11px] fill-white opacity-90">
+                <textPath href="#textCircle" startOffset="50%" textAnchor="middle">
+                  AAYUSHMAN • PORTFOLIO •
+                </textPath>
+              </text>
+            </svg>
         </div>
-        
-        {/* Center Dot (Independent) */}
-        <div 
-            className="fixed top-0 left-0 w-2 h-2 bg-primary rounded-full pointer-events-none z-50 mix-blend-difference transition-opacity duration-300"
-            style={{ 
-                transform: `translate3d(${position.x - 4}px, ${position.y - 4}px, 0)`,
-                opacity: hidden ? 0 : 1
-            }}
-        />
+      </div>
     </>
   );
 };
