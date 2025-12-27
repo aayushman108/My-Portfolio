@@ -1,81 +1,105 @@
 "use client";
+
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaEnvelope, FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
+import { FaLinkedin, FaGithub, FaTwitter, FaEnvelope } from "react-icons/fa";
 
 const Contact = () => {
     const containerRef = useRef(null);
 
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
-    
-        gsap.fromTo(
-        ".contact-container",
-        { opacity: 0, scale: 0.9 },
-        {
-            opacity: 1,
-            scale: 1,
-            duration: 1,
-            ease: "power3.out",
+
+        gsap.from(".contact-container", {
             scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
+                trigger: containerRef.current,
+                start: "top 80%"
             },
-        }
-        );
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out"
+        });
     }, { scope: containerRef });
 
     return (
-        <section id="contact" ref={containerRef} className="py-20 px-6 bg-background">
-            <div className="contact-container container mx-auto text-center">
-                {/* Section Badge */}
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 dark:bg-green-500/10 border border-green-200 dark:border-green-500/20 text-sm font-medium text-green-600 dark:text-green-400 mb-6">
-                    <span className="w-2 h-2 rounded-full bg-green-600 dark:bg-green-400 animate-pulse"></span>
-                    <span>Let's Connect</span>
-                </div>
-                
-                {/* Main Heading */}
-                <h2 className="text-5xl md:text-6xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-6 tracking-tight">
-                    Get In Touch
-                </h2>
-                
-                {/* Decorative Line */}
-                <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 mx-auto mb-6 rounded-full"></div>
-                
-                {/* Subtitle */}
-                <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
-                    I'm currently looking for new opportunities. Whether you have a question or just want to say hi,
-                    I'll try my best to get back to you!
-                </p>
+        <section id="contact" ref={containerRef} className="min-h-screen bg-white dark:bg-black py-32 px-6 md:px-12 lg:px-24 relative">
+            {/* Subtle Grid */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none" />
 
-                <div className="flex justify-center gap-8 mb-12">
-                     <a href="#" className="p-4 bg-white dark:bg-white/5 rounded-full shadow-md dark:shadow-none hover:bg-gray-100 dark:hover:bg-white/10 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 text-gray-700 dark:text-gray-300">
-                        <FaLinkedin size={24} />
-                    </a>
-                    <a href="mailto:hello@example.com" className="p-4 bg-white dark:bg-white/5 rounded-full shadow-md dark:shadow-none hover:bg-gray-100 dark:hover:bg-white/10 hover:text-red-500 dark:hover:text-red-400 transition-all duration-300 text-gray-700 dark:text-gray-300">
-                        <FaEnvelope size={24} />
-                    </a>
-                    <a href="#" className="p-4 bg-white dark:bg-white/5 rounded-full shadow-md dark:shadow-none hover:bg-gray-100 dark:hover:bg-white/10 hover:text-black dark:hover:text-white transition-all duration-300 text-gray-700 dark:text-gray-300">
-                        <FaGithub size={24} />
-                    </a>
-                    <a href="#" className="p-4 bg-white dark:bg-white/5 rounded-full shadow-md dark:shadow-none hover:bg-gray-100 dark:hover:bg-white/10 hover:text-blue-400 dark:hover:text-blue-400 transition-all duration-300 text-gray-700 dark:text-gray-300">
-                        <FaTwitter size={24} />
-                    </a>
+            <div className="contact-container relative z-10 max-w-7xl mx-auto">
+                {/* Section Number */}
+                <div className="mb-16">
+                    <span className="text-8xl md:text-9xl font-black text-gray-200 dark:text-gray-800 leading-none">
+                        04
+                    </span>
                 </div>
 
-                <a
-                    href="mailto:hello@example.com"
-                    className="inline-block px-8 py-3 rounded-full border border-blue-600 dark:border-blue-500 text-blue-600 dark:text-blue-400 hover:bg-blue-600 dark:hover:bg-blue-500 hover:text-white transition-all duration-300 font-semibold"
-                >
-                    Say Hello
-                </a>
-                
-                 <footer className="mt-20 pt-8 border-t border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-500 text-sm">
-                    <p>© {new Date().getFullYear()} Aayushman Sharma. All rights reserved.</p>
-                </footer>
+                {/* Content Grid */}
+                <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+                    {/* Left: Title & Description */}
+                    <div>
+                        <h2 className="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight text-gray-900 dark:text-white mb-8">
+                            Let's Work<br />Together
+                        </h2>
+                        <div className="w-24 h-1 bg-black dark:bg-white mb-8"></div>
+                        
+                        <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 leading-relaxed mb-12">
+                            Have a project in mind? Let's create something amazing together.
+                        </p>
+
+                        {/* Email CTA */}
+                        <a 
+                            href="mailto:hello@aayushman.dev"
+                            className="inline-flex items-center gap-3 text-2xl md:text-3xl font-bold text-black dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors group"
+                        >
+                            <FaEnvelope className="group-hover:scale-110 transition-transform" />
+                            <span>hello@aayushman.dev</span>
+                        </a>
+                    </div>
+
+                    {/* Right: Social Links */}
+                    <div className="flex flex-col justify-end">
+                        <div className="space-y-6">
+                            <p className="text-sm font-medium text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-8">
+                                Connect With Me
+                            </p>
+
+                            <a 
+                                href="#" 
+                                className="group flex items-center justify-between py-6 border-b border-gray-200 dark:border-gray-800 hover:border-black dark:hover:border-white transition-colors"
+                            >
+                                <span className="text-xl font-medium text-gray-900 dark:text-white">LinkedIn</span>
+                                <FaLinkedin className="text-2xl text-gray-400 group-hover:text-black dark:group-hover:text-white transition-colors" />
+                            </a>
+
+                            <a 
+                                href="#" 
+                                className="group flex items-center justify-between py-6 border-b border-gray-200 dark:border-gray-800 hover:border-black dark:hover:border-white transition-colors"
+                            >
+                                <span className="text-xl font-medium text-gray-900 dark:text-white">GitHub</span>
+                                <FaGithub className="text-2xl text-gray-400 group-hover:text-black dark:group-hover:text-white transition-colors" />
+                            </a>
+
+                            <a 
+                                href="#" 
+                                className="group flex items-center justify-between py-6 border-b border-gray-200 dark:border-gray-800 hover:border-black dark:hover:border-white transition-colors"
+                            >
+                                <span className="text-xl font-medium text-gray-900 dark:text-white">Twitter</span>
+                                <FaTwitter className="text-2xl text-gray-400 group-hover:text-black dark:group-hover:text-white transition-colors" />
+                            </a>
+                        </div>
+
+                        {/* Footer Note */}
+                        <div className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-800">
+                            <p className="text-sm text-gray-500 dark:text-gray-500">
+                                © 2024 Aayushman. All rights reserved.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     );

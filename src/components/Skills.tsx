@@ -1,129 +1,82 @@
 "use client";
 
 import { useRef } from "react";
-import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaReact, FaHtml5, FaCss3Alt, FaJs, FaGitAlt, FaNodeJs } from "react-icons/fa";
 import { SiNextdotjs, SiTailwindcss, SiTypescript, SiGreensock } from "react-icons/si";
 
 const skills = [
-  { name: "React", icon: <FaReact size={50} className="text-blue-500 dark:text-cyan-400" /> },
-  { name: "Next.js", icon: <SiNextdotjs size={50} className="text-black dark:text-white" /> },
-  { name: "TypeScript", icon: <SiTypescript size={50} className="text-blue-600 dark:text-blue-500" /> },
-  { name: "JavaScript", icon: <FaJs size={50} className="text-yellow-500 dark:text-yellow-400" /> },
-  { name: "Tailwind CSS", icon: <SiTailwindcss size={50} className="text-cyan-500 dark:text-cyan-300" /> },
-  { name: "GSAP", icon: <SiGreensock size={50} className="text-green-600 dark:text-green-500" /> },
-  { name: "HTML5", icon: <FaHtml5 size={50} className="text-orange-600 dark:text-orange-500" /> },
-  { name: "CSS3", icon: <FaCss3Alt size={50} className="text-blue-600 dark:text-blue-500" /> },
-  { name: "Git", icon: <FaGitAlt size={50} className="text-red-600 dark:text-red-500" /> },
-  { name: "Node.js", icon: <FaNodeJs size={50} className="text-green-700 dark:text-green-600" /> },
+  { name: "React", icon: <FaReact size={40} /> },
+  { name: "Next.js", icon: <SiNextdotjs size={40} /> },
+  { name: "TypeScript", icon: <SiTypescript size={40} /> },
+  { name: "JavaScript", icon: <FaJs size={40} /> },
+  { name: "Tailwind CSS", icon: <SiTailwindcss size={40} /> },
+  { name: "GSAP", icon: <SiGreensock size={40} /> },
+  { name: "HTML5", icon: <FaHtml5 size={40} /> },
+  { name: "CSS3", icon: <FaCss3Alt size={40} /> },
+  { name: "Git", icon: <FaGitAlt size={40} /> },
+  { name: "Node.js", icon: <FaNodeJs size={40} /> },
 ];
 
 const Skills = () => {
     const wrapperRef = useRef(null);
-    const marqueeRef = useRef(null);
 
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
 
-        // Intro animation
-        gsap.fromTo(wrapperRef.current, 
-            { opacity: 0, y: 50 },
-            {
-                opacity: 1, 
-                y: 0, 
-                duration: 1, 
-                scrollTrigger: {
-                    trigger: wrapperRef.current,
-                    start: "top 80%"
-                }
-            }
-        );
-
-        // Infinite Marquee Loop
-        // Important: The track contains two identical sets of items.
-        // We move from x: 0% to x: -50%.
-        // Because the two sets are identical, x: -50% looks exactly like x: 0%.
-        const duration = 30;
-
-        gsap.to(marqueeRef.current, {
-            xPercent: -50, // Use xPercent for better responsiveness
-            ease: "none",
-            duration: duration,
-            repeat: -1,
+        gsap.from(".skill-item", {
+            scrollTrigger: {
+                trigger: wrapperRef.current,
+                start: "top 80%"
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: "power3.out"
         });
     }, { scope: wrapperRef });
 
   return (
-    <section id="skills" className="py-24 overflow-hidden bg-gray-50 dark:bg-black/30 w-full relative">
-       {/* Gradient Masks */}
-       <div className="absolute top-0 left-0 w-32 h-full z-10 bg-gradient-to-r from-gray-50 to-transparent dark:from-black dark:to-transparent pointer-events-none" />
-       <div className="absolute top-0 right-0 w-32 h-full z-10 bg-gradient-to-l from-gray-50 to-transparent dark:from-black dark:to-transparent pointer-events-none" />
+    <section id="skills" ref={wrapperRef} className="min-h-screen bg-white dark:bg-black py-32 px-6 md:px-12 lg:px-24 relative">
+       {/* Subtle Grid */}
+       <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none" />
 
-       <div ref={wrapperRef} className="container mx-auto px-6 mb-16 text-center">
-            {/* Section Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-sm font-medium text-blue-600 dark:text-blue-400 mb-6">
-                <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400 animate-pulse"></span>
-                <span>Technologies & Tools</span>
+       <div className="relative z-10 max-w-7xl mx-auto">
+            {/* Section Number */}
+            <div className="mb-16">
+                <span className="text-8xl md:text-9xl font-black text-gray-200 dark:text-gray-800 leading-none">
+                    02
+                </span>
             </div>
-            
-            {/* Main Heading */}
-            <h2 className="text-5xl md:text-6xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-6 tracking-tight">
+
+            {/* Title */}
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight text-gray-900 dark:text-white mb-8">
                 Tech Stack
             </h2>
-            
-            {/* Decorative Line */}
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 mx-auto mb-6 rounded-full"></div>
-            
-            {/* Subtitle */}
-            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                My arsenal of modern web technologies
-            </p>
-       </div>
+            <div className="w-24 h-1 bg-black dark:bg-white mb-20"></div>
 
-       {/* Marquee Track */}
-       <div className="w-full overflow-hidden">
-           <div 
-                ref={marqueeRef}
-                className="flex w-max"
-           >
-                {/* Chunk 1 */}
-               <div className="flex gap-16 px-8 items-center shrink-0">
-                   {[...skills, ...skills].map((skill, i) => (
-                       <div 
-                            key={`c1-${skill.name}-${i}`} 
-                            className="flex flex-col items-center gap-4 group cursor-default"
-                       >
-                            <div className="p-4 rounded-2xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 shadow-lg group-hover:scale-110 transition-transform duration-300">
+            {/* Skills Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-12">
+                {skills.map((skill, i) => (
+                    <div 
+                        key={i}
+                        className="skill-item group"
+                    >
+                        <div className="flex flex-col items-center gap-4 p-6 rounded-2xl border border-gray-200 dark:border-gray-800 hover:border-black dark:hover:border-white transition-all duration-300">
+                            <div className="text-gray-900 dark:text-white group-hover:scale-110 transition-transform duration-300">
                                 {skill.icon}
                             </div>
-                            <span className="font-bold text-lg text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                                 {skill.name}
                             </span>
-                       </div>
-                   ))}
-               </div>
-
-               {/* Chunk 2 (Identical Copy) */}
-               <div className="flex gap-16 px-8 items-center shrink-0">
-                   {[...skills, ...skills].map((skill, i) => (
-                       <div 
-                            key={`c2-${skill.name}-${i}`} 
-                            className="flex flex-col items-center gap-4 group cursor-default"
-                       >
-                            <div className="p-4 rounded-2xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                                {skill.icon}
-                            </div>
-                            <span className="font-bold text-lg text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                                {skill.name}
-                            </span>
-                       </div>
-                   ))}
-               </div>
-           </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
        </div>
-
     </section>
   );
 };

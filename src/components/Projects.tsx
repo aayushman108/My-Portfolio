@@ -1,116 +1,124 @@
 "use client";
+
 import { useRef } from "react";
-import Link from "next/link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaGithub, FaExternalLinkAlt, FaArrowRight } from "react-icons/fa";
-import { projects } from "@/data/projects";
 
-
+const projects = [
+  {
+    title: "E-Commerce Platform",
+    description: "Modern shopping experience with Next.js",
+    tech: ["Next.js", "TypeScript", "Stripe"],
+    year: "2024"
+  },
+  {
+    title: "SaaS Dashboard",
+    description: "Analytics platform for businesses",
+    tech: ["React", "D3.js", "Node.js"],
+    year: "2024"
+  },
+  {
+    title: "Portfolio Website",
+    description: "Award-winning creative portfolio",
+    tech: ["Next.js", "GSAP", "Tailwind"],
+    year: "2023"
+  },
+  {
+    title: "Mobile App",
+    description: "Cross-platform fitness tracker",
+    tech: ["React Native", "Firebase"],
+    year: "2023"
+  },
+  {
+    title: "Blog Platform",
+    description: "Content management system",
+    tech: ["Next.js", "MDX", "Vercel"],
+    year: "2023"
+  },
+  {
+    title: "Design System",
+    description: "Component library for teams",
+    tech: ["React", "Storybook", "CSS"],
+    year: "2024"
+  }
+];
 
 const Projects = () => {
     const containerRef = useRef(null);
 
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
-    
-        gsap.fromTo(
-        ".project-card",
-        { opacity: 0, y: 50 },
-        {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            stagger: 0.2,
-            ease: "power3.out",
+
+        gsap.from(".project-card", {
             scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 75%",
-            toggleActions: "play none none reverse",
+                trigger: containerRef.current,
+                start: "top 75%"
             },
-        }
-        );
+            y: 60,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power3.out"
+        });
     }, { scope: containerRef });
 
   return (
-    <section id="projects" ref={containerRef} className="py-20 px-6 bg-background">
-      <div className="container mx-auto">
-        {/* Section Header */}
-        <div className="text-center mb-20">
-          {/* Section Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-50 dark:bg-purple-500/10 border border-purple-200 dark:border-purple-500/20 text-sm font-medium text-purple-600 dark:text-purple-400 mb-6">
-            <span className="w-2 h-2 rounded-full bg-purple-600 dark:bg-purple-400 animate-pulse"></span>
-            <span>Portfolio Showcase</span>
-          </div>
-          
-          {/* Main Heading */}
-          <h2 className="text-5xl md:text-6xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-6 tracking-tight">
-            Featured Projects
-          </h2>
-          
-          {/* Decorative Line */}
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 mx-auto mb-6 rounded-full"></div>
-          
-          {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            Crafted with passion, built with precision
-          </p>
+    <section id="projects" ref={containerRef} className="min-h-screen bg-gray-50 dark:bg-zinc-900 py-32 px-6 md:px-12 lg:px-24 relative">
+      {/* Subtle Grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none" />
+
+      <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Section Number */}
+        <div className="mb-16">
+            <span className="text-8xl md:text-9xl font-black text-gray-200 dark:text-gray-800 leading-none">
+                03
+            </span>
         </div>
-        
+
+        {/* Title */}
+        <h2 className="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight text-gray-900 dark:text-white mb-8">
+            Selected Work
+        </h2>
+        <div className="w-24 h-1 bg-black dark:bg-white mb-20"></div>
+
+        {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <div
               key={index}
-              className="project-card bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-lg dark:shadow-none hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-300 group"
+              className="project-card group cursor-pointer"
             >
-              <div className={`h-48 w-full bg-linear-to-br ${project.color} opacity-80 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center`}>
-                  <span className="text-4xl font-bold text-white/50 dark:text-white/20">Preview</span>
-              </div>
-              
-              <div className="p-6">
-                <h3 className="text-2xl font-bold mb-2 text-foreground group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              <div className="border border-gray-200 dark:border-gray-800 rounded-2xl p-8 hover:border-black dark:hover:border-white transition-all duration-300 h-full flex flex-col">
+                {/* Year */}
+                <div className="text-xs font-medium text-gray-400 dark:text-gray-600 uppercase tracking-wider mb-6">
+                  {project.year}
+                </div>
+
+                {/* Title */}
+                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
+
+                {/* Description */}
+                <p className="text-gray-600 dark:text-gray-400 mb-6 flex-grow">
                   {project.description}
                 </p>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tech.map((t) => (
+
+                {/* Tech Stack */}
+                <div className="flex flex-wrap gap-2">
+                  {project.tech.map((tech, i) => (
                     <span
-                      key={t}
-                      className="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-300"
+                      key={i}
+                      className="text-xs px-3 py-1 rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300"
                     >
-                      {t}
+                      {tech}
                     </span>
                   ))}
-                </div>
-                <div className="flex justify-between items-center mt-auto">
-                  <a
-                    href={project.github}
-                    className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
-                  >
-                    <FaGithub /> Code
-                  </a>
-                  <a
-                    href={project.live}
-                    className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
-                  >
-                    <FaExternalLinkAlt /> Live Demo
-                  </a>
                 </div>
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="mt-16 text-center">
-          <Link
-            href="/projects"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white rounded-full font-bold text-lg hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:-translate-y-1"
-          >
-            View All Projects <FaArrowRight />
-          </Link>
         </div>
       </div>
     </section>
