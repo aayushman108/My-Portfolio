@@ -4,8 +4,22 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaReact, FaHtml5, FaCss3Alt, FaJs, FaGitAlt, FaNodeJs, FaFigma } from "react-icons/fa";
-import { SiNextdotjs, SiTailwindcss, SiTypescript, SiGreensock } from "react-icons/si";
+import {
+  FaReact,
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
+  FaGitAlt,
+  FaNodeJs,
+  FaFigma,
+} from "react-icons/fa";
+import {
+  SiNextdotjs,
+  SiTailwindcss,
+  SiTypescript,
+  SiGreensock,
+} from "react-icons/si";
+import { SectionHeader } from "./SectionHeader";
 
 const skillCategories = [
   {
@@ -15,7 +29,7 @@ const skillCategories = [
       { name: "Next.js", icon: <SiNextdotjs size={28} /> },
       { name: "TypeScript", icon: <SiTypescript size={28} /> },
       { name: "JavaScript", icon: <FaJs size={28} /> },
-    ]
+    ],
   },
   {
     title: "Styling",
@@ -23,13 +37,11 @@ const skillCategories = [
       { name: "Tailwind CSS", icon: <SiTailwindcss size={28} /> },
       { name: "CSS3", icon: <FaCss3Alt size={28} /> },
       { name: "HTML5", icon: <FaHtml5 size={28} /> },
-    ]
+    ],
   },
   {
     title: "Animation",
-    skills: [
-      { name: "GSAP", icon: <SiGreensock size={28} /> },
-    ]
+    skills: [{ name: "GSAP", icon: <SiGreensock size={28} /> }],
   },
   {
     title: "Tools",
@@ -37,84 +49,79 @@ const skillCategories = [
       { name: "Git", icon: <FaGitAlt size={28} /> },
       { name: "Node.js", icon: <FaNodeJs size={28} /> },
       { name: "Figma", icon: <FaFigma size={28} /> },
-    ]
+    ],
   },
 ];
 
 const Skills = () => {
   const containerRef = useRef(null);
 
-  useGSAP(() => {
-    gsap.registerPlugin(ScrollTrigger);
+  useGSAP(
+    () => {
+      gsap.registerPlugin(ScrollTrigger);
 
-    gsap.fromTo(
-      ".skills-header",
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 70%",
-        },
-      }
-    );
+      gsap.fromTo(
+        ".skills-header",
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 70%",
+          },
+        }
+      );
 
-    gsap.fromTo(
-      ".skill-category",
-      { opacity: 0, y: 40 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".skills-grid",
-          start: "top 75%",
-        },
-      }
-    );
-  }, { scope: containerRef });
+      gsap.fromTo(
+        ".skill-category",
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".skills-grid",
+            start: "top 75%",
+          },
+        }
+      );
+    },
+    { scope: containerRef }
+  );
 
   return (
-    <section id="skills" ref={containerRef} className="py-32 px-6 bg-white dark:bg-black relative overflow-hidden">
+    <section
+      id="skills"
+      ref={containerRef}
+      className="py-32 px-6 bg-white dark:bg-black relative overflow-hidden"
+    >
       {/* Minimal background accent */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gray-50 dark:bg-zinc-900/30 -z-10" />
 
       <div className="container mx-auto">
         {/* Header */}
-        <div className="skills-header mb-20">
-          <div className="flex items-end justify-between flex-wrap gap-8">
-            <div>
-              <span className="text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400 mb-4 block">
-                Expertise
-              </span>
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white leading-[1.1] tracking-tight">
-                Tech
-                <br />
-                <span className="text-gray-400 dark:text-gray-600">Stack</span>
-              </h2>
-            </div>
-            <p className="text-gray-600 dark:text-gray-400 text-lg md:text-xl max-w-md leading-relaxed">
-              Technologies and tools I use to bring ideas to life.
-            </p>
-          </div>
-        </div>
+        {/* Header */}
+        <SectionHeader
+          label="Expertise"
+          title="Tech"
+          subtitle="Stack"
+          description="Technologies and tools I use to bring ideas to life."
+          className="skills-header"
+        />
 
         {/* Skills Grid */}
         <div className="skills-grid grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
           {skillCategories.map((category, categoryIndex) => (
-            <div
-              key={categoryIndex}
-              className="skill-category"
-            >
+            <div key={categoryIndex} className="skill-category">
               {/* Category Header */}
               <div className="flex items-center gap-3 mb-6">
                 <span className="text-3xl font-black text-gray-200 dark:text-gray-800">
-                  {String(categoryIndex + 1).padStart(2, '0')}
+                  {String(categoryIndex + 1).padStart(2, "0")}
                 </span>
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white uppercase tracking-wider">
                   {category.title}

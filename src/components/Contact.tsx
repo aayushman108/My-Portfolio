@@ -5,69 +5,94 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaEnvelope, FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
+import { SectionHeader } from "./SectionHeader";
 
 const Contact = () => {
   const containerRef = useRef(null);
 
-  useGSAP(() => {
-    gsap.registerPlugin(ScrollTrigger);
+  useGSAP(
+    () => {
+      gsap.registerPlugin(ScrollTrigger);
 
-    gsap.fromTo(
-      ".contact-content",
-      { opacity: 0, y: 60 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 70%",
-        },
-      }
-    );
+      gsap.fromTo(
+        ".contact-content",
+        { opacity: 0, y: 60 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 70%",
+          },
+        }
+      );
 
-    gsap.fromTo(
-      ".contact-link",
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".contact-links",
-          start: "top 80%",
-        },
-      }
-    );
-  }, { scope: containerRef });
+      gsap.fromTo(
+        ".contact-link",
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".contact-links",
+            start: "top 80%",
+          },
+        }
+      );
+    },
+    { scope: containerRef }
+  );
 
   const socialLinks = [
-    { icon: <FaGithub size={20} />, label: "GitHub", href: "https://github.com/aayushman108", color: "hover:text-gray-900 dark:hover:text-white" },
-    { icon: <FaLinkedin size={20} />, label: "LinkedIn", href: "#", color: "hover:text-blue-600 dark:hover:text-blue-400" },
-    { icon: <FaTwitter size={20} />, label: "Twitter", href: "#", color: "hover:text-sky-500 dark:hover:text-sky-400" },
-    { icon: <FaEnvelope size={20} />, label: "Email", href: "mailto:hello@example.com", color: "hover:text-purple-600 dark:hover:text-purple-400" },
+    {
+      icon: <FaGithub size={20} />,
+      label: "GitHub",
+      href: "https://github.com/aayushman108",
+      color: "hover:text-gray-900 dark:hover:text-white",
+    },
+    {
+      icon: <FaLinkedin size={20} />,
+      label: "LinkedIn",
+      href: "#",
+      color: "hover:text-blue-600 dark:hover:text-blue-400",
+    },
+    {
+      icon: <FaTwitter size={20} />,
+      label: "Twitter",
+      href: "#",
+      color: "hover:text-sky-500 dark:hover:text-sky-400",
+    },
+    {
+      icon: <FaEnvelope size={20} />,
+      label: "Email",
+      href: "mailto:hello@example.com",
+      color: "hover:text-purple-600 dark:hover:text-purple-400",
+    },
   ];
 
   return (
-    <section id="contact" ref={containerRef} className="py-32 px-6 bg-white dark:bg-black relative overflow-hidden">
+    <section
+      id="contact"
+      ref={containerRef}
+      className="py-32 px-6 bg-white dark:bg-black relative overflow-hidden"
+    >
       {/* Minimal background accent */}
       <div className="absolute top-0 left-0 w-1/3 h-full bg-gray-50 dark:bg-zinc-900/30 -z-10" />
 
       <div className="container mx-auto">
         {/* Header */}
-        <div className="contact-content mb-20">
-          <span className="text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400 mb-4 block">
-            Get In Touch
-          </span>
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white leading-[1.1] tracking-tight">
-            Let's Work
-            <br />
-            <span className="text-gray-400 dark:text-gray-600">Together</span>
-          </h2>
-        </div>
+        {/* Header */}
+        <SectionHeader
+          label="Get In Touch"
+          title="Let's Work"
+          subtitle="Together"
+          className="contact-content"
+        />
 
         {/* Main Content Grid */}
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 mb-20">
@@ -76,10 +101,11 @@ const Contact = () => {
             <p className="text-2xl md:text-3xl font-light text-gray-900 dark:text-white leading-relaxed">
               Have a project in mind? I'd love to hear about it.
             </p>
-            
+
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
-              I'm currently available for freelance work and exciting opportunities. 
-              Whether you have a question or just want to say hi, I'll try my best to get back to you!
+              I'm currently available for freelance work and exciting
+              opportunities. Whether you have a question or just want to say hi,
+              I'll try my best to get back to you!
             </p>
 
             {/* Email CTA */}
@@ -92,13 +118,18 @@ const Contact = () => {
                   hello@example.com
                 </span>
                 <div className="w-12 h-12 rounded-full border-2 border-gray-300 dark:border-gray-700 flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">
-                  <svg 
+                  <svg
                     className="w-5 h-5 text-gray-400 transition-all duration-300 group-hover:text-white group-hover:rotate-45"
-                    fill="none" 
-                    viewBox="0 0 24 24" 
+                    fill="none"
+                    viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    />
                   </svg>
                 </div>
               </a>
@@ -110,7 +141,7 @@ const Contact = () => {
             <h3 className="text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400 mb-8">
               Connect With Me
             </h3>
-            
+
             <div className="space-y-0">
               {socialLinks.map((link, index) => (
                 <a
@@ -128,13 +159,18 @@ const Contact = () => {
                       {link.label}
                     </span>
                   </div>
-                  <svg 
+                  <svg
                     className="w-5 h-5 text-gray-300 dark:text-gray-700 group-hover:text-current group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300"
-                    fill="none" 
-                    viewBox="0 0 24 24" 
+                    fill="none"
+                    viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M7 17L17 7M17 7H7M17 7v10"
+                    />
                   </svg>
                 </a>
               ))}
@@ -147,7 +183,8 @@ const Contact = () => {
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div>
               <p className="text-gray-500 dark:text-gray-400 text-sm">
-                © {new Date().getFullYear()} Aayushman Sharma. All rights reserved.
+                © {new Date().getFullYear()} Aayushman Sharma. All rights
+                reserved.
               </p>
             </div>
             <div className="flex items-center gap-2">

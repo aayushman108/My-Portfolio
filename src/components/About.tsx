@@ -4,8 +4,22 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaReact, FaHtml5, FaCss3Alt, FaJs, FaGitAlt, FaNodeJs, FaFigma } from "react-icons/fa";
-import { SiNextdotjs, SiTailwindcss, SiTypescript, SiGreensock } from "react-icons/si";
+import {
+  FaReact,
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
+  FaGitAlt,
+  FaNodeJs,
+  FaFigma,
+} from "react-icons/fa";
+import {
+  SiNextdotjs,
+  SiTailwindcss,
+  SiTypescript,
+  SiGreensock,
+} from "react-icons/si";
+import { SectionHeader } from "./SectionHeader";
 
 const skills = [
   { name: "React", icon: <FaReact size={24} /> },
@@ -30,61 +44,64 @@ const stats = [
 const About = () => {
   const containerRef = useRef(null);
 
-  useGSAP(() => {
-    gsap.registerPlugin(ScrollTrigger);
+  useGSAP(
+    () => {
+      gsap.registerPlugin(ScrollTrigger);
 
-    gsap.fromTo(
-      ".about-content",
-      { opacity: 0, y: 60 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 70%",
-        },
-      }
-    );
+      gsap.fromTo(
+        ".about-content",
+        { opacity: 0, y: 60 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 70%",
+          },
+        }
+      );
 
-    gsap.fromTo(
-      ".about-stat",
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".about-stats",
-          start: "top 80%",
-        },
-      }
-    );
+      gsap.fromTo(
+        ".about-stat",
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".about-stats",
+            start: "top 80%",
+          },
+        }
+      );
 
-    gsap.fromTo(
-      ".skill-item",
-      { opacity: 0, y: 20 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.05,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".skills-section",
-          start: "top 80%",
-        },
-      }
-    );
-  }, { scope: containerRef });
+      gsap.fromTo(
+        ".skill-item",
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.05,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".skills-section",
+            start: "top 80%",
+          },
+        }
+      );
+    },
+    { scope: containerRef }
+  );
 
   return (
-    <section 
-      id="about" 
-      ref={containerRef} 
+    <section
+      id="about"
+      ref={containerRef}
       className="py-32 px-6 bg-gray-50 dark:bg-zinc-900 relative overflow-hidden"
     >
       {/* Minimal background accent - Inverted for contrast */}
@@ -92,27 +109,28 @@ const About = () => {
 
       <div className="container mx-auto">
         {/* Header */}
-        <div className="about-content mb-16">
-          <span className="text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400 mb-4 block">
-            About Me
-          </span>
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white leading-[1.1] tracking-tight">
-            Digital Craftsman
-            <br />
-            <span className="text-gray-400 dark:text-gray-600">& Problem Solver</span>
-          </h2>
-        </div>
+        {/* Header */}
+        <SectionHeader
+          label="About Me"
+          title="Digital Craftsman"
+          subtitle="& Problem Solver"
+          className="about-content"
+        />
 
         {/* Bio Section */}
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 mb-20">
           {/* Left: Bio Text */}
           <div className="about-content lg:col-span-7 space-y-6">
             <p className="text-2xl md:text-3xl font-light text-gray-900 dark:text-white leading-relaxed">
-              I'm <span className="font-semibold">Aayushman</span>, a frontend developer passionate about creating beautiful, functional web experiences.
+              I'm <span className="font-semibold">Aayushman</span>, a frontend
+              developer passionate about creating beautiful, functional web
+              experiences.
             </p>
-            
+
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
-              With expertise in React, Next.js, and modern animation libraries, I transform complex ideas into elegant, user-friendly interfaces. I believe in the power of clean code and thoughtful design.
+              With expertise in React, Next.js, and modern animation libraries,
+              I transform complex ideas into elegant, user-friendly interfaces.
+              I believe in the power of clean code and thoughtful design.
             </p>
 
             {/* CTA */}
@@ -123,13 +141,18 @@ const About = () => {
               >
                 <span>Let's work together</span>
                 <div className="w-12 h-12 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">
-                  <svg 
+                  <svg
                     className="w-5 h-5 transition-all duration-300 group-hover:text-white group-hover:translate-x-0.5"
-                    fill="none" 
-                    viewBox="0 0 24 24" 
+                    fill="none"
+                    viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    />
                   </svg>
                 </div>
               </a>
@@ -166,7 +189,7 @@ const About = () => {
               Technologies I work with daily
             </span>
           </div>
-          
+
           {/* Skills Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
             {skills.map((skill, index) => (

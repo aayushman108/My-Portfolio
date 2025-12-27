@@ -8,50 +8,52 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaArrowRight } from "react-icons/fa";
 import { PROJECTS } from "@/data/projects";
 import { ProjectCardForHomePage } from "./ProjectCard";
+import { SectionHeader } from "./SectionHeader";
 
 const Projects = () => {
   const containerRef = useRef(null);
 
-  useGSAP(() => {
-    gsap.registerPlugin(ScrollTrigger);
+  useGSAP(
+    () => {
+      gsap.registerPlugin(ScrollTrigger);
 
-    gsap.fromTo(
-      ".project-card",
-      { opacity: 0, y: 80 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 75%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-  }, { scope: containerRef });
+      gsap.fromTo(
+        ".project-card",
+        { opacity: 0, y: 80 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          stagger: 0.15,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 75%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    },
+    { scope: containerRef }
+  );
 
   return (
-    <section id="projects" ref={containerRef} className="py-32 px-6 bg-white dark:bg-black relative overflow-hidden">
+    <section
+      id="projects"
+      ref={containerRef}
+      className="py-32 px-6 bg-white dark:bg-black relative overflow-hidden"
+    >
       {/* Minimal background accent */}
       <div className="absolute top-0 left-0 w-1/3 h-full bg-gray-50 dark:bg-zinc-900/30 -z-10" />
-      
+
       <div className="container mx-auto">
         {/* Section Header - Awwwards Style */}
-        <div className="mb-20">
-          <div className="flex items-end justify-between flex-wrap gap-8">
-            <div>
-              <span className="text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400 mb-4 block">
-                Selected Work
-              </span>
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white leading-[1.1] tracking-tight">
-                Featured
-                <br />
-                <span className="text-gray-400 dark:text-gray-600">Projects</span>
-              </h2>
-            </div>
+        {/* Section Header - Awwwards Style */}
+        <SectionHeader
+          label="Selected Work"
+          title="Featured"
+          subtitle="Projects"
+          rightElement={
             <Link
               href="/projects"
               className="group inline-flex items-center gap-4 text-lg font-medium text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 mb-2"
@@ -61,8 +63,8 @@ const Projects = () => {
                 <FaArrowRight className="text-sm group-hover:text-white transition-colors" />
               </div>
             </Link>
-          </div>
-        </div>
+          }
+        />
 
         {/* Projects List - Editorial Layout */}
         <div className="space-y-0">
