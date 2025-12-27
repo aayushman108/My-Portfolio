@@ -29,7 +29,7 @@ const Contact = () => {
             {/* Subtle Grid */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none" />
 
-            <div className="contact-container relative z-10 max-w-7xl mx-auto">
+            <div className="contact-container relative z-10 container mx-auto">
                 {/* Section Number */}
                 <div className="mb-16">
                     <span className="text-8xl md:text-9xl font-black text-gray-200 dark:text-gray-800 leading-none">

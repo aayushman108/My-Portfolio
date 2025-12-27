@@ -7,106 +7,122 @@ import { FiArrowRight } from "react-icons/fi";
 
 const Hero = () => {
     const heroRef = useRef<HTMLDivElement>(null);
+    const btnRef = useRef(null);
+    const spotlightRef = useRef(null);
 
     useGSAP(() => {
-        const tl = gsap.timeline({ delay: 4 });
+        // Mouse Spotlight Effect with quickTo for performance
+        const xTo = gsap.quickTo(spotlightRef.current, "x", { duration: 0.1, ease: "power3" });
+        const yTo = gsap.quickTo(spotlightRef.current, "y", { duration: 0.1, ease: "power3" });
 
-        // Animate elements in sequence
-        tl.from(".hero-label", {
-            y: 30,
-            opacity: 0,
-            duration: 0.8,
-            ease: "power3.out"
-        })
-        .from(".hero-title-line", {
-            y: 100,
-            opacity: 0,
-            duration: 1,
-            stagger: 0.1,
+        const handleMouseMove = (e: MouseEvent) => {
+            if (heroRef.current) {
+                const { left, top, width, height } = heroRef.current.getBoundingClientRect();
+                const x = (e.clientX - left) / width - 0.5;
+                const y = (e.clientY - top) / height - 0.5;
+                
+                xTo(x * 50);
+                yTo(y * 50);
+            }
+        };
+
+        window.addEventListener("mousemove", handleMouseMove);
+
+        // Clip Path Animation
+        const tl = gsap.timeline({delay: 4});
+        const lines = gsap.utils.toArray(".clip-line");
+
+        // 1. Initial State for lines
+        gsap.set(lines, { 
+            clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
+            y: 80,
+            opacity: 0
+        });
+
+        // 2. Animate Clip Path Reveal for Title lines
+        tl.to(lines, {
+            clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+            y: 0,
+            opacity: 1,
+            duration: 1.2,
+            stagger: 0.15,
             ease: "power4.out"
-        }, "-=0.4")
-        .from(".hero-subtitle", {
-            y: 30,
-            opacity: 0,
-            duration: 0.8,
-            ease: "power3.out"
-        }, "-=0.5")
-        .from(".hero-cta", {
-            y: 20,
-            opacity: 0,
-            duration: 0.6,
-            ease: "power2.out"
-        }, "-=0.3");
+        })
+        // 3. Animate Button separately
+        .fromTo(
+            btnRef.current,
+            { opacity: 0, scale: 0.8 },
+            { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.7)" },
+            "-=0.5"
+        );
+
+        return () => window.removeEventListener("mousemove", handleMouseMove);
     }, { scope: heroRef });
 
     return (
         <section
             id="home"
             ref={heroRef}
-            className="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 relative overflow-hidden bg-white dark:bg-black"
+            className="min-h-screen flex flex-col justify-center items-center text-center px-6 md:px-12 relative overflow-hidden bg-background"
         >
-            {/* Subtle Grid */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none" />
+            {/* Refined Grid Background */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none" />
             
-            {/* Content */}
-            <div className="relative z-10 max-w-7xl mx-auto w-full">
-                {/* Small Label */}
-                <div className="hero-label mb-8 md:mb-12">
-                    <span className="inline-block px-4 py-2 text-xs md:text-sm font-medium tracking-[0.2em] uppercase text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-gray-800 rounded-full">
-                        Available for Freelance
+             {/* Mouse Spotlight */}
+            <div 
+                ref={spotlightRef}
+                className="absolute w-[800px] h-[800px] bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-[100px] -z-10 pointer-events-none"
+            />
+
+            {/* Glowing Orbs - More Subtle */}
+            <div className="absolute top-[20%] left-[20%] w-[300px] h-[300px] bg-purple-600/10 dark:bg-purple-600/20 rounded-full blur-[120px] -z-10 animate-pulse" />
+            <div className="absolute bottom-[20%] right-[20%] w-[400px] h-[400px] bg-blue-600/10 dark:bg-blue-600/20 rounded-full blur-[120px] -z-10 animate-pulse" style={{ animationDelay: "2s" }} />
+
+            <div className="relative z-10 container mx-auto">
+                {/* Title with Better Spacing */}
+                <div className="mb-8 font-black tracking-tighter text-foreground">
+                    <h1 className="text-6xl md:text-8xl lg:text-9xl flex flex-col items-center gap-4">
+                        <span className="clip-line block">Hi, I'm</span>
+                        <span className="clip-line block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 cursor-default hover:tracking-widest transition-all duration-500">
+                            Aayushman
+                        </span>
+                    </h1>
+                </div>
+                
+                {/* Subtitle with Better Hierarchy */}
+                <div className="relative z-10 text-xl md:text-2xl lg:text-3xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto mb-16 font-light leading-relaxed flex flex-col items-center gap-3">
+                    <span className="clip-line block">
+                         <span className="font-semibold text-foreground">Frontend Architect</span> & <span className="font-semibold text-foreground">React Specialist</span>
+                    </span>
+                    <span className="clip-line block">
+                        Building digital experiences that are pixel-perfect and performant
                     </span>
                 </div>
 
-                {/* Massive Title */}
-                <h1 className="mb-8 md:mb-12 overflow-hidden">
-                    <div className="hero-title-line text-[14vw] md:text-[12vw] lg:text-[10vw] font-black leading-[0.9] tracking-tighter text-gray-900 dark:text-white">
-                        Creative
-                    </div>
-                    <div className="hero-title-line text-[14vw] md:text-[12vw] lg:text-[10vw] font-black leading-[0.9] tracking-tighter">
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
-                            Developer
-                        </span>
-                    </div>
-                </h1>
-
-                {/* Subtitle & Description */}
-                <div className="hero-subtitle max-w-2xl mb-12 md:mb-16">
-                    <p className="text-xl md:text-2xl lg:text-3xl font-light text-gray-600 dark:text-gray-400 leading-relaxed">
-                        Crafting exceptional digital experiences through code, design, and innovation.
-                    </p>
-                </div>
-
-                {/* CTA */}
-                <div className="hero-cta flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                {/* Refined CTA Buttons */}
+                <div ref={btnRef} className="relative z-10 flex flex-col sm:flex-row gap-4 items-center justify-center">
                     <a
                         href="#projects"
-                        className="group inline-flex items-center gap-3 px-8 py-4 bg-black dark:bg-white text-white dark:text-black font-medium rounded-full hover:gap-5 transition-all duration-300"
+                        className="group relative inline-flex items-center gap-3 justify-center overflow-hidden rounded-full px-8 py-4 bg-foreground text-background font-bold transition-all hover:scale-105 hover:shadow-2xl"
                     >
-                        <span>View Projects</span>
-                        <FiArrowRight className="text-xl" />
+                        <span className="absolute inset-0 z-0 h-full w-full rounded-full bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 transition-all duration-500 group-hover:opacity-100" />
+                         <span className="relative z-10 transition-colors group-hover:text-white">Explore My Work</span>
+                         <FiArrowRight className="relative z-10 group-hover:translate-x-1 transition-transform" />
                     </a>
                     
                     <a
                         href="#contact"
-                        className="inline-flex items-center gap-3 px-8 py-4 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white font-medium rounded-full hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300"
+                        className="inline-flex items-center gap-3 px-8 py-4 border-2 border-foreground/20 text-foreground font-medium rounded-full hover:border-foreground hover:bg-foreground/5 transition-all duration-300"
                     >
                         <span>Get In Touch</span>
                     </a>
                 </div>
-
-                {/* Scroll Indicator */}
-                <div className="absolute bottom-12 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-gray-400 dark:text-gray-600">
-                    <span className="text-xs font-medium tracking-widest uppercase">Scroll</span>
-                    <div className="w-[1px] h-16 bg-gradient-to-b from-gray-400 to-transparent dark:from-gray-600"></div>
-                </div>
             </div>
 
-            {/* Floating Badge */}
-            <div className="absolute top-12 right-12 hidden lg:block">
-                <div className="flex flex-col items-end gap-2">
-                    <span className="text-xs font-medium tracking-widest uppercase text-gray-400 dark:text-gray-600">Based in</span>
-                    <span className="text-sm font-bold text-gray-900 dark:text-white">Nepal</span>
-                </div>
+            {/* Scroll Indicator */}
+            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-gray-400 dark:text-gray-600 animate-bounce">
+                <span className="text-xs font-medium tracking-widest uppercase">Scroll</span>
+                <div className="w-[1px] h-12 bg-gradient-to-b from-gray-400 to-transparent dark:from-gray-600"></div>
             </div>
         </section>
     );
