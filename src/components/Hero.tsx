@@ -10,7 +10,7 @@ const Hero = () => {
 
   useGSAP(
     () => {
-      const tl = gsap.timeline({ delay: 5 });
+      const tl = gsap.timeline({ delay: 4 });
 
       gsap.set(".hero-fade", { opacity: 0, y: 30 });
       gsap.set(".hero-cta-btn", { opacity: 0, y: 20 });
@@ -27,9 +27,9 @@ const Hero = () => {
       tl.to(
         ".hero-text-reveal",
         {
-          clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+          y: 0,
           duration: 1.5,
-          stagger: 0.5,
+          // stagger: 0.5,
           ease: "power4.inOut",
         },
         "-=0.5"
@@ -44,7 +44,7 @@ const Hero = () => {
           duration: 1,
           ease: "power3.out",
         },
-        "-=0.8"
+        "-=0.2"
       );
 
       // 4. OTA Buttons Stagger
@@ -111,26 +111,26 @@ const Hero = () => {
           <h1 className="mb-8">
             {/* Wrapper 1 */}
             <div
-              className="hero-text-reveal"
+              className=""
               style={{
-                clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)",
+                clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
               }}
             >
-              <span className="block text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-gray-900 dark:text-white leading-[0.9] tracking-tight">
+              <p className=" hero-text-reveal translate-y-30 block text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-gray-900 dark:text-white leading-[0.9] tracking-tight">
                 Hi, I'm
-              </span>
+              </p>
             </div>
 
             {/* Wrapper 2 */}
             <div
-              className="hero-text-reveal"
+              className=""
               style={{
-                clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)",
+                clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
               }}
             >
-              <span className="block text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black leading-[1.1] tracking-tight text-gray-400 dark:text-gray-600">
+              <p className=" hero-text-reveal translate-y-30 block text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black leading-[1.1] tracking-tight text-gray-400 dark:text-gray-600">
                 Aayushman
-              </span>
+              </p>
             </div>
           </h1>
 
