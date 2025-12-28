@@ -86,8 +86,8 @@ const Contact = () => {
 
       <div className="container mx-auto">
         {/* Header */}
-        {/* Header */}
         <SectionHeader
+          key="Get In Touch"
           label="Get In Touch"
           title="Let's Work"
           subtitle="Together"

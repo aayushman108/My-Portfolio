@@ -111,6 +111,7 @@ const About = () => {
         {/* Header */}
         {/* Header */}
         <SectionHeader
+          key="About Me"
           label="About Me"
           title="Digital Craftsman"
           subtitle="& Problem Solver"

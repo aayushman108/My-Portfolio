@@ -105,8 +105,8 @@ const Skills = () => {
 
       <div className="container mx-auto">
         {/* Header */}
-        {/* Header */}
         <SectionHeader
+          key="Expertise"
           label="Expertise"
           title="Tech"
           subtitle="Stack"

@@ -48,8 +48,8 @@ const Projects = () => {
 
       <div className="container mx-auto">
         {/* Section Header - Awwwards Style */}
-        {/* Section Header - Awwwards Style */}
         <SectionHeader
+          key="Selected Work"
           label="Selected Work"
           title="Featured"
           subtitle="Projects"

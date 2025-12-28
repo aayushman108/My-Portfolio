@@ -106,8 +106,8 @@ const Questions = () => {
 
       <div className="container mx-auto">
         {/* Header */}
-        {/* Header */}
         <SectionHeader
+          key="FAQ"
           label="FAQ"
           title="Common"
           subtitle="Questions"
