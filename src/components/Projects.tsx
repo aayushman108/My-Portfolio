@@ -1,46 +1,13 @@
-"use client";
-import { useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaArrowRight } from "react-icons/fa";
 import { PROJECTS } from "@/data/projects";
 import { ProjectCardForHomePage } from "./ProjectCard";
 import { SectionHeader } from "./SectionHeader";
 
 const Projects = () => {
-  const containerRef = useRef(null);
-
-  useGSAP(
-    () => {
-      gsap.registerPlugin(ScrollTrigger);
-
-      gsap.fromTo(
-        ".project-card",
-        { opacity: 0, y: 80 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          stagger: 0.15,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 75%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    },
-    { scope: containerRef }
-  );
-
   return (
     <section
       id="projects"
-      ref={containerRef}
       className="py-32 px-6 bg-white dark:bg-black relative overflow-hidden"
     >
       {/* Minimal background accent */}

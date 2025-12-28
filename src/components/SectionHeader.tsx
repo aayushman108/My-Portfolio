@@ -31,10 +31,8 @@ export const SectionHeader = ({
       const t1 = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 75%",
-          toggleActions: "play none none reverse",
-          markers: true,
-          id: label,
+          start: "top 70%",
+          toggleActions: "play none none none",
         },
       });
       t1.to(".section-text-reveal", {

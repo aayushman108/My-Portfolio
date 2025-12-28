@@ -1,16 +1,48 @@
+"use client";
+
 import { PROJECTS } from "@/data/projects";
 import Image from "next/image";
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type IProjectCardProps = {
   project: (typeof PROJECTS)[number];
 };
 
 export function ProjectCardForHomePage({ project }: IProjectCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        cardRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: cardRef.current,
+            start: "top 90%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    },
+    { scope: cardRef }
+  );
+
   return (
     <div
+      ref={cardRef}
       key={project.id}
-      className="project-card group block border-t border-gray-200 dark:border-gray-800 last:border-b relative"
+      className="project-card group block border-t border-gray-200 dark:border-gray-800 last:border-b relative opacity-0"
     >
       <a
         href={project.live}
@@ -120,8 +152,35 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
 }
 
 export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        cardRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: cardRef.current,
+            start: "top 90%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    },
+    { scope: cardRef }
+  );
+
   return (
-    <div key={project.id} className="project-card group">
+    <div
+      ref={cardRef}
+      key={project.id}
+      className="project-card group opacity-0"
+    >
       {/* Image Container */}
       <div className="relative aspect-video rounded-2xl overflow-hidden bg-gray-100 dark:bg-zinc-800 mb-6">
         <Image

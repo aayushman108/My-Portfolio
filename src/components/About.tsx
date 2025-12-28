@@ -41,44 +41,58 @@ const stats = [
   { value: "100%", label: "Client Satisfaction" },
 ];
 
+gsap.registerPlugin(ScrollTrigger);
+
 const About = () => {
-  const containerRef = useRef(null);
+  const aboutContentRef = useRef(null);
+  const aboutSkillsRef = useRef(null);
 
   useGSAP(
     () => {
-      gsap.registerPlugin(ScrollTrigger);
-
+      // Bio Content Animation
       gsap.fromTo(
         ".about-content",
-        { opacity: 0, y: 60 },
+        { opacity: 0, y: 50 },
         {
           opacity: 1,
           y: 0,
-          duration: 1,
-          ease: "power3.out",
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power1.inOut",
           scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 70%",
+            trigger: aboutContentRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+            markers: true,
+            id: "About Me",
           },
         }
       );
 
+      // Stats Animation
       gsap.fromTo(
         ".about-stat",
-        { opacity: 0, y: 30 },
+        { opacity: 0, y: 40 },
         {
           opacity: 1,
           y: 0,
           duration: 0.8,
           stagger: 0.1,
-          ease: "power3.out",
+          ease: "power1.inOut",
           scrollTrigger: {
-            trigger: ".about-stats",
+            trigger: aboutContentRef.current,
             start: "top 80%",
+            toggleActions: "play none none none",
           },
         }
       );
+    },
+    { scope: aboutContentRef }
+  );
 
+  useGSAP(
+    () => {
+      // Skills Animation
       gsap.fromTo(
         ".skill-item",
         { opacity: 0, y: 20 },
@@ -87,28 +101,26 @@ const About = () => {
           y: 0,
           duration: 0.6,
           stagger: 0.05,
-          ease: "power3.out",
+          ease: "power1.inOut",
           scrollTrigger: {
-            trigger: ".skills-section",
-            start: "top 80%",
+            trigger: aboutSkillsRef.current,
+            start: "top 75%",
+            toggleActions: "play none none none",
+            markers: true,
+            id: "Skills",
           },
         }
       );
     },
-    { scope: containerRef }
+    { scope: aboutSkillsRef }
   );
 
   return (
     <section
       id="about"
-      ref={containerRef}
       className="py-32 px-6 bg-gray-50 dark:bg-zinc-900 relative overflow-hidden"
     >
-      {/* Minimal background accent - Inverted for contrast */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-white dark:bg-black -z-10" />
-
       <div className="container mx-auto">
-        {/* Header */}
         {/* Header */}
         <SectionHeader
           key="About Me"
@@ -119,7 +131,10 @@ const About = () => {
         />
 
         {/* Bio Section */}
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 mb-20">
+        <div
+          ref={aboutContentRef}
+          className="grid lg:grid-cols-12 gap-12 lg:gap-16 mb-20"
+        >
           {/* Left: Bio Text */}
           <div className="about-content lg:col-span-7 space-y-6">
             <p className="text-2xl md:text-3xl font-light text-gray-900 dark:text-white leading-relaxed">
@@ -181,7 +196,10 @@ const About = () => {
         </div>
 
         {/* Skills Section */}
-        <div className="skills-section pt-12 border-t border-gray-200 dark:border-gray-800">
+        <div
+          ref={aboutSkillsRef}
+          className="skills-section pt-12 border-t border-gray-200 dark:border-gray-800"
+        >
           <div className="flex items-center justify-between flex-wrap gap-6 mb-8">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
               Tech Stack
