@@ -63,7 +63,6 @@ const About = () => {
             trigger: aboutContentRef.current,
             start: "top 85%",
             toggleActions: "play none none none",
-            markers: true,
             id: "About Me",
           },
         }
@@ -106,7 +105,6 @@ const About = () => {
             trigger: aboutSkillsRef.current,
             start: "top 75%",
             toggleActions: "play none none none",
-            markers: true,
             id: "Skills",
           },
         }
