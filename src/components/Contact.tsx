@@ -58,7 +58,7 @@ const Contact = () => {
     {
       icon: <FaLinkedin size={20} />,
       label: "LinkedIn",
-      href: "#",
+      href: "https://www.linkedin.com/notifications/?filter=all",
       color: "hover:text-blue-600 dark:hover:text-blue-400",
     },
     {
@@ -70,7 +70,7 @@ const Contact = () => {
     {
       icon: <FaEnvelope size={20} />,
       label: "Email",
-      href: "mailto:hello@example.com",
+      href: "mailto:aayushmansharma108@gmail.com",
       color: "hover:text-purple-600 dark:hover:text-purple-400",
     },
   ];
@@ -111,11 +111,11 @@ const Contact = () => {
             {/* Email CTA */}
             <div className="pt-4">
               <a
-                href="mailto:hello@example.com"
+                href="mailto:aayushmansharma108@gmail.com"
                 className="group inline-flex items-center gap-4"
               >
                 <span className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 underline underline-offset-8 decoration-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-purple-600 dark:hover:decoration-purple-400">
-                  hello@example.com
+                  aayushmansharma108@gmail.com
                 </span>
                 <div className="w-12 h-12 rounded-full border-2 border-gray-300 dark:border-gray-700 flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">
                   <svg
