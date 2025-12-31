@@ -58,14 +58,14 @@ export const SectionHeader = ({
                 clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
               }}
             >
-              <p className="section-text-reveal translate-y-20">{title}</p>
+              <p className="section-text-reveal translate-y-40">{title}</p>
             </div>
             <div
               style={{
                 clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
               }}
             >
-              <p className="section-text-reveal translate-y-20 text-gray-400 dark:text-gray-600">
+              <p className="section-text-reveal translate-y-40 text-gray-400 dark:text-gray-600">
                 {subtitle}
               </p>
             </div>

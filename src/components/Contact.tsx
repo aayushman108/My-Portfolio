@@ -4,7 +4,13 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaEnvelope, FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
+import {
+  FaEnvelope,
+  FaLinkedin,
+  FaGithub,
+  FaTwitter,
+  FaPhoneAlt,
+} from "react-icons/fa";
 import { SectionHeader } from "./SectionHeader";
 
 const Contact = () => {
@@ -58,7 +64,7 @@ const Contact = () => {
     {
       icon: <FaLinkedin size={20} />,
       label: "LinkedIn",
-      href: "https://www.linkedin.com/notifications/?filter=all",
+      href: "https://www.linkedin.com/in/aayushman-sharma-a8abbb277/",
       color: "hover:text-blue-600 dark:hover:text-blue-400",
     },
     {
@@ -72,6 +78,12 @@ const Contact = () => {
       label: "Email",
       href: "mailto:aayushmansharma108@gmail.com",
       color: "hover:text-purple-600 dark:hover:text-purple-400",
+    },
+    {
+      icon: <FaPhoneAlt size={20} />,
+      label: "Phone",
+      href: "tel:+9779810478691",
+      color: "hover:text-green-600 dark:hover:text-green-400",
     },
   ];
 

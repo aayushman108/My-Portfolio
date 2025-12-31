@@ -10,32 +10,32 @@ const questions = [
   {
     question: "What's your experience?",
     answer:
-      "Two years building production interfaces with React, JavaScript, and GSAP. I focus on clean code and smooth user experiences.",
+      "I have over two years of professional experience as a Frontend Software Engineer, working with React, Next.js, TypeScript, and modern UI libraries to build production-ready web applications.",
   },
   {
-    question: "Do you work remotely?",
+    question: "Are you available for freelance or remote work?",
     answer:
-      "Yes. I work with teams across time zones and handle projects entirely online.",
+      "I’m currently working full-time, but I’m open to discussing freelance or remote opportunities if they’re a good fit.",
   },
   {
-    question: "What's your typical process?",
+    question: "What kind of projects have you worked on?",
     answer:
-      "I start by understanding the problem, then design and build solutions that balance aesthetics with performance.",
+      "I’ve worked on government systems, AI-powered platforms, dashboards, and e-commerce applications, ranging from large-scale data-driven systems to customer-facing websites.",
   },
   {
-    question: "Can you handle animations?",
+    question: "How do you approach development?",
     answer:
-      "Absolutely. GSAP is my tool of choice for creating performant, intentional motion design.",
+      "I start by understanding the problem and requirements, then focus on building clean, maintainable code with strong attention to performance, accessibility, and user experience.",
   },
   {
-    question: "What about responsive design?",
+    question: "Do you work with animations and interactions?",
     answer:
-      "Every project I build works beautifully on mobile, tablet, and desktop. It's non-negotiable.",
+      "Yes. I regularly use GSAP, Framer Motion, and other modern animation libraries to create smooth, performant, and purposeful UI interactions.",
   },
   {
-    question: "How do we get started?",
+    question: "How can we collaborate?",
     answer:
-      "Reach out through the contact section. We'll discuss your project and see if we're a good fit.",
+      "You can reach out through the contact section. We can discuss your project, timeline, and see how I can contribute.",
   },
 ];
 

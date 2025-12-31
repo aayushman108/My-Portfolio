@@ -103,7 +103,7 @@ const Hero = () => {
           {/* Label */}
           <div className="hero-fade-label opacity-0 translate-y-5 mb-8">
             <span className="text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">
-              Frontend Developer & Digital Craftsman
+              Frontend Software Engineer
             </span>
           </div>
 
@@ -135,14 +135,15 @@ const Hero = () => {
           </h1>
 
           {/* Subtitle */}
-          <div className="hero-fade-subtitle opacity-0 translate-y-8 max-w-2xl mb-12">
+          <div className="hero-fade-subtitle opacity-0 translate-y-8 max-w-4xl mb-12">
             <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 leading-relaxed">
-              I craft{" "}
+              Frontend Software Engineer with{" "}
               <span className="text-gray-900 dark:text-white font-medium">
-                pixel-perfect
+                2+ years of experience
               </span>{" "}
-              digital experiences with modern technologies. Specializing in
-              React, Next.js, and thoughtful UI animations.
+              building scalable web and mobile applications using React,
+              Next.js, and React Native—focused on performance, usability, and
+              clean UI animations.
             </p>
           </div>
 

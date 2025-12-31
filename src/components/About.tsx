@@ -18,26 +18,34 @@ import {
   SiTailwindcss,
   SiTypescript,
   SiGreensock,
+  SiExpress,
+  SiPostgresql,
+  SiFramer,
+  SiRedux,
 } from "react-icons/si";
 import { SectionHeader } from "./SectionHeader";
 
 const skills = [
   { name: "React", icon: <FaReact size={24} /> },
   { name: "Next.js", icon: <SiNextdotjs size={24} /> },
+  { name: "React Native", icon: <FaReact size={24} /> },
   { name: "TypeScript", icon: <SiTypescript size={24} /> },
   { name: "JavaScript", icon: <FaJs size={24} /> },
+  { name: "Redux Toolkit", icon: <SiRedux size={24} /> },
   { name: "Tailwind CSS", icon: <SiTailwindcss size={24} /> },
   { name: "GSAP", icon: <SiGreensock size={24} /> },
+  { name: "Framer Motion", icon: <SiFramer size={24} /> },
   { name: "HTML5", icon: <FaHtml5 size={24} /> },
   { name: "CSS3", icon: <FaCss3Alt size={24} /> },
   { name: "Git", icon: <FaGitAlt size={24} /> },
   { name: "Node.js", icon: <FaNodeJs size={24} /> },
-  { name: "Figma", icon: <FaFigma size={24} /> },
+  { name: "Express", icon: <SiExpress size={24} /> },
+  { name: "PostgreSQL", icon: <SiPostgresql size={24} /> },
 ];
 
 const stats = [
   { value: "2+", label: "Years Experience" },
-  { value: "15+", label: "Projects Completed" },
+  { value: "5+", label: "Projects Completed" },
   { value: "100%", label: "Client Satisfaction" },
 ];
 
@@ -123,8 +131,8 @@ const About = () => {
         <SectionHeader
           key="About Me"
           label="About Me"
-          title="Digital Craftsman"
-          subtitle="& Problem Solver"
+          title="Frontend Engineer"
+          subtitle="Crafting Seamless & Scalable Web Experiences"
           className="about-content"
         />
 
@@ -136,15 +144,20 @@ const About = () => {
           {/* Left: Bio Text */}
           <div className="about-content lg:col-span-7 space-y-6">
             <p className="text-2xl md:text-3xl font-light text-gray-900 dark:text-white leading-relaxed">
-              I'm <span className="font-semibold">Aayushman</span>, a frontend
-              developer passionate about creating beautiful, functional web
-              experiences.
+              I'm <span className="font-semibold">Aayushman Sharma</span>, a
+              Frontend Software Engineer with over{" "}
+              <span className="font-semibold">
+                2 years of professional experience{" "}
+              </span>
+              building modern, scalable web applications.
             </p>
 
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
-              With expertise in React, Next.js, and modern animation libraries,
-              I transform complex ideas into elegant, user-friendly interfaces.
-              I believe in the power of clean code and thoughtful design.
+              I specialize in React and Next.js, with strong experience in
+              TypeScript, state management, testing, and interactive UI
+              development. I’ve worked on government systems, AI-powered
+              platforms, dashboards, and e-commerce applications—focusing on
+              clean code, performance, and user experience.
             </p>
 
             {/* CTA */}
