@@ -1,54 +1,50 @@
 export const PROJECTS = [
   {
     id: 1,
-    title: "E-Commerce Dashboard",
+    title: "PHMIS - Poor Household Management Information System",
     description:
-      "A comprehensive dashboard for managing online stores, featuring real-time analytics and inventory management.",
-    tech: ["React", "Tailwind", "Recharts"],
+      "Government-led web application designed to digitize and manage data related to poor households across Nepal, supporting large-scale surveys, data processing, and household-level queries for inclusive welfare monitoring.",
+    tech: ["React", "Redux Toolkit", "React Testing Library", "Vitest"],
     github: "#",
-    live: "#",
-    year: "2024",
+    live: "https://phmis.molcpa.gov.np/",
+    year: "2025",
     category: "Web App",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+    image: "/images/PHMIS.png",
   },
   {
     id: 2,
-    title: "AI Chat Application",
+    title: "Rajdevi Engineering Consultancy Website",
     description:
-      "Real-time chat application powered by AI, supporting multiple concurrent conversations and voice input.",
-    tech: ["Next.js", "OpenAI API", "Socket.io"],
+      "Corporate website for an engineering consultancy firm showcasing company information, services, projects, milestones, and interactive map-based project visualization.",
+    tech: ["Next.js", "Redux Toolkit", "Recharts", "Leaflet", "Strapi CMS"],
     github: "#",
-    live: "#",
+    live: "https://rajdevi.com.np/",
     year: "2024",
-    category: "AI/ML",
-    image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
+    category: "Website",
+    image: "/images/rajdevi.png",
   },
   {
     id: 3,
-    title: "Portfolio Website",
+    title: "Online Sewa",
     description:
-      "Modern portfolio website with smooth animations and responsive design showcasing creative work.",
-    tech: ["Next.js", "GSAP", "Tailwind"],
+      "E-commerce platform offering online shopping features, promotional sections, community forums, and content-driven experiences for users.",
+    tech: ["Next.js", "Redux Toolkit"],
     github: "#",
-    live: "#",
+    live: "https://onlinesewa.com/",
     year: "2024",
-    category: "Design",
-    image:
-      "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80",
+    category: "Web App",
+    image: "/images/onlinesewa.png",
   },
   {
     id: 4,
-    title: "Task Management App",
+    title: "Dafinchi.ai",
     description:
-      "A productivity app for teams with drag-and-drop boards, real-time collaboration, and deadline tracking.",
-    tech: ["React", "Redux", "Firebase"],
+      "AI-powered financial analysis platform that extracts insights from financial documents, enabling intelligent queries related to revenue, statements, and risk assessment.",
+    tech: ["Next.js", "Redux Toolkit", "Clerk Authentication"],
     github: "#",
-    live: "#",
-    year: "2023",
+    live: "https://dafinchi.ai/",
+    year: "2024",
     category: "Web App",
-    image:
-      "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&q=80",
+    image: "/images/dafinchi.png",
   },
 ] as const;

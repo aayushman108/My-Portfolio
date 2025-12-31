@@ -8,15 +8,20 @@ import About from "@/components/About";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import Questions from "@/components/Questions";
+import { usePathname } from "next/navigation";
 
 export default function Home() {
+  const pathname = usePathname();
+
   useEffect(() => {
-    // Force scroll to top on page load/reload
-    if ("scrollRestoration" in history) {
-      history.scrollRestoration = "manual";
+    // Only scroll to top for `/` without hash
+    if (pathname === "/" && !window.location.hash) {
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+      window.scrollTo(0, 0);
     }
-    window.scrollTo(0, 0);
-  }, []);
+  }, [pathname]);
 
   return (
     <>
