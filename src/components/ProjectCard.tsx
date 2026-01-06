@@ -62,19 +62,27 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
           {/* Image */}
           <div className="col-span-12 md:col-span-5 lg:col-span-4">
             <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-100 dark:bg-zinc-800">
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 40vw, 33vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
-              />
+              {project.image ? (
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 40vw, 33vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+              ) : (
+                <div className="w-full h-full bg-gradient-to-br from-purple-500/10 to-blue-500/10 dark:from-purple-900/20 dark:to-blue-900/20" />
+              )}
             </div>
           </div>
 
           {/* Content */}
           <div className="col-span-12 md:col-span-4 lg:col-span-5">
             <div className="flex items-center gap-4 mb-3">
+              <span className="text-xs font-medium tracking-wider uppercase text-purple-600 dark:text-purple-400">
+                {project.type} Project
+              </span>
+              <span className="w-1 h-1 rounded-full bg-gray-400" />
               <span className="text-xs font-medium tracking-wider uppercase text-gray-500 dark:text-gray-400">
                 {project.category}
               </span>
@@ -183,13 +191,17 @@ export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
     >
       {/* Image Container */}
       <div className="relative aspect-video rounded-2xl overflow-hidden bg-gray-100 dark:bg-zinc-800 mb-6">
-        <Image
-          src={project.image}
-          alt={project.title}
-          fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
-        />
+        {project.image ? (
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-purple-500/10 to-blue-500/10 dark:from-purple-900/20 dark:to-blue-900/20" />
+        )}
 
         {/* Year Badge */}
         <div className="absolute top-4 right-4 px-3 py-1.5 bg-white/90 dark:bg-black/80 backdrop-blur-sm rounded-full text-xs font-bold text-gray-900 dark:text-white">
@@ -227,7 +239,10 @@ export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
       {/* Content */}
       <div className="space-y-4">
         {/* Meta */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          <span className="px-2 py-1 rounded-md bg-purple-100 dark:bg-purple-900/30 text-[10px] font-bold tracking-wider uppercase text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-800">
+            {project.type}
+          </span>
           <span className="text-xs font-medium tracking-wider uppercase text-gray-500 dark:text-gray-400">
             {project.category}
           </span>
