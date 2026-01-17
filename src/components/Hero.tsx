@@ -4,6 +4,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { FaArrowDown } from "react-icons/fa";
+import Globe from "./Globe";
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -14,6 +15,7 @@ const Hero = () => {
 
       gsap.set(".hero-fade", { opacity: 0, y: 30 });
       gsap.set(".hero-cta-btn", { opacity: 0, y: 20 });
+      gsap.set(".hero-globe", { opacity: 0, scale: 0.8 });
 
       // 1. Label Fade In
       tl.to(".hero-fade-label", {
@@ -32,7 +34,19 @@ const Hero = () => {
           // stagger: 0.5,
           ease: "power4.inOut",
         },
-        "-=0.5"
+        "-=0.5",
+      );
+
+      // 2.5. Globe Reveal
+      tl.to(
+        ".hero-globe",
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 1.5,
+          ease: "power3.out",
+        },
+        "-=1.2",
       );
 
       // 3. Subtitle Fade In
@@ -44,7 +58,7 @@ const Hero = () => {
           duration: 1,
           ease: "power3.out",
         },
-        "-=0.2"
+        "-=0.8",
       );
 
       // 4. OTA Buttons Stagger
@@ -57,7 +71,7 @@ const Hero = () => {
           stagger: 0.1,
           ease: "power4.inOut",
         },
-        "-=0.6"
+        "-=0.6",
       );
 
       // 5. Bottom Info Bar Fade In
@@ -70,7 +84,7 @@ const Hero = () => {
           stagger: 0.1,
           ease: "power3.out",
         },
-        "-=0.6"
+        "-=0.6",
       );
 
       // Floating animation for scroll indicator
@@ -82,7 +96,7 @@ const Hero = () => {
         ease: "power1.inOut",
       });
     },
-    { scope: heroRef }
+    { scope: heroRef },
   );
 
   return (
@@ -97,9 +111,14 @@ const Hero = () => {
       {/* Subtle grid pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[64px_64px] pointer-events-none" />
 
+      {/* 3D Globe - Positioned on the right */}
+      <div className="hero-globe absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] lg:w-[600px] lg:h-[600px] xl:w-[700px] xl:h-[700px] opacity-0 pointer-events-auto hidden md:block">
+        <Globe className="w-full h-full" />
+      </div>
+
       <div className="container mx-auto">
         {/* Main Content */}
-        <div className="max-w-5xl">
+        <div className="max-w-5xl relative z-10">
           {/* Label */}
           <div className="hero-fade-label opacity-0 translate-y-5 mb-8">
             <span className="text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">
