@@ -73,7 +73,7 @@ const About = () => {
             toggleActions: "play none none none",
             id: "About Me",
           },
-        }
+        },
       );
 
       // Stats Animation
@@ -91,10 +91,10 @@ const About = () => {
             start: "top 80%",
             toggleActions: "play none none none",
           },
-        }
+        },
       );
     },
-    { scope: aboutContentRef }
+    { scope: aboutContentRef },
   );
 
   useGSAP(
@@ -115,10 +115,10 @@ const About = () => {
             toggleActions: "play none none none",
             id: "Skills",
           },
-        }
+        },
       );
     },
-    { scope: aboutSkillsRef }
+    { scope: aboutSkillsRef },
   );
 
   return (
@@ -132,7 +132,7 @@ const About = () => {
           key="About Me"
           label="About Me"
           title="Frontend Engineer"
-          subtitle="Crafting Seamless & Scalable Web Experiences"
+          subtitle="Crafting Seamless Web Experiences"
           className="about-content"
         />
 
