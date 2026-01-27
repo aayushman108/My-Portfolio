@@ -13,13 +13,13 @@ import {
 } from "react-icons/fa";
 import { SectionHeader } from "./SectionHeader";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const Contact = () => {
   const containerRef = useRef(null);
 
   useGSAP(
     () => {
-      gsap.registerPlugin(ScrollTrigger);
-
       gsap.fromTo(
         ".contact-content",
         { opacity: 0, y: 60 },
@@ -32,7 +32,7 @@ const Contact = () => {
             trigger: containerRef.current,
             start: "top 70%",
           },
-        }
+        },
       );
 
       gsap.fromTo(
@@ -48,10 +48,10 @@ const Contact = () => {
             trigger: ".contact-links",
             start: "top 80%",
           },
-        }
+        },
       );
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   const socialLinks = [

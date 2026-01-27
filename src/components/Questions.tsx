@@ -6,6 +6,8 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SectionHeader } from "./SectionHeader";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const questions = [
   {
     question: "What's your experience?",
@@ -45,8 +47,6 @@ const Questions = () => {
 
   useGSAP(
     () => {
-      gsap.registerPlugin(ScrollTrigger);
-
       gsap.fromTo(
         ".questions-header",
         { opacity: 0, y: 50 },
