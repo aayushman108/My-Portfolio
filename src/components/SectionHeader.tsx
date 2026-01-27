@@ -42,7 +42,7 @@ export const SectionHeader = ({
         ease: "power4.inOut",
       });
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   return (
@@ -58,16 +58,18 @@ export const SectionHeader = ({
                 clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
               }}
             >
-              <p className="section-text-reveal translate-y-40">{title}</p>
+              <span className="section-text-reveal translate-y-40 block">
+                {title}
+              </span>
             </div>
             <div
               style={{
                 clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
               }}
             >
-              <p className="section-text-reveal translate-y-40 text-gray-400 dark:text-gray-600">
+              <span className="section-text-reveal translate-y-40 text-gray-400 dark:text-gray-600 block">
                 {subtitle}
-              </p>
+              </span>
             </div>
           </h2>
         </div>

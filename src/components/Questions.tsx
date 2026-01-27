@@ -10,7 +10,7 @@ const questions = [
   {
     question: "What's your experience?",
     answer:
-      "I have over two years of professional experience as a Frontend Software Engineer, working with React, Next.js, TypeScript, and modern UI libraries to build production-ready web applications.",
+      "I have over two years of professional experience as a Frontend Software Engineer, specializing in React, Next.js, and TypeScript to build scalable and reliable web applications for international clients.",
   },
   {
     question: "Are you available for freelance or remote work?",
@@ -59,7 +59,7 @@ const Questions = () => {
             trigger: ".questions-header",
             start: "top 80%",
           },
-        }
+        },
       );
 
       gsap.fromTo(
@@ -75,7 +75,7 @@ const Questions = () => {
             trigger: ".questions-list",
             start: "top 75%",
           },
-        }
+        },
       );
 
       gsap.fromTo(
@@ -90,10 +90,10 @@ const Questions = () => {
             trigger: ".questions-footer",
             start: "top 85%",
           },
-        }
+        },
       );
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   return (

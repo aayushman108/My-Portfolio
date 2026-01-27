@@ -122,7 +122,7 @@ const Hero = () => {
           {/* Label */}
           <div className="hero-fade-label opacity-0 translate-y-5 mb-8">
             <span className="text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">
-              Frontend Software Engineer
+              Frontend Software Engineer & React Expert
             </span>
           </div>
 
@@ -135,9 +135,9 @@ const Hero = () => {
                 clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
               }}
             >
-              <p className=" hero-text-reveal translate-y-30 block text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-gray-900 dark:text-white leading-[0.9] tracking-tight">
+              <span className=" hero-text-reveal translate-y-30 block text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-gray-900 dark:text-white leading-[0.9] tracking-tight">
                 Hi, I'm
-              </p>
+              </span>
             </div>
 
             {/* Wrapper 2 */}
@@ -147,9 +147,9 @@ const Hero = () => {
                 clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
               }}
             >
-              <p className=" hero-text-reveal translate-y-30 block text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black leading-[1.1] tracking-tight text-gray-400 dark:text-gray-600">
+              <span className=" hero-text-reveal translate-y-30 block text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black leading-[1.1] tracking-tight text-gray-400 dark:text-gray-600">
                 Aayushman
-              </p>
+              </span>
             </div>
           </h1>
 
@@ -160,9 +160,12 @@ const Hero = () => {
               <span className="text-gray-900 dark:text-white font-medium">
                 2+ years of experience
               </span>{" "}
-              building scalable web and mobile applications using React,
-              Next.js, and React Native—focused on performance, usability, and
-              clean UI animations.
+              building scalable and reliable web applications. Specialist in{" "}
+              <span className="text-gray-900 dark:text-white font-medium">
+                React, Next.js, and TypeScript
+              </span>
+              —focused on delivering production-ready features for international
+              clients.
             </p>
           </div>
 
