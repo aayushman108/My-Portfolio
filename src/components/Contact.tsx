@@ -126,7 +126,7 @@ const Contact = () => {
                 href="mailto:aayushmansharma108@gmail.com"
                 className="group inline-flex items-center gap-4 max-w-full"
               >
-                <span className="text-base md:text-3xl font-bold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 underline underline-offset-8 decoration-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-purple-600 dark:hover:decoration-purple-400 break-all md:break-normal">
+                <span className="text-base md:text-2xl font-bold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 underline underline-offset-8 decoration-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-purple-600 dark:hover:decoration-purple-400 break-all md:break-normal">
                   aayushmansharma108@gmail.com
                 </span>
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-gray-300 dark:border-gray-700 flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">

@@ -44,19 +44,19 @@ const Projects = () => {
         <div className="pt-12 border-t border-gray-200 dark:border-gray-800">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
             <div>
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
+              <h3 className="text-xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
                 Want to see more?
               </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-lg">
+              <p className="text-base md:text-lg text-gray-600 dark:text-gray-400">
                 Explore the complete collection of my work.
               </p>
             </div>
             <Link
               href="/projects"
-              className="group inline-flex items-center gap-4 px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-black rounded-full font-semibold text-base hover:bg-purple-600 dark:hover:bg-purple-400 transition-all duration-300"
+              className="group inline-flex items-center gap-3 md:gap-4 px-6 py-3 md:px-8 md:py-4 bg-gray-900 dark:bg-white text-white dark:text-black rounded-full font-semibold text-sm md:text-base hover:bg-purple-600 dark:hover:bg-purple-400 transition-all duration-300"
             >
               <span>All Projects</span>
-              <FaArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
+              <FaArrowRight className="text-sm md:text-base transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </div>
         </div>
