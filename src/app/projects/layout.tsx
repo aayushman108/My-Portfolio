@@ -3,7 +3,10 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Explore the projects and works of Aayushman, featuring full-stack development, modern UI/UX, and creative web solutions.",
+    "A showcase of professional web development projects by Aayushman, specializing in React, Next.js, and high-performance frontend solutions.",
+  alternates: {
+    canonical: "/projects",
+  },
 };
 
 export default function ProjectsLayout({

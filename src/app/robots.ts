@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/private/",
     },
-    sitemap: "https://aayushmansharma-portfolio.netlify.app/sitemap.xml",
+    sitemap: "https://portfolio.aayushmansharma.com.np/sitemap.xml",
   };
 }

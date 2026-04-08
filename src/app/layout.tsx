@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
@@ -15,6 +15,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 export const metadata: Metadata = {
   title: {
     default: "Aayushman | Frontend Engineer & React Expert",
@@ -24,25 +34,32 @@ export const metadata: Metadata = {
     "Frontend Engineer & React Expert with 2+ years of experience building scalable applications. Specialist in Next.js, TypeScript, and high-performance UI/UX. Experienced in international collaborations and open to opportunities in Japan.",
   keywords: [
     "Aayushman",
+    "Frontend Developer",
     "Frontend Expert",
+    "React Developer",
     "React Specialist",
     "Next.js Developer",
-    "TypeScript Engineer",
     "Frontend Software Engineer",
+    "TypeScript Engineer",
+    "Javascript Developer",
     "Web Performance Expert",
     "UI/UX Developer",
     "Full Stack Knowledge",
   ],
-  authors: [{ name: "Aayushman Sharma" }],
+  authors: [{ name: "Aayushman Sharma", url: "https://portfolio.aayushmansharma.com.np" }],
   creator: "Aayushman Sharma",
-  metadataBase: new URL("https://aayushmansharma-portfolio.netlify.app"),
+  publisher: "Aayushman Sharma",
+  metadataBase: new URL("https://portfolio.aayushmansharma.com.np"),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://aayushmansharma-portfolio.netlify.app",
+    url: "https://portfolio.aayushmansharma.com.np",
     title: "Aayushman | Frontend Engineer & React Expert",
     description:
-      "Explore the portfolio of Aayushman, showcasing modern web development projects and design expertise.",
+      "Explore the portfolio of Aayushman, featuring high-performance web applications, modern UI/UX design, and expertise in React and Next.js.",
     siteName: "Aayushman Portfolio",
     images: [
       {
@@ -57,12 +74,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Aayushman | Frontend Engineer & React Expert",
     description:
-      "Personal portfolio showcasing modern web development and design by Aayushman.",
+      "Frontend Software Engineer specializing in React and Next.js. Check out my latest projects and work experience.",
     images: ["/og-image.png"],
+    creator: "@aayushman108", // Assuming from github handle
   },
   robots: {
     index: true,
     follow: true,
+    nocache: true,
     googleBot: {
       index: true,
       follow: true,
@@ -79,6 +98,7 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   manifest: "/manifest.json",
+  category: "technology",
 };
 
 export default function RootLayout({
@@ -88,6 +108,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -104,12 +128,19 @@ export default function RootLayout({
                 "@context": "https://schema.org",
                 "@type": "Person",
                 name: "Aayushman Sharma",
-                url: "https://aayushmansharma-portfolio.netlify.app",
-                jobTitle: "Frontend Software Engineer",
+                alternateName: "Aayushman",
+                url: "https://portfolio.aayushmansharma.com.np",
+                image: "https://portfolio.aayushmansharma.com.np/og-image.png",
                 sameAs: [
                   "https://github.com/aayushman108",
                   "https://www.linkedin.com/in/aayushman-sharma-a8abbb277/",
                 ],
+                jobTitle: "Frontend Software Engineer",
+                worksFor: {
+                  "@type": "Organization",
+                  name: "Freelance",
+                },
+                description: "Frontend Software Engineer with 2+ years of experience building scalable applications. Specialist in Next.js, TypeScript, and high-performance UI/UX.",
                 knowsAbout: [
                   "React",
                   "Next.js",
@@ -124,6 +155,11 @@ export default function RootLayout({
                   "Express.js",
                   "PostgreSQL",
                 ],
+                address: {
+                  "@type": "PostalAddress",
+                  addressLocality: "Kathmandu",
+                  addressCountry: "NP"
+                }
               }),
             }}
           />
