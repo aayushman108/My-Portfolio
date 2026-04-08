@@ -142,9 +142,9 @@ const About = () => {
           className="grid lg:grid-cols-12 gap-12 lg:gap-16 mb-20"
         >
           {/* Left: Bio Text */}
-          <div className="about-content lg:col-span-7 space-y-6">
+          <div className="about-content lg:col-span-7 space-y-6 grid">
             <p className="text-2xl md:text-3xl font-light text-gray-900 dark:text-white leading-relaxed">
-              I'm <span className="font-semibold">Aayushman Sharma</span>, a
+              I&apos;m <span className="font-semibold">Aayushman Sharma</span>, a
               Frontend Software Engineer with over{" "}
               <span className="font-semibold">
                 2 years of professional experience{" "}
@@ -161,12 +161,12 @@ const About = () => {
             </p>
 
             {/* CTA */}
-            <div className="pt-4">
+            <div className="pt-4 hidden md:block">
               <a
                 href="#contact"
                 className="group inline-flex items-center gap-4 text-lg font-semibold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300"
               >
-                <span>Let's work together</span>
+                <span>Let&apos;s work together</span>
                 <div className="w-12 h-12 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">
                   <svg
                     className="w-5 h-5 transition-all duration-300 group-hover:text-white group-hover:translate-x-0.5"
@@ -188,7 +188,7 @@ const About = () => {
 
           {/* Right: Stats */}
           <div className="about-stats lg:col-span-5">
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
               {stats.map((stat, index) => (
                 <div
                   key={index}
@@ -204,6 +204,30 @@ const About = () => {
               ))}
             </div>
           </div>
+          {/* CTA */}
+            <div className="pt-4 block md:hidden">
+              <a
+                href="#contact"
+                className="group inline-flex items-center gap-4 text-lg font-semibold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300"
+              >
+                <span>Let&apos;s work together</span>
+                <div className="w-12 h-12 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">
+                  <svg
+                    className="w-5 h-5 transition-all duration-300 group-hover:text-white group-hover:translate-x-0.5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    />
+                  </svg>
+                </div>
+              </a>
+            </div>
         </div>
 
         {/* Skills Section */}
