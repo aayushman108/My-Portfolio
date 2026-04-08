@@ -46,13 +46,13 @@ export const SectionHeader = ({
   );
 
   return (
-    <div ref={containerRef} className={`mb-20 ${className}`}>
+    <div ref={containerRef} className={`mb-12 md:mb-20 ${className}`}>
       <div className="flex items-end justify-between flex-wrap gap-8">
         <div>
           <span className="text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400 mb-4 block">
             {label}
           </span>
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white leading-[1.2] tracking-tight">
+          <h2 className="text-3xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white leading-[1.2] tracking-tight">
             <div
               style={{
                 clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",

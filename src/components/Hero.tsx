@@ -127,7 +127,7 @@ const Hero = () => {
           </div>
 
           {/* Main Title - Clipped Text Reveal */}
-          <h1 className="mb-8">
+          <h1 className="mb-4 md:mb-8">
             {/* Wrapper 1 */}
             <div
               className=""
@@ -135,8 +135,8 @@ const Hero = () => {
                 clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
               }}
             >
-              <span className=" hero-text-reveal translate-y-30 block text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-gray-900 dark:text-white leading-[0.9] tracking-tight">
-                Hi, I'm
+              <span className=" hero-text-reveal translate-y-30 block text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-gray-900 dark:text-white leading-[0.9] tracking-tight">
+                Hi, I&apos;m
               </span>
             </div>
 
@@ -147,14 +147,14 @@ const Hero = () => {
                 clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
               }}
             >
-              <span className=" hero-text-reveal translate-y-30 block text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black leading-[1.1] tracking-tight text-gray-400 dark:text-gray-600">
+              <span className=" hero-text-reveal translate-y-30 block text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black leading-[1.1] tracking-tight text-gray-400 dark:text-gray-600">
                 Aayushman
               </span>
             </div>
           </h1>
 
           {/* Subtitle */}
-          <div className="hero-fade-subtitle opacity-0 translate-y-8 max-w-4xl mb-12">
+          <div className="hero-fade-subtitle opacity-0 translate-y-8 max-w-4xl mb-6 md:mb-12">
             <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 leading-relaxed">
               Frontend Software Engineer with{" "}
               <span className="text-gray-900 dark:text-white font-medium">
@@ -170,14 +170,14 @@ const Hero = () => {
           </div>
 
           {/* CTAs */}
-          <div className="flex flex-wrap items-center gap-4 md:gap-6">
+          <div className="flex flex-wrap items-center gap-3 md:gap-6">
             <a
               href="#projects"
-              className="hero-cta-btn inline-flex items-center gap-3 px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-black rounded-full font-semibold text-base hover:bg-purple-600 dark:hover:bg-purple-400 transition-colors duration-300"
+              className="hero-cta-btn inline-flex items-center gap-2 md:gap-3 px-6 py-3 md:px-8 md:py-4 bg-gray-900 dark:bg-white text-white dark:text-black rounded-full font-semibold text-sm md:text-base hover:bg-purple-600 dark:hover:bg-purple-400 transition-colors duration-300"
             >
               <span>View My Work</span>
               <svg
-                className="w-4 h-4"
+                className="w-3.5 h-3.5 md:w-4 md:h-4"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -193,12 +193,12 @@ const Hero = () => {
 
             <a
               href="#contact"
-              className="hero-cta-btn group inline-flex items-center gap-4 text-base font-semibold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300"
+              className="hero-cta-btn group inline-flex items-center gap-3 md:gap-4 text-sm md:text-base font-semibold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300"
             >
               <span>Get in Touch</span>
-              <div className="w-12 h-12 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-colors duration-300">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-colors duration-300">
                 <svg
-                  className="w-5 h-5 transition-all duration-300 group-hover:text-white"
+                  className="w-4 h-4 md:w-5 md:h-5 transition-all duration-300 group-hover:text-white"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -216,9 +216,9 @@ const Hero = () => {
         </div>
 
         {/* Bottom Info Bar */}
-        <div className="absolute bottom-12 left-6 right-6">
+        <div className="absolute  bottom-6 md:bottom-12 left-6 right-6">
           <div className="container mx-auto">
-            <div className="flex items-end justify-between">
+            <div className="flex items-end justify-center md:justify-between">
               {/* Availability Status */}
               <div className="hero-fade-bottom opacity-0 translate-y-5 hidden md:flex items-center gap-3">
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
@@ -232,10 +232,10 @@ const Hero = () => {
                 href="#about"
                 className="hero-fade-bottom opacity-0 translate-y-5 hero-scroll flex flex-col items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
               >
-                <span className="text-xs font-medium tracking-widest uppercase">
+                <span className="text-[10px] md:text-xs font-medium tracking-widest uppercase">
                   Scroll
                 </span>
-                <FaArrowDown className="hero-scroll-icon text-sm" />
+                <FaArrowDown className="hero-scroll-icon text-[10px] md:text-sm" />
               </a>
 
               {/* Location */}

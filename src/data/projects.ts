@@ -1,4 +1,17 @@
-export const PROJECTS = [
+export interface Project {
+  id: number;
+  title: string;
+  description: string;
+  tech: string[];
+  github: string;
+  live: string;
+  year: string;
+  category: string;
+  type: "Company" | "Personal";
+  image?: string;
+}
+
+export const PROJECTS: Project[] = [
   {
     id: 1,
     title: "Government Welfare Management System",
@@ -58,4 +71,4 @@ export const PROJECTS = [
     type: "Company",
     image: undefined,
   },
-] as const;
+];

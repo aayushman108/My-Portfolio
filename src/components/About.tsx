@@ -11,7 +11,6 @@ import {
   FaJs,
   FaGitAlt,
   FaNodeJs,
-  FaFigma,
 } from "react-icons/fa";
 import {
   SiNextdotjs,
@@ -124,7 +123,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="py-32 px-6 bg-gray-50 dark:bg-zinc-900 relative overflow-hidden"
+      className="py-16 md:py-32 px-6 bg-gray-50 dark:bg-zinc-900 relative overflow-hidden"
     >
       <div className="container mx-auto">
         {/* Header */}
@@ -139,7 +138,7 @@ const About = () => {
         {/* Bio Section */}
         <div
           ref={aboutContentRef}
-          className="grid lg:grid-cols-12 gap-12 lg:gap-16 mb-20"
+          className="grid lg:grid-cols-12 gap-12 lg:gap-16 mb-12 md:mb-20"
         >
           {/* Left: Bio Text */}
           <div className="about-content lg:col-span-7 space-y-6 grid">
@@ -167,9 +166,9 @@ const About = () => {
                 className="group inline-flex items-center gap-4 text-lg font-semibold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300"
               >
                 <span>Let&apos;s work together</span>
-                <div className="w-12 h-12 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">
                   <svg
-                    className="w-5 h-5 transition-all duration-300 group-hover:text-white group-hover:translate-x-0.5"
+                    className="w-4 h-4 md:w-5 md:h-5 transition-all duration-300 group-hover:text-white group-hover:translate-x-0.5"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -211,9 +210,9 @@ const About = () => {
                 className="group inline-flex items-center gap-4 text-lg font-semibold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300"
               >
                 <span>Let&apos;s work together</span>
-                <div className="w-12 h-12 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">
                   <svg
-                    className="w-5 h-5 transition-all duration-300 group-hover:text-white group-hover:translate-x-0.5"
+                    className="w-4 h-4 md:w-5 md:h-5 transition-all duration-300 group-hover:text-white group-hover:translate-x-0.5"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"

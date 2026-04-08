@@ -91,7 +91,7 @@ const Contact = () => {
     <section
       id="contact"
       ref={containerRef}
-      className="py-32 px-6 bg-white dark:bg-black relative overflow-hidden"
+      className="py-16 md:py-32 px-6 bg-white dark:bg-black relative overflow-hidden"
     >
       {/* Minimal background accent */}
       <div className="absolute top-0 left-0 w-1/3 h-full bg-gray-50 dark:bg-zinc-900/30 -z-10" />
@@ -107,31 +107,31 @@ const Contact = () => {
         />
 
         {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 mb-20">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 mb-20">
           {/* Left: Message */}
-          <div className="contact-content space-y-8">
-            <p className="text-2xl md:text-3xl font-light text-gray-900 dark:text-white leading-relaxed">
-              Have a project in mind? I'd love to hear about it.
+          <div className="contact-content space-y-6 md:space-y-8">
+            <p className="text-xl md:text-3xl font-light text-gray-900 dark:text-white leading-relaxed">
+              Have a project in mind? I&apos;d love to hear about it.
             </p>
 
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
-              I'm currently available for freelance work and exciting
+            <p className="text-base md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
+              I&apos;m currently available for freelance work and exciting
               opportunities. Whether you have a question or just want to say hi,
-              I'll try my best to get back to you!
+              I&apos;ll try my best to get back to you!
             </p>
 
             {/* Email CTA */}
             <div className="pt-4">
               <a
                 href="mailto:aayushmansharma108@gmail.com"
-                className="group inline-flex items-center gap-4"
+                className="group inline-flex items-center gap-4 max-w-full"
               >
-                <span className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 underline underline-offset-8 decoration-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-purple-600 dark:hover:decoration-purple-400">
+                <span className="text-base md:text-3xl font-bold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 underline underline-offset-8 decoration-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-purple-600 dark:hover:decoration-purple-400 break-all md:break-normal">
                   aayushmansharma108@gmail.com
                 </span>
-                <div className="w-12 h-12 rounded-full border-2 border-gray-300 dark:border-gray-700 flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-gray-300 dark:border-gray-700 flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">
                   <svg
-                    className="w-5 h-5 text-gray-400 transition-all duration-300 group-hover:text-white group-hover:rotate-45"
+                    className="w-4 h-4 md:w-5 md:h-5 text-gray-400 transition-all duration-300 group-hover:text-white group-hover:rotate-45"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -167,7 +167,7 @@ const Contact = () => {
                     <span className="text-gray-400 group-hover:text-current transition-colors duration-300">
                       {link.icon}
                     </span>
-                    <span className="text-xl md:text-2xl font-semibold text-gray-900 dark:text-white group-hover:text-current transition-colors duration-300">
+                    <span className="text-lg md:text-2xl font-semibold text-gray-900 dark:text-white group-hover:text-current transition-colors duration-300">
                       {link.label}
                     </span>
                   </div>
