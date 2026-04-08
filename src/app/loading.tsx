@@ -30,7 +30,7 @@ export default function Loading() {
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="fixed inset-0 w-screen h-screen bg-[#050505] flex flex-col items-center justify-center z-[200] overflow-hidden">
+    <div ref={containerRef} className="fixed inset-0 w-screen h-screen bg-[#050505] flex flex-col items-center justify-center z-200 overflow-hidden">
       <div className="flex flex-col items-center">
         <span 
             id="loader-logo" 
