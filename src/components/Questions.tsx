@@ -73,7 +73,7 @@ const Questions = () => {
           ease: "power3.out",
           scrollTrigger: {
             trigger: ".questions-list",
-            start: "top 75%",
+            start: "top 70%",
           },
         },
       );
@@ -88,7 +88,7 @@ const Questions = () => {
           ease: "power3.out",
           scrollTrigger: {
             trigger: ".questions-footer",
-            start: "top 85%",
+            start: "top 80%",
           },
         },
       );

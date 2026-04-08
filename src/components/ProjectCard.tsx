@@ -21,7 +21,7 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
     () => {
       gsap.fromTo(
         cardRef.current,
-        { opacity: 0, y: 50 },
+        { opacity: 0, y: 60},
         {
           opacity: 1,
           y: 0,
@@ -29,7 +29,7 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
           ease: "power2.out",
           scrollTrigger: {
             trigger: cardRef.current,
-            start: "top 90%",
+            start: "top 80%",
             toggleActions: "play none none none",
           },
         }

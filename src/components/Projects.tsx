@@ -1,10 +1,41 @@
+"use client";
+
+import { useRef } from "react";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { PROJECTS } from "@/data/projects";
 import { ProjectCardForHomePage } from "./ProjectCard";
 import { SectionHeader } from "./SectionHeader";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const Projects = () => {
+  const ctaRef = useRef(null);
+
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        ".cta-content",
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ctaRef.current,
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        },
+      );
+    },
+    { scope: ctaRef },
+  );
+
   return (
     <section
       id="projects"
@@ -41,8 +72,11 @@ const Projects = () => {
         </div>
 
         {/* Bottom CTA */}
-        <div className="pt-12 border-t border-gray-200 dark:border-gray-800">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+        <div
+          ref={ctaRef}
+          className="pt-12 border-t border-gray-200 dark:border-gray-800"
+        >
+          <div className="cta-content flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
             <div>
               <h3 className="text-xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
                 Want to see more?

@@ -31,7 +31,7 @@ export const SectionHeader = ({
       const t1 = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 70%",
+          start: "top 80%",
           toggleActions: "play none none none",
         },
       });
@@ -41,6 +41,28 @@ export const SectionHeader = ({
         // stagger: 0.2,
         ease: "power4.inOut",
       });
+
+      if (description) {
+        t1.to(".section-description", {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+        });
+      }
+
+      if (rightElement) {
+        t1.to(
+          ".section-right-element",
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
+          },
+          description ? "-=0.5" : ">", // Overlap slightly with description if it exists, otherwise start after title
+        );
+      }
     },
     { scope: containerRef },
   );
@@ -76,12 +98,16 @@ export const SectionHeader = ({
 
         {/* Right Side Content */}
         {description && (
-          <p className="text-gray-600 dark:text-gray-400 text-lg md:text-xl max-w-md leading-relaxed">
+          <p className="section-description opacity-0 translate-y-10 text-gray-600 dark:text-gray-400 text-lg md:text-xl max-w-md leading-relaxed">
             {description}
           </p>
         )}
 
-        {rightElement}
+        {rightElement && (
+          <div className="section-right-element opacity-0 translate-y-10">
+            {rightElement}
+          </div>
+        )}
       </div>
     </div>
   );
