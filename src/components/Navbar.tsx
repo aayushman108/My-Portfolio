@@ -12,12 +12,21 @@ const Navbar = () => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    // Wrap in a micro-task/timeout to avoid the "cascading render" warning
+    // while still ensuring hydration safety for next-themes
+    const timer = setTimeout(() => {
+      setMounted(true);
+    }, 0);
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const navLinks = [
@@ -32,17 +41,21 @@ const Navbar = () => {
 
   return (
     <>
-      <nav
-      className={`fixed z-50 transition-all duration-700 cubic-bezier(0.19, 1, 0.22, 1) ${
-        scrolled
-          ? "top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-2xl rounded-full bg-white/70 dark:bg-black/70 backdrop-blur-xl border border-black/5 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] py-3 px-6"
-          : "top-0 left-0 w-full bg-transparent py-8 px-6 border-transparent"
-      }`}
-      style={{
-        transitionTimingFunction: "cubic-bezier(0.19, 1, 0.22, 1)" // Expo ease out for premium feel
-      }}
+    <nav
+      className="fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none"
     >
-        <div className={`flex justify-between items-center ${scrolled ? "w-full" : "container mx-auto"}`}>
+      <div
+        className={`pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] ${
+          scrolled
+            ? "mt-6 w-[95%] md:w-[90%] max-w-3xl rounded-full bg-white/70 dark:bg-black/70 backdrop-blur-xl border border-black/5 dark:border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.2)] py-3 px-6"
+            : "mt-0 w-full bg-transparent py-8 px-6 border-transparent"
+        }`}
+        style={{
+          willChange: "width, padding, margin, background-color",
+          backfaceVisibility: "hidden",
+        }}
+      >
+        <div className="flex justify-between items-center w-full max-w-7xl mx-auto">
           {/* Logo */}
           <Link
             href="/"
@@ -92,7 +105,8 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-      </nav>
+      </div>
+    </nav>
 
       {/* Mobile Menu Overlay */}
       <div 
