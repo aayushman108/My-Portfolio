@@ -9,6 +9,7 @@ export interface Project {
   category: string;
   type: "Company" | "Personal";
   image?: string;
+  status: "Completed" | "In-Progress";
 }
 
 export const PROJECTS: Project[] = [
@@ -31,6 +32,7 @@ export const PROJECTS: Project[] = [
     category: "Web App",
     type: "Company",
     image: undefined,
+    status: "Completed",
   },
   {
     id: 2,
@@ -44,6 +46,7 @@ export const PROJECTS: Project[] = [
     category: "Website",
     type: "Company",
     image: undefined,
+    status: "Completed",
   },
   {
     id: 3,
@@ -57,6 +60,7 @@ export const PROJECTS: Project[] = [
     category: "Web App",
     type: "Company",
     image: undefined,
+    status: "Completed",
   },
   {
     id: 4,
@@ -70,5 +74,46 @@ export const PROJECTS: Project[] = [
     category: "Web App",
     type: "Company",
     image: undefined,
+    status: "Completed",
+  },
+  {
+    id: 5,
+    title: "Envoware",
+    description:
+      "A premium, interactive web application promoting environmental awareness and healthy living through engaging eco-quizzes, daily sustainability tips, and rich, fluid animations.",
+    tech: ["Next.js", "React", "Typescript", "SCSS", "GSAP"],
+    github: "https://github.com/aayushman108/EcoAware",
+    live: "https://envoware.netlify.app",
+    year: "2025",
+    category: "Web App",
+    type: "Personal",
+    image: "/images/eco.png",
+    status: "Completed",
+  },
+  {
+    id: 6,
+    title: "Expensora",
+    description: "A smart expense tracker and bill splitter for individuals and groups. Track personal finances, split bills with custom ratios, and seamlessly settle monthly debts.",
+    tech: ["Next.js", "TypeScript", "Redux", "GSAP", "Express", "PostgreSQL", "Knex.js"],
+    github: "https://github.com/aayushman108/expense-routine-tracker",
+    live: "https://expensora.netlify.app",
+    year: "2026",
+    category: "Web App",
+    type: "Personal",
+    image: "/images/expensora.png",
+    status: "In-Progress",
+  },
+ {
+    id: 7, 
+    title: "Annapurna | Taste of Himalayas",
+    description: "A full-scale restaurant platform featuring interactive digital menus, automated table reservations, dynamic ordering capabilities, and seamless dining operations.",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "GSAP", "Express", "PostgreSQL", "Knex.js"],
+    github: "https://github.com/aayushman108/Restaurant-app",
+    live: "#",
+    year: "2026",
+    category: "Web App",
+    type: "Personal",
+    image: "/images/restaurant.png",
+    status: "In-Progress",
   },
 ];

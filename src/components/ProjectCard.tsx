@@ -81,13 +81,27 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
 
           {/* Content */}
           <div className="lg:col-span-4">
-            <div className="flex items-center gap-4 mb-3">
+            <div className="flex items-center gap-3 mb-3 flex-wrap">
               <span className="text-xs font-medium tracking-wider uppercase text-purple-600 dark:text-purple-400">
                 {project.type} Project
               </span>
               <span className="w-1 h-1 rounded-full bg-gray-400" />
               <span className="text-xs font-medium tracking-wider uppercase text-gray-500 dark:text-gray-400">
                 {project.category}
+              </span>
+              <span className="w-1 h-1 rounded-full bg-gray-400" />
+              <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase border flex items-center gap-1.5 ${
+                project.status === "Completed" 
+                  ? "bg-emerald-100/50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800/30" 
+                  : "bg-amber-100/50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800/30"
+              }`}>
+                {project.status === "In-Progress" && (
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-500"></span>
+                  </span>
+                )}
+                {project.status === "In-Progress" ? "In Progress" : project.status}
               </span>
             </div>
 
@@ -242,12 +256,25 @@ export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
       {/* Content */}
       <div className="space-y-4">
         {/* Meta */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-wrap">
           <span className="px-2 py-1 rounded-md bg-purple-100 dark:bg-purple-900/30 text-[10px] font-bold tracking-wider uppercase text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-800">
             {project.type}
           </span>
           <span className="text-xs font-medium tracking-wider uppercase text-gray-500 dark:text-gray-400">
             {project.category}
+          </span>
+          <span className={`px-2 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase border flex items-center gap-1.5 ${
+            project.status === "Completed" 
+              ? "bg-emerald-100/50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800/30" 
+              : "bg-amber-100/50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800/30"
+          }`}>
+            {project.status === "In-Progress" && (
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-500"></span>
+              </span>
+            )}
+            {project.status === "In-Progress" ? "In Progress" : project.status}
           </span>
         </div>
 
