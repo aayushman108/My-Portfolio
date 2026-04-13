@@ -19,7 +19,7 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
-    id: 5,
+    id: 1,
     title: "Envoware",
     description:
       "A premium, interactive web application promoting environmental awareness and healthy living through engaging eco-quizzes, daily sustainability tips, and rich, fluid animations.",
@@ -38,7 +38,7 @@ export const PROJECTS: Project[] = [
     },
   },
  {
-  id: 6,
+  id: 2,
   title: "Expensora",
   description: "Expensora is a smart expense management and bill-splitting platform designed for individuals and groups. It enables users to efficiently track personal and shared expenses, manage group finances, and simplify settlements through intelligent algorithms. With flexible splitting options and detailed monthly insights, Expensora helps users maintain financial clarity and accountability.",
   tech: ["Next.js", "TypeScript", "Redux", "GSAP", "Node.js", "Express", "PostgreSQL", "Knex.js"],
@@ -72,7 +72,7 @@ export const PROJECTS: Project[] = [
   },
 },
  {
-  id: 7,
+  id: 3,
   title: "Annapurna",
   description: "A modern restaurant web application focused on delivering an immersive dining experience through a visually rich and responsive UI. Built as a frontend-first platform with a scalable architecture to support future backend integration and operational automation.",
   tech: ["Next.js", "TypeScript", "Tailwind CSS", "GSAP"],
@@ -103,7 +103,7 @@ export const PROJECTS: Project[] = [
   },
 },
   {
-    id: 1,
+    id: 4,
     title: "Government Welfare Management System",
     description:
       "Government-led web application designed to digitize and manage data related to poor households across Nepal, supporting large-scale surveys, data processing, and household-level queries for inclusive welfare monitoring.",
@@ -124,7 +124,7 @@ export const PROJECTS: Project[] = [
     status: "Completed",
   },
   {
-    id: 2,
+    id: 5,
     title: "Engineering Consultancy Website",
     description:
       "Corporate website for an engineering consultancy firm showcasing company information, services, projects, milestones, and interactive map-based project visualization.",
@@ -138,7 +138,7 @@ export const PROJECTS: Project[] = [
     status: "Completed",
   },
   {
-    id: 3,
+    id: 6,
     title: "E-Commerce Platform",
     description:
       "E-commerce platform offering online shopping features, promotional sections, community forums, and content-driven experiences for users.",
@@ -152,7 +152,7 @@ export const PROJECTS: Project[] = [
     status: "Completed",
   },
   {
-    id: 4,
+    id: 7,
     title: "AI Financial Analysis Platform",
     description:
       "AI-powered financial analysis platform that extracts insights from financial documents, enabling intelligent queries related to revenue, statements, and risk assessment.",
