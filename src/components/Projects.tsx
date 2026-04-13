@@ -66,7 +66,7 @@ const Projects = () => {
 
         {/* Projects List - Editorial Layout */}
         <div className="space-y-0">
-          {PROJECTS.map((project, index) => (
+          {PROJECTS.slice(0, 4).map((project, index) => (
             <ProjectCardForHomePage project={project} key={index} />
           ))}
         </div>

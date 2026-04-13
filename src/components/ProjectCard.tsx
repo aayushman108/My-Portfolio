@@ -2,8 +2,10 @@
 
 import { Project } from "@/data/projects";
 import Image from "next/image";
-import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
-import { useRef } from "react";
+import Link from "next/link";
+import { FaExternalLinkAlt, FaGithub, FaCheckCircle, FaSpinner, FaRocket, FaInfoCircle } from "react-icons/fa";
+import { useRef, useState } from "react";
+import { Modal } from "./Modal";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -16,6 +18,7 @@ type IProjectCardProps = {
 
 export function ProjectCardForHomePage({ project }: IProjectCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useGSAP(
     () => {
@@ -44,7 +47,7 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
       key={project.id}
       className="project-card group block border-t border-gray-200 dark:border-gray-800 relative opacity-0"
     >
-      <a
+      <Link
         href={project.live}
         className="absolute inset-0 z-20"
         aria-label={`View ${project.title}`}
@@ -109,7 +112,7 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
               {project.title}
             </h3>
 
-            <p className="text-gray-600 dark:text-gray-400 text-base md:text-lg leading-relaxed mb-6 max-w-xl">
+            <p className="text-gray-600 dark:text-gray-400 text-base md:text-lg leading-relaxed mb-6 max-w-xl line-clamp-3">
               {project.description}
             </p>
 
@@ -128,7 +131,7 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
             {/* PROJECT LINKS */}
             {project.type === "Personal" && (
               <div className="flex items-center gap-3 mt-4 relative z-30">
-                <a
+                <Link
                   href={project.github}
                   className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-gray-900 dark:hover:border-white hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black transition-all duration-300"
                   target="_blank"
@@ -136,8 +139,8 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
                 >
                   <FaGithub className="text-base" />
                   <span>Code</span>
-                </a>
-                <a
+                </Link>
+                <Link
                   href={project.live}
                   className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full border border-purple-500 dark:border-purple-400 text-purple-600 dark:text-purple-400 hover:bg-purple-600 dark:hover:bg-purple-400 hover:text-white dark:hover:text-black transition-all duration-300"
                   target="_blank"
@@ -145,7 +148,17 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
                 >
                   <FaExternalLinkAlt className="text-xs" />
                   <span>Live Demo</span>
-                </a>
+                </Link>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsModalOpen(true);
+                  }}
+                  className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full border border-emerald-500 dark:border-emerald-400 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-600 dark:hover:bg-emerald-400 hover:text-white dark:hover:text-black transition-all duration-300 cursor-pointer"
+                >
+                  <FaInfoCircle className="text-base" />
+                  <span>Details</span>
+                </button>
               </div>
             )}
           </div>
@@ -170,12 +183,14 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
           </div>
         </div>
       </div>
+      <ProjectDetailsModal project={project} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 }
 
 export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useGSAP(
     () => {
@@ -231,24 +246,34 @@ export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
         {/* Hover Actions */}
         {project.type === "Personal" && (
           <div className="absolute bottom-4 right-4 flex gap-3 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-            <a
+            <Link
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 bg-white/20 backdrop-blur-md rounded-full hover:bg-white/30 transition-colors border border-white/20"
+              className="p-3 bg-white/20 backdrop-blur-md rounded-full hover:bg-white/30 transition-colors border border-white/20 cursor-pointer"
               onClick={(e) => e.stopPropagation()}
             >
               <FaGithub className="text-white text-lg" />
-            </a>
-            <a
+            </Link>
+            <Link
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 bg-white/20 backdrop-blur-md rounded-full hover:bg-white/30 transition-colors border border-white/20"
+              className="p-3 bg-white/20 backdrop-blur-md rounded-full hover:bg-white/30 transition-colors border border-white/20 cursor-pointer"
               onClick={(e) => e.stopPropagation()}
             >
               <FaExternalLinkAlt className="text-white text-lg" />
-            </a>
+            </Link>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                setIsModalOpen(true);
+              }}
+              className="p-3 bg-white/20 backdrop-blur-md rounded-full hover:bg-white/30 transition-colors border border-white/20 cursor-pointer"
+            >
+              <FaInfoCircle className="text-white text-lg" />
+            </button>
           </div>
         )}
       </div>
@@ -284,7 +309,7 @@ export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
         </h2>
 
         {/* Description */}
-        <p className="text-gray-600 dark:text-gray-400 text-base md:text-lg leading-relaxed">
+        <p className="text-gray-600 dark:text-gray-400 text-base md:text-lg leading-relaxed line-clamp-3">
           {project.description}
         </p>
 
@@ -303,7 +328,7 @@ export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
         {/* Links */}
         {project.type === "Personal" && (
           <div className="flex items-center gap-3 pt-4">
-            <a
+            <Link
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
@@ -311,8 +336,8 @@ export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
             >
               <FaGithub className="text-base" />
               <span>Code</span>
-            </a>
-            <a
+            </Link>
+            <Link
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
@@ -320,10 +345,147 @@ export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
             >
               <FaExternalLinkAlt className="text-xs" />
               <span>Live Demo</span>
-            </a>
+            </Link>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setIsModalOpen(true);
+              }}
+              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full border border-emerald-500 dark:border-emerald-400 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-600 dark:hover:bg-emerald-400 hover:text-white dark:hover:text-black transition-all duration-300 cursor-pointer"
+            >
+              <FaInfoCircle className="text-base" />
+              <span>Details</span>
+            </button>
           </div>
         )}
       </div>
+      <ProjectDetailsModal project={project} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
+  );
+}
+
+function ProjectDetailsModal({ project, isOpen, onClose }: { project: Project; isOpen: boolean; onClose: () => void }) {
+  return (
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      title={project.title}
+      subtitle="Project Features"
+      headerRight={
+        <span className={`px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase border flex items-center gap-1.5 ${
+          project.status === "Completed" 
+            ? "bg-emerald-100/50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800/30" 
+            : "bg-amber-100/50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800/30"
+        }`}>
+          {project.status === "In-Progress" && (
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-500"></span>
+            </span>
+          )}
+          {project.status === "In-Progress" ? "In Progress" : project.status}
+        </span>
+      }
+    >
+      {/* Description and Links Top Section */}
+      <div className="mb-8">
+        <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-base md:text-lg mb-6">
+          {project.description}
+        </p>
+
+        {project.type === "Personal" && (
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-xl border border-gray-300 dark:border-zinc-700 text-gray-700 dark:text-gray-300 hover:border-gray-900 dark:hover:border-white hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black transition-all duration-300 bg-white dark:bg-zinc-800/50 cursor-pointer"
+            >
+              <FaGithub className="text-lg" />
+              <span>Source Code</span>
+            </Link>
+            <Link
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-xl border border-purple-500 dark:border-purple-400 text-purple-600 dark:text-purple-400 hover:bg-purple-600 dark:hover:bg-purple-400 hover:text-white dark:hover:text-black transition-all duration-300 bg-purple-50 dark:bg-purple-900/10 cursor-pointer"
+            >
+              <FaExternalLinkAlt className="text-base" />
+              <span>Live Demo</span>
+            </Link>
+          </div>
+        )}
+      </div>
+
+      <hr className="border-gray-200 dark:border-zinc-800/80 mb-8" />
+
+      {!project.features ? (
+        <div className="text-center py-10 border-2 border-dashed border-gray-200 dark:border-zinc-800 rounded-xl">
+          <FaInfoCircle className="text-4xl text-gray-300 dark:text-zinc-700 mx-auto mb-3" />
+          <p className="text-gray-500 dark:text-gray-400 font-medium">Detailed feature list is currently being updated.</p>
+        </div>
+      ) : (
+        <div className="space-y-8">
+          
+          {/* Current Features */}
+          {project.features.current && project.features.current.length > 0 && (
+            <section>
+              <h3 className="flex items-center gap-2 text-base md:text-lg font-bold text-gray-900 dark:text-white mb-4">
+                <FaCheckCircle className="text-emerald-500 text-lg" />
+                Available Features
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {project.features.current.map((feature, idx) => (
+                  <div key={idx} className="flex items-start gap-3 p-3.5 rounded-xl bg-gray-50 dark:bg-zinc-800/50 border border-gray-100 dark:border-zinc-800/80 hover:border-emerald-200 dark:hover:border-emerald-900/50 transition-colors">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+                    <span className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* In Progress Features */}
+          {project.features.inProgress && project.features.inProgress.length > 0 && (
+            <section>
+              <h3 className="flex items-center gap-2 text-base md:text-lg font-bold text-gray-900 dark:text-white mb-4">
+                <FaSpinner className="text-amber-500 text-lg animate-spin-slow" />
+                Currently Building
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {project.features.inProgress.map((feature, idx) => (
+                  <div key={idx} className="flex items-start gap-3 p-3.5 rounded-xl bg-amber-50/30 dark:bg-amber-900/10 border border-amber-100 dark:border-amber-900/20 hover:border-amber-200 dark:hover:border-amber-900/40 transition-colors">
+                    <span className="relative flex h-2 w-2 mt-1.5 shrink-0">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+                    </span>
+                    <span className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Planned Features */}
+          {project.features.planned && project.features.planned.length > 0 && (
+            <section>
+              <h3 className="flex items-center gap-2 text-base md:text-lg font-bold text-gray-900 dark:text-white mb-4">
+                <FaRocket className="text-purple-500 text-lg" />
+                Planned / Ideation
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {project.features.planned.map((feature, idx) => (
+                  <div key={idx} className="flex items-start gap-3 p-3.5 rounded-xl bg-purple-50/30 dark:bg-purple-900/10 border border-purple-100 dark:border-purple-900/20 hover:border-purple-200 dark:hover:border-purple-900/40 transition-colors">
+                    <span className="w-1.5 h-1.5 rounded-full bg-purple-500 mt-2 shrink-0 shadow-[0_0_8px_rgba(168,85,247,0.5)]" />
+                    <span className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+        </div>
+      )}
+    </Modal>
   );
 }
