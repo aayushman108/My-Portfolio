@@ -143,9 +143,9 @@ const About = () => {
         >
           {/* Left: Bio Text */}
           <div className="about-content lg:col-span-7 space-y-6 grid">
-            <p className="text-2xl md:text-3xl font-light text-gray-900 dark:text-white leading-relaxed">
-              I&apos;m <span className="font-semibold">Aayushman Sharma</span>, a
-              Frontend Software Engineer with over{" "}
+            <p className="text-xl md:text-2xl font-light text-gray-900 dark:text-white leading-relaxed">
+              I&apos;m <span className="font-semibold">Aayushman Sharma</span>,
+              a Frontend Software Engineer with over{" "}
               <span className="font-semibold">
                 2 years of professional experience{" "}
               </span>
@@ -205,29 +205,29 @@ const About = () => {
             </div>
           </div>
           {/* CTA */}
-            <div className="pt-4 block md:hidden">
-              <a
-                href="#contact"
-                className="group inline-flex items-center gap-4 text-lg font-semibold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300"
-              >
-                <span>Let&apos;s work together</span>
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">
-                  <svg
-                    className="w-4 h-4 md:w-5 md:h-5 transition-all duration-300 group-hover:text-white group-hover:translate-x-0.5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M14 5l7 7m0 0l-7 7m7-7H3"
-                    />
-                  </svg>
-                </div>
-              </a>
-            </div>
+          <div className="pt-4 block md:hidden">
+            <a
+              href="#contact"
+              className="group inline-flex items-center gap-4 text-lg font-semibold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300"
+            >
+              <span>Let&apos;s work together</span>
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">
+                <svg
+                  className="w-4 h-4 md:w-5 md:h-5 transition-all duration-300 group-hover:text-white group-hover:translate-x-0.5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  />
+                </svg>
+              </div>
+            </a>
+          </div>
         </div>
 
         {/* Skills Section */}

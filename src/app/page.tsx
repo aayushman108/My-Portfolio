@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Projects from "@/components/Projects";
@@ -10,7 +9,6 @@ export default function Home() {
   return (
     <>
       <HomeScrollManager />
-      <Navbar />
       <main className="min-h-screen bg-background text-foreground selection:bg-purple-500/30">
         <Hero />
         <About />

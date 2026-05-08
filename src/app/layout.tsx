@@ -4,6 +4,7 @@ import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
 import { ThemeProvider } from "@/components/theme-provider";
 import SmoothScroll from "@/components/SmoothScroll";
+import Navbar from "@/components/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -289,6 +290,7 @@ export default function RootLayout({
         >
           <SmoothScroll>
             <CustomCursor />
+            <Navbar />
             {children}
           </SmoothScroll>
         </ThemeProvider>
