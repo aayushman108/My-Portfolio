@@ -91,6 +91,7 @@ const Contact = () => {
     <section
       id="contact"
       ref={containerRef}
+      aria-label="Contact information"
       className="py-16 md:py-32 px-6 bg-white dark:bg-black relative overflow-hidden"
     >
       {/* Minimal background accent */}

@@ -98,7 +98,9 @@ const Questions = () => {
 
   return (
     <section
+      id="faq"
       ref={containerRef}
+      aria-label="Frequently asked questions"
       className="py-16 md:py-32 px-6 bg-gray-50 dark:bg-zinc-900 relative overflow-hidden"
     >
       {/* Minimal background accent - Inverted */}

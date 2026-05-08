@@ -123,6 +123,7 @@ const About = () => {
   return (
     <section
       id="about"
+      aria-label="About Aayushman Sharma"
       className="py-16 md:py-32 px-6 bg-gray-50 dark:bg-zinc-900 relative overflow-hidden"
     >
       <div className="container mx-auto">

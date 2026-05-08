@@ -103,6 +103,7 @@ const Hero = () => {
     <section
       id="home"
       ref={heroRef}
+      aria-label="Introduction"
       className="min-h-screen flex flex-col justify-center relative overflow-hidden bg-white dark:bg-black px-6"
     >
       {/* Minimal background accent */}

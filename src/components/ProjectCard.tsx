@@ -3,7 +3,14 @@
 import { Project } from "@/data/projects";
 import Image from "next/image";
 import Link from "next/link";
-import { FaExternalLinkAlt, FaGithub, FaCheckCircle, FaSpinner, FaRocket, FaInfoCircle } from "react-icons/fa";
+import {
+  FaExternalLinkAlt,
+  FaGithub,
+  FaCheckCircle,
+  FaSpinner,
+  FaRocket,
+  FaInfoCircle,
+} from "react-icons/fa";
 import { useRef, useState } from "react";
 import { Modal } from "./Modal";
 import gsap from "gsap";
@@ -24,7 +31,7 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
     () => {
       gsap.fromTo(
         cardRef.current,
-        { opacity: 0, y: 60},
+        { opacity: 0, y: 60 },
         {
           opacity: 1,
           y: 0,
@@ -35,10 +42,10 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
             start: "top 80%",
             toggleActions: "play none none none",
           },
-        }
+        },
       );
     },
-    { scope: cardRef }
+    { scope: cardRef },
   );
 
   return (
@@ -93,18 +100,22 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
                 {project.category}
               </span>
               <span className="w-1 h-1 rounded-full bg-gray-400" />
-              <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase border flex items-center gap-1.5 ${
-                project.status === "Completed" 
-                  ? "bg-emerald-100/50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800/30" 
-                  : "bg-amber-100/50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800/30"
-              }`}>
+              <span
+                className={`px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase border flex items-center gap-1.5 ${
+                  project.status === "Completed"
+                    ? "bg-emerald-100/50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800/30"
+                    : "bg-amber-100/50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800/30"
+                }`}
+              >
                 {project.status === "In-Progress" && (
                   <span className="relative flex h-1.5 w-1.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-500"></span>
                   </span>
                 )}
-                {project.status === "In-Progress" ? "In Progress" : project.status}
+                {project.status === "In-Progress"
+                  ? "In Progress"
+                  : project.status}
               </span>
             </div>
 
@@ -138,7 +149,7 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
                   rel="noopener noreferrer"
                 >
                   <FaGithub className="text-base" />
-                  <span>Code</span>
+                  <span className="hidden sm:inline">Code</span>
                 </Link>
                 <Link
                   href={project.live}
@@ -147,7 +158,7 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
                   rel="noopener noreferrer"
                 >
                   <FaExternalLinkAlt className="text-xs" />
-                  <span>Live Demo</span>
+                  <span className="hidden sm:inline">Live Demo</span>
                 </Link>
                 <button
                   onClick={(e) => {
@@ -157,7 +168,7 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
                   className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full border border-emerald-500 dark:border-emerald-400 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-600 dark:hover:bg-emerald-400 hover:text-white dark:hover:text-black transition-all duration-300 cursor-pointer"
                 >
                   <FaInfoCircle className="text-base" />
-                  <span>Details</span>
+                  <span className="hidden sm:inline">Details</span>
                 </button>
               </div>
             )}
@@ -183,7 +194,11 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
           </div>
         </div>
       </div>
-      <ProjectDetailsModal project={project} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <ProjectDetailsModal
+        project={project}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 }
@@ -207,10 +222,10 @@ export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
             start: "top 90%",
             toggleActions: "play none none none",
           },
-        }
+        },
       );
     },
-    { scope: cardRef }
+    { scope: cardRef },
   );
 
   return (
@@ -288,11 +303,13 @@ export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
           <span className="text-xs font-medium tracking-wider uppercase text-gray-500 dark:text-gray-400">
             {project.category}
           </span>
-          <span className={`px-2 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase border flex items-center gap-1.5 ${
-            project.status === "Completed" 
-              ? "bg-emerald-100/50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800/30" 
-              : "bg-amber-100/50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800/30"
-          }`}>
+          <span
+            className={`px-2 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase border flex items-center gap-1.5 ${
+              project.status === "Completed"
+                ? "bg-emerald-100/50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800/30"
+                : "bg-amber-100/50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800/30"
+            }`}
+          >
             {project.status === "In-Progress" && (
               <span className="relative flex h-1.5 w-1.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
@@ -359,12 +376,24 @@ export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
           </div>
         )}
       </div>
-      <ProjectDetailsModal project={project} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <ProjectDetailsModal
+        project={project}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 }
 
-function ProjectDetailsModal({ project, isOpen, onClose }: { project: Project; isOpen: boolean; onClose: () => void }) {
+function ProjectDetailsModal({
+  project,
+  isOpen,
+  onClose,
+}: {
+  project: Project;
+  isOpen: boolean;
+  onClose: () => void;
+}) {
   return (
     <Modal
       isOpen={isOpen}
@@ -372,11 +401,13 @@ function ProjectDetailsModal({ project, isOpen, onClose }: { project: Project; i
       title={project.title}
       subtitle="Project Features"
       headerRight={
-        <span className={`px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase border flex items-center gap-1.5 ${
-          project.status === "Completed" 
-            ? "bg-emerald-100/50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800/30" 
-            : "bg-amber-100/50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800/30"
-        }`}>
+        <span
+          className={`px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase border flex items-center gap-1.5 ${
+            project.status === "Completed"
+              ? "bg-emerald-100/50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800/30"
+              : "bg-amber-100/50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800/30"
+          }`}
+        >
           {project.status === "In-Progress" && (
             <span className="relative flex h-1.5 w-1.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
@@ -422,11 +453,12 @@ function ProjectDetailsModal({ project, isOpen, onClose }: { project: Project; i
       {!project.features ? (
         <div className="text-center py-10 border-2 border-dashed border-gray-200 dark:border-zinc-800 rounded-xl">
           <FaInfoCircle className="text-4xl text-gray-300 dark:text-zinc-700 mx-auto mb-3" />
-          <p className="text-gray-500 dark:text-gray-400 font-medium">Detailed feature list is currently being updated.</p>
+          <p className="text-gray-500 dark:text-gray-400 font-medium">
+            Detailed feature list is currently being updated.
+          </p>
         </div>
       ) : (
         <div className="space-y-8">
-          
           {/* Current Features */}
           {project.features.current && project.features.current.length > 0 && (
             <section>
@@ -436,9 +468,14 @@ function ProjectDetailsModal({ project, isOpen, onClose }: { project: Project; i
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {project.features.current.map((feature, idx) => (
-                  <div key={idx} className="flex items-start gap-3 p-3.5 rounded-xl bg-gray-50 dark:bg-zinc-800/50 border border-gray-100 dark:border-zinc-800/80 hover:border-emerald-200 dark:hover:border-emerald-900/50 transition-colors">
+                  <div
+                    key={idx}
+                    className="flex items-start gap-3 p-3.5 rounded-xl bg-gray-50 dark:bg-zinc-800/50 border border-gray-100 dark:border-zinc-800/80 hover:border-emerald-200 dark:hover:border-emerald-900/50 transition-colors"
+                  >
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
-                    <span className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{feature}</span>
+                    <span className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                      {feature}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -446,25 +483,31 @@ function ProjectDetailsModal({ project, isOpen, onClose }: { project: Project; i
           )}
 
           {/* In Progress Features */}
-          {project.features.inProgress && project.features.inProgress.length > 0 && (
-            <section>
-              <h3 className="flex items-center gap-2 text-base md:text-lg font-bold text-gray-900 dark:text-white mb-4">
-                <FaSpinner className="text-amber-500 text-lg animate-spin-slow" />
-                Currently Building
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {project.features.inProgress.map((feature, idx) => (
-                  <div key={idx} className="flex items-start gap-3 p-3.5 rounded-xl bg-amber-50/30 dark:bg-amber-900/10 border border-amber-100 dark:border-amber-900/20 hover:border-amber-200 dark:hover:border-amber-900/40 transition-colors">
-                    <span className="relative flex h-2 w-2 mt-1.5 shrink-0">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-                    </span>
-                    <span className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{feature}</span>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
+          {project.features.inProgress &&
+            project.features.inProgress.length > 0 && (
+              <section>
+                <h3 className="flex items-center gap-2 text-base md:text-lg font-bold text-gray-900 dark:text-white mb-4">
+                  <FaSpinner className="text-amber-500 text-lg animate-spin-slow" />
+                  Currently Building
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {project.features.inProgress.map((feature, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-start gap-3 p-3.5 rounded-xl bg-amber-50/30 dark:bg-amber-900/10 border border-amber-100 dark:border-amber-900/20 hover:border-amber-200 dark:hover:border-amber-900/40 transition-colors"
+                    >
+                      <span className="relative flex h-2 w-2 mt-1.5 shrink-0">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+                      </span>
+                      <span className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                        {feature}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
 
           {/* Planned Features */}
           {project.features.planned && project.features.planned.length > 0 && (
@@ -475,15 +518,19 @@ function ProjectDetailsModal({ project, isOpen, onClose }: { project: Project; i
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {project.features.planned.map((feature, idx) => (
-                  <div key={idx} className="flex items-start gap-3 p-3.5 rounded-xl bg-purple-50/30 dark:bg-purple-900/10 border border-purple-100 dark:border-purple-900/20 hover:border-purple-200 dark:hover:border-purple-900/40 transition-colors">
+                  <div
+                    key={idx}
+                    className="flex items-start gap-3 p-3.5 rounded-xl bg-purple-50/30 dark:bg-purple-900/10 border border-purple-100 dark:border-purple-900/20 hover:border-purple-200 dark:hover:border-purple-900/40 transition-colors"
+                  >
                     <span className="w-1.5 h-1.5 rounded-full bg-purple-500 mt-2 shrink-0 shadow-[0_0_8px_rgba(168,85,247,0.5)]" />
-                    <span className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{feature}</span>
+                    <span className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                      {feature}
+                    </span>
                   </div>
                 ))}
               </div>
             </section>
           )}
-
         </div>
       )}
     </Modal>

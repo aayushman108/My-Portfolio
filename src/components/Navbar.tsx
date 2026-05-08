@@ -35,14 +35,11 @@ const Navbar = () => {
     { name: "Contact", href: "#contact" },
   ];
 
-  if (!mounted) {
-    return null; 
-  }
-
   return (
     <>
     <nav
       className="fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none"
+      aria-label="Main navigation"
     >
       <div
         className={`pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] ${
@@ -79,27 +76,34 @@ const Navbar = () => {
               ))}
             </div>
             
-            <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2.5 rounded-full bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors focus:outline-none"
-              aria-label="Toggle Theme"
-            >
-              {theme === "dark" ? <FaSun size={16} /> : <FaMoon size={16} />}
-            </button>
+            {mounted && (
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="p-2.5 rounded-full bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors focus:outline-none"
+                aria-label="Toggle Theme"
+              >
+                {theme === "dark" ? <FaSun size={16} /> : <FaMoon size={16} />}
+              </button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-4">
-            <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2 rounded-full bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/20 transition-all focus:outline-none"
-            >
-              {theme === "dark" ? <FaSun size={18} /> : <FaMoon size={18} />}
-            </button>
+            {mounted && (
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="p-2 rounded-full bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/20 transition-all focus:outline-none"
+                aria-label="Toggle Theme"
+              >
+                {theme === "dark" ? <FaSun size={18} /> : <FaMoon size={18} />}
+              </button>
+            )}
             
             <button
               className="text-gray-900 dark:text-white focus:outline-none p-2"
               onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isOpen}
             >
               {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
             </button>
