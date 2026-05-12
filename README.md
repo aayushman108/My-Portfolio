@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# My Portfolio 🚀
 
-## Getting Started
+Welcome to my personal portfolio! This project is a modern, high-performance web application designed to showcase my skills, projects, and experience as a developer. It focuses on premium UI/UX, smooth animations, and a seamless user experience.
 
-First, run the development server:
+🔗 **Live Demo:** [portfolio.aayushmansharma.com.np/](https://portfolio.aayushmansharma.com.np/)
+
+---
+
+## ✨ Key Features
+
+- **Premium UI/UX:** A clean, modern aesthetic with a focus on typography and visual hierarchy.
+- **Smooth Animations:** Integrated **GSAP** and **Lenis** for high-quality, scroll-triggered animations and smooth momentum scrolling.
+- **Interactive 3D Globe:** A stunning visual element powered by **Cobe**.
+- **Custom Animated Cursor:** A tailored cursor experience for improved interactivity.
+- **Interactive Preloader:** A sleek initial loading sequence to enhance the first-impression.
+- **Responsive Design:** Fully optimized for all screen sizes, from mobile to ultra-wide monitors.
+- **Dark/Light Mode:** Seamless theme switching with **next-themes**.
+- **Performance Optimized:** Built with **Next.js 15+** and **React 19** for blazing-fast load times.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** [Next.js 16](https://nextjs.org/)
+- **Library:** [React 19](https://react.dev/)
+- **Styling:** [Tailwind CSS 4](https://tailwindcss.com/)
+- **Animations:** [GSAP](https://gsap.com/) & [@gsap/react](https://gsap.com/resources/react/)
+- **Smooth Scroll:** [Lenis](https://lenis.darkroom.engineering/)
+- **Visualization:** [Cobe](https://github.com/shuding/cobe) (3D Globe)
+- **Icons:** [React Icons](https://react-icons.github.io/react-icons/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+
+---
+
+## 🚀 Getting Started
+
+To get a local copy up and running, follow these simple steps.
+
+### Prerequisites
+
+Make sure you have Node.js installed on your machine.
+
+### Installation
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/aayushman108/My-Portfolio.git
+   ```
+
+2. **Navigate to the project directory:**
+
+   ```bash
+   cd My-Portfolio
+   ```
+
+3. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+### Running the Development Server
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🏗️ Build for Production
 
-## Learn More
+To create an optimized production build:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Then, you can start the production server:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run start
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Developed with ❤️ by [Aayushman Sharma](https://github.com/aayushman108)
