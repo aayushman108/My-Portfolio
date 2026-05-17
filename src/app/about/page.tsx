@@ -160,19 +160,6 @@ const AboutPage = () => {
         "-=0.5"
       );
 
-      // Animate summary description
-      introTl.fromTo(
-        ".header-description",
-        { opacity: 0, y: 25 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1.0,
-          ease: "power3.out",
-        },
-        "-=0.8"
-      );
-
       // Animate main intro bio paragraph
       introTl.fromTo(
         ".about-intro-text",
@@ -183,7 +170,7 @@ const AboutPage = () => {
           duration: 1.0,
           ease: "power3.out",
         },
-        "-=0.6"
+        "-=0.7"
       );
 
       // Animate availability status badge
@@ -405,21 +392,10 @@ const AboutPage = () => {
                   }}
                 >
                   <span className="header-text-reveal opacity-0 translate-y-20 text-gray-400 dark:text-gray-600 block">
-                    Aayushman 👋
+                    Aayushman
                   </span>
                 </div>
               </h1>
-            </div>
-            
-            <div
-              style={{
-                clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
-              }}
-            >
-              <p className="header-description opacity-0 translate-y-15 text-gray-600 dark:text-gray-400 text-lg md:text-xl max-w-md leading-relaxed">
-                Frontend Engineer & React/Next.js Specialist with 2+ years of
-                professional experience.
-              </p>
             </div>
           </div>
         </div>
@@ -432,13 +408,26 @@ const AboutPage = () => {
             }}
             className="mb-8"
           >
-            <p className="about-intro-text opacity-0 translate-y-20 text-xl md:text-2xl lg:text-3xl font-light text-gray-900 dark:text-white leading-relaxed">
-              I bridge the gap between{" "}
-              <span className="font-semibold">robust engineering</span> and{" "}
-              <span className="font-semibold">intuitive UI</span>. I specialize in
-              building high-performance, production-ready web applications that
-              turn complex data into seamless user experiences.
-            </p>
+            <div className="about-intro-text opacity-0 translate-y-20 space-y-6 text-gray-600 dark:text-gray-400 text-base md:text-lg leading-relaxed font-normal">
+              <p>
+                I bridge the gap between{" "}
+                <span className="font-semibold text-gray-900 dark:text-white">robust engineering</span> and{" "}
+                <span className="font-semibold text-gray-900 dark:text-white">intuitive UI</span>. With 2+ years of professional experience, I specialize in
+                building high-performance, production-ready web applications that
+                turn complex data into seamless user experiences.
+              </p>
+              <p>
+                My approach to development is rooted in precision, clean code, and performance optimization. 
+                Whether architecting complex Next.js architectures, designing fluid layouts, or orchestrating 
+                stunning, interactive GSAP timeline sequences, I strive to build software that not only functions flawlessly 
+                but also provides a delightful and premium feel for the end-user.
+              </p>
+              <p>
+                Beyond my technical expertise, I am highly passionate about keeping up with the latest advancements 
+                in the web ecosystem, continuously refining my craft, and collaborating with cross-functional 
+                teams to deliver top-tier digital products that solve real-world problems.
+              </p>
+            </div>
           </div>
           
           <div className="about-intro-badge opacity-0 translate-y-5 inline-flex items-center gap-3 px-5 py-3 rounded-full bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800">
