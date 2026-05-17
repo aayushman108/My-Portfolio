@@ -94,3 +94,31 @@ body {
 .bg-gradient-radial {
   background: radial-gradient(circle at center, var(--tw-gradient-stops));
 }
+
+/* Centralized layout container. Change max-width here to affect all sections */
+.section-container {
+  width: 100%;
+  max-width: 1440px; /* 1440px (previously 80rem / 1280px) */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Standard padding for most sections. Change this to affect all standard sections at once. */
+.section-padding {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+@media (min-width: 576px) {
+  .section-padding {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}

@@ -61,7 +61,7 @@ const Skills = () => {
       gsap.registerPlugin(ScrollTrigger);
 
       gsap.fromTo(
-        ".skills-header",
+        ".skills-footer",
         { opacity: 0, y: 50 },
         {
           opacity: 1,
@@ -70,7 +70,7 @@ const Skills = () => {
           ease: "power3.out",
           scrollTrigger: {
             trigger: containerRef.current,
-            start: "top 70%",
+            start: "top 40%", // Trigger when scrolled further down
           },
         }
       );
@@ -83,6 +83,7 @@ const Skills = () => {
           y: 0,
           duration: 0.8,
           stagger: 0.15,
+          delay: 0.8, // Wait for header to finish animating
           ease: "power3.out",
           scrollTrigger: {
             trigger: ".skills-grid",
@@ -98,12 +99,12 @@ const Skills = () => {
     <section
       id="skills"
       ref={containerRef}
-      className="py-32 px-6 bg-white dark:bg-black relative overflow-hidden"
+      className="section-padding bg-white dark:bg-black relative overflow-hidden"
     >
       {/* Minimal background accent */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gray-50 dark:bg-zinc-900/30 -z-10" />
 
-      <div className="container mx-auto">
+      <div className="section-container">
         {/* Header */}
         <SectionHeader
           key="Expertise"
@@ -111,7 +112,7 @@ const Skills = () => {
           title="Tech"
           subtitle="Stack"
           description="Technologies and tools I use to bring ideas to life."
-          className="skills-header"
+          className=""
         />
 
         {/* Skills Grid */}
@@ -149,7 +150,7 @@ const Skills = () => {
         </div>
 
         {/* Bottom Stats/Experience */}
-        <div className="skills-header mt-20 pt-12 border-t border-gray-200 dark:border-gray-800">
+        <div className="skills-footer mt-20 pt-12 border-t border-gray-200 dark:border-gray-800">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
               { value: "2+", label: "Years Experience" },

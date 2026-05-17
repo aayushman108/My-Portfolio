@@ -5,6 +5,7 @@ import CustomCursor from "@/components/CustomCursor";
 import { ThemeProvider } from "@/components/theme-provider";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
+import PageLoader from "@/components/PageLoader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -288,6 +289,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <PageLoader />
           <SmoothScroll>
             <CustomCursor />
             <Navbar />

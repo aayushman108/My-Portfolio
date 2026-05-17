@@ -65,6 +65,7 @@ const About = () => {
           y: 0,
           duration: 0.6,
           stagger: 0.1,
+          delay: 0.8, // Wait for header to finish animating
           ease: "power1.inOut",
           scrollTrigger: {
             trigger: aboutContentRef.current,
@@ -84,6 +85,7 @@ const About = () => {
           y: 0,
           duration: 0.8,
           stagger: 0.1,
+          delay: 1.0, // Wait for header to finish animating
           ease: "power1.inOut",
           scrollTrigger: {
             trigger: aboutContentRef.current,
@@ -124,25 +126,25 @@ const About = () => {
     <section
       id="about"
       aria-label="About Aayushman Sharma"
-      className="py-16 md:py-32 px-6 bg-gray-50 dark:bg-zinc-900 relative overflow-hidden"
+      className="section-padding bg-gray-50 dark:bg-zinc-900 relative overflow-hidden"
     >
-      <div className="container mx-auto">
+      <div className="section-container">
         {/* Header */}
         <SectionHeader
           key="About Me"
           label="About Me"
           title="Frontend Engineer"
           subtitle="Crafting Seamless Web Experiences"
-          className="about-content"
+          className=""
         />
 
         {/* Bio Section */}
         <div
           ref={aboutContentRef}
-          className="grid lg:grid-cols-12 gap-12 lg:gap-16 mb-12 md:mb-20"
+          className="grid lg:grid-cols-12 gap-8 lg:gap-10 mb-8 md:mb-12"
         >
           {/* Left: Bio Text */}
-          <div className="about-content lg:col-span-7 space-y-6 grid">
+          <div className="about-content lg:col-span-7 space-y-4 grid">
             <p className="text-xl md:text-2xl font-light text-gray-900 dark:text-white leading-relaxed">
               I&apos;m <span className="font-semibold">Aayushman Sharma</span>,
               a Frontend Software Engineer with over{" "}
@@ -188,16 +190,16 @@ const About = () => {
 
           {/* Right: Stats */}
           <div className="about-stats lg:col-span-5">
-            <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+            <div className="flex flex-wrap gap-2 lg:gap-3 xl:gap-4">
               {stats.map((stat, index) => (
                 <div
                   key={index}
-                  className="about-stat text-center lg:text-left p-4 rounded-2xl bg-gray-50 dark:bg-zinc-900/50 border border-gray-100 dark:border-zinc-800"
+                  className="about-stat flex-1 min-w-max text-center lg:text-left p-3 xl:p-4 rounded-2xl bg-gray-50 dark:bg-zinc-900/50 border border-gray-100 dark:border-zinc-800"
                 >
-                  <span className="text-3xl md:text-4xl font-black text-gray-900 dark:text-white block mb-1">
+                  <span className="text-2xl md:text-3xl xl:text-4xl font-black text-gray-900 dark:text-white block mb-1">
                     {stat.value}
                   </span>
-                  <span className="text-xs md:text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <span className="text-[10px] md:text-[11px] xl:text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide whitespace-nowrap block">
                     {stat.label}
                   </span>
                 </div>
@@ -233,9 +235,9 @@ const About = () => {
         {/* Skills Section */}
         <div
           ref={aboutSkillsRef}
-          className="skills-section pt-12 border-t border-gray-200 dark:border-gray-800"
+          className="skills-section pt-8 border-t border-gray-200 dark:border-gray-800"
         >
-          <div className="flex items-center justify-between flex-wrap gap-6 mb-8">
+          <div className="flex items-center justify-between flex-wrap gap-4 mb-6">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
               Tech Stack
             </h3>
@@ -245,11 +247,11 @@ const About = () => {
           </div>
 
           {/* Skills Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
             {skills.map((skill, index) => (
               <div
                 key={index}
-                className="skill-item group flex items-center gap-3 px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-purple-500 dark:hover:border-purple-400 bg-white dark:bg-zinc-900/50 transition-all duration-300 cursor-default"
+                className="skill-item group flex items-center gap-2 px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-purple-500 dark:hover:border-purple-400 bg-white dark:bg-zinc-900/50 transition-all duration-300 cursor-default"
               >
                 <span className="text-gray-400 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300">
                   {skill.icon}

@@ -27,6 +27,7 @@ const Contact = () => {
           opacity: 1,
           y: 0,
           duration: 1,
+          delay: 0.8, // Wait for header to finish animating
           ease: "power3.out",
           scrollTrigger: {
             trigger: containerRef.current,
@@ -43,6 +44,7 @@ const Contact = () => {
           y: 0,
           duration: 0.8,
           stagger: 0.1,
+          delay: 1.0, // Wait for header and left content to finish animating
           ease: "power3.out",
           scrollTrigger: {
             trigger: ".contact-links",
@@ -92,19 +94,19 @@ const Contact = () => {
       id="contact"
       ref={containerRef}
       aria-label="Contact information"
-      className="py-16 md:py-32 px-6 bg-white dark:bg-black relative overflow-hidden"
+      className="section-padding bg-white dark:bg-black relative overflow-hidden"
     >
       {/* Minimal background accent */}
       <div className="absolute top-0 left-0 w-1/3 h-full bg-gray-50 dark:bg-zinc-900/30 -z-10" />
 
-      <div className="container mx-auto">
+      <div className="section-container">
         {/* Header */}
         <SectionHeader
           key="Get In Touch"
           label="Get In Touch"
           title="Let's Work"
           subtitle="Together"
-          className="contact-content"
+          className=""
         />
 
         {/* Main Content Grid */}

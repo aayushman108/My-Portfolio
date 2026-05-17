@@ -48,21 +48,6 @@ const Questions = () => {
   useGSAP(
     () => {
       gsap.fromTo(
-        ".questions-header",
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".questions-header",
-            start: "top 80%",
-          },
-        },
-      );
-
-      gsap.fromTo(
         ".question-item",
         { opacity: 0, y: 30 },
         {
@@ -70,6 +55,7 @@ const Questions = () => {
           y: 0,
           duration: 0.8,
           stagger: 0.1,
+          delay: 0.8, // Wait for header to finish animating
           ease: "power3.out",
           scrollTrigger: {
             trigger: ".questions-list",
@@ -101,12 +87,12 @@ const Questions = () => {
       id="faq"
       ref={containerRef}
       aria-label="Frequently asked questions"
-      className="py-16 md:py-32 px-6 bg-gray-50 dark:bg-zinc-900 relative overflow-hidden"
+      className="section-padding bg-gray-50 dark:bg-zinc-900 relative overflow-hidden"
     >
       {/* Minimal background accent - Inverted */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-white dark:bg-black -z-10" />
 
-      <div className="container mx-auto">
+      <div className="section-container">
         {/* Header */}
         <SectionHeader
           key="FAQ"
@@ -114,11 +100,11 @@ const Questions = () => {
           title="Common"
           subtitle="Questions"
           description="Everything you need to know about working together."
-          className="questions-header"
+          className=""
         />
 
         {/* Questions Accordion */}
-        <div className="questions-list mb-12 md:mb-20">
+        <div className="questions-list mb-8 md:mb-12">
           {questions.map((item, index) => (
             <div
               key={index}
@@ -128,11 +114,11 @@ const Questions = () => {
                 onClick={() =>
                   setActiveIndex(activeIndex === index ? null : index)
                 }
-                className="w-full py-6 md:py-10 flex items-start gap-2 md:gap-12 text-left cursor-pointer"
+                className="w-full py-4 md:py-6 flex items-start gap-2 md:gap-8 text-left cursor-pointer"
               >
                 {/* Number */}
                 <span
-                  className={`text-lg md:text-5xl font-black leading-none transition-colors duration-300 min-w-[32px] md:min-w-[80px] ${
+                  className={`text-base md:text-3xl font-black leading-none transition-colors duration-300 min-w-[24px] md:min-w-[48px] ${
                     activeIndex === index
                       ? "text-purple-500 dark:text-purple-400"
                       : "text-gray-200 dark:text-gray-800 group-hover:text-purple-500 dark:group-hover:text-purple-400"
@@ -145,7 +131,7 @@ const Questions = () => {
                 <div className="flex-1">
                   <div className="flex items-center justify-between gap-2">
                     <h3
-                      className={`text-base md:text-2xl lg:text-3xl font-bold transition-colors duration-300 ${
+                      className={`text-sm md:text-xl lg:text-2xl font-bold transition-colors duration-300 ${
                         activeIndex === index
                           ? "text-purple-600 dark:text-purple-400"
                           : "text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400"
@@ -156,14 +142,14 @@ const Questions = () => {
 
                     {/* Toggle Icon */}
                     <div
-                      className={`w-7 h-7 md:w-12 md:h-12 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-300 ${
+                      className={`w-6 h-6 md:w-10 md:h-10 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-300 ${
                         activeIndex === index
                           ? "bg-purple-500 dark:bg-purple-400 border-purple-500 dark:border-purple-400 rotate-45"
                           : "border-gray-200 dark:border-gray-700 group-hover:border-purple-500 dark:group-hover:border-purple-400 group-hover:bg-purple-500 dark:group-hover:bg-purple-400"
                       }`}
                     >
                       <svg
-                        className={`w-4 h-4 md:w-6 md:h-6 transition-all duration-300 ${
+                        className={`w-3 h-3 md:w-5 md:h-5 transition-all duration-300 ${
                           activeIndex === index
                             ? "text-white"
                             : "text-gray-400 group-hover:text-white"
@@ -186,11 +172,11 @@ const Questions = () => {
                   <div
                     className={`overflow-hidden transition-all duration-500 ease-out ${
                       activeIndex === index
-                        ? "max-h-60 opacity-100 mt-6"
+                        ? "max-h-60 opacity-100 mt-4"
                         : "max-h-0 opacity-0"
                     }`}
                   >
-                    <p className="text-gray-600 dark:text-gray-400 text-sm md:text-lg leading-relaxed max-w-3xl">
+                    <p className="text-gray-600 dark:text-gray-400 text-xs md:text-base leading-relaxed max-w-3xl">
                       {item.answer}
                     </p>
                   </div>
@@ -202,18 +188,18 @@ const Questions = () => {
 
         {/* Footer CTA */}
         <div className="questions-footer">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pt-12 border-t border-gray-200 dark:border-gray-800">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pt-8 border-t border-gray-200 dark:border-gray-800">
             <div>
-              <h3 className="text-xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
+              <h3 className="text-lg md:text-2xl font-bold text-gray-900 dark:text-white mb-2">
                 Still have questions?
               </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-base md:text-lg">
+              <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
                 Let&apos;s start a conversation.
               </p>
             </div>
             <a
               href="#contact"
-              className="group inline-flex items-center gap-4 text-lg font-semibold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300"
+              className="group inline-flex items-center gap-3 text-base md:text-lg font-semibold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300"
             >
               <span>Get in Touch</span>
               <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">

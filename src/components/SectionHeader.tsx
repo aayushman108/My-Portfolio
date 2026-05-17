@@ -38,7 +38,6 @@ export const SectionHeader = ({
       t1.to(".section-text-reveal", {
         y: 0,
         duration: 1.5,
-        // stagger: 0.2,
         ease: "power4.inOut",
       });
 
@@ -60,7 +59,7 @@ export const SectionHeader = ({
             duration: 1,
             ease: "power3.out",
           },
-          description ? "-=0.5" : ">", // Overlap slightly with description if it exists, otherwise start after title
+          description ? "-=0.5" : ">",
         );
       }
     },
@@ -68,7 +67,7 @@ export const SectionHeader = ({
   );
 
   return (
-    <div ref={containerRef} className={`mb-12 md:mb-20 ${className}`}>
+    <div ref={containerRef} className={`mb-8 md:mb-12 ${className}`}>
       <div className="flex items-end justify-between flex-wrap gap-8">
         <div>
           <span className="text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400 mb-4 block">

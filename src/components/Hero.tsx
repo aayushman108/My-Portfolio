@@ -11,7 +11,7 @@ const Hero = () => {
 
   useGSAP(
     () => {
-      const tl = gsap.timeline({ delay: 4 });
+      const tl = gsap.timeline({ paused: true });
 
       gsap.set(".hero-fade", { opacity: 0, y: 30 });
       gsap.set(".hero-cta-btn", { opacity: 0, y: 20 });
@@ -95,6 +95,16 @@ const Hero = () => {
         yoyo: true,
         ease: "power1.inOut",
       });
+
+      const playAnimation = () => {
+        setTimeout(() => tl.play(), 1000);
+      };
+
+      if (document.readyState === "complete") {
+        playAnimation();
+      } else {
+        window.addEventListener("load", playAnimation, { once: true });
+      }
     },
     { scope: heroRef },
   );
@@ -117,7 +127,7 @@ const Hero = () => {
         <Globe className="w-full h-full" />
       </div>
 
-      <div className="container mx-auto">
+      <div className="section-container">
         {/* Main Content */}
         <div className="max-w-5xl relative z-10">
           {/* Label */}
@@ -136,7 +146,7 @@ const Hero = () => {
                 clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
               }}
             >
-              <span className=" hero-text-reveal translate-y-30 block text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-gray-900 dark:text-white leading-[0.9] tracking-tight">
+              <span className=" hero-text-reveal translate-y-30 block text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-gray-900 dark:text-white leading-[0.9] tracking-tight">
                 Hi, I&apos;m
               </span>
             </div>
@@ -148,7 +158,7 @@ const Hero = () => {
                 clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
               }}
             >
-              <span className=" hero-text-reveal translate-y-30 block text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black leading-[1.1] tracking-tight text-gray-400 dark:text-gray-600">
+              <span className=" hero-text-reveal translate-y-30 block text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-[1.1] tracking-tight text-gray-400 dark:text-gray-600">
                 Aayushman
               </span>
             </div>
@@ -218,7 +228,7 @@ const Hero = () => {
 
         {/* Bottom Info Bar */}
         <div className="absolute  bottom-6 md:bottom-12 left-6 right-6">
-          <div className="container mx-auto">
+          <div className="section-container">
             <div className="flex items-end justify-center md:justify-between">
               {/* Availability Status */}
               <div className="hero-fade-bottom opacity-0 translate-y-5 hidden md:flex items-center gap-3">

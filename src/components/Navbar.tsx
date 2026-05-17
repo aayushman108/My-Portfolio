@@ -52,7 +52,7 @@ const Navbar = () => {
           backfaceVisibility: "hidden",
         }}
       >
-        <div className="flex justify-between items-center w-full max-w-7xl mx-auto">
+        <div className="flex justify-between items-center section-container">
           {/* Logo */}
           <Link
             href="/"

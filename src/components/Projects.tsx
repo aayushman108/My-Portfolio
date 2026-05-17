@@ -40,12 +40,12 @@ const Projects = () => {
     <section
       id="projects"
       aria-label="Featured projects"
-      className="py-16 md:py-32 px-6 bg-white dark:bg-black relative overflow-hidden"
+      className="section-padding bg-white dark:bg-black relative overflow-hidden"
     >
       {/* Minimal background accent */}
       <div className="absolute top-0 left-0 w-1/3 h-full bg-gray-50 dark:bg-zinc-900/30 -z-10" />
 
-      <div className="container mx-auto">
+      <div className="section-container">
         {/* Section Header - Awwwards Style */}
         <SectionHeader
           key="Selected Work"
