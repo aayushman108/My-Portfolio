@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -15,6 +15,9 @@ import {
   FaGraduationCap,
   FaBriefcase,
   FaBolt,
+  FaCalendarAlt,
+  FaChevronDown,
+  FaChevronUp,
 } from "react-icons/fa";
 import {
   SiReact,
@@ -123,8 +126,88 @@ const quickStats = [
   },
 ];
 
+const numericalStats = [
+  {
+    number: "2+",
+    label: "Years of Experience",
+    description: "Building scalable, high-performance web applications using React & Next.js.",
+  },
+  {
+    number: "15+",
+    label: "Projects Completed",
+    description: "From large-scale corporate systems to personal web apps and experiments.",
+  },
+  {
+    number: "9+",
+    label: "Production Apps",
+    description: "Robust architectures deployed in live customer environments.",
+  },
+  {
+    number: "100%",
+    label: "Commitment to Quality",
+    description: "Pixel-perfect fidelity, accessibility (a11y), and top performance.",
+  },
+];
+
+const timelineData = [
+  {
+    type: "experience",
+    role: "Associate Frontend Software Engineer",
+    company: "Codniv Innovations Pvt. Ltd.",
+    location: "Kathmandu, Nepal",
+    period: "Feb 2024 – Present",
+    description: "Spearheading frontend development of scalable CRM systems, HR dashboards, real-time communication modules, and automated billing workflows.",
+    details: [
+      "Built scalable survey and data entry systems using React and Redux Toolkit, handling large datasets with a focus on performance, reliability, and data accuracy.",
+      "Developed reusable, component-driven UI architecture, improving consistency and maintainability across multiple modules.",
+      "Implemented responsive and accessible interfaces using semantic HTML and modern CSS practices, ensuring cross-device compatibility.",
+      "Wrote unit and integration tests using React Testing Library and Vitest, reducing regressions and improving overall application stability.",
+      "Collaborated closely with backend engineers to design and integrate REST APIs, ensuring robust data flow and error handling.",
+      "Developed internal dashboards for HR workflows, contracts, and timesheets, improving operational efficiency and usability.",
+      "Built and maintained Stripe-based subscription and billing workflows, handling recurring payments, upgrades, cancellations, and webhook-based event synchronization.",
+      "Contributed to a multi-platform ecosystem (Next.js web + React Native mobile), delivering consistent user experiences across platforms.",
+      "Developed real-time communication features using Socket.IO, enabling reliable bidirectional messaging and connection handling.",
+    ],
+  },
+  {
+    type: "experience",
+    role: "Software Engineer Intern",
+    company: "Leapfrog Technology Inc.",
+    location: "Kathmandu, Nepal",
+    period: "Nov 2023 – Jan 2024",
+    description: "Built a strong foundation in full-stack web development, shipping responsive frontends, server REST APIs, and database schemas.",
+    details: [
+      "Gained hands-on experience in full-stack web development using HTML, CSS, JavaScript, TypeScript, Node.js, Express, and PostgreSQL.",
+      "Built multiple projects including browser-based games, landing pages, and full-stack Todo and E-commerce applications.",
+      "Collaborated in a team environment following Agile/Scrum methodologies, conducting code reviews and sprint retrospectives.",
+    ],
+  },
+  {
+    type: "education",
+    role: "Bachelor of Mechanical Engineering",
+    company: "Pulchowk Campus, Institute of Engineering (IOE)",
+    location: "Tribhuvan University, Nepal",
+    period: "2018 – 2023",
+    description: "Leveraged computational methods, systems architecture, and mathematical frameworks to transition into frontend and software engineering.",
+    details: [
+      "Engaged in extensive analytical studies including mathematics, fluid dynamics, and automated systems control.",
+      "Applied structured logical models and procedural algorithms directly to frontend application state management and computational layouts."
+    ],
+  },
+];
+
 const AboutPage = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [expandedTimelineItems, setExpandedTimelineItems] = useState<{
+    [key: number]: boolean;
+  }>({ 0: true });
+
+  const toggleTimelineItem = (index: number) => {
+    setExpandedTimelineItems((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
 
   useGSAP(
     () => {
@@ -214,6 +297,58 @@ const AboutPage = () => {
           ease: "power3.out",
           scrollTrigger: {
             trigger: ".expertise-grid",
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        },
+      );
+
+      // ScrollTrigger for Numerical Stats Cards
+      gsap.fromTo(
+        ".metric-card",
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.12,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".metrics-grid",
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        },
+      );
+
+      // ScrollTrigger for Professional Timeline Section Header
+      gsap.fromTo(
+        ".timeline-header-text-reveal",
+        { y: "100%" },
+        {
+          y: 0,
+          duration: 1.2,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: ".timeline-section",
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        },
+      );
+
+      // ScrollTrigger for Timeline Cards
+      gsap.fromTo(
+        ".timeline-item",
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".timeline-container",
             start: "top 80%",
             toggleActions: "play none none none",
           },
@@ -438,7 +573,29 @@ const AboutPage = () => {
           </div>
         </div>
 
-        {/* Expertise & Experience Section */}
+        {/* Key Numerical Metrics */}
+        <div className="mb-16 md:mb-24">
+          <div className="metrics-grid grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {numericalStats.map((stat, index) => (
+              <div
+                key={index}
+                className="metric-card opacity-0 group p-6 rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-zinc-900/50 hover:border-purple-300 dark:hover:border-purple-700 hover:bg-gray-50/50 dark:hover:bg-zinc-900/80 transition-all duration-300 shadow-sm"
+              >
+                <div className="text-4xl md:text-5xl font-black text-purple-600 dark:text-purple-400 mb-2 group-hover:scale-105 transition-transform duration-300 origin-left">
+                  {stat.number}
+                </div>
+                <h3 className="text-xs font-semibold tracking-wider uppercase text-gray-500 dark:text-gray-400 mb-2">
+                  {stat.label}
+                </h3>
+                <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 leading-relaxed font-normal">
+                  {stat.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Expertise Section */}
         <div className="expertise-section mb-16 md:mb-24">
           <div className="flex items-center gap-3 mb-8 md:mb-12">
             <div
@@ -447,7 +604,7 @@ const AboutPage = () => {
               }}
             >
               <span className="expertise-header-text-reveal translate-y-10 block text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">
-                Expertise & Experience
+                Core Expertise
               </span>
             </div>
             <div className="flex-1 h-px bg-gray-200 dark:bg-gray-800" />
@@ -474,6 +631,109 @@ const AboutPage = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Professional Journey / Timeline Section */}
+        <div className="timeline-section mb-16 md:mb-24">
+          <div className="flex items-center gap-3 mb-8 md:mb-12">
+            <div
+              style={{
+                clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+              }}
+            >
+              <span className="timeline-header-text-reveal translate-y-10 block text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">
+                Professional Journey
+              </span>
+            </div>
+            <div className="flex-1 h-px bg-gray-200 dark:bg-gray-800" />
+          </div>
+
+          <div className="relative pl-6 sm:pl-8 border-l-2 border-gray-200 dark:border-zinc-800 ml-4 sm:ml-6 space-y-12 timeline-container">
+            {timelineData.map((item, index) => {
+              const isExpanded = expandedTimelineItems[index] ?? false;
+              return (
+                <div
+                  key={index}
+                  className="timeline-item opacity-0 relative"
+                >
+                  {/* Timeline node */}
+                  <div className={`absolute -left-[39px] sm:-left-[47px] top-1.5 w-8 h-8 rounded-full border-2 ${
+                    item.type === "experience"
+                      ? "border-purple-500 text-purple-600 dark:text-purple-400"
+                      : "border-blue-500 text-blue-600 dark:text-blue-400"
+                  } bg-white dark:bg-black flex items-center justify-center shadow-md z-10`}
+                  >
+                    {item.type === "experience" ? (
+                      <FaBriefcase className="text-xs" />
+                    ) : (
+                      <FaGraduationCap className="text-sm" />
+                    )}
+                  </div>
+
+                  {/* Content card */}
+                  <div className="group p-6 rounded-2xl border border-gray-200 dark:border-gray-800 hover:border-purple-300 dark:hover:border-purple-700 bg-white dark:bg-zinc-900/50 hover:bg-gray-55/20 dark:hover:bg-zinc-900/80 transition-all duration-300 shadow-sm hover:shadow-md">
+                    <div className="flex flex-wrap items-start justify-between gap-4">
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                          {item.role}
+                        </h3>
+                        <div className="flex flex-wrap items-center gap-2 mt-1">
+                          <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                            {item.company}
+                          </span>
+                          <span className="text-gray-300 dark:text-gray-700 hidden sm:inline">&bull;</span>
+                          <span className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                            <FaMapMarkerAlt className="text-[10px]" /> {item.location}
+                          </span>
+                        </div>
+                      </div>
+
+                      <span className="inline-flex items-center gap-1.5 text-xs text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-zinc-800 px-3 py-1.5 rounded-full font-semibold border border-gray-200 dark:border-zinc-700">
+                        <FaCalendarAlt size={10} className="text-purple-500" />
+                        {item.period}
+                      </span>
+                    </div>
+
+                    <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 mt-4 leading-relaxed font-normal">
+                      {item.description}
+                    </p>
+
+                    {/* Expandable Details */}
+                    {item.details && item.details.length > 0 && (
+                      <div className="mt-4 pt-4 border-t border-gray-100 dark:border-zinc-800/80">
+                        <button
+                          onClick={() => toggleTimelineItem(index)}
+                          className="flex items-center gap-2 text-xs font-semibold text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 transition-colors focus:outline-none cursor-pointer"
+                        >
+                          <span>{isExpanded ? "Hide Details" : "View Key Contributions & Achievements"}</span>
+                          {isExpanded ? (
+                            <FaChevronUp size={10} />
+                          ) : (
+                            <FaChevronDown size={10} />
+                          )}
+                        </button>
+
+                        <div
+                          className={`mt-4 space-y-2.5 overflow-hidden transition-all duration-500 ease-in-out ${
+                            isExpanded ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
+                          }`}
+                        >
+                          {item.details.map((detail, detailIdx) => (
+                            <div key={detailIdx} className="flex items-start gap-3">
+                              <span className="mt-2 w-1.5 h-1.5 rounded-full bg-purple-500 shrink-0" />
+                              <span className="text-xs md:text-sm text-gray-600 dark:text-gray-400 leading-relaxed font-normal font-sans">
+                                {detail}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
