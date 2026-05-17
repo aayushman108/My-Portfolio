@@ -20,25 +20,6 @@ export interface Project {
 export const PROJECTS: Project[] = [
   {
     id: 1,
-    title: "Envoware",
-    description:
-      "A premium, interactive web application promoting environmental awareness and healthy living through engaging eco-quizzes, daily sustainability tips, and rich, fluid animations.",
-    tech: ["Next.js", "React", "Typescript", "SCSS", "GSAP"],
-    github: "https://github.com/aayushman108/EcoAware",
-    live: "https://envoware.netlify.app",
-    year: "2025",
-    category: "Web App",
-    type: "Personal",
-    image: "/images/eco.png",
-    status: "In-Progress",
-    features: {
-      current: ["Interactive Quizzes", "Sustainability Tips"],
-      inProgress: [],
-      planned: ["Social Media Sharing", "Leaderboards", "Community Forums"],
-    },
-  },
-  {
-    id: 2,
     title: "SyncSplit",
     description:
       "SyncSplit is a smart expense management and bill-splitting platform designed for individuals and groups. It enables users to efficiently track personal and shared expenses, manage group finances, and simplify settlements through intelligent algorithms. With flexible splitting options and detailed monthly insights, SyncSplit helps users maintain financial clarity and accountability.",
@@ -77,6 +58,25 @@ export const PROJECTS: Project[] = [
         "Receipt scanning and expense extraction",
         "Multi-currency support",
       ],
+    },
+  },
+  {
+    id: 2,
+    title: "Envoware",
+    description:
+      "A premium, interactive web application promoting environmental awareness and healthy living through engaging eco-quizzes, daily sustainability tips, and rich, fluid animations.",
+    tech: ["Next.js", "React", "Typescript", "SCSS", "GSAP"],
+    github: "https://github.com/aayushman108/EcoAware",
+    live: "https://envoware.netlify.app",
+    year: "2025",
+    category: "Web App",
+    type: "Personal",
+    image: "/images/eco.png",
+    status: "In-Progress",
+    features: {
+      current: ["Interactive Quizzes", "Sustainability Tips"],
+      inProgress: [],
+      planned: ["Social Media Sharing", "Leaderboards", "Community Forums"],
     },
   },
   {
