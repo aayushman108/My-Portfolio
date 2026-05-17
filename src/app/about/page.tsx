@@ -457,7 +457,7 @@ const AboutPage = () => {
             {expertise.map((item, index) => (
               <div
                 key={index}
-                className="expertise-card opacity-0 group p-6 rounded-2xl border border-gray-200 dark:border-gray-800 hover:border-purple-300 dark:hover:border-purple-700 bg-white dark:bg-zinc-900/50 transition-all duration-300"
+                className="expertise-card opacity-0 group p-6 rounded-2xl border border-gray-200 dark:border-gray-800 hover:border-purple-300 dark:hover:border-purple-700 bg-white dark:bg-zinc-900/50 transition-colors duration-300"
               >
                 <div className="flex items-start gap-4">
                   <span className="text-2xl font-black text-gray-200 dark:text-gray-800 group-hover:text-purple-300 dark:group-hover:text-purple-700 transition-colors">
