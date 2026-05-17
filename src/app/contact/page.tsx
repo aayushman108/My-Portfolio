@@ -220,15 +220,15 @@ const ContactPage = () => {
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
           {/* Left Column: Form Card */}
           <div className="lg:col-span-7 contact-form-card opacity-0">
-            <div className="p-6 sm:p-8 rounded-3xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-zinc-900/50 shadow-sm relative overflow-hidden">
+            <div className="p-6 sm:p-10 rounded-3xl border border-gray-200/80 dark:border-gray-800/80 bg-white/70 dark:bg-zinc-900/40 backdrop-blur-xl shadow-lg relative overflow-hidden">
               {status === "success" ? (
                 <div className="py-12 px-4 text-center flex flex-col items-center justify-center space-y-6">
                   <FaCheckCircle className="text-6xl text-green-500 animate-bounce" />
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
                     Message Sent Successfully!
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-400 max-w-sm leading-relaxed">
-                    Thank you for reaching out, Aayushman will review your message and get back to you shortly.
+                  <p className="text-gray-600 dark:text-gray-400 max-w-sm leading-relaxed text-sm">
+                    Thank you for reaching out. Aayushman will review your message and get back to you shortly.
                   </p>
                   <button
                     onClick={() => setStatus("idle")}
@@ -240,7 +240,7 @@ const ContactPage = () => {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                    <h3 className="text-xl font-black text-gray-900 dark:text-white mb-2">
                       Send a Message
                     </h3>
                     <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
@@ -249,112 +249,112 @@ const ContactPage = () => {
                   </div>
 
                   {/* Name field */}
-                  <div className="relative">
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="name"
+                      className="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400"
+                    >
+                      Your Name
+                    </label>
                     <input
                       type="text"
                       id="name"
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder=" "
-                      className={`peer w-full px-4 py-3 bg-gray-50 dark:bg-zinc-900/50 border ${
+                      placeholder="e.g. John Doe"
+                      className={`w-full px-5 py-4 bg-gray-50/50 dark:bg-zinc-900/30 border ${
                         errors.name
-                          ? "border-red-500 focus:border-red-500 focus:ring-red-100"
-                          : "border-gray-200 dark:border-gray-800 focus:border-purple-500 dark:focus:border-purple-400"
-                      } rounded-xl text-gray-950 dark:text-white placeholder-transparent focus:outline-none transition-all`}
+                          ? "border-red-500/80 focus:border-red-500 focus:ring-red-500/10"
+                          : "border-gray-200 dark:border-gray-800/80 hover:border-purple-300 dark:hover:border-purple-800/60 focus:border-purple-500 dark:focus:border-purple-400 focus:ring-4 focus:ring-purple-500/5 dark:focus:ring-purple-400/5"
+                      } rounded-2xl text-gray-950 dark:text-white text-sm focus:outline-none transition-all duration-300 placeholder:text-gray-350 dark:placeholder:text-gray-650`}
                     />
-                    <label
-                      htmlFor="name"
-                      className="absolute left-4 top-3 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-450 duration-300 transform -translate-y-7 scale-75 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-7 peer-focus:text-purple-600 dark:peer-focus:text-purple-400 pointer-events-none"
-                    >
-                      Your Name
-                    </label>
                     {errors.name && (
-                      <span className="text-xs text-red-500 mt-1.5 block font-medium">
+                      <span className="text-xs text-red-500 mt-1 block font-medium">
                         {errors.name}
                       </span>
                     )}
                   </div>
 
                   {/* Email field */}
-                  <div className="relative">
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="email"
+                      className="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400"
+                    >
+                      Your Email
+                    </label>
                     <input
                       type="email"
                       id="email"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder=" "
-                      className={`peer w-full px-4 py-3 bg-gray-50 dark:bg-zinc-900/50 border ${
+                      placeholder="e.g. john@example.com"
+                      className={`w-full px-5 py-4 bg-gray-50/50 dark:bg-zinc-900/30 border ${
                         errors.email
-                          ? "border-red-500 focus:border-red-500 focus:ring-red-100"
-                          : "border-gray-200 dark:border-gray-800 focus:border-purple-500 dark:focus:border-purple-400"
-                      } rounded-xl text-gray-950 dark:text-white placeholder-transparent focus:outline-none transition-all`}
+                          ? "border-red-500/80 focus:border-red-500 focus:ring-red-500/10"
+                          : "border-gray-200 dark:border-gray-800/80 hover:border-purple-300 dark:hover:border-purple-800/60 focus:border-purple-500 dark:focus:border-purple-400 focus:ring-4 focus:ring-purple-500/5 dark:focus:ring-purple-400/5"
+                      } rounded-2xl text-gray-955 dark:text-white text-sm focus:outline-none transition-all duration-300 placeholder:text-gray-355 dark:placeholder:text-gray-655`}
                     />
-                    <label
-                      htmlFor="email"
-                      className="absolute left-4 top-3 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-450 duration-300 transform -translate-y-7 scale-75 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-7 peer-focus:text-purple-600 dark:peer-focus:text-purple-400 pointer-events-none"
-                    >
-                      Your Email
-                    </label>
                     {errors.email && (
-                      <span className="text-xs text-red-500 mt-1.5 block font-medium">
+                      <span className="text-xs text-red-500 mt-1 block font-medium">
                         {errors.email}
                       </span>
                     )}
                   </div>
 
                   {/* Subject field */}
-                  <div className="relative">
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="subject"
+                      className="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400"
+                    >
+                      Subject
+                    </label>
                     <input
                       type="text"
                       id="subject"
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
-                      placeholder=" "
-                      className={`peer w-full px-4 py-3 bg-gray-50 dark:bg-zinc-900/50 border ${
+                      placeholder="e.g. Project Collaboration"
+                      className={`w-full px-5 py-4 bg-gray-50/50 dark:bg-zinc-900/30 border ${
                         errors.subject
-                          ? "border-red-500 focus:border-red-500 focus:ring-red-100"
-                          : "border-gray-200 dark:border-gray-800 focus:border-purple-500 dark:focus:border-purple-400"
-                      } rounded-xl text-gray-950 dark:text-white placeholder-transparent focus:outline-none transition-all`}
+                          ? "border-red-500/80 focus:border-red-500 focus:ring-red-500/10"
+                          : "border-gray-200 dark:border-gray-800/80 hover:border-purple-300 dark:hover:border-purple-800/60 focus:border-purple-500 dark:focus:border-purple-400 focus:ring-4 focus:ring-purple-500/5 dark:focus:ring-purple-400/5"
+                      } rounded-2xl text-gray-955 dark:text-white text-sm focus:outline-none transition-all duration-300 placeholder:text-gray-355 dark:placeholder:text-gray-655`}
                     />
-                    <label
-                      htmlFor="subject"
-                      className="absolute left-4 top-3 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-450 duration-300 transform -translate-y-7 scale-75 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-7 peer-focus:text-purple-600 dark:peer-focus:text-purple-400 pointer-events-none"
-                    >
-                      Subject
-                    </label>
                     {errors.subject && (
-                      <span className="text-xs text-red-500 mt-1.5 block font-medium">
+                      <span className="text-xs text-red-500 mt-1 block font-medium">
                         {errors.subject}
                       </span>
                     )}
                   </div>
 
                   {/* Message field */}
-                  <div className="relative">
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="message"
+                      className="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400"
+                    >
+                      Message
+                    </label>
                     <textarea
                       id="message"
                       name="message"
                       rows={5}
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder=" "
-                      className={`peer w-full px-4 py-3 bg-gray-50 dark:bg-zinc-900/50 border ${
+                      placeholder="Tell me about your project, goals, and timeline..."
+                      className={`w-full px-5 py-4 bg-gray-50/50 dark:bg-zinc-900/30 border ${
                         errors.message
-                          ? "border-red-500 focus:border-red-500 focus:ring-red-100"
-                          : "border-gray-200 dark:border-gray-800 focus:border-purple-500 dark:focus:border-purple-400"
-                      } rounded-xl text-gray-950 dark:text-white placeholder-transparent focus:outline-none transition-all resize-none`}
+                          ? "border-red-500/80 focus:border-red-500 focus:ring-red-500/10"
+                          : "border-gray-200 dark:border-gray-800/80 hover:border-purple-300 dark:hover:border-purple-800/60 focus:border-purple-500 dark:focus:border-purple-400 focus:ring-4 focus:ring-purple-500/5 dark:focus:ring-purple-400/5"
+                      } rounded-2xl text-gray-955 dark:text-white text-sm focus:outline-none transition-all duration-300 resize-none placeholder:text-gray-355 dark:placeholder:text-gray-655`}
                     />
-                    <label
-                      htmlFor="message"
-                      className="absolute left-4 top-3 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-450 duration-300 transform -translate-y-7 scale-75 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-7 peer-focus:text-purple-600 dark:peer-focus:text-purple-400 pointer-events-none"
-                    >
-                      Message
-                    </label>
                     {errors.message && (
-                      <span className="text-xs text-red-500 mt-1.5 block font-medium">
+                      <span className="text-xs text-red-500 mt-1 block font-medium">
                         {errors.message}
                       </span>
                     )}
@@ -364,7 +364,7 @@ const ContactPage = () => {
                   <button
                     type="submit"
                     disabled={status === "sending"}
-                    className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-black rounded-full font-bold hover:bg-purple-600 dark:hover:bg-purple-400 dark:hover:text-white hover:text-white transition-all duration-300 disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer"
+                    className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-black rounded-2xl font-bold hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 hover:text-white dark:hover:text-white hover:shadow-[0_8px_30px_rgba(168,85,247,0.25)] transition-all duration-300 disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer"
                   >
                     {status === "sending" ? (
                       <>
