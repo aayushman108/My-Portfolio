@@ -139,16 +139,19 @@ const AboutPage = () => {
       );
 
       // Animate "About Me" Sublabel
-      introTl.to(
+      introTl.fromTo(
         ".about-sublabel",
-        { y: 0, duration: 0.8, ease: "power4.out" },
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power4.out" },
         "-=0.6"
       );
 
       // Animate Headline text reveals
-      introTl.to(
+      introTl.fromTo(
         ".header-text-reveal",
+        { opacity: 0, y: 35 },
         {
+          opacity: 1,
           y: 0,
           duration: 1.2,
           stagger: 0.12,
@@ -158,9 +161,11 @@ const AboutPage = () => {
       );
 
       // Animate summary description
-      introTl.to(
+      introTl.fromTo(
         ".header-description",
+        { opacity: 0, y: 25 },
         {
+          opacity: 1,
           y: 0,
           duration: 1.0,
           ease: "power3.out",
@@ -169,9 +174,11 @@ const AboutPage = () => {
       );
 
       // Animate main intro bio paragraph
-      introTl.to(
+      introTl.fromTo(
         ".about-intro-text",
+        { opacity: 0, y: 30 },
         {
+          opacity: 1,
           y: 0,
           duration: 1.0,
           ease: "power3.out",
@@ -378,7 +385,7 @@ const AboutPage = () => {
                 }}
                 className="mb-4"
               >
-                <span className="about-sublabel translate-y-10 text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400 block">
+                <span className="about-sublabel opacity-0 translate-y-10 text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400 block">
                   About Me
                 </span>
               </div>
@@ -388,7 +395,7 @@ const AboutPage = () => {
                     clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
                   }}
                 >
-                  <span className="header-text-reveal translate-y-20 block">
+                  <span className="header-text-reveal opacity-0 translate-y-20 block">
                     Hi, I&apos;m
                   </span>
                 </div>
@@ -397,7 +404,7 @@ const AboutPage = () => {
                     clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
                   }}
                 >
-                  <span className="header-text-reveal translate-y-20 text-gray-400 dark:text-gray-600 block">
+                  <span className="header-text-reveal opacity-0 translate-y-20 text-gray-400 dark:text-gray-600 block">
                     Aayushman 👋
                   </span>
                 </div>
@@ -409,7 +416,7 @@ const AboutPage = () => {
                 clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
               }}
             >
-              <p className="header-description translate-y-15 text-gray-600 dark:text-gray-400 text-lg md:text-xl max-w-md leading-relaxed">
+              <p className="header-description opacity-0 translate-y-15 text-gray-600 dark:text-gray-400 text-lg md:text-xl max-w-md leading-relaxed">
                 Frontend Engineer & React/Next.js Specialist with 2+ years of
                 professional experience.
               </p>
@@ -425,7 +432,7 @@ const AboutPage = () => {
             }}
             className="mb-8"
           >
-            <p className="about-intro-text translate-y-20 text-xl md:text-2xl lg:text-3xl font-light text-gray-900 dark:text-white leading-relaxed">
+            <p className="about-intro-text opacity-0 translate-y-20 text-xl md:text-2xl lg:text-3xl font-light text-gray-900 dark:text-white leading-relaxed">
               I bridge the gap between{" "}
               <span className="font-semibold">robust engineering</span> and{" "}
               <span className="font-semibold">intuitive UI</span>. I specialize in
