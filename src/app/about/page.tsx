@@ -129,33 +129,67 @@ const AboutPage = () => {
   useGSAP(
     () => {
       // 1. Initial Page Load Animation for Hero / Header
-      const introTl = gsap.timeline({ delay: 1.0 });
+      const introTl = gsap.timeline({ delay: 0.8 });
 
-      introTl.to(".header-text-reveal", {
-        y: 0,
-        duration: 1.2,
-        stagger: 0.15,
-        ease: "power4.out",
-      });
-
+      // Animate Back Link
       introTl.fromTo(
-        ".header-description",
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
-        "-=0.8",
+        ".back-link-reveal",
+        { opacity: 0, x: -15 },
+        { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" }
       );
 
+      // Animate "About Me" Sublabel
+      introTl.to(
+        ".about-sublabel",
+        { y: 0, duration: 0.8, ease: "power4.out" },
+        "-=0.6"
+      );
+
+      // Animate Headline text reveals
+      introTl.to(
+        ".header-text-reveal",
+        {
+          y: 0,
+          duration: 1.2,
+          stagger: 0.12,
+          ease: "power4.out",
+        },
+        "-=0.5"
+      );
+
+      // Animate summary description
+      introTl.to(
+        ".header-description",
+        {
+          y: 0,
+          duration: 1.0,
+          ease: "power3.out",
+        },
+        "-=0.8"
+      );
+
+      // Animate main intro bio paragraph
+      introTl.to(
+        ".about-intro-text",
+        {
+          y: 0,
+          duration: 1.0,
+          ease: "power3.out",
+        },
+        "-=0.6"
+      );
+
+      // Animate availability status badge
       introTl.fromTo(
-        ".about-intro",
-        { opacity: 0, y: 30 },
+        ".about-intro-badge",
+        { opacity: 0, y: 15 },
         {
           opacity: 1,
           y: 0,
           duration: 0.8,
-          stagger: 0.15,
           ease: "power3.out",
         },
-        "-=0.6",
+        "-=0.4"
       );
 
       // 2. ScrollTrigger for Expertise Section Header
@@ -323,22 +357,31 @@ const AboutPage = () => {
         {/* Page Header */}
         <div className="page-header mb-16 md:mb-20">
           {/* Back Link */}
-          <Link
-            href="/"
-            className="group inline-flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors mb-8"
-          >
-            <div className="w-10 h-10 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">
-              <FaArrowLeft className="text-sm group-hover:text-white transition-colors" />
-            </div>
-            <span className="font-medium">Back to Home</span>
-          </Link>
+          <div className="back-link-reveal opacity-0 -translate-x-4 mb-8">
+            <Link
+              href="/"
+              className="group inline-flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+            >
+              <div className="w-10 h-10 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">
+                <FaArrowLeft className="text-sm group-hover:text-white transition-colors" />
+              </div>
+              <span className="font-medium">Back to Home</span>
+            </Link>
+          </div>
 
           {/* Title with Masked Reveal Animation */}
           <div className="flex items-end justify-between flex-wrap gap-8">
             <div>
-              <span className="text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400 mb-4 block">
-                About Me
-              </span>
+              <div
+                style={{
+                  clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+                }}
+                className="mb-4"
+              >
+                <span className="about-sublabel translate-y-10 text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400 block">
+                  About Me
+                </span>
+              </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white leading-[1.1] tracking-tight">
                 <div
                   style={{
@@ -360,23 +403,38 @@ const AboutPage = () => {
                 </div>
               </h1>
             </div>
-            <p className="header-description opacity-0 translate-y-10 text-gray-600 dark:text-gray-400 text-lg md:text-xl max-w-md leading-relaxed">
-              Frontend Engineer & React/Next.js Specialist with 2+ years of
-              professional experience.
-            </p>
+            
+            <div
+              style={{
+                clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+              }}
+            >
+              <p className="header-description translate-y-15 text-gray-600 dark:text-gray-400 text-lg md:text-xl max-w-md leading-relaxed">
+                Frontend Engineer & React/Next.js Specialist with 2+ years of
+                professional experience.
+              </p>
+            </div>
           </div>
         </div>
 
         {/* Intro */}
         <div className="mb-16 md:mb-24 max-w-4xl">
-          <p className="about-intro opacity-0 text-xl md:text-2xl lg:text-3xl font-light text-gray-900 dark:text-white leading-relaxed mb-8">
-            I bridge the gap between{" "}
-            <span className="font-semibold">robust engineering</span> and{" "}
-            <span className="font-semibold">intuitive UI</span>. I specialize in
-            building high-performance, production-ready web applications that
-            turn complex data into seamless user experiences.
-          </p>
-          <div className="about-intro opacity-0 inline-flex items-center gap-3 px-5 py-3 rounded-full bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800">
+          <div
+            style={{
+              clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+            }}
+            className="mb-8"
+          >
+            <p className="about-intro-text translate-y-20 text-xl md:text-2xl lg:text-3xl font-light text-gray-900 dark:text-white leading-relaxed">
+              I bridge the gap between{" "}
+              <span className="font-semibold">robust engineering</span> and{" "}
+              <span className="font-semibold">intuitive UI</span>. I specialize in
+              building high-performance, production-ready web applications that
+              turn complex data into seamless user experiences.
+            </p>
+          </div>
+          
+          <div className="about-intro-badge opacity-0 translate-y-5 inline-flex items-center gap-3 px-5 py-3 rounded-full bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
             <span className="text-sm font-medium text-green-700 dark:text-green-400">
               Open to global & remote opportunities — Based in Kathmandu, Nepal
