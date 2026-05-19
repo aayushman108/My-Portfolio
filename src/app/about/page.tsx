@@ -435,7 +435,7 @@ const AboutPage = () => {
       );
 
       ctaTl.fromTo(
-        ".cta-links > *",
+        ".cta-links a",
         { opacity: 0, scale: 0.8 },
         {
           opacity: 1,
@@ -777,45 +777,47 @@ const AboutPage = () => {
 
         {/* Connect CTA Section */}
         <div className="cta-section pt-12">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 rounded-[1.5rem] bg-slate-950 dark:bg-white/[0.06] px-6 py-8 md:px-8 text-white dark:text-white">
-            <div>
-              <h3 className="cta-title opacity-0 text-2xl md:text-3xl font-bold mb-2">
+          <div className="flex flex-col lg:flex-row items-center text-center lg:text-left justify-between gap-8 rounded-[1.5rem] bg-slate-950 dark:bg-white/[0.06] p-6 sm:p-10 lg:p-12 text-white dark:text-white">
+            <div className="w-full lg:w-auto">
+              <h3 className="cta-title opacity-0 text-2xl sm:text-3xl lg:text-4xl font-bold mb-2">
                 Let&apos;s Connect
               </h3>
-              <p className="cta-desc opacity-0 text-white/70 text-lg max-w-xl">
+              <p className="cta-desc opacity-0 text-white/70 text-base sm:text-lg max-w-xl mx-auto lg:mx-0">
                 I&apos;m always open to discussing frontend architecture,
                 performance optimization, or remote collaborations.
               </p>
             </div>
-            <div className="cta-links flex items-center gap-3">
-              <a
-                href="https://github.com/aayushman108"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="opacity-0 w-12 h-12 rounded-full border-2 border-white/15 bg-white/10 flex items-center justify-center text-white/70 hover:border-white hover:bg-white hover:text-slate-950 transition-all duration-300"
-                aria-label="GitHub"
-              >
-                <FaGithub size={20} />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/aayushman-sharma-a8abbb277"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="opacity-0 w-12 h-12 rounded-full border-2 border-white/15 bg-white/10 flex items-center justify-center text-white/70 hover:border-blue-400 hover:bg-blue-500 hover:text-white transition-all duration-300"
-                aria-label="LinkedIn"
-              >
-                <FaLinkedin size={20} />
-              </a>
-              <a
-                href="mailto:dev.aayushmansharma@gmail.com"
-                className="opacity-0 w-12 h-12 rounded-full border-2 border-white/15 bg-white/10 flex items-center justify-center text-white/70 hover:border-cyan-300 hover:bg-cyan-300 hover:text-slate-950 transition-all duration-300"
-                aria-label="Email"
-              >
-                <FaEnvelope size={20} />
-              </a>
+            <div className="cta-links flex flex-col sm:flex-row items-center justify-center lg:justify-end gap-4 sm:gap-6 w-full lg:w-auto">
+              <div className="flex items-center justify-center gap-3">
+                <a
+                  href="https://github.com/aayushman108"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="opacity-0 w-12 h-12 rounded-full border-2 border-white/15 bg-white/10 flex items-center justify-center text-white/70 hover:border-white hover:bg-white hover:text-slate-950 transition-all duration-300 shrink-0"
+                  aria-label="GitHub"
+                >
+                  <FaGithub size={20} />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/aayushman-sharma-a8abbb277"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="opacity-0 w-12 h-12 rounded-full border-2 border-white/15 bg-white/10 flex items-center justify-center text-white/70 hover:border-blue-400 hover:bg-blue-500 hover:text-white transition-all duration-300 shrink-0"
+                  aria-label="LinkedIn"
+                >
+                  <FaLinkedin size={20} />
+                </a>
+                <a
+                  href="mailto:dev.aayushmansharma@gmail.com"
+                  className="opacity-0 w-12 h-12 rounded-full border-2 border-white/15 bg-white/10 flex items-center justify-center text-white/70 hover:border-cyan-300 hover:bg-cyan-300 hover:text-slate-950 transition-all duration-300 shrink-0"
+                  aria-label="Email"
+                >
+                  <FaEnvelope size={20} />
+                </a>
+              </div>
               <Link
                 href="/#contact"
-                className="opacity-0 group inline-flex items-center gap-3 px-6 py-3 md:px-8 md:py-4 bg-white text-slate-950 rounded-full font-semibold text-sm md:text-base hover:bg-cyan-300 transition-all duration-300 ml-2"
+                className="opacity-0 group inline-flex items-center justify-center gap-3 px-5 py-3.5 sm:px-8 sm:py-4 bg-white text-slate-950 rounded-full font-semibold text-sm sm:text-base hover:bg-cyan-300 transition-all duration-300 w-full sm:w-auto shrink-0"
               >
                 <span>Get in Touch</span>
                 <FaArrowRight className="text-sm transition-transform duration-300 group-hover:translate-x-1" />
