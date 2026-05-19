@@ -87,10 +87,9 @@ const Questions = () => {
       id="faq"
       ref={containerRef}
       aria-label="Frequently asked questions"
-      className="section-padding bg-gray-50 dark:bg-zinc-900 relative overflow-hidden"
+      className="section-padding bg-slate-50 dark:bg-[#08080d] relative overflow-hidden"
     >
-      {/* Minimal background accent - Inverted */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-white dark:bg-black -z-10" />
+      <div className="section-sheen absolute inset-0 pointer-events-none" />
 
       <div className="section-container">
         {/* Header */}
@@ -108,7 +107,7 @@ const Questions = () => {
           {questions.map((item, index) => (
             <div
               key={index}
-              className="question-item group border-t border-gray-200 dark:border-gray-800"
+              className="question-item group border-t border-cyan-900/10 dark:border-white/10 transition-colors duration-300"
             >
               <button
                 onClick={() =>
@@ -120,8 +119,8 @@ const Questions = () => {
                 <span
                   className={`text-base md:text-3xl font-black leading-none transition-colors duration-300 min-w-[24px] md:min-w-[48px] ${
                     activeIndex === index
-                      ? "text-purple-500 dark:text-purple-400"
-                      : "text-gray-200 dark:text-gray-800 group-hover:text-purple-500 dark:group-hover:text-purple-400"
+                      ? "text-cyan-500 dark:text-cyan-300"
+                      : "text-slate-200 dark:text-white/10 group-hover:text-cyan-500 dark:group-hover:text-cyan-300"
                   }`}
                 >
                   {String(index + 1).padStart(2, "0")}
@@ -133,8 +132,8 @@ const Questions = () => {
                     <h3
                       className={`text-sm md:text-xl lg:text-2xl font-bold transition-colors duration-300 ${
                         activeIndex === index
-                          ? "text-purple-600 dark:text-purple-400"
-                          : "text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400"
+                          ? "text-cyan-600 dark:text-cyan-300"
+                          : "text-slate-950 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300"
                       }`}
                     >
                       {item.question}
@@ -144,8 +143,8 @@ const Questions = () => {
                     <div
                       className={`w-6 h-6 md:w-10 md:h-10 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-300 ${
                         activeIndex === index
-                          ? "bg-purple-500 dark:bg-purple-400 border-purple-500 dark:border-purple-400 rotate-45"
-                          : "border-gray-200 dark:border-gray-700 group-hover:border-purple-500 dark:group-hover:border-purple-400 group-hover:bg-purple-500 dark:group-hover:bg-purple-400"
+                          ? "bg-cyan-500 dark:bg-cyan-300 border-cyan-500 dark:border-cyan-300 rotate-45 shadow-[0_14px_32px_rgba(14,165,233,0.32)]"
+                          : "border-cyan-900/10 dark:border-white/15 bg-white/70 dark:bg-white/[0.06] group-hover:border-cyan-500 dark:group-hover:border-cyan-300 group-hover:bg-cyan-500 dark:group-hover:bg-cyan-300"
                       }`}
                     >
                       <svg
@@ -176,7 +175,7 @@ const Questions = () => {
                         : "max-h-0 opacity-0"
                     }`}
                   >
-                    <p className="text-gray-600 dark:text-gray-400 text-xs md:text-base leading-relaxed max-w-3xl">
+                    <p className="text-slate-600 dark:text-slate-300 text-xs md:text-base leading-relaxed max-w-3xl">
                       {item.answer}
                     </p>
                   </div>
@@ -188,21 +187,21 @@ const Questions = () => {
 
         {/* Footer CTA */}
         <div className="questions-footer">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pt-8 border-t border-gray-200 dark:border-gray-800">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pt-8 border-t border-cyan-900/10 dark:border-white/10">
             <div>
-              <h3 className="text-lg md:text-2xl font-bold text-gray-900 dark:text-white mb-2">
+              <h3 className="text-lg md:text-2xl font-bold text-slate-950 dark:text-white mb-2">
                 Still have questions?
               </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
+              <p className="text-slate-600 dark:text-slate-300 text-sm md:text-base">
                 Let&apos;s start a conversation.
               </p>
             </div>
             <a
               href="#contact"
-              className="group inline-flex items-center gap-3 text-base md:text-lg font-semibold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300"
+              className="group inline-flex items-center gap-3 text-base md:text-lg font-semibold text-slate-950 dark:text-white hover:text-cyan-600 dark:hover:text-cyan-300 transition-colors duration-300"
             >
               <span>Get in Touch</span>
-              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-current flex items-center justify-center bg-white/70 dark:bg-white/[0.06] shadow-[0_12px_30px_rgba(14,165,233,0.18)] group-hover:bg-cyan-600 dark:group-hover:bg-cyan-300 group-hover:border-cyan-600 dark:group-hover:border-cyan-300 transition-all duration-300">
                 <svg
                   className="w-4 h-4 md:w-5 md:h-5 transition-all duration-300 group-hover:text-white group-hover:translate-x-0.5"
                   fill="none"

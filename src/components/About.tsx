@@ -126,8 +126,9 @@ const About = () => {
     <section
       id="about"
       aria-label="About Aayushman Sharma"
-      className="section-padding bg-gray-50 dark:bg-zinc-900 relative overflow-hidden"
+      className="section-padding bg-slate-50 dark:bg-[#08080d] relative overflow-hidden"
     >
+      <div className="section-sheen absolute inset-0 pointer-events-none" />
       <div className="section-container">
         {/* Header */}
         <SectionHeader
@@ -145,7 +146,7 @@ const About = () => {
         >
           {/* Left: Bio Text */}
           <div className="about-content lg:col-span-7 space-y-4 grid">
-            <p className="text-xl md:text-2xl font-light text-gray-900 dark:text-white leading-relaxed">
+            <p className="text-xl md:text-2xl font-light text-slate-950 dark:text-white leading-relaxed">
               I&apos;m <span className="font-semibold">Aayushman Sharma</span>,
               a Frontend Software Engineer with over{" "}
               <span className="font-semibold">
@@ -154,7 +155,7 @@ const About = () => {
               building modern, scalable web applications.
             </p>
 
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
+            <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
               I specialize in React and Next.js, with strong experience in
               TypeScript, state management, testing, and interactive UI
               development. I’ve worked on government systems, AI-powered
@@ -166,10 +167,10 @@ const About = () => {
             <div className="pt-4 hidden md:block">
               <a
                 href="#contact"
-                className="group inline-flex items-center gap-4 text-lg font-semibold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300"
+                className="group inline-flex items-center gap-4 text-lg font-semibold text-slate-950 dark:text-white hover:text-cyan-600 dark:hover:text-cyan-300 transition-colors duration-300"
               >
                 <span>Let&apos;s work together</span>
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-current flex items-center justify-center bg-white/70 dark:bg-white/10 shadow-[0_10px_28px_rgba(14,165,233,0.16)] group-hover:bg-cyan-600 dark:group-hover:bg-cyan-300 group-hover:border-cyan-600 dark:group-hover:border-cyan-300 transition-all duration-300">
                   <svg
                     className="w-4 h-4 md:w-5 md:h-5 transition-all duration-300 group-hover:text-white group-hover:translate-x-0.5"
                     fill="none"
@@ -194,12 +195,12 @@ const About = () => {
               {stats.map((stat, index) => (
                 <div
                   key={index}
-                  className="about-stat flex-1 min-w-max text-center lg:text-left p-3 xl:p-4 rounded-2xl bg-gray-50 dark:bg-zinc-900/50 border border-gray-100 dark:border-zinc-800"
+                  className="about-stat flex-1 min-w-max text-center lg:text-left p-3 xl:p-4 rounded-2xl bg-white/85 dark:bg-white/[0.06] border border-white/80 dark:border-white/10 shadow-[0_18px_45px_rgba(15,23,42,0.08)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.25)] backdrop-blur-md"
                 >
-                  <span className="text-2xl md:text-3xl xl:text-4xl font-black text-gray-900 dark:text-white block mb-1">
+                  <span className="text-2xl md:text-3xl xl:text-4xl font-black text-gradient-hot block mb-1">
                     {stat.value}
                   </span>
-                  <span className="text-[10px] md:text-[11px] xl:text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide whitespace-nowrap block">
+                  <span className="text-[10px] md:text-[11px] xl:text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap block">
                     {stat.label}
                   </span>
                 </div>
@@ -210,10 +211,10 @@ const About = () => {
           <div className="pt-4 block md:hidden">
             <a
               href="#contact"
-              className="group inline-flex items-center gap-4 text-lg font-semibold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300"
+              className="group inline-flex items-center gap-4 text-lg font-semibold text-slate-950 dark:text-white hover:text-cyan-600 dark:hover:text-cyan-300 transition-colors duration-300"
             >
               <span>Let&apos;s work together</span>
-              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-current flex items-center justify-center bg-white/70 dark:bg-white/10 shadow-[0_10px_28px_rgba(14,165,233,0.16)] group-hover:bg-cyan-600 dark:group-hover:bg-cyan-300 group-hover:border-cyan-600 dark:group-hover:border-cyan-300 transition-all duration-300">
                 <svg
                   className="w-4 h-4 md:w-5 md:h-5 transition-all duration-300 group-hover:text-white group-hover:translate-x-0.5"
                   fill="none"
@@ -235,13 +236,13 @@ const About = () => {
         {/* Skills Section */}
         <div
           ref={aboutSkillsRef}
-          className="skills-section pt-8 border-t border-gray-200 dark:border-gray-800"
+          className="skills-section pt-8 border-t border-cyan-900/10 dark:border-white/10"
         >
           <div className="flex items-center justify-between flex-wrap gap-4 mb-6">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
+            <h3 className="text-2xl md:text-3xl font-bold text-slate-950 dark:text-white">
               Tech Stack
             </h3>
-            <span className="text-sm text-gray-500 dark:text-gray-400">
+            <span className="text-sm text-slate-500 dark:text-slate-400">
               Technologies I work with daily
             </span>
           </div>
@@ -251,12 +252,12 @@ const About = () => {
             {skills.map((skill, index) => (
               <div
                 key={index}
-                className="skill-item group flex items-center gap-2 px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-purple-500 dark:hover:border-purple-400 bg-white dark:bg-zinc-900/50 transition-all duration-300 cursor-default"
+                className="skill-item group flex items-center gap-2 px-3 py-2 rounded-xl border border-white/80 dark:border-white/10 hover:border-cyan-400 dark:hover:border-cyan-300 bg-white/85 dark:bg-white/[0.06] shadow-[0_10px_30px_rgba(15,23,42,0.05)] hover:shadow-[0_18px_44px_rgba(14,165,233,0.18)] transition-all duration-300 cursor-default backdrop-blur-md"
               >
-                <span className="text-gray-400 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300">
+                <span className="text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors duration-300">
                   {skill.icon}
                 </span>
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-300">
+                <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-slate-950 dark:group-hover:text-white transition-colors duration-300">
                   {skill.name}
                 </span>
               </div>

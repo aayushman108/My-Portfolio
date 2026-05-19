@@ -267,7 +267,7 @@ export default function RootLayout({
               __html: `
                 #transition-overlay { display: none !important; }
                 #page-content { opacity: 1 !important; transform: none !important; }
-                .hero-fade, .hero-cta-btn, .hero-globe, .hero-fade-label, .hero-fade-subtitle, .hero-fade-bottom,
+                .hero-cta-btn, .hero-globe, .hero-fade-label, .hero-fade-subtitle, .hero-fade-bottom,
                 .about-content, .about-stat, .skill-item, .contact-content, .contact-link,
                 .questions-header, .question-item, .questions-footer, .cta-content,
                 .section-text-reveal, .section-description, .section-right-element,

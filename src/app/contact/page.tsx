@@ -15,6 +15,7 @@ import {
   FaCheckCircle,
   FaSpinner,
 } from "react-icons/fa";
+import { sendContactEmail } from "./actions";
 
 const ContactPage = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -26,6 +27,7 @@ const ContactPage = () => {
   });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [serverError, setServerError] = useState<string | null>(null);
 
   useGSAP(
     () => {
@@ -121,17 +123,26 @@ const ContactPage = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
 
     setStatus("sending");
+    setServerError(null);
 
-    // Simulate sending message
-    setTimeout(() => {
-      setStatus("success");
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    }, 2000);
+    try {
+      const response = await sendContactEmail(formData);
+      if (response.success) {
+        setStatus("success");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setStatus("error");
+        setServerError(response.error || "Failed to send message. Please try again.");
+      }
+    } catch {
+      setStatus("error");
+      setServerError("An unexpected network error occurred. Please try again.");
+    }
   };
 
   const socialLinks = [
@@ -139,120 +150,223 @@ const ContactPage = () => {
       icon: <FaGithub size={20} />,
       label: "GitHub",
       href: "https://github.com/aayushman108",
-      color: "hover:text-black dark:hover:text-white hover:border-black dark:hover:border-white hover:bg-black/5 dark:hover:bg-white/5",
+      color: "hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10",
     },
     {
       icon: <FaLinkedin size={20} />,
       label: "LinkedIn",
       href: "https://www.linkedin.com/in/aayushman-sharma-a8abbb277/",
-      color: "hover:text-blue-600 hover:border-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950/20",
+      color: "hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950/20",
     },
     {
       icon: <FaTwitter size={20} />,
       label: "Twitter",
       href: "#",
-      color: "hover:text-sky-500 hover:border-sky-500 hover:bg-sky-50 dark:hover:bg-sky-950/20",
+      color: "hover:text-sky-500 hover:bg-sky-50 dark:hover:bg-sky-950/20",
     },
   ];
 
   return (
     <main
       ref={containerRef}
-      className="min-h-screen bg-white dark:bg-black relative overflow-hidden"
+      className="min-h-screen bg-[#fbfcff] dark:bg-[#050509] relative overflow-hidden"
     >
-      {/* Minimal background accent */}
-      <div className="absolute top-0 left-0 w-1/3 h-full bg-gray-50 dark:bg-zinc-900/30 -z-10" />
+      <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(14,165,233,0.08),transparent_30%),linear-gradient(300deg,rgba(244,63,94,0.08),transparent_34%)] dark:bg-[linear-gradient(120deg,rgba(34,211,238,0.1),transparent_30%),linear-gradient(300deg,rgba(251,113,133,0.1),transparent_34%)] pointer-events-none" />
 
       <div className="section-container px-4 sm:px-6 pt-32 pb-20">
         {/* Page Header */}
-        <div className="page-header mb-16 md:mb-20">
-          {/* Back Link */}
+        <section className="page-header pb-6 md:pb-8 mb-8 md:mb-10 border-b border-cyan-900/10 dark:border-white/10">
           <div className="back-link-reveal opacity-0 -translate-x-4 mb-8">
             <Link
               href="/"
-              className="group inline-flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+              className="group inline-flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-300 transition-colors"
             >
-              <div className="w-10 h-10 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">
+              <div className="w-10 h-10 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-cyan-600 dark:group-hover:bg-cyan-300 group-hover:border-cyan-600 dark:group-hover:border-cyan-300 transition-all duration-300">
                 <FaArrowLeft className="text-sm group-hover:text-white transition-colors" />
               </div>
               <span className="font-medium">Back to Home</span>
             </Link>
           </div>
 
-          {/* Title */}
-          <div className="flex items-end justify-between flex-wrap gap-8">
-            <div>
-              <div
-                style={{
-                  clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
-                }}
-                className="mb-4"
-              >
-                <span className="contact-sublabel opacity-0 translate-y-10 text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400 block">
-                  Contact
-                </span>
+          <div className="pt-8 md:pt-10">
+            <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-end">
+              <div className="lg:col-span-7">
+                <div
+                  style={{
+                    clipPath:
+                      "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+                  }}
+                  className="mb-6"
+                >
+                  <span className="contact-sublabel opacity-0 translate-y-10 inline-flex items-center gap-3 text-sm font-bold tracking-widest uppercase text-cyan-700 dark:text-cyan-300">
+                    <span className="h-px w-10 bg-linear-to-r from-cyan-500 via-violet-500 to-rose-500" />
+                    Contact
+                  </span>
+                </div>
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-slate-950 dark:text-white leading-[1.02] tracking-tight">
+                  <div
+                    style={{
+                      clipPath:
+                        "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+                    }}
+                  >
+                    <span className="header-text-reveal opacity-0 translate-y-20 block">
+                      Start
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      clipPath:
+                        "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+                    }}
+                  >
+                    <span className="header-text-reveal opacity-0 translate-y-20 text-gradient-hot block">
+                      a conversation.
+                    </span>
+                  </div>
+                </h1>
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white leading-[1.1] tracking-tight">
-                <div
-                  style={{
-                    clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
-                  }}
-                >
-                  <span className="header-text-reveal opacity-0 translate-y-20 block">
-                    Let&apos;s build
-                  </span>
-                </div>
-                <div
-                  style={{
-                    clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
-                  }}
-                >
-                  <span className="header-text-reveal opacity-0 translate-y-20 text-gray-400 dark:text-gray-600 block">
-                    together.
-                  </span>
-                </div>
-              </h1>
+
+              <div className="lg:col-span-5">
+                <p className="header-text-reveal opacity-0 translate-y-20 text-base md:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Tell me what you are building, where the product is stuck, or
+                  what kind of frontend help you need. I read every message and
+                  reply with clear next steps.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* Main Columns Grid */}
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
-          {/* Left Column: Form Card */}
-          <div className="lg:col-span-7 contact-form-card opacity-0">
-            <div className="p-6 sm:p-10 rounded-3xl border border-gray-200/80 dark:border-gray-800/80 bg-white/70 dark:bg-zinc-900/40 backdrop-blur-xl shadow-lg relative overflow-hidden">
+        {/* Direct Contact Strip */}
+        <section className="pb-6 md:pb-8 mb-8 md:mb-10 border-b border-cyan-900/10 dark:border-white/10">
+          <div className="grid md:grid-cols-3">
+            <a
+              href="mailto:dev.aayushmansharma@gmail.com"
+              className="contact-info-card opacity-0 group py-5 md:py-6 md:pr-6"
+            >
+              <div className="flex items-center gap-3 text-cyan-600 dark:text-cyan-300 mb-3">
+                <FaEnvelope size={18} />
+                <span className="text-xs font-bold tracking-widest uppercase text-slate-500 dark:text-slate-400">
+                  Email
+                </span>
+              </div>
+              <span className="text-sm md:text-base font-bold text-slate-950 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors break-all">
+                dev.aayushmansharma@gmail.com
+              </span>
+            </a>
+
+            <a
+              href="tel:+9779810478691"
+              className="contact-info-card opacity-0 group py-5 md:py-6 md:px-6"
+            >
+              <div className="flex items-center gap-3 text-emerald-600 dark:text-emerald-300 mb-3">
+                <FaPhoneAlt size={16} />
+                <span className="text-xs font-bold tracking-widest uppercase text-slate-500 dark:text-slate-400">
+                  Phone
+                </span>
+              </div>
+              <span className="text-sm md:text-base font-bold text-slate-950 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-300 transition-colors">
+                +977 9810478691
+              </span>
+            </a>
+
+            <div className="contact-info-card opacity-0 py-5 md:py-6 md:pl-6">
+              <div className="flex items-center gap-3 text-rose-600 dark:text-rose-300 mb-3">
+                <FaMapMarkerAlt size={16} />
+                <span className="text-xs font-bold tracking-widest uppercase text-slate-500 dark:text-slate-400">
+                  Location
+                </span>
+              </div>
+              <span className="text-sm md:text-base font-bold text-slate-950 dark:text-white">
+                Kathmandu, Nepal
+              </span>
+              <span className="block text-sm text-slate-500 dark:text-slate-400">
+                Open to global, local & remote options
+              </span>
+            </div>
+          </div>
+        </section>
+
+        {/* Main Work Brief */}
+        <section className="contact-form-card opacity-0 grid lg:grid-cols-2 gap-10 lg:gap-16">
+          <aside className="lg:pr-12">
+            <span className="text-sm font-bold tracking-widest uppercase text-cyan-700 dark:text-cyan-300">
+              Project Brief
+            </span>
+            <h2 className="mt-4 text-3xl md:text-5xl font-black text-slate-950 dark:text-white leading-tight tracking-tight">
+              Send context. I&apos;ll reply with a clear path forward.
+            </h2>
+            <p className="mt-6 max-w-xl text-base md:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+              Scope, timeline, budget range, and main problem are enough. Keep
+              it short if project is still early.
+            </p>
+
+            <div className="mt-10 border-y border-cyan-900/10 dark:border-white/10 py-8">
+              <p className="max-w-xl text-lg md:text-xl font-medium leading-relaxed text-slate-800 dark:text-slate-200">
+                Share a short note about your idea, product, or team. I&apos;m
+                open to new builds, frontend improvements, collaboration, and
+                technical conversations.
+              </p>
+              <p className="mt-5 max-w-xl text-slate-600 dark:text-slate-300 leading-relaxed">
+                No need to over-prepare. A few lines are enough to start.
+              </p>
+            </div>
+
+            <div className="mt-10">
+              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-300">
+                <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_16px_rgba(52,211,153,0.9)]" />
+                Available for freelance & remote
+              </div>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {socialLinks.map((link, index) => (
+                  <a
+                    key={index}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`inline-flex items-center gap-2 rounded-full border border-cyan-900/10 dark:border-white/10 bg-white/60 dark:bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-slate-600 dark:text-slate-300 transition-colors duration-300 ${link.color}`}
+                  >
+                    {link.icon}
+                    <span>{link.label}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </aside>
+
+          <div className="lg:pl-2">
               {status === "success" ? (
-                <div className="py-12 px-4 text-center flex flex-col items-center justify-center space-y-6">
-                  <FaCheckCircle className="text-6xl text-green-500 animate-bounce" />
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                    Message Sent Successfully!
+                <div className="py-16 text-center flex flex-col items-center justify-center space-y-6">
+                  <FaCheckCircle className="text-6xl text-emerald-500" />
+                  <h3 className="text-2xl font-bold text-slate-950 dark:text-white">
+                    Message sent.
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-400 max-w-sm leading-relaxed text-sm">
+                  <p className="text-slate-600 dark:text-slate-300 max-w-sm leading-relaxed text-sm">
                     Thank you for reaching out. Aayushman will review your message and get back to you shortly.
                   </p>
                   <button
                     onClick={() => setStatus("idle")}
-                    className="px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-gray-150 dark:bg-zinc-800 text-gray-700 dark:text-gray-300 hover:bg-purple-600 dark:hover:bg-purple-500 hover:text-white dark:hover:text-white transition-all cursor-pointer"
+                    className="px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-950 dark:bg-white text-white dark:text-black hover:bg-cyan-600 dark:hover:bg-cyan-300 transition-all cursor-pointer"
                   >
                     Send Another Message
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <h3 className="text-xl font-black text-gray-900 dark:text-white mb-2">
-                      Send a Message
-                    </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
-                      Fill out the form below and I will reply as soon as possible.
-                    </p>
-                  </div>
+                <form onSubmit={handleSubmit} className="space-y-7">
+                  {status === "error" && serverError && (
+                    <div className="p-4 rounded-2xl border border-red-500/20 bg-red-500/10 text-red-600 dark:text-red-400 text-sm font-semibold flex items-center gap-2.5">
+                      <span className="shrink-0">!</span>
+                      <span>{serverError}</span>
+                    </div>
+                  )}
 
-                  {/* Name field */}
-                  <div className="space-y-2">
+                  <div className="grid md:grid-cols-2 gap-5">
+                    {/* Name field */}
+                    <div className="space-y-2">
                     <label
                       htmlFor="name"
-                      className="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400"
+                      className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
                     >
                       Your Name
                     </label>
@@ -263,24 +377,24 @@ const ContactPage = () => {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="e.g. John Doe"
-                      className={`w-full px-5 py-4 bg-gray-50/50 dark:bg-zinc-900/30 border ${
+                      className={`w-full px-5 py-4 bg-white/80 dark:bg-white/[0.04] border ${
                         errors.name
                           ? "border-red-500/80 focus:border-red-500 focus:ring-red-500/10"
-                          : "border-gray-200 dark:border-gray-800/80 hover:border-purple-300 dark:hover:border-purple-800/60 focus:border-purple-500 dark:focus:border-purple-400 focus:ring-4 focus:ring-purple-500/5 dark:focus:ring-purple-400/5"
-                      } rounded-2xl text-gray-950 dark:text-white text-sm focus:outline-none transition-all duration-300 placeholder:text-gray-350 dark:placeholder:text-gray-650`}
+                          : "border-cyan-900/10 dark:border-white/10 hover:border-cyan-300 dark:hover:border-cyan-300/50 focus:border-cyan-500 dark:focus:border-cyan-300 focus:ring-4 focus:ring-cyan-500/10"
+                      } rounded-2xl text-slate-950 dark:text-white text-sm focus:outline-none transition-all duration-300 placeholder:text-slate-400 dark:placeholder:text-slate-600`}
                     />
                     {errors.name && (
                       <span className="text-xs text-red-500 mt-1 block font-medium">
                         {errors.name}
                       </span>
                     )}
-                  </div>
+                    </div>
 
-                  {/* Email field */}
-                  <div className="space-y-2">
+                    {/* Email field */}
+                    <div className="space-y-2">
                     <label
                       htmlFor="email"
-                      className="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400"
+                      className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
                     >
                       Your Email
                     </label>
@@ -291,24 +405,25 @@ const ContactPage = () => {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="e.g. john@example.com"
-                      className={`w-full px-5 py-4 bg-gray-50/50 dark:bg-zinc-900/30 border ${
+                      className={`w-full px-5 py-4 bg-white/80 dark:bg-white/[0.04] border ${
                         errors.email
                           ? "border-red-500/80 focus:border-red-500 focus:ring-red-500/10"
-                          : "border-gray-200 dark:border-gray-800/80 hover:border-purple-300 dark:hover:border-purple-800/60 focus:border-purple-500 dark:focus:border-purple-400 focus:ring-4 focus:ring-purple-500/5 dark:focus:ring-purple-400/5"
-                      } rounded-2xl text-gray-955 dark:text-white text-sm focus:outline-none transition-all duration-300 placeholder:text-gray-355 dark:placeholder:text-gray-655`}
+                          : "border-cyan-900/10 dark:border-white/10 hover:border-cyan-300 dark:hover:border-cyan-300/50 focus:border-cyan-500 dark:focus:border-cyan-300 focus:ring-4 focus:ring-cyan-500/10"
+                      } rounded-2xl text-slate-950 dark:text-white text-sm focus:outline-none transition-all duration-300 placeholder:text-slate-400 dark:placeholder:text-slate-600`}
                     />
                     {errors.email && (
                       <span className="text-xs text-red-500 mt-1 block font-medium">
                         {errors.email}
                       </span>
                     )}
+                    </div>
                   </div>
 
                   {/* Subject field */}
                   <div className="space-y-2">
                     <label
                       htmlFor="subject"
-                      className="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400"
+                      className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
                     >
                       Subject
                     </label>
@@ -319,11 +434,11 @@ const ContactPage = () => {
                       value={formData.subject}
                       onChange={handleChange}
                       placeholder="e.g. Project Collaboration"
-                      className={`w-full px-5 py-4 bg-gray-50/50 dark:bg-zinc-900/30 border ${
+                      className={`w-full px-5 py-4 bg-white/80 dark:bg-white/[0.04] border ${
                         errors.subject
                           ? "border-red-500/80 focus:border-red-500 focus:ring-red-500/10"
-                          : "border-gray-200 dark:border-gray-800/80 hover:border-purple-300 dark:hover:border-purple-800/60 focus:border-purple-500 dark:focus:border-purple-400 focus:ring-4 focus:ring-purple-500/5 dark:focus:ring-purple-400/5"
-                      } rounded-2xl text-gray-955 dark:text-white text-sm focus:outline-none transition-all duration-300 placeholder:text-gray-355 dark:placeholder:text-gray-655`}
+                          : "border-cyan-900/10 dark:border-white/10 hover:border-cyan-300 dark:hover:border-cyan-300/50 focus:border-cyan-500 dark:focus:border-cyan-300 focus:ring-4 focus:ring-cyan-500/10"
+                      } rounded-2xl text-slate-950 dark:text-white text-sm focus:outline-none transition-all duration-300 placeholder:text-slate-400 dark:placeholder:text-slate-600`}
                     />
                     {errors.subject && (
                       <span className="text-xs text-red-500 mt-1 block font-medium">
@@ -336,7 +451,7 @@ const ContactPage = () => {
                   <div className="space-y-2">
                     <label
                       htmlFor="message"
-                      className="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400"
+                      className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
                     >
                       Message
                     </label>
@@ -347,11 +462,11 @@ const ContactPage = () => {
                       value={formData.message}
                       onChange={handleChange}
                       placeholder="Tell me about your project, goals, and timeline..."
-                      className={`w-full px-5 py-4 bg-gray-50/50 dark:bg-zinc-900/30 border ${
+                      className={`w-full px-5 py-4 bg-white/80 dark:bg-white/[0.04] border ${
                         errors.message
                           ? "border-red-500/80 focus:border-red-500 focus:ring-red-500/10"
-                          : "border-gray-200 dark:border-gray-800/80 hover:border-purple-300 dark:hover:border-purple-800/60 focus:border-purple-500 dark:focus:border-purple-400 focus:ring-4 focus:ring-purple-500/5 dark:focus:ring-purple-400/5"
-                      } rounded-2xl text-gray-955 dark:text-white text-sm focus:outline-none transition-all duration-300 resize-none placeholder:text-gray-355 dark:placeholder:text-gray-655`}
+                          : "border-cyan-900/10 dark:border-white/10 hover:border-cyan-300 dark:hover:border-cyan-300/50 focus:border-cyan-500 dark:focus:border-cyan-300 focus:ring-4 focus:ring-cyan-500/10"
+                      } rounded-2xl text-slate-950 dark:text-white text-sm focus:outline-none transition-all duration-300 resize-none placeholder:text-slate-400 dark:placeholder:text-slate-600`}
                     />
                     {errors.message && (
                       <span className="text-xs text-red-500 mt-1 block font-medium">
@@ -364,7 +479,7 @@ const ContactPage = () => {
                   <button
                     type="submit"
                     disabled={status === "sending"}
-                    className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-black rounded-2xl font-bold hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 hover:text-white dark:hover:text-white hover:shadow-[0_8px_30px_rgba(168,85,247,0.25)] transition-all duration-300 disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer"
+                    className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-slate-950 dark:bg-white text-white dark:text-black rounded-2xl font-bold hover:bg-cyan-600 dark:hover:bg-cyan-300 hover:shadow-[0_18px_45px_rgba(14,165,233,0.24)] transition-all duration-300 disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer"
                   >
                     {status === "sending" ? (
                       <>
@@ -378,91 +493,7 @@ const ContactPage = () => {
                 </form>
               )}
             </div>
-          </div>
-
-          {/* Right Column: Direct Info Cards */}
-          <div className="lg:col-span-5 flex flex-col space-y-6">
-            <div className="space-y-6">
-              {/* Direct Info list */}
-              <div className="contact-info-card opacity-0 grid sm:grid-cols-2 lg:grid-cols-1 gap-4">
-                <a
-                  href="mailto:dev.aayushmansharma@gmail.com"
-                  className="group flex items-start gap-4 p-5 rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-zinc-900/50 hover:border-purple-300 dark:hover:border-purple-700 transition-colors"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/20 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0">
-                    <FaEnvelope size={16} />
-                  </div>
-                  <div>
-                    <span className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 block mb-1">
-                      Email Me
-                    </span>
-                    <span className="text-sm font-bold text-gray-950 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors break-all">
-                      dev.aayushmansharma@gmail.com
-                    </span>
-                  </div>
-                </a>
-
-                <a
-                  href="tel:+9779810478691"
-                  className="group flex items-start gap-4 p-5 rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-zinc-900/50 hover:border-purple-300 dark:hover:border-purple-700 transition-colors"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-green-50 dark:bg-green-950/20 text-green-600 dark:text-green-400 flex items-center justify-center shrink-0">
-                    <FaPhoneAlt size={16} />
-                  </div>
-                  <div>
-                    <span className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 block mb-1">
-                      Call Me
-                    </span>
-                    <span className="text-sm font-bold text-gray-950 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-                      +977 9810478691
-                    </span>
-                  </div>
-                </a>
-              </div>
-
-              {/* Location Card */}
-              <div className="contact-info-card opacity-0 p-5 rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-zinc-900/50">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/20 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
-                    <FaMapMarkerAlt size={16} />
-                  </div>
-                  <div>
-                    <span className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 block mb-1">
-                      Current Location
-                    </span>
-                    <span className="text-sm font-bold text-gray-950 dark:text-white">
-                      Kathmandu, Nepal
-                    </span>
-                    <span className="text-xs text-gray-500 dark:text-gray-400 block mt-1 font-medium">
-                      Open to global, local & remote options
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Social Channels */}
-              <div className="contact-info-card opacity-0">
-                <span className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 block mb-4">
-                  Social Channels
-                </span>
-                <div className="flex items-center gap-3">
-                  {socialLinks.map((link, index) => (
-                    <a
-                      key={index}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`flex-1 flex items-center justify-center gap-2.5 py-3.5 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-zinc-900/50 text-gray-600 dark:text-gray-400 font-bold text-sm transition-all duration-300 ${link.color}`}
-                    >
-                      {link.icon}
-                      <span>{link.label}</span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        </section>
       </div>
     </main>
   );

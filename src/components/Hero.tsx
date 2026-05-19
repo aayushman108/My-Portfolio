@@ -13,7 +13,6 @@ const Hero = () => {
     () => {
       const tl = gsap.timeline({ paused: true });
 
-      gsap.set(".hero-fade", { opacity: 0, y: 30 });
       gsap.set(".hero-cta-btn", { opacity: 0, y: 20 });
       gsap.set(".hero-globe", { opacity: 0, scale: 0.8 });
 
@@ -61,17 +60,16 @@ const Hero = () => {
         "-=0.8",
       );
 
-      // 4. OTA Buttons Stagger
+      // 4. OTA Buttons (Synchronous with Subtitle)
       tl.to(
         ".hero-cta-btn",
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "power4.inOut",
+          duration: 1,
+          ease: "power3.out",
         },
-        "-=0.6",
+        "-=0.8",
       );
 
       // 5. Bottom Info Bar Fade In
@@ -114,16 +112,19 @@ const Hero = () => {
       id="home"
       ref={heroRef}
       aria-label="Introduction"
-      className="min-h-screen flex flex-col justify-center relative overflow-hidden bg-white dark:bg-black px-6"
+      className="min-h-screen flex flex-col justify-center relative overflow-hidden bg-[#fbfcff] dark:bg-[#050509] px-6"
     >
-      {/* Minimal background accent */}
-      <div className="absolute top-0 left-0 w-1/3 h-full bg-gray-50 dark:bg-zinc-900/30 -z-10" />
+      {/* Layered prism background */}
+      <div className="hero-prism absolute inset-0 opacity-90 dark:opacity-80" />
+      <div className="hero-beam absolute inset-y-0 left-1/4 w-1/3 bg-white/35 dark:bg-white/10 blur-3xl pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_45%,transparent_0,transparent_22%,rgba(251,252,255,0.72)_48%,#fbfcff_78%)] dark:bg-[radial-gradient(circle_at_72%_45%,transparent_0,transparent_24%,rgba(5,5,9,0.72)_50%,#050509_78%)]" />
 
       {/* Subtle grid pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[64px_64px] pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#0ea5e926_1px,transparent_1px),linear-gradient(to_bottom,#f43f5e1f_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#22d3ee1f_1px,transparent_1px),linear-gradient(to_bottom,#fb71851f_1px,transparent_1px)] bg-size-[64px_64px] pointer-events-none" />
+
 
       {/* 3D Globe - Positioned on the right */}
-      <div className="hero-globe absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] lg:w-[600px] lg:h-[600px] xl:w-[700px] xl:h-[700px] opacity-0 pointer-events-auto hidden md:block">
+      <div className="hero-globe absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] lg:w-[600px] lg:h-[600px] xl:w-[700px] xl:h-[700px] opacity-0 pointer-events-auto hidden md:block drop-shadow-[0_35px_90px_rgba(14,165,233,0.38)] dark:drop-shadow-[0_35px_110px_rgba(167,139,250,0.32)]">
         <Globe className="w-full h-full" />
       </div>
 
@@ -132,7 +133,7 @@ const Hero = () => {
         <div className="max-w-5xl relative z-10">
           {/* Label */}
           <div className="hero-fade-label opacity-0 translate-y-5 mb-8">
-            <span className="text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">
+            <span className="inline-flex rounded-full border border-cyan-400/30 bg-white/70 px-4 py-2 text-sm font-bold tracking-widest uppercase text-slate-700 shadow-[0_12px_35px_rgba(14,165,233,0.16)] backdrop-blur-md dark:border-cyan-300/20 dark:bg-white/10 dark:text-cyan-50">
               Frontend Software Engineer & React Expert
             </span>
           </div>
@@ -146,7 +147,7 @@ const Hero = () => {
                 clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
               }}
             >
-              <span className=" hero-text-reveal translate-y-30 block text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-gray-900 dark:text-white leading-[0.9] tracking-tight">
+              <span className=" hero-text-reveal translate-y-30 block text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-slate-950 dark:text-white leading-[0.9] tracking-tight drop-shadow-[0_12px_42px_rgba(15,23,42,0.14)]">
                 Hi, I&apos;m
               </span>
             </div>
@@ -158,7 +159,7 @@ const Hero = () => {
                 clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
               }}
             >
-              <span className=" hero-text-reveal translate-y-30 block text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-[1.1] tracking-tight text-gray-400 dark:text-gray-600">
+              <span className=" hero-text-reveal translate-y-30 block text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-[1.1] tracking-tight text-gradient-hot">
                 Aayushman
               </span>
             </div>
@@ -166,13 +167,13 @@ const Hero = () => {
 
           {/* Subtitle */}
           <div className="hero-fade-subtitle opacity-0 translate-y-8 max-w-4xl mb-6 md:mb-12">
-            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 leading-relaxed">
+            <p className="text-xl md:text-2xl text-slate-700 dark:text-slate-300 leading-relaxed">
               Frontend Software Engineer with{" "}
-              <span className="text-gray-900 dark:text-white font-medium">
+              <span className="text-slate-950 dark:text-white font-bold decoration-cyan-400/50 underline underline-offset-4">
                 2+ years of experience
               </span>{" "}
               building scalable and reliable web applications. Specialist in{" "}
-              <span className="text-gray-900 dark:text-white font-medium">
+              <span className="text-slate-950 dark:text-white font-bold decoration-rose-400/50 underline underline-offset-4">
                 React, Next.js, and TypeScript
               </span>
               —focused on delivering production-ready features for international
@@ -184,7 +185,7 @@ const Hero = () => {
           <div className="flex flex-wrap items-center gap-3 md:gap-6">
             <a
               href="#projects"
-              className="hero-cta-btn inline-flex items-center gap-2 md:gap-3 px-6 py-3 md:px-8 md:py-4 bg-gray-900 dark:bg-white text-white dark:text-black rounded-full font-semibold text-sm md:text-base hover:bg-purple-600 dark:hover:bg-purple-400 transition-colors duration-300"
+              className="hero-cta-btn inline-flex items-center gap-2 md:gap-3 px-6 py-3 md:px-8 md:py-4 bg-slate-950 dark:bg-white text-white dark:text-black rounded-full font-semibold text-sm md:text-base shadow-[0_18px_45px_rgba(14,165,233,0.28)] hover:bg-cyan-600 dark:hover:bg-cyan-300 hover:shadow-[0_22px_60px_rgba(14,165,233,0.42)] transition-[background-color,box-shadow] duration-300"
             >
               <span>View My Work</span>
               <svg
@@ -204,10 +205,10 @@ const Hero = () => {
 
             <a
               href="#contact"
-              className="hero-cta-btn group inline-flex items-center gap-3 md:gap-4 text-sm md:text-base font-semibold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300"
+              className="hero-cta-btn group inline-flex items-center gap-3 md:gap-4 text-sm md:text-base font-semibold text-slate-950 dark:text-white hover:text-rose-600 dark:hover:text-rose-300 transition-colors duration-300"
             >
               <span>Get in Touch</span>
-              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-colors duration-300">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-current flex items-center justify-center bg-white/60 dark:bg-white/10 backdrop-blur-md group-hover:bg-rose-600 dark:group-hover:bg-rose-400 group-hover:border-rose-600 dark:group-hover:border-rose-400 transition-colors duration-300">
                 <svg
                   className="w-4 h-4 md:w-5 md:h-5 transition-all duration-300 group-hover:text-white"
                   fill="none"
@@ -232,8 +233,8 @@ const Hero = () => {
             <div className="flex items-end justify-center md:justify-between">
               {/* Availability Status */}
               <div className="hero-fade-bottom opacity-0 translate-y-5 hidden md:flex items-center gap-3">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-sm text-gray-500 dark:text-gray-400">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_16px_rgba(52,211,153,0.9)] animate-pulse" />
+                <span className="text-sm text-slate-600 dark:text-slate-300">
                   Available for freelance work
                 </span>
               </div>
@@ -241,7 +242,7 @@ const Hero = () => {
               {/* Scroll Indicator */}
               <a
                 href="#about"
-                className="hero-fade-bottom opacity-0 translate-y-5 hero-scroll flex flex-col items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                className="hero-fade-bottom opacity-0 translate-y-5 hero-scroll flex flex-col items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-300 transition-colors"
               >
                 <span className="text-[10px] md:text-xs font-medium tracking-widest uppercase">
                   Scroll

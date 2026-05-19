@@ -94,10 +94,9 @@ const Contact = () => {
       id="contact"
       ref={containerRef}
       aria-label="Contact information"
-      className="section-padding bg-white dark:bg-black relative overflow-hidden"
+      className="section-padding bg-[#fbfcff] dark:bg-[#050509] relative overflow-hidden"
     >
-      {/* Minimal background accent */}
-      <div className="absolute top-0 left-0 w-1/3 h-full bg-gray-50 dark:bg-zinc-900/30 -z-10" />
+      <div className="absolute inset-0 bg-[linear-gradient(125deg,rgba(14,165,233,0.08),transparent_30%),linear-gradient(305deg,rgba(244,63,94,0.09),transparent_34%)] dark:bg-[linear-gradient(125deg,rgba(34,211,238,0.1),transparent_30%),linear-gradient(305deg,rgba(251,113,133,0.1),transparent_34%)] pointer-events-none" />
 
       <div className="section-container">
         {/* Header */}
@@ -113,11 +112,11 @@ const Contact = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 mb-20">
           {/* Left: Message */}
           <div className="contact-content space-y-6 md:space-y-8">
-            <p className="text-xl md:text-3xl font-light text-gray-900 dark:text-white leading-relaxed">
+            <p className="text-xl md:text-3xl font-light text-slate-950 dark:text-white leading-relaxed">
               Have a project in mind? I&apos;d love to hear about it.
             </p>
 
-            <p className="text-base md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
+            <p className="text-base md:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
               I&apos;m currently available for freelance work and exciting
               opportunities. Whether you have a question or just want to say hi,
               I&apos;ll try my best to get back to you!
@@ -129,10 +128,10 @@ const Contact = () => {
                 href="mailto:dev.aayushmansharma@gmail.com"
                 className="group inline-flex items-center gap-4 max-w-full"
               >
-                <span className="text-base md:text-2xl font-bold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 underline underline-offset-8 decoration-2 decoration-gray-300 dark:decoration-gray-700 hover:decoration-purple-600 dark:hover:decoration-purple-400 break-all md:break-normal">
+                <span className="text-base md:text-2xl font-bold text-slate-950 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors duration-300 underline underline-offset-8 decoration-2 decoration-cyan-300/60 dark:decoration-cyan-700/60 group-hover:decoration-cyan-600 dark:group-hover:decoration-cyan-300 break-all md:break-normal">
                   dev.aayushmansharma@gmail.com
                 </span>
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-gray-300 dark:border-gray-700 flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-cyan-300 dark:border-cyan-700 flex items-center justify-center group-hover:bg-cyan-600 dark:group-hover:bg-cyan-300 group-hover:border-cyan-600 dark:group-hover:border-cyan-300 transition-all duration-300">
                   <svg
                     className="w-4 h-4 md:w-5 md:h-5 text-gray-400 transition-all duration-300 group-hover:text-white group-hover:rotate-45"
                     fill="none"
@@ -164,7 +163,7 @@ const Contact = () => {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`contact-link group flex items-center justify-between py-6 border-t border-gray-200 dark:border-gray-800 last:border-b transition-colors duration-300 ${link.color}`}
+                  className={`contact-link group flex items-center justify-between py-6 border-t border-cyan-900/10 dark:border-white/10 last:border-b transition-colors duration-300 hover:bg-cyan-50/70 dark:hover:bg-cyan-950/20 ${link.color}`}
                 >
                   <div className="flex items-center gap-4">
                     <span className="text-gray-400 group-hover:text-current transition-colors duration-300">
@@ -197,14 +196,14 @@ const Contact = () => {
         <footer className="contact-content pt-12 border-t border-gray-200 dark:border-gray-800">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div>
-              <p className="text-gray-500 dark:text-gray-400 text-sm">
+              <p className="text-slate-500 dark:text-slate-400 text-sm">
                 © {new Date().getFullYear()} Aayushman Sharma. All rights
                 reserved.
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-sm text-gray-500 dark:text-gray-400">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_16px_rgba(52,211,153,0.9)] animate-pulse" />
+              <span className="text-sm text-slate-500 dark:text-slate-400">
                 Available for freelance work
               </span>
             </div>

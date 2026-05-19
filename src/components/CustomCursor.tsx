@@ -24,14 +24,22 @@ const CustomCursor = () => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  useGSAP(() => {
+  // Handle dynamic document body cursor styles based on hover state
+  useEffect(() => {
     if (isMobile) {
-        document.body.style.cursor = 'auto';
-        return;
+      document.body.style.cursor = "auto";
+      return;
     }
+    
+    document.body.style.cursor = hovered ? "auto" : "none";
+    
+    return () => {
+      document.body.style.cursor = "auto";
+    };
+  }, [hovered, isMobile]);
 
-    // Hide default cursor
-    document.body.style.cursor = 'none';
+  useGSAP(() => {
+    if (isMobile) return;
 
     // Center the cursor elements initially
     gsap.set(cursorRef.current, { xPercent: -50, yPercent: -50 });
@@ -57,30 +65,57 @@ const CustomCursor = () => {
     const handleMouseDown = () => setClicked(true);
     const handleMouseUp = () => setClicked(false);
 
-    const handleLinkHover = () => setHovered(true);
-    const handleLinkLeave = () => setHovered(false);
+    // Deep detection check for clickable elements or those with cursor: pointer
+    const checkClickable = (el: HTMLElement): boolean => {
+      if (!el) return false;
+      const tag = el.tagName;
+      if (tag === "A" || tag === "BUTTON" || tag === "INPUT" || tag === "TEXTAREA") return true;
+      if (el.classList && (el.classList.contains("clickable") || el.classList.contains("cursor-pointer"))) return true;
+      
+      // Check inline style
+      if (el.style && (el.style.cursor === "pointer" || el.style.cursor === "default")) return true;
+      
+      // Check computed style
+      try {
+        const computed = window.getComputedStyle(el).cursor;
+        if (computed === "pointer") return true;
+      } catch (err) {
+        // Safe fallback
+      }
+      return false;
+    };
+
+    const handleMouseOver = (e: MouseEvent) => {
+      let current = e.target as HTMLElement | null;
+      let isClickable = false;
+      
+      while (current && current !== document.documentElement) {
+        if (checkClickable(current)) {
+          isClickable = true;
+          break;
+        }
+        current = current.parentElement;
+      }
+      
+      setHovered(isClickable);
+    };
+
+    const handleMouseLeaveWindow = () => {
+      setHovered(false);
+    };
 
     window.addEventListener("mousemove", moveCursor);
     window.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mouseup", handleMouseUp);
-
-    const addHoverListeners = () => {
-        document.querySelectorAll("a, button, input, textarea, .clickable").forEach((el) => {
-            el.addEventListener("mouseenter", handleLinkHover);
-            el.addEventListener("mouseleave", handleLinkLeave);
-        });
-    };
-    addHoverListeners();
-
-    const observer = new MutationObserver(addHoverListeners);
-    observer.observe(document.body, { childList: true, subtree: true });
+    window.addEventListener("mouseover", handleMouseOver);
+    document.addEventListener("mouseleave", handleMouseLeaveWindow);
 
     return () => {
-      document.body.style.cursor = 'auto';
       window.removeEventListener("mousemove", moveCursor);
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
-      observer.disconnect();
+      window.removeEventListener("mouseover", handleMouseOver);
+      document.removeEventListener("mouseleave", handleMouseLeaveWindow);
     };
   }, [isMobile]);
 
@@ -91,9 +126,10 @@ const CustomCursor = () => {
       {/* Center Dot / Spotlight Lens */}
       <div
         ref={cursorRef}
-        className={`fixed top-0 left-0 pointer-events-none z-9999 mix-blend-difference -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-out rounded-full bg-white
+        style={{ zIndex: 100000 }}
+        className={`fixed top-0 left-0 pointer-events-none mix-blend-difference -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-out rounded-full bg-white
             ${hovered 
-                ? "w-20 h-20 opacity-100 mix-blend-difference" // Large spotlight on hover
+                ? "w-0 h-0 opacity-0" // Hide completely on hover to allow browser pointer to show
                 : "w-2 h-2 opacity-100" // Small dot normally
             }
             ${clicked ? "scale-90" : "scale-100"}
@@ -103,7 +139,8 @@ const CustomCursor = () => {
       {/* Rotating Text Ring - Follows Smoothly */}
       <div
         ref={followerRef}
-        className={`fixed top-0 left-0 pointer-events-none z-9998 mix-blend-difference -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ease-out
+        style={{ zIndex: 99999 }}
+        className={`fixed top-0 left-0 pointer-events-none mix-blend-difference -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ease-out
             ${hovered ? "scale-150 opacity-0" : "scale-100 opacity-100"} 
         `}
       >

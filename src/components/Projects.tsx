@@ -40,10 +40,9 @@ const Projects = () => {
     <section
       id="projects"
       aria-label="Featured projects"
-      className="section-padding bg-white dark:bg-black relative overflow-hidden"
+      className="section-padding bg-[#fbfcff] dark:bg-[#050509] relative overflow-hidden"
     >
-      {/* Minimal background accent */}
-      <div className="absolute top-0 left-0 w-1/3 h-full bg-gray-50 dark:bg-zinc-900/30 -z-10" />
+      <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(14,165,233,0.08),transparent_32%),linear-gradient(300deg,rgba(245,158,11,0.08),transparent_34%)] dark:bg-[linear-gradient(120deg,rgba(34,211,238,0.1),transparent_32%),linear-gradient(300deg,rgba(251,191,36,0.08),transparent_34%)] pointer-events-none" />
 
       <div className="section-container">
         {/* Section Header - Awwwards Style */}
@@ -55,10 +54,10 @@ const Projects = () => {
           rightElement={
             <Link
               href="/projects"
-              className="group inline-flex items-center gap-4 text-lg font-medium text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 mb-2"
+              className="group inline-flex items-center gap-4 text-lg font-medium text-slate-950 dark:text-white hover:text-cyan-600 dark:hover:text-cyan-300 transition-colors duration-300 mb-2"
             >
               <span>View All</span>
-              <div className="w-10 h-10 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">
+              <div className="w-10 h-10 rounded-full border-2 border-current flex items-center justify-center bg-white/70 dark:bg-white/10 shadow-[0_12px_30px_rgba(14,165,233,0.18)] group-hover:bg-cyan-600 dark:group-hover:bg-cyan-300 group-hover:border-cyan-600 dark:group-hover:border-cyan-300 transition-all duration-300">
                 <FaArrowRight className="text-sm group-hover:text-white transition-colors" />
               </div>
             </Link>
@@ -75,20 +74,20 @@ const Projects = () => {
         {/* Bottom CTA */}
         <div
           ref={ctaRef}
-          className="pt-12 border-t border-gray-200 dark:border-gray-800"
+          className="pt-12 border-t border-cyan-900/10 dark:border-white/10"
         >
           <div className="cta-content flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
             <div>
-              <h3 className="text-xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
+              <h3 className="text-xl md:text-3xl font-bold text-slate-950 dark:text-white mb-2">
                 Want to see more?
               </h3>
-              <p className="text-base md:text-lg text-gray-600 dark:text-gray-400">
+              <p className="text-base md:text-lg text-slate-600 dark:text-slate-300">
                 Explore the complete collection of my work.
               </p>
             </div>
             <Link
               href="/projects"
-              className="group inline-flex items-center gap-3 md:gap-4 px-6 py-3 md:px-8 md:py-4 bg-gray-900 dark:bg-white text-white dark:text-black rounded-full font-semibold text-sm md:text-base hover:bg-purple-600 dark:hover:bg-purple-400 transition-all duration-300"
+              className="group inline-flex items-center gap-3 md:gap-4 px-6 py-3 md:px-8 md:py-4 bg-slate-950 dark:bg-white text-white dark:text-black rounded-full font-semibold text-sm md:text-base shadow-[0_18px_45px_rgba(14,165,233,0.24)] hover:bg-cyan-600 dark:hover:bg-cyan-300 hover:shadow-[0_22px_60px_rgba(14,165,233,0.36)] transition-all duration-300"
             >
               <span>All Projects</span>
               <FaArrowRight className="text-sm md:text-base transition-transform duration-300 group-hover:translate-x-1" />

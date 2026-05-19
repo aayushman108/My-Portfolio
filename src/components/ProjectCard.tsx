@@ -52,7 +52,7 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
     <div
       ref={cardRef}
       key={project.id}
-      className="project-card group block border-t border-gray-200 dark:border-gray-800 relative opacity-0"
+      className="project-card group block border-t border-cyan-900/10 dark:border-white/10 relative opacity-0 transition-colors duration-500 hover:border-cyan-400/50 dark:hover:border-cyan-300/40"
     >
       <Link
         href={project.live}
@@ -64,7 +64,7 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-8 lg:gap-16 items-center">
           {/* Image */}
           <div className="lg:col-span-6">
-            <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-100 dark:bg-zinc-800">
+            <div className="relative aspect-video rounded-xl overflow-hidden bg-slate-100 dark:bg-zinc-800 shadow-[0_24px_70px_rgba(15,23,42,0.12)] dark:shadow-[0_24px_70px_rgba(0,0,0,0.42)] transition-all duration-500 group-hover:shadow-[0_30px_90px_rgba(14,165,233,0.28)]">
               {project.image ? (
                 <Image
                   src={project.image}
@@ -83,7 +83,7 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
               </span>
 
               {/* Year Badge */}
-              <div className="absolute top-4 right-4 px-3 py-1.5 bg-white/90 dark:bg-black/80 backdrop-blur-sm rounded-full text-xs font-bold text-gray-900 dark:text-white z-10">
+              <div className="absolute top-4 right-4 px-3 py-1.5 bg-white/90 dark:bg-black/80 backdrop-blur-sm rounded-full text-xs font-bold text-slate-950 dark:text-white z-10 border border-white/60 dark:border-white/10">
                 {project.year}
               </div>
             </div>
@@ -92,7 +92,7 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
           {/* Content */}
           <div className="lg:col-span-4">
             <div className="flex items-center gap-3 mb-3 flex-wrap">
-              <span className="text-xs font-medium tracking-wider uppercase text-purple-600 dark:text-purple-400">
+              <span className="text-xs font-bold tracking-wider uppercase text-cyan-600 dark:text-cyan-300">
                 {project.type} Project
               </span>
               <span className="w-1 h-1 rounded-full bg-gray-400" />
@@ -119,11 +119,11 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
               </span>
             </div>
 
-            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300 group-hover:text-purple-600 dark:group-hover:text-purple-400">
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-950 dark:text-white mb-4 transition-colors duration-300 group-hover:text-cyan-600 dark:group-hover:text-cyan-300">
               {project.title}
             </h3>
 
-            <p className="text-gray-600 dark:text-gray-400 text-base md:text-lg leading-relaxed mb-6 max-w-xl line-clamp-3">
+            <p className="text-slate-600 dark:text-slate-300 text-base md:text-lg leading-relaxed mb-6 max-w-xl line-clamp-3">
               {project.description}
             </p>
 
@@ -132,7 +132,7 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
               {project.tech.map((t) => (
                 <span
                   key={t}
-                  className="px-3 py-1 text-xs font-medium rounded-full bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-zinc-700"
+                  className="px-3 py-1 text-xs font-medium rounded-full bg-white/80 dark:bg-white/[0.06] text-slate-600 dark:text-slate-300 border border-cyan-900/10 dark:border-white/10 shadow-[0_8px_20px_rgba(15,23,42,0.04)]"
                 >
                   {t}
                 </span>
@@ -144,7 +144,7 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
               <div className="flex items-center gap-3 mt-4 relative z-30">
                 <Link
                   href={project.github}
-                  className="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2 text-sm font-medium rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-gray-900 dark:hover:border-white hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black transition-all duration-300"
+                  className="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2 text-sm font-medium rounded-full border border-slate-300 dark:border-white/20 text-slate-700 dark:text-slate-300 hover:border-slate-950 dark:hover:border-white hover:bg-slate-950 dark:hover:bg-white hover:text-white dark:hover:text-black transition-all duration-300"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -153,7 +153,7 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
                 </Link>
                 <Link
                   href={project.live}
-                  className="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2 text-sm font-medium rounded-full border border-purple-500 dark:border-purple-400 text-purple-600 dark:text-purple-400 hover:bg-purple-600 dark:hover:bg-purple-400 hover:text-white dark:hover:text-black transition-all duration-300"
+                  className="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2 text-sm font-medium rounded-full border border-cyan-500 dark:border-cyan-300 text-cyan-600 dark:text-cyan-300 hover:bg-cyan-600 dark:hover:bg-cyan-300 hover:text-white dark:hover:text-black transition-all duration-300"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -165,7 +165,7 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
                     e.preventDefault();
                     setIsModalOpen(true);
                   }}
-                  className="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2 text-sm font-medium rounded-full border border-emerald-500 dark:border-emerald-400 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-600 dark:hover:bg-emerald-400 hover:text-white dark:hover:text-black transition-all duration-300 cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2 text-sm font-medium rounded-full border border-rose-500 dark:border-rose-300 text-rose-600 dark:text-rose-300 hover:bg-rose-600 dark:hover:bg-rose-300 hover:text-white dark:hover:text-black transition-all duration-300 cursor-pointer"
                 >
                   <FaInfoCircle className="text-base" />
                   <span className="hidden sm:inline">Details</span>
@@ -176,7 +176,7 @@ export function ProjectCardForHomePage({ project }: IProjectCardProps) {
 
           {/* Arrow */}
           <div className="hidden lg:flex col-span-2 items-center justify-end">
-            <div className="w-14 h-14 rounded-full border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center transition-all duration-500 group-hover:border-purple-500 dark:group-hover:border-purple-400 group-hover:bg-purple-500 dark:group-hover:bg-purple-400">
+            <div className="w-14 h-14 rounded-full border-2 border-cyan-900/10 dark:border-white/15 flex items-center justify-center bg-white/70 dark:bg-white/[0.06] transition-all duration-500 group-hover:border-cyan-500 dark:group-hover:border-cyan-300 group-hover:bg-cyan-500 dark:group-hover:bg-cyan-300 group-hover:shadow-[0_18px_42px_rgba(14,165,233,0.35)]">
               <svg
                 className="w-5 h-5 text-gray-400 transition-all duration-500 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1"
                 fill="none"
@@ -214,7 +214,7 @@ export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
       className="project-card group opacity-0"
     >
       {/* Image Container */}
-      <div className="relative aspect-video rounded-2xl overflow-hidden bg-gray-100 dark:bg-zinc-800 mb-6">
+      <div className="relative aspect-video rounded-2xl overflow-hidden bg-white/80 dark:bg-white/[0.04] border border-cyan-900/10 dark:border-white/10 mb-6 transition-all duration-500 group-hover:border-cyan-300 dark:group-hover:border-cyan-300/40 group-hover:shadow-[0_24px_70px_rgba(14,165,233,0.18)]">
         {project.image ? (
           <Image
             src={project.image}
@@ -224,16 +224,20 @@ export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
             className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
         ) : (
-          <div className="w-full h-full bg-linear-to-br from-purple-500/10 to-blue-500/10 dark:from-purple-900/20 dark:to-blue-900/20" />
+          <div className="w-full h-full bg-[linear-gradient(135deg,rgba(14,165,233,0.16),rgba(244,63,94,0.12)),linear-gradient(to_right,rgba(15,23,42,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.05)_1px,transparent_1px)] dark:bg-[linear-gradient(135deg,rgba(34,211,238,0.16),rgba(251,113,133,0.12)),linear-gradient(to_right,rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-size-[auto,40px_40px,40px_40px] flex items-center justify-center">
+            <span className="text-6xl md:text-7xl font-black text-white/80 dark:text-white/20">
+              {String(project.id).padStart(2, "0")}
+            </span>
+          </div>
         )}
 
         {/* Year Badge */}
-        <div className="absolute top-4 right-4 px-3 py-1.5 bg-white/90 dark:bg-black/80 backdrop-blur-sm rounded-full text-xs font-bold text-gray-900 dark:text-white">
+        <div className="absolute top-4 right-4 px-3 py-1.5 bg-white/90 dark:bg-black/80 backdrop-blur-sm rounded-full text-xs font-bold text-slate-950 dark:text-white border border-white/60 dark:border-white/10">
           {project.year}
         </div>
 
         {/* Project Number */}
-        <span className="absolute top-4 left-4 text-5xl font-black text-white/30 leading-none">
+        <span className="absolute top-4 left-4 text-5xl font-black text-white/35 leading-none">
           {String(project.id).padStart(2, "0")}
         </span>
 
@@ -276,10 +280,10 @@ export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
       <div className="space-y-4">
         {/* Meta */}
         <div className="flex items-center gap-3 flex-wrap">
-          <span className="px-2 py-1 rounded-md bg-purple-100 dark:bg-purple-900/30 text-[10px] font-bold tracking-wider uppercase text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-800">
+          <span className="px-2 py-1 rounded-md bg-cyan-50 dark:bg-cyan-950/25 text-[10px] font-bold tracking-wider uppercase text-cyan-700 dark:text-cyan-300 border border-cyan-200/80 dark:border-cyan-700/40">
             {project.type}
           </span>
-          <span className="text-xs font-medium tracking-wider uppercase text-gray-500 dark:text-gray-400">
+          <span className="text-xs font-medium tracking-wider uppercase text-slate-500 dark:text-slate-400">
             {project.category}
           </span>
           <span
@@ -300,12 +304,12 @@ export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
         </div>
 
         {/* Title */}
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300">
+        <h2 className="text-2xl md:text-3xl font-bold text-slate-950 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors duration-300">
           {project.title}
         </h2>
 
         {/* Description */}
-        <p className="text-gray-600 dark:text-gray-400 text-base md:text-lg leading-relaxed line-clamp-3">
+        <p className="text-slate-600 dark:text-slate-300 text-base md:text-lg leading-relaxed line-clamp-3">
           {project.description}
         </p>
 
@@ -314,7 +318,7 @@ export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
           {project.tech.map((t) => (
             <span
               key={t}
-              className="px-3 py-1.5 text-xs font-medium rounded-full border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:border-purple-500 dark:hover:border-purple-400 transition-colors cursor-default"
+              className="px-3 py-1.5 text-xs font-medium rounded-full border border-cyan-900/10 dark:border-white/10 bg-white/60 dark:bg-white/[0.04] text-slate-600 dark:text-slate-300 hover:border-cyan-400 dark:hover:border-cyan-300 transition-colors cursor-default"
             >
               {t}
             </span>
@@ -328,7 +332,7 @@ export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2 text-sm font-medium rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-gray-900 dark:hover:border-white hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black transition-all duration-300"
+              className="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2 text-sm font-medium rounded-full border border-slate-300 dark:border-white/20 text-slate-700 dark:text-slate-300 hover:border-slate-950 dark:hover:border-white hover:bg-slate-950 dark:hover:bg-white hover:text-white dark:hover:text-black transition-all duration-300"
             >
               <FaGithub className="text-base" />
               <span className="hidden sm:inline">Code</span>
@@ -337,7 +341,7 @@ export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2 text-sm font-medium rounded-full border border-purple-500 dark:border-purple-400 text-purple-600 dark:text-purple-400 hover:bg-purple-600 dark:hover:bg-purple-400 hover:text-white dark:hover:text-black transition-all duration-300"
+              className="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2 text-sm font-medium rounded-full border border-cyan-500 dark:border-cyan-300 text-cyan-600 dark:text-cyan-300 hover:bg-cyan-600 dark:hover:bg-cyan-300 hover:text-white dark:hover:text-black transition-all duration-300"
             >
               <FaExternalLinkAlt className="text-xs" />
               <span className="hidden sm:inline">Live Demo</span>
@@ -347,7 +351,7 @@ export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
                 e.preventDefault();
                 setIsModalOpen(true);
               }}
-              className="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2 text-sm font-medium rounded-full border border-emerald-500 dark:border-emerald-400 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-600 dark:hover:bg-emerald-400 hover:text-white dark:hover:text-black transition-all duration-300 cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2 text-sm font-medium rounded-full border border-rose-500 dark:border-rose-300 text-rose-600 dark:text-rose-300 hover:bg-rose-600 dark:hover:bg-rose-300 hover:text-white dark:hover:text-black transition-all duration-300 cursor-pointer"
             >
               <FaInfoCircle className="text-base" />
               <span className="hidden sm:inline">Details</span>

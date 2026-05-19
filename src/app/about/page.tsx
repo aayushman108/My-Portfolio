@@ -269,6 +269,34 @@ const AboutPage = () => {
         "-=0.4"
       );
 
+      gsap.set(".metric-number", { textContent: 0 });
+
+      introTl.fromTo(
+        ".metric-card",
+        { opacity: 0, y: 24 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          stagger: 0.08,
+          ease: "power3.out",
+        },
+        "-=0.25",
+      );
+
+      introTl.to(
+        ".metric-number",
+        {
+          textContent: (_index: number, el: HTMLElement) =>
+            `${el.dataset.value}${el.dataset.suffix}`,
+          duration: 1.0,
+          ease: "power3.out",
+          snap: { textContent: 1 },
+          stagger: 0.08,
+        },
+        "<",
+      );
+
       // 2. ScrollTrigger for Expertise Section Header
       gsap.fromTo(
         ".expertise-header-text-reveal",
@@ -298,24 +326,6 @@ const AboutPage = () => {
           scrollTrigger: {
             trigger: ".expertise-grid",
             start: "top 80%",
-            toggleActions: "play none none none",
-          },
-        },
-      );
-
-      // ScrollTrigger for Numerical Stats Cards
-      gsap.fromTo(
-        ".metric-card",
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.12,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".metrics-grid",
-            start: "top 85%",
             toggleActions: "play none none none",
           },
         },
@@ -402,41 +412,7 @@ const AboutPage = () => {
         );
       });
 
-      // 4. ScrollTrigger for Quick Stats Section Header
-      gsap.fromTo(
-        ".stats-header-text-reveal",
-        { y: "100%" },
-        {
-          y: 0,
-          duration: 1.2,
-          ease: "power4.out",
-          scrollTrigger: {
-            trigger: ".stats-section",
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        },
-      );
-
-      // ScrollTrigger for Quick Stats Cards
-      gsap.fromTo(
-        ".stat-card",
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".stats-grid",
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-        },
-      );
-
-      // 5. ScrollTrigger for Connect CTA Section
+      // 4. ScrollTrigger for Connect CTA Section
       const ctaTl = gsap.timeline({
         scrollTrigger: {
           trigger: ".cta-section",
@@ -477,154 +453,170 @@ const AboutPage = () => {
   return (
     <main
       ref={containerRef}
-      className="min-h-screen bg-white dark:bg-black relative overflow-hidden"
+      className="min-h-screen bg-[#fbfcff] dark:bg-[#050509] relative overflow-hidden"
     >
-      {/* Minimal background accent */}
-      <div className="absolute top-0 left-0 w-1/3 h-full bg-gray-50 dark:bg-zinc-900/30 -z-10" />
+      <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(14,165,233,0.08),transparent_30%),linear-gradient(300deg,rgba(244,63,94,0.08),transparent_34%)] dark:bg-[linear-gradient(120deg,rgba(34,211,238,0.1),transparent_30%),linear-gradient(300deg,rgba(251,113,133,0.1),transparent_34%)] pointer-events-none" />
 
       <div className="section-container px-4 sm:px-6 pt-32 pb-20">
-        {/* Page Header */}
-        <div className="page-header mb-16 md:mb-20">
-          {/* Back Link */}
+        {/* Editorial Hero */}
+        <section className="page-header pb-6 md:pb-8 mb-8 md:mb-10 border-b border-cyan-900/10 dark:border-white/10">
           <div className="back-link-reveal opacity-0 -translate-x-4 mb-8">
             <Link
               href="/"
-              className="group inline-flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+              className="group inline-flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-300 transition-colors"
             >
-              <div className="w-10 h-10 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-purple-600 dark:group-hover:bg-purple-400 group-hover:border-purple-600 dark:group-hover:border-purple-400 transition-all duration-300">
+              <div className="w-10 h-10 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-cyan-600 dark:group-hover:bg-cyan-300 group-hover:border-cyan-600 dark:group-hover:border-cyan-300 transition-all duration-300">
                 <FaArrowLeft className="text-sm group-hover:text-white transition-colors" />
               </div>
               <span className="font-medium">Back to Home</span>
             </Link>
           </div>
 
-          {/* Title with Masked Reveal Animation */}
-          <div className="flex items-end justify-between flex-wrap gap-8">
-            <div>
-              <div
-                style={{
-                  clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
-                }}
-                className="mb-4"
-              >
-                <span className="about-sublabel opacity-0 translate-y-10 text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400 block">
-                  About Me
-                </span>
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white leading-[1.1] tracking-tight">
-                <div
-                  style={{
-                    clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
-                  }}
-                >
-                  <span className="header-text-reveal opacity-0 translate-y-20 block">
-                    Hi, I&apos;m
-                  </span>
-                </div>
-                <div
-                  style={{
-                    clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
-                  }}
-                >
-                  <span className="header-text-reveal opacity-0 translate-y-20 text-gray-400 dark:text-gray-600 block">
-                    Aayushman
-                  </span>
-                </div>
-              </h1>
+          <div className="pt-8 md:pt-10">
+            <div
+              style={{
+                clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+              }}
+              className="mb-6"
+            >
+              <span className="about-sublabel opacity-0 translate-y-10 inline-flex items-center gap-3 text-sm font-bold tracking-widest uppercase text-cyan-700 dark:text-cyan-300">
+                <span className="h-px w-10 bg-linear-to-r from-cyan-500 via-violet-500 to-rose-500" />
+                About Me
+              </span>
             </div>
-          </div>
-        </div>
 
-        {/* Intro */}
-        <div className="mb-16 md:mb-24 max-w-4xl">
-          <div
-            style={{
-              clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
-            }}
-            className="mb-8"
-          >
-            <div className="about-intro-text opacity-0 translate-y-20 space-y-6 text-gray-600 dark:text-gray-400 text-base md:text-lg leading-relaxed font-normal">
-              <p>
-                I bridge the gap between{" "}
-                <span className="font-semibold text-gray-900 dark:text-white">robust engineering</span> and{" "}
-                <span className="font-semibold text-gray-900 dark:text-white">intuitive UI</span>. With 2+ years of professional experience, I specialize in
-                building high-performance, production-ready web applications that
-                turn complex data into seamless user experiences.
-              </p>
-              <p>
-                My approach to development is rooted in precision, clean code, and performance optimization. 
-                Whether architecting complex Next.js architectures, designing fluid layouts, or orchestrating 
-                stunning, interactive GSAP timeline sequences, I strive to build software that not only functions flawlessly 
-                but also provides a delightful and premium feel for the end-user.
-              </p>
-              <p>
-                Beyond my technical expertise, I am highly passionate about keeping up with the latest advancements 
-                in the web ecosystem, continuously refining my craft, and collaborating with cross-functional 
-                teams to deliver top-tier digital products that solve real-world problems.
-              </p>
+            <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-end">
+              <div className="lg:col-span-7">
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-slate-950 dark:text-white leading-[1.02] tracking-tight">
+                  <div
+                    style={{
+                      clipPath:
+                        "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+                    }}
+                  >
+                    <span className="header-text-reveal opacity-0 translate-y-20 block">
+                      Aayushman
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      clipPath:
+                        "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+                    }}
+                  >
+                    <span className="header-text-reveal opacity-0 translate-y-20 text-gradient-hot block">
+                      Sharma
+                    </span>
+                  </div>
+                </h1>
+              </div>
+
+              <div className="lg:col-span-5">
+                <div
+                  style={{
+                    clipPath:
+                      "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+                  }}
+                >
+                  <div className="about-intro-text opacity-0 translate-y-20 space-y-5 text-slate-600 dark:text-slate-300 text-base md:text-lg leading-relaxed font-normal">
+                    <p>
+                      Frontend software engineer building high-performance,
+                      production-ready web applications for complex workflows,
+                      dashboards, and product teams.
+                    </p>
+                    <p>
+                      I care about clean architecture, responsive interaction,
+                      accessible UI, and details that make software feel sharp
+                      and trustworthy.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          
-          <div className="about-intro-badge opacity-0 translate-y-5 inline-flex items-center gap-3 px-5 py-3 rounded-full bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            <span className="text-sm font-medium text-green-700 dark:text-green-400">
-              Open to global & remote opportunities — Based in Kathmandu, Nepal
-            </span>
+        </section>
+
+        {/* Quick Stats Section */}
+        <section className="quick-stats-section pb-6 md:pb-8 mb-8 md:mb-10 border-b border-cyan-900/10 dark:border-white/10">
+          <div className="about-intro-badge opacity-0 translate-y-5 grid sm:grid-cols-2 lg:grid-cols-4">
+            {quickStats.map((stat, index) => (
+              <div
+                key={index}
+                className="py-5 sm:pr-5 sm:[&:nth-child(n+2)]:pl-5"
+              >
+                <div className="flex items-center gap-3 text-cyan-600 dark:text-cyan-300 mb-3">
+                  {stat.icon}
+                  <span className="text-xs font-bold tracking-widest uppercase text-slate-500 dark:text-slate-400">
+                    {stat.label}
+                  </span>
+                </div>
+                <h3 className="text-sm md:text-base font-bold text-slate-950 dark:text-white">
+                  {stat.value}
+                </h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400">
+                  {stat.sub}
+                </p>
+              </div>
+            ))}
           </div>
-        </div>
+        </section>
 
         {/* Key Numerical Metrics */}
-        <div className="mb-16 md:mb-24">
-          <div className="metrics-grid grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <section className="pb-6 md:pb-8 mb-8 md:mb-10 border-b border-cyan-900/10 dark:border-white/10">
+          <div className="metrics-grid grid grid-cols-2 lg:grid-cols-4">
             {numericalStats.map((stat, index) => (
               <div
                 key={index}
-                className="metric-card opacity-0 group p-6 rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-zinc-900/50 hover:border-purple-300 dark:hover:border-purple-700 hover:bg-gray-50/50 dark:hover:bg-zinc-900/80 transition-all duration-300 shadow-sm"
+                className="metric-card opacity-0 group py-6 pr-4 md:py-8 md:pr-8 [&:nth-child(2n)]:pl-4 md:[&:nth-child(2n)]:pl-8 lg:[&:nth-child(n+2)]:pl-8 lg:[&:nth-child(2n)]:pl-8"
               >
-                <div className="text-4xl md:text-5xl font-black text-purple-600 dark:text-purple-400 mb-2 group-hover:scale-105 transition-transform duration-300 origin-left">
+                <div
+                  className="metric-number text-4xl md:text-5xl font-black text-rose-600 dark:text-rose-300 mb-2"
+                  data-value={stat.number.replace(/\D/g, "")}
+                  data-suffix={stat.number.replace(/\d/g, "")}
+                >
                   {stat.number}
                 </div>
-                <h3 className="text-xs font-semibold tracking-wider uppercase text-gray-500 dark:text-gray-400 mb-2">
+                <h3 className="text-xs font-semibold tracking-wider uppercase text-slate-500 dark:text-slate-400 mb-2">
                   {stat.label}
                 </h3>
-                <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 leading-relaxed font-normal">
+                <p className="text-xs md:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
                   {stat.description}
                 </p>
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
         {/* Expertise Section */}
-        <div className="expertise-section mb-16 md:mb-24">
-          <div className="flex items-center gap-3 mb-8 md:mb-12">
+        <div className="expertise-section pb-6 md:pb-8 mb-8 md:mb-10 border-b border-cyan-900/10 dark:border-white/10">
+          <div className="flex items-center gap-3 mb-6 md:mb-8">
             <div
               style={{
                 clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
               }}
             >
-              <span className="expertise-header-text-reveal translate-y-10 block text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">
+              <span className="expertise-header-text-reveal translate-y-10 block text-sm font-bold tracking-widest uppercase text-cyan-700 dark:text-cyan-300">
                 Core Expertise
               </span>
             </div>
-            <div className="flex-1 h-px bg-gray-200 dark:bg-gray-800" />
+            <div className="flex-1 h-px bg-linear-to-r from-cyan-500/50 via-violet-500/30 to-transparent" />
           </div>
 
-          <div className="expertise-grid grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="expertise-grid grid lg:grid-cols-2">
             {expertise.map((item, index) => (
               <div
                 key={index}
-                className="expertise-card opacity-0 group p-6 rounded-2xl border border-gray-200 dark:border-gray-800 hover:border-purple-300 dark:hover:border-purple-700 bg-white dark:bg-zinc-900/50 transition-colors duration-300"
+                className="expertise-card opacity-0 group py-6 lg:py-8 lg:pr-8 lg:even:pl-8"
               >
                 <div className="flex items-start gap-4">
-                  <span className="text-2xl font-black text-gray-200 dark:text-gray-800 group-hover:text-purple-300 dark:group-hover:text-purple-700 transition-colors">
+                  <span className="text-2xl font-black text-slate-300 dark:text-white/15 group-hover:text-cyan-500 dark:group-hover:text-cyan-300 transition-colors">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <div>
-                    <h3 className="text-base md:text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                    <h3 className="text-base md:text-lg font-bold text-slate-950 dark:text-white mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">
                       {item.title}
                     </h3>
-                    <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+                    <p className="text-sm md:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
                       {item.description}
                     </p>
                   </div>
@@ -635,21 +627,21 @@ const AboutPage = () => {
         </div>
 
         {/* Professional Journey / Timeline Section */}
-        <div className="timeline-section mb-16 md:mb-24">
-          <div className="flex items-center gap-3 mb-8 md:mb-12">
+        <div className="timeline-section pb-6 md:pb-8 mb-8 md:mb-10 border-b border-cyan-900/10 dark:border-white/10">
+          <div className="flex items-center gap-3 mb-6 md:mb-8">
             <div
               style={{
                 clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
               }}
             >
-              <span className="timeline-header-text-reveal translate-y-10 block text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">
+              <span className="timeline-header-text-reveal translate-y-10 block text-sm font-bold tracking-widest uppercase text-cyan-700 dark:text-cyan-300">
                 Professional Journey
               </span>
             </div>
-            <div className="flex-1 h-px bg-gray-200 dark:bg-gray-800" />
+            <div className="flex-1 h-px bg-linear-to-r from-cyan-500/50 via-violet-500/30 to-transparent" />
           </div>
 
-          <div className="relative pl-6 sm:pl-8 border-l-2 border-gray-200 dark:border-zinc-800 ml-4 sm:ml-6 space-y-12 timeline-container">
+          <div className="relative pl-6 sm:pl-8 border-l-2 border-cyan-200/80 dark:border-cyan-900/50 ml-4 sm:ml-6 space-y-10 timeline-container">
             {timelineData.map((item, index) => {
               const isExpanded = expandedTimelineItems[index] ?? false;
               return (
@@ -660,9 +652,9 @@ const AboutPage = () => {
                   {/* Timeline node */}
                   <div className={`absolute -left-[39px] sm:-left-[47px] top-1.5 w-8 h-8 rounded-full border-2 ${
                     item.type === "experience"
-                      ? "border-purple-500 text-purple-600 dark:text-purple-400"
-                      : "border-blue-500 text-blue-600 dark:text-blue-400"
-                  } bg-white dark:bg-black flex items-center justify-center shadow-md z-10`}
+                      ? "border-cyan-500 text-cyan-600 dark:text-cyan-300"
+                      : "border-rose-500 text-rose-600 dark:text-rose-300"
+                  } bg-[#fbfcff] dark:bg-[#050509] flex items-center justify-center z-10`}
                   >
                     {item.type === "experience" ? (
                       <FaBriefcase className="text-xs" />
@@ -672,39 +664,39 @@ const AboutPage = () => {
                   </div>
 
                   {/* Content card */}
-                  <div className="group p-6 rounded-2xl border border-gray-200 dark:border-gray-800 hover:border-purple-300 dark:hover:border-purple-700 bg-white dark:bg-zinc-900/50 hover:bg-gray-55/20 dark:hover:bg-zinc-900/80 transition-all duration-300 shadow-sm hover:shadow-md">
+                  <div className="group pb-8 border-b border-cyan-900/10 dark:border-white/10">
                     <div className="flex flex-wrap items-start justify-between gap-4">
                       <div>
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                        <h3 className="text-xl font-bold text-slate-950 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">
                           {item.role}
                         </h3>
                         <div className="flex flex-wrap items-center gap-2 mt-1">
-                          <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                          <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
                             {item.company}
                           </span>
-                          <span className="text-gray-300 dark:text-gray-700 hidden sm:inline">&bull;</span>
-                          <span className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                          <span className="text-slate-300 dark:text-white/20 hidden sm:inline">&bull;</span>
+                          <span className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1">
                             <FaMapMarkerAlt className="text-[10px]" /> {item.location}
                           </span>
                         </div>
                       </div>
 
-                      <span className="inline-flex items-center gap-1.5 text-xs text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-zinc-800 px-3 py-1.5 rounded-full font-semibold border border-gray-200 dark:border-zinc-700">
-                        <FaCalendarAlt size={10} className="text-purple-500" />
+                      <span className="inline-flex items-center gap-1.5 text-xs text-slate-700 dark:text-slate-300 bg-cyan-50/80 dark:bg-cyan-950/25 px-3 py-1.5 rounded-full font-semibold border border-cyan-200/80 dark:border-cyan-700/40">
+                        <FaCalendarAlt size={10} className="text-cyan-500" />
                         {item.period}
                       </span>
                     </div>
 
-                    <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 mt-4 leading-relaxed font-normal">
+                    <p className="text-sm md:text-base text-slate-600 dark:text-slate-300 mt-4 leading-relaxed font-normal">
                       {item.description}
                     </p>
 
                     {/* Expandable Details */}
                     {item.details && item.details.length > 0 && (
-                      <div className="mt-4 pt-4 border-t border-gray-100 dark:border-zinc-800/80">
+                      <div className="mt-4 pt-4 border-t border-cyan-900/10 dark:border-white/10">
                         <button
                           onClick={() => toggleTimelineItem(index)}
-                          className="flex items-center gap-2 text-xs font-semibold text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 transition-colors focus:outline-none cursor-pointer"
+                          className="flex items-center gap-2 text-xs font-semibold text-cyan-600 dark:text-cyan-300 hover:text-cyan-800 dark:hover:text-cyan-200 transition-colors focus:outline-none cursor-pointer"
                         >
                           <span>{isExpanded ? "Hide Details" : "View Key Contributions & Achievements"}</span>
                           {isExpanded ? (
@@ -721,8 +713,8 @@ const AboutPage = () => {
                         >
                           {item.details.map((detail, detailIdx) => (
                             <div key={detailIdx} className="flex items-start gap-3">
-                              <span className="mt-2 w-1.5 h-1.5 rounded-full bg-purple-500 shrink-0" />
-                              <span className="text-xs md:text-sm text-gray-600 dark:text-gray-400 leading-relaxed font-normal font-sans">
+                              <span className="mt-2 w-1.5 h-1.5 rounded-full bg-cyan-500 shrink-0" />
+                              <span className="text-xs md:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal font-sans">
                                 {detail}
                               </span>
                             </div>
@@ -738,37 +730,40 @@ const AboutPage = () => {
         </div>
 
         {/* Tech Stack Section */}
-        <div className="tech-section mb-16 md:mb-24">
-          <div className="flex items-center gap-3 mb-8 md:mb-12">
+        <div className="tech-section pb-6 md:pb-8 mb-8 md:mb-10 border-b border-cyan-900/10 dark:border-white/10">
+          <div className="flex items-center gap-3 mb-6 md:mb-8">
             <div
               style={{
                 clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
               }}
             >
-              <span className="tech-header-text-reveal translate-y-10 block text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">
+              <span className="tech-header-text-reveal translate-y-10 block text-sm font-bold tracking-widest uppercase text-cyan-700 dark:text-cyan-300">
                 Tech Stack
               </span>
             </div>
-            <div className="flex-1 h-px bg-gray-200 dark:bg-gray-800" />
+            <div className="flex-1 h-px bg-linear-to-r from-cyan-500/50 via-violet-500/30 to-transparent" />
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
             {Object.entries(techStack).map(
               ([category, skills], categoryIndex) => (
-                <div key={categoryIndex} className="tech-category">
-                  <h3 className="tech-category-title opacity-0 text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400 mb-6">
+                <div
+                  key={categoryIndex}
+                  className="tech-category"
+                >
+                  <h3 className="tech-category-title opacity-0 text-sm font-bold tracking-widest uppercase text-slate-500 dark:text-slate-400 mb-5">
                     {category}
                   </h3>
-                  <div className="space-y-0">
+                  <div className="flex flex-wrap gap-2">
                     {skills.map((skill, skillIndex) => (
                       <div
                         key={skillIndex}
-                        className="skill-row opacity-0 group flex items-center gap-4 py-4 border-t border-gray-200 dark:border-gray-800 last:border-b cursor-default"
+                        className="skill-row opacity-0 group inline-flex items-center gap-2 rounded-full border border-cyan-900/10 dark:border-white/10 bg-white/60 dark:bg-white/[0.04] px-3 py-2 cursor-default transition-colors duration-300 hover:bg-cyan-50 dark:hover:bg-cyan-950/20"
                       >
-                        <span className="text-gray-400 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300">
+                        <span className="text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors duration-300">
                           {skill.icon}
                         </span>
-                        <span className="text-base md:text-lg font-medium text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-300">
+                        <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-slate-950 dark:group-hover:text-white transition-colors duration-300">
                           {skill.name}
                         </span>
                       </div>
@@ -780,52 +775,14 @@ const AboutPage = () => {
           </div>
         </div>
 
-        {/* Quick Stats Section */}
-        <div className="stats-section mb-16 md:mb-24">
-          <div className="flex items-center gap-3 mb-8 md:mb-12">
-            <div
-              style={{
-                clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
-              }}
-            >
-              <span className="stats-header-text-reveal translate-y-10 block text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">
-                Quick Stats
-              </span>
-            </div>
-            <div className="flex-1 h-px bg-gray-200 dark:bg-gray-800" />
-          </div>
-
-          <div className="stats-grid grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {quickStats.map((stat, index) => (
-              <div
-                key={index}
-                className="stat-card opacity-0 p-6 rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-zinc-900/50"
-              >
-                <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-white/5 flex items-center justify-center text-gray-500 dark:text-gray-400 mb-4">
-                  {stat.icon}
-                </div>
-                <span className="text-xs font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400 block mb-2">
-                  {stat.label}
-                </span>
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
-                  {stat.value}
-                </h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  {stat.sub}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* Connect CTA Section */}
-        <div className="cta-section pt-12 border-t border-gray-200 dark:border-gray-800">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+        <div className="cta-section pt-12">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 rounded-[1.5rem] bg-slate-950 dark:bg-white/[0.06] px-6 py-8 md:px-8 text-white dark:text-white">
             <div>
-              <h3 className="cta-title opacity-0 text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
+              <h3 className="cta-title opacity-0 text-2xl md:text-3xl font-bold mb-2">
                 Let&apos;s Connect
               </h3>
-              <p className="cta-desc opacity-0 text-gray-600 dark:text-gray-400 text-lg max-w-xl">
+              <p className="cta-desc opacity-0 text-white/70 text-lg max-w-xl">
                 I&apos;m always open to discussing frontend architecture,
                 performance optimization, or remote collaborations.
               </p>
@@ -835,7 +792,7 @@ const AboutPage = () => {
                 href="https://github.com/aayushman108"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="opacity-0 w-12 h-12 rounded-full border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:border-gray-900 dark:hover:border-white hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black transition-all duration-300"
+                className="opacity-0 w-12 h-12 rounded-full border-2 border-white/15 bg-white/10 flex items-center justify-center text-white/70 hover:border-white hover:bg-white hover:text-slate-950 transition-all duration-300"
                 aria-label="GitHub"
               >
                 <FaGithub size={20} />
@@ -844,21 +801,21 @@ const AboutPage = () => {
                 href="https://www.linkedin.com/in/aayushman-sharma-a8abbb277"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="opacity-0 w-12 h-12 rounded-full border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:border-blue-600 dark:hover:border-blue-400 hover:bg-blue-600 dark:hover:bg-blue-400 hover:text-white transition-all duration-300"
+                className="opacity-0 w-12 h-12 rounded-full border-2 border-white/15 bg-white/10 flex items-center justify-center text-white/70 hover:border-blue-400 hover:bg-blue-500 hover:text-white transition-all duration-300"
                 aria-label="LinkedIn"
               >
                 <FaLinkedin size={20} />
               </a>
               <a
                 href="mailto:dev.aayushmansharma@gmail.com"
-                className="opacity-0 w-12 h-12 rounded-full border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:border-purple-600 dark:hover:border-purple-400 hover:bg-purple-600 dark:hover:bg-purple-400 hover:text-white transition-all duration-300"
+                className="opacity-0 w-12 h-12 rounded-full border-2 border-white/15 bg-white/10 flex items-center justify-center text-white/70 hover:border-cyan-300 hover:bg-cyan-300 hover:text-slate-950 transition-all duration-300"
                 aria-label="Email"
               >
                 <FaEnvelope size={20} />
               </a>
               <Link
                 href="/#contact"
-                className="opacity-0 group inline-flex items-center gap-3 px-6 py-3 md:px-8 md:py-4 bg-gray-900 dark:bg-white text-white dark:text-black rounded-full font-semibold text-sm md:text-base hover:bg-purple-600 dark:hover:bg-purple-400 transition-all duration-300 ml-2"
+                className="opacity-0 group inline-flex items-center gap-3 px-6 py-3 md:px-8 md:py-4 bg-white text-slate-950 rounded-full font-semibold text-sm md:text-base hover:bg-cyan-300 transition-all duration-300 ml-2"
               >
                 <span>Get in Touch</span>
                 <FaArrowRight className="text-sm transition-transform duration-300 group-hover:translate-x-1" />

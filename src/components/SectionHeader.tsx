@@ -70,10 +70,11 @@ export const SectionHeader = ({
     <div ref={containerRef} className={`mb-8 md:mb-12 ${className}`}>
       <div className="flex items-end justify-between flex-wrap gap-8">
         <div>
-          <span className="text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400 mb-4 block">
+          <span className="mb-4 inline-flex items-center gap-3 text-sm font-bold tracking-widest uppercase text-cyan-700 dark:text-cyan-300">
+            <span className="h-px w-10 bg-linear-to-r from-cyan-500 via-violet-500 to-rose-500" />
             {label}
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white leading-[1.2] tracking-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 dark:text-white leading-[1.2] tracking-tight">
             <div
               style={{
                 clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
@@ -88,7 +89,7 @@ export const SectionHeader = ({
                 clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
               }}
             >
-              <span className="section-text-reveal sm:translate-y-15 translate-y-30 text-gray-400 dark:text-gray-600 block">
+              <span className="section-text-reveal sm:translate-y-15 translate-y-30 text-gradient-hot block">
                 {subtitle}
               </span>
             </div>

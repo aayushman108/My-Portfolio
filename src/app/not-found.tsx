@@ -6,8 +6,6 @@ import { FaHome, FaSearch, FaArrowLeft } from "react-icons/fa";
 export default function NotFound() {
   return (
     <div className="fixed inset-0 w-screen h-screen bg-white dark:bg-black flex flex-col items-center justify-center z-200 px-6 text-center transition-colors duration-500">
-      {/* Background patterns */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[64px_64px] pointer-events-none" />
 
       {/* Glow Effect */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-blue-600/5 dark:bg-blue-600/10 blur-[120px] -z-10 rounded-full" />
