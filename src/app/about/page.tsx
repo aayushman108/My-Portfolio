@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -50,7 +50,7 @@ const expertise = [
   {
     title: "Real-time & Interactive Features",
     description:
-      "Implementing real-time data streaming and push notification systems to create highly responsive, \"living\" interfaces.",
+      'Implementing real-time data streaming and push notification systems to create highly responsive, "living" interfaces.',
   },
   {
     title: "Secure Service Integration",
@@ -130,12 +130,14 @@ const numericalStats = [
   {
     number: "2+",
     label: "Years of Experience",
-    description: "Building scalable, high-performance web applications using React & Next.js.",
+    description:
+      "Building scalable, high-performance web applications using React & Next.js.",
   },
   {
     number: "15+",
     label: "Projects Completed",
-    description: "From large-scale corporate systems to personal web apps and experiments.",
+    description:
+      "From large-scale corporate systems to personal web apps and experiments.",
   },
   {
     number: "9+",
@@ -145,7 +147,8 @@ const numericalStats = [
   {
     number: "100%",
     label: "Commitment to Quality",
-    description: "Pixel-perfect fidelity, accessibility (a11y), and top performance.",
+    description:
+      "Pixel-perfect fidelity, accessibility (a11y), and top performance.",
   },
 ];
 
@@ -156,17 +159,14 @@ const timelineData = [
     company: "Codniv Innovations Pvt. Ltd.",
     location: "Kathmandu, Nepal",
     period: "Feb 2024 – Present",
-    description: "Spearheading frontend development of scalable CRM systems, HR dashboards, real-time communication modules, and automated billing workflows.",
+    description:
+      "Spearheading frontend development of scalable CRM systems, HR dashboards, real-time communication modules, and automated billing workflows.",
     details: [
-      "Built scalable survey and data entry systems using React and Redux Toolkit, handling large datasets with a focus on performance, reliability, and data accuracy.",
-      "Developed reusable, component-driven UI architecture, improving consistency and maintainability across multiple modules.",
-      "Implemented responsive and accessible interfaces using semantic HTML and modern CSS practices, ensuring cross-device compatibility.",
-      "Wrote unit and integration tests using React Testing Library and Vitest, reducing regressions and improving overall application stability.",
-      "Collaborated closely with backend engineers to design and integrate REST APIs, ensuring robust data flow and error handling.",
-      "Developed internal dashboards for HR workflows, contracts, and timesheets, improving operational efficiency and usability.",
-      "Built and maintained Stripe-based subscription and billing workflows, handling recurring payments, upgrades, cancellations, and webhook-based event synchronization.",
-      "Contributed to a multi-platform ecosystem (Next.js web + React Native mobile), delivering consistent user experiences across platforms.",
-      "Developed real-time communication features using Socket.IO, enabling reliable bidirectional messaging and connection handling.",
+      "Built scalable survey and dashboard systems using React and Redux Toolkit, handling large datasets with optimized performance and precision.",
+      "Designed a reusable component-driven UI architecture, streamlining development and ensuring design system fidelity.",
+      "Integrated Stripe-based subscription billing systems and Socket.IO-powered real-time messaging modules.",
+      "Contributed to a cohesive multi-platform ecosystem encompassing Next.js web and React Native mobile applications.",
+      "Wrote robust unit and integration tests using Vitest and React Testing Library to deliver highly stable frontend codebases.",
     ],
   },
   {
@@ -175,11 +175,11 @@ const timelineData = [
     company: "Leapfrog Technology Inc.",
     location: "Kathmandu, Nepal",
     period: "Nov 2023 – Jan 2024",
-    description: "Built a strong foundation in full-stack web development, shipping responsive frontends, server REST APIs, and database schemas.",
+    description:
+      "Built a strong foundation in full-stack web development, shipping responsive frontends, server REST APIs, and database schemas.",
     details: [
-      "Gained hands-on experience in full-stack web development using HTML, CSS, JavaScript, TypeScript, Node.js, Express, and PostgreSQL.",
-      "Built multiple projects including browser-based games, landing pages, and full-stack Todo and E-commerce applications.",
-      "Collaborated in a team environment following Agile/Scrum methodologies, conducting code reviews and sprint retrospectives.",
+      "Acquired full-stack experience using TypeScript, React, Node.js, Express, and PostgreSQL.",
+      "Developed fully responsive web applications, browser-based games, and RESTful APIs under Agile/Scrum workflows.",
     ],
   },
   {
@@ -188,10 +188,10 @@ const timelineData = [
     company: "Pulchowk Campus, Institute of Engineering (IOE)",
     location: "Tribhuvan University, Nepal",
     period: "2018 – 2023",
-    description: "Leveraged computational methods, systems architecture, and mathematical frameworks to transition into frontend and software engineering.",
+    description:
+      "Leveraged computational methods, systems architecture, and mathematical frameworks to transition into software engineering.",
     details: [
-      "Engaged in extensive analytical studies including mathematics, fluid dynamics, and automated systems control.",
-      "Applied structured logical models and procedural algorithms directly to frontend application state management and computational layouts."
+      "Applied advanced analytical methods, structured logic, and procedural algorithms directly to software engineering and complex state management workflows.",
     ],
   },
 ];
@@ -209,6 +209,19 @@ const AboutPage = () => {
     }));
   };
 
+  useEffect(() => {
+    const refreshFrame = requestAnimationFrame(() => ScrollTrigger.refresh());
+    const refreshAfterTransition = window.setTimeout(
+      () => ScrollTrigger.refresh(),
+      550,
+    );
+
+    return () => {
+      cancelAnimationFrame(refreshFrame);
+      window.clearTimeout(refreshAfterTransition);
+    };
+  }, [expandedTimelineItems]);
+
   useGSAP(
     () => {
       // 1. Initial Page Load Animation for Hero / Header
@@ -218,7 +231,7 @@ const AboutPage = () => {
       introTl.fromTo(
         ".back-link-reveal",
         { opacity: 0, x: -15 },
-        { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" }
+        { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" },
       );
 
       // Animate "About Me" Sublabel
@@ -226,7 +239,7 @@ const AboutPage = () => {
         ".about-sublabel",
         { opacity: 0, y: 15 },
         { opacity: 1, y: 0, duration: 0.8, ease: "power4.out" },
-        "-=0.6"
+        "-=0.6",
       );
 
       // Animate Headline text reveals
@@ -240,7 +253,7 @@ const AboutPage = () => {
           stagger: 0.12,
           ease: "power4.out",
         },
-        "-=0.5"
+        "-=0.5",
       );
 
       // Animate main intro bio paragraph
@@ -253,7 +266,7 @@ const AboutPage = () => {
           duration: 1.0,
           ease: "power3.out",
         },
-        "-=0.7"
+        "-=0.7",
       );
 
       // Animate availability status badge
@@ -266,7 +279,7 @@ const AboutPage = () => {
           duration: 0.8,
           ease: "power3.out",
         },
-        "-=0.4"
+        "-=0.4",
       );
 
       gsap.set(".metric-number", { textContent: 0 });
@@ -490,8 +503,7 @@ const AboutPage = () => {
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-slate-950 dark:text-white leading-[1.02] tracking-tight">
                   <div
                     style={{
-                      clipPath:
-                        "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+                      clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
                     }}
                   >
                     <span className="header-text-reveal opacity-0 translate-y-20 block">
@@ -500,8 +512,7 @@ const AboutPage = () => {
                   </div>
                   <div
                     style={{
-                      clipPath:
-                        "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+                      clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
                     }}
                   >
                     <span className="header-text-reveal opacity-0 translate-y-20 text-gradient-hot block">
@@ -514,8 +525,7 @@ const AboutPage = () => {
               <div className="lg:col-span-5">
                 <div
                   style={{
-                    clipPath:
-                      "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+                    clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
                   }}
                 >
                   <div className="about-intro-text opacity-0 translate-y-20 space-y-5 text-slate-600 dark:text-slate-300 text-base md:text-lg leading-relaxed font-normal">
@@ -645,16 +655,14 @@ const AboutPage = () => {
             {timelineData.map((item, index) => {
               const isExpanded = expandedTimelineItems[index] ?? false;
               return (
-                <div
-                  key={index}
-                  className="timeline-item opacity-0 relative"
-                >
+                <div key={index} className="timeline-item opacity-0 relative">
                   {/* Timeline node */}
-                  <div className={`absolute -left-[39px] sm:-left-[47px] top-1.5 w-8 h-8 rounded-full border-2 ${
-                    item.type === "experience"
-                      ? "border-cyan-500 text-cyan-600 dark:text-cyan-300"
-                      : "border-rose-500 text-rose-600 dark:text-rose-300"
-                  } bg-[#fbfcff] dark:bg-[#050509] flex items-center justify-center z-10`}
+                  <div
+                    className={`absolute -left-[39px] sm:-left-[47px] top-1.5 w-8 h-8 rounded-full border-2 ${
+                      item.type === "experience"
+                        ? "border-cyan-500 text-cyan-600 dark:text-cyan-300"
+                        : "border-rose-500 text-rose-600 dark:text-rose-300"
+                    } bg-[#fbfcff] dark:bg-[#050509] flex items-center justify-center z-10`}
                   >
                     {item.type === "experience" ? (
                       <FaBriefcase className="text-xs" />
@@ -674,9 +682,12 @@ const AboutPage = () => {
                           <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
                             {item.company}
                           </span>
-                          <span className="text-slate-300 dark:text-white/20 hidden sm:inline">&bull;</span>
+                          <span className="text-slate-300 dark:text-white/20 hidden sm:inline">
+                            &bull;
+                          </span>
                           <span className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1">
-                            <FaMapMarkerAlt className="text-[10px]" /> {item.location}
+                            <FaMapMarkerAlt className="text-[10px]" />{" "}
+                            {item.location}
                           </span>
                         </div>
                       </div>
@@ -696,9 +707,13 @@ const AboutPage = () => {
                       <div className="mt-4 pt-4 border-t border-cyan-900/10 dark:border-white/10">
                         <button
                           onClick={() => toggleTimelineItem(index)}
-                          className="flex items-center gap-2 text-xs font-semibold text-cyan-600 dark:text-cyan-300 hover:text-cyan-800 dark:hover:text-cyan-200 transition-colors focus:outline-none cursor-pointer"
+                          className="flex items-center gap-2 text-sm font-semibold text-cyan-600 dark:text-cyan-300 hover:text-cyan-800 dark:hover:text-cyan-200 transition-colors focus:outline-none cursor-pointer"
                         >
-                          <span>{isExpanded ? "Hide Details" : "View Key Contributions & Achievements"}</span>
+                          <span>
+                            {isExpanded
+                              ? "Hide Details"
+                              : "View Key Contributions & Achievements"}
+                          </span>
                           {isExpanded ? (
                             <FaChevronUp size={10} />
                           ) : (
@@ -708,13 +723,18 @@ const AboutPage = () => {
 
                         <div
                           className={`mt-4 space-y-2.5 overflow-hidden transition-all duration-500 ease-in-out ${
-                            isExpanded ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
+                            isExpanded
+                              ? "max-h-[1000px] opacity-100"
+                              : "max-h-0 opacity-0"
                           }`}
                         >
                           {item.details.map((detail, detailIdx) => (
-                            <div key={detailIdx} className="flex items-start gap-3">
-                              <span className="mt-2 w-1.5 h-1.5 rounded-full bg-cyan-500 shrink-0" />
-                              <span className="text-xs md:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal font-sans">
+                            <div
+                              key={detailIdx}
+                              className="flex items-start gap-3"
+                            >
+                              <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-cyan-500 shrink-0" />
+                              <span className="text-sm md:text-[15px] text-slate-600 dark:text-slate-300 leading-relaxed font-normal font-sans">
                                 {detail}
                               </span>
                             </div>
@@ -747,10 +767,7 @@ const AboutPage = () => {
           <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
             {Object.entries(techStack).map(
               ([category, skills], categoryIndex) => (
-                <div
-                  key={categoryIndex}
-                  className="tech-category"
-                >
+                <div key={categoryIndex} className="tech-category">
                   <h3 className="tech-category-title opacity-0 text-sm font-bold tracking-widest uppercase text-slate-500 dark:text-slate-400 mb-5">
                     {category}
                   </h3>
