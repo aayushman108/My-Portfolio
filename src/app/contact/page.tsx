@@ -25,7 +25,9 @@ const ContactPage = () => {
     subject: "",
     message: "",
   });
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [serverError, setServerError] = useState<string | null>(null);
 
@@ -37,7 +39,7 @@ const ContactPage = () => {
       tl.fromTo(
         ".back-link-reveal",
         { opacity: 0, x: -15 },
-        { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" }
+        { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" },
       );
 
       // Animate Sublabel
@@ -45,7 +47,7 @@ const ContactPage = () => {
         ".contact-sublabel",
         { opacity: 0, y: 15 },
         { opacity: 1, y: 0, duration: 0.8, ease: "power4.out" },
-        "-=0.6"
+        "-=0.6",
       );
 
       // Animate Title Reveals
@@ -59,7 +61,7 @@ const ContactPage = () => {
           stagger: 0.12,
           ease: "power4.out",
         },
-        "-=0.5"
+        "-=0.5",
       );
 
       // Animate Form Panel
@@ -72,7 +74,7 @@ const ContactPage = () => {
           duration: 1.0,
           ease: "power3.out",
         },
-        "-=0.8"
+        "-=0.8",
       );
 
       // Animate Right Info Columns
@@ -86,31 +88,31 @@ const ContactPage = () => {
           stagger: 0.12,
           ease: "power3.out",
         },
-        "-=0.8"
+        "-=0.8",
       );
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   const validateForm = () => {
     const tempErrors: { [key: string]: string } = {};
     if (!formData.name.trim()) tempErrors.name = "Name is required";
-    
+
     if (!formData.email.trim()) {
       tempErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       tempErrors.email = "Please enter a valid email address";
     }
-    
+
     if (!formData.subject.trim()) tempErrors.subject = "Subject is required";
     if (!formData.message.trim()) tempErrors.message = "Message is required";
-    
+
     setErrors(tempErrors);
     return Object.keys(tempErrors).length === 0;
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -137,7 +139,9 @@ const ContactPage = () => {
         setFormData({ name: "", email: "", subject: "", message: "" });
       } else {
         setStatus("error");
-        setServerError(response.error || "Failed to send message. Please try again.");
+        setServerError(
+          response.error || "Failed to send message. Please try again.",
+        );
       }
     } catch {
       setStatus("error");
@@ -150,7 +154,8 @@ const ContactPage = () => {
       icon: <FaGithub size={20} />,
       label: "GitHub",
       href: "https://github.com/aayushman108",
-      color: "hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10",
+      color:
+        "hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10",
     },
     {
       icon: <FaLinkedin size={20} />,
@@ -193,8 +198,7 @@ const ContactPage = () => {
               <div className="lg:col-span-7">
                 <div
                   style={{
-                    clipPath:
-                      "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+                    clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
                   }}
                   className="mb-6"
                 >
@@ -206,8 +210,7 @@ const ContactPage = () => {
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-slate-950 dark:text-white leading-[1.02] tracking-tight">
                   <div
                     style={{
-                      clipPath:
-                        "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+                      clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
                     }}
                   >
                     <span className="header-text-reveal opacity-0 translate-y-20 block">
@@ -216,8 +219,7 @@ const ContactPage = () => {
                   </div>
                   <div
                     style={{
-                      clipPath:
-                        "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+                      clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
                     }}
                   >
                     <span className="header-text-reveal opacity-0 translate-y-20 text-gradient-hot block">
@@ -230,8 +232,8 @@ const ContactPage = () => {
               <div className="lg:col-span-5">
                 <p className="header-text-reveal opacity-0 translate-y-20 text-base md:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
                   Tell me what you are building, where the product is stuck, or
-                  what kind of frontend help you need. I read every message and
-                  reply with clear next steps.
+                  what kind of engineering help you need. I read every message
+                  and reply with clear next steps.
                 </p>
               </div>
             </div>
@@ -302,17 +304,6 @@ const ContactPage = () => {
               it short if project is still early.
             </p>
 
-            <div className="mt-10 border-y border-cyan-900/10 dark:border-white/10 py-8">
-              <p className="max-w-xl text-lg md:text-xl font-medium leading-relaxed text-slate-800 dark:text-slate-200">
-                Share a short note about your idea, product, or team. I&apos;m
-                open to new builds, frontend improvements, collaboration, and
-                technical conversations.
-              </p>
-              <p className="mt-5 max-w-xl text-slate-600 dark:text-slate-300 leading-relaxed">
-                No need to over-prepare. A few lines are enough to start.
-              </p>
-            </div>
-
             <div className="mt-10">
               <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-300">
                 <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_16px_rgba(52,211,153,0.9)]" />
@@ -336,34 +327,35 @@ const ContactPage = () => {
           </aside>
 
           <div className="lg:pl-2">
-              {status === "success" ? (
-                <div className="py-16 text-center flex flex-col items-center justify-center space-y-6">
-                  <FaCheckCircle className="text-6xl text-emerald-500" />
-                  <h3 className="text-2xl font-bold text-slate-950 dark:text-white">
-                    Message sent.
-                  </h3>
-                  <p className="text-slate-600 dark:text-slate-300 max-w-sm leading-relaxed text-sm">
-                    Thank you for reaching out. Aayushman will review your message and get back to you shortly.
-                  </p>
-                  <button
-                    onClick={() => setStatus("idle")}
-                    className="px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-950 dark:bg-white text-white dark:text-black hover:bg-cyan-600 dark:hover:bg-cyan-300 transition-all cursor-pointer"
-                  >
-                    Send Another Message
-                  </button>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-7">
-                  {status === "error" && serverError && (
-                    <div className="p-4 rounded-2xl border border-red-500/20 bg-red-500/10 text-red-600 dark:text-red-400 text-sm font-semibold flex items-center gap-2.5">
-                      <span className="shrink-0">!</span>
-                      <span>{serverError}</span>
-                    </div>
-                  )}
+            {status === "success" ? (
+              <div className="py-16 text-center flex flex-col items-center justify-center space-y-6">
+                <FaCheckCircle className="text-6xl text-emerald-500" />
+                <h3 className="text-2xl font-bold text-slate-950 dark:text-white">
+                  Message sent.
+                </h3>
+                <p className="text-slate-600 dark:text-slate-300 max-w-sm leading-relaxed text-sm">
+                  Thank you for reaching out. Aayushman will review your message
+                  and get back to you shortly.
+                </p>
+                <button
+                  onClick={() => setStatus("idle")}
+                  className="px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-950 dark:bg-white text-white dark:text-black hover:bg-cyan-600 dark:hover:bg-cyan-300 transition-all cursor-pointer"
+                >
+                  Send Another Message
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-7">
+                {status === "error" && serverError && (
+                  <div className="p-4 rounded-2xl border border-red-500/20 bg-red-500/10 text-red-600 dark:text-red-400 text-sm font-semibold flex items-center gap-2.5">
+                    <span className="shrink-0">!</span>
+                    <span>{serverError}</span>
+                  </div>
+                )}
 
-                  <div className="grid md:grid-cols-2 gap-5">
-                    {/* Name field */}
-                    <div className="space-y-2">
+                <div className="grid md:grid-cols-2 gap-5">
+                  {/* Name field */}
+                  <div className="space-y-2">
                     <label
                       htmlFor="name"
                       className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
@@ -388,10 +380,10 @@ const ContactPage = () => {
                         {errors.name}
                       </span>
                     )}
-                    </div>
+                  </div>
 
-                    {/* Email field */}
-                    <div className="space-y-2">
+                  {/* Email field */}
+                  <div className="space-y-2">
                     <label
                       htmlFor="email"
                       className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
@@ -416,83 +408,83 @@ const ContactPage = () => {
                         {errors.email}
                       </span>
                     )}
-                    </div>
                   </div>
+                </div>
 
-                  {/* Subject field */}
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="subject"
-                      className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
-                    >
-                      Subject
-                    </label>
-                    <input
-                      type="text"
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      placeholder="e.g. Project Collaboration"
-                      className={`w-full px-5 py-4 bg-white/80 dark:bg-white/[0.04] border ${
-                        errors.subject
-                          ? "border-red-500/80 focus:border-red-500 focus:ring-red-500/10"
-                          : "border-cyan-900/10 dark:border-white/10 hover:border-cyan-300 dark:hover:border-cyan-300/50 focus:border-cyan-500 dark:focus:border-cyan-300 focus:ring-4 focus:ring-cyan-500/10"
-                      } rounded-2xl text-slate-950 dark:text-white text-sm focus:outline-none transition-all duration-300 placeholder:text-slate-400 dark:placeholder:text-slate-600`}
-                    />
-                    {errors.subject && (
-                      <span className="text-xs text-red-500 mt-1 block font-medium">
-                        {errors.subject}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Message field */}
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="message"
-                      className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
-                    >
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={5}
-                      value={formData.message}
-                      onChange={handleChange}
-                      placeholder="Tell me about your project, goals, and timeline..."
-                      className={`w-full px-5 py-4 bg-white/80 dark:bg-white/[0.04] border ${
-                        errors.message
-                          ? "border-red-500/80 focus:border-red-500 focus:ring-red-500/10"
-                          : "border-cyan-900/10 dark:border-white/10 hover:border-cyan-300 dark:hover:border-cyan-300/50 focus:border-cyan-500 dark:focus:border-cyan-300 focus:ring-4 focus:ring-cyan-500/10"
-                      } rounded-2xl text-slate-950 dark:text-white text-sm focus:outline-none transition-all duration-300 resize-none placeholder:text-slate-400 dark:placeholder:text-slate-600`}
-                    />
-                    {errors.message && (
-                      <span className="text-xs text-red-500 mt-1 block font-medium">
-                        {errors.message}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Submit Button */}
-                  <button
-                    type="submit"
-                    disabled={status === "sending"}
-                    className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-slate-950 dark:bg-white text-white dark:text-black rounded-2xl font-bold hover:bg-cyan-600 dark:hover:bg-cyan-300 hover:shadow-[0_18px_45px_rgba(14,165,233,0.24)] transition-all duration-300 disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer"
+                {/* Subject field */}
+                <div className="space-y-2">
+                  <label
+                    htmlFor="subject"
+                    className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
                   >
-                    {status === "sending" ? (
-                      <>
-                        <FaSpinner className="animate-spin text-sm" />
-                        <span>Sending Message...</span>
-                      </>
-                    ) : (
-                      <span>Send Message</span>
-                    )}
-                  </button>
-                </form>
-              )}
-            </div>
+                    Subject
+                  </label>
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    placeholder="e.g. Project Collaboration"
+                    className={`w-full px-5 py-4 bg-white/80 dark:bg-white/[0.04] border ${
+                      errors.subject
+                        ? "border-red-500/80 focus:border-red-500 focus:ring-red-500/10"
+                        : "border-cyan-900/10 dark:border-white/10 hover:border-cyan-300 dark:hover:border-cyan-300/50 focus:border-cyan-500 dark:focus:border-cyan-300 focus:ring-4 focus:ring-cyan-500/10"
+                    } rounded-2xl text-slate-950 dark:text-white text-sm focus:outline-none transition-all duration-300 placeholder:text-slate-400 dark:placeholder:text-slate-600`}
+                  />
+                  {errors.subject && (
+                    <span className="text-xs text-red-500 mt-1 block font-medium">
+                      {errors.subject}
+                    </span>
+                  )}
+                </div>
+
+                {/* Message field */}
+                <div className="space-y-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
+                  >
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={5}
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Tell me about your project, goals, and timeline..."
+                    className={`w-full px-5 py-4 bg-white/80 dark:bg-white/[0.04] border ${
+                      errors.message
+                        ? "border-red-500/80 focus:border-red-500 focus:ring-red-500/10"
+                        : "border-cyan-900/10 dark:border-white/10 hover:border-cyan-300 dark:hover:border-cyan-300/50 focus:border-cyan-500 dark:focus:border-cyan-300 focus:ring-4 focus:ring-cyan-500/10"
+                    } rounded-2xl text-slate-950 dark:text-white text-sm focus:outline-none transition-all duration-300 resize-none placeholder:text-slate-400 dark:placeholder:text-slate-600`}
+                  />
+                  {errors.message && (
+                    <span className="text-xs text-red-500 mt-1 block font-medium">
+                      {errors.message}
+                    </span>
+                  )}
+                </div>
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  disabled={status === "sending"}
+                  className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-slate-950 dark:bg-white text-white dark:text-black rounded-2xl font-bold hover:bg-cyan-600 dark:hover:bg-cyan-300 hover:shadow-[0_18px_45px_rgba(14,165,233,0.24)] transition-all duration-300 disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer"
+                >
+                  {status === "sending" ? (
+                    <>
+                      <FaSpinner className="animate-spin text-sm" />
+                      <span>Sending Message...</span>
+                    </>
+                  ) : (
+                    <span>Send Message</span>
+                  )}
+                </button>
+              </form>
+            )}
+          </div>
         </section>
       </div>
     </main>

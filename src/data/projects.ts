@@ -83,7 +83,7 @@ export const PROJECTS: Project[] = [
     id: 3,
     title: "Annapurna",
     description:
-      "A modern restaurant web application focused on delivering an immersive dining experience through a visually rich and responsive UI. Built as a frontend-first platform with a scalable architecture to support future backend integration and operational automation.",
+      "A       modern restaurant web application focused on delivering an immersive dining experience through a visually rich and responsive UI. Built with a scalable architecture to support future backend integration and operational automation.",
     tech: ["Next.js", "TypeScript", "Tailwind CSS", "GSAP"],
     github: "https://github.com/aayushman108/Restaurant-app",
     live: "https://annapurnafoodz.netlify.app",
@@ -179,7 +179,7 @@ export const PROJECTS: Project[] = [
     title: "Business Onboarding Platform",
     description:
       "A full-stack platform designed to help businesses onboard and grow through digital marketing services. It provides structured onboarding flows, service exploration, pricing plans, and seamless payment gateway integration.",
-    tech: ["Next.js", "TypeScript", "Node.js", "Integrated APIs"],
+    tech: ["Next.js", "Node.js", "Express", "PostgreSQL"],
     github: "#",
     live: "#",
     year: "2025",
@@ -203,7 +203,7 @@ export const PROJECTS: Project[] = [
     title: "Matrimonial Platform",
     description:
       "A matchmaking platform enabling users to discover potential partners through intelligent suggestions, real-time chat, and advanced search capabilities.",
-    tech: ["Next.js", "Node.js", "Express"],
+    tech: ["Next.js", "Node.js", "Express", "PostgreSQL"],
     github: "#",
     live: "#",
     year: "2026",

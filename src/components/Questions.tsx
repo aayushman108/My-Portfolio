@@ -12,7 +12,7 @@ const questions = [
   {
     question: "What's your experience?",
     answer:
-      "I have over two years of professional experience as a Frontend Software Engineer, specializing in React, Next.js, and TypeScript to build scalable and reliable web applications for international clients.",
+      "I have over two years of professional experience as a Software Engineer, specializing in React, Next.js, and TypeScript to build scalable and reliable web applications for international clients.",
   },
   {
     question: "Are you available for freelance or remote work?",

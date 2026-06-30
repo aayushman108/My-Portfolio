@@ -122,7 +122,6 @@ const Hero = () => {
       {/* Subtle grid pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#0ea5e926_1px,transparent_1px),linear-gradient(to_bottom,#f43f5e1f_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#22d3ee1f_1px,transparent_1px),linear-gradient(to_bottom,#fb71851f_1px,transparent_1px)] bg-size-[64px_64px] pointer-events-none" />
 
-
       {/* 3D Globe - Positioned on the right */}
       <div className="hero-globe absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] lg:w-[600px] lg:h-[600px] xl:w-[700px] xl:h-[700px] opacity-0 pointer-events-auto hidden md:block drop-shadow-[0_35px_90px_rgba(14,165,233,0.38)] dark:drop-shadow-[0_35px_110px_rgba(167,139,250,0.32)]">
         <Globe className="w-full h-full" />
@@ -134,7 +133,7 @@ const Hero = () => {
           {/* Label */}
           <div className="hero-fade-label opacity-0 translate-y-5 mb-8">
             <span className="inline-flex rounded-full border border-cyan-400/30 bg-white/70 px-4 py-2 text-sm font-bold tracking-widest uppercase text-slate-700 shadow-[0_12px_35px_rgba(14,165,233,0.16)] backdrop-blur-md dark:border-cyan-300/20 dark:bg-white/10 dark:text-cyan-50">
-              Frontend Software Engineer & React Expert
+              Software Engineer & React Specialist
             </span>
           </div>
 
@@ -168,16 +167,20 @@ const Hero = () => {
           {/* Subtitle */}
           <div className="hero-fade-subtitle opacity-0 translate-y-8 max-w-4xl mb-6 md:mb-12">
             <p className="text-xl md:text-2xl text-slate-700 dark:text-slate-300 leading-relaxed">
-              Frontend Software Engineer with{" "}
+              Software Engineer with{" "}
               <span className="text-slate-950 dark:text-white font-bold decoration-cyan-400/50 underline underline-offset-4">
-                2+ years of experience
+                2.5+ years of experience
               </span>{" "}
-              building scalable and reliable web applications. Specialist in{" "}
+              building scalable, production-ready web applications. I bring deep
+              frontend expertise in{" "}
               <span className="text-slate-950 dark:text-white font-bold decoration-rose-400/50 underline underline-offset-4">
-                React, Next.js, and TypeScript
+                React, Next.js, and TypeScript{" "}
               </span>
-              —focused on delivering production-ready features for international
-              clients.
+              along with solid backend experience in{" "}
+              <span className="text-slate-950 dark:text-white font-bold decoration-rose-400/50 underline underline-offset-4">
+                Node.js, Express, and PostgreSQL{" "}
+              </span>
+              — delivering end-to-end features for international clients.
             </p>
           </div>
 

@@ -134,8 +134,8 @@ const About = () => {
         <SectionHeader
           key="About Me"
           label="About Me"
-          title="Frontend Engineer"
-          subtitle="Crafting Seamless Web Experiences"
+          title="Software Engineer"
+          subtitle="Frontend-Focused, Full-Stack Capable"
           className=""
         />
 
@@ -148,7 +148,7 @@ const About = () => {
           <div className="about-content lg:col-span-7 space-y-4 grid">
             <p className="text-xl md:text-2xl font-light text-slate-950 dark:text-white leading-relaxed">
               I&apos;m <span className="font-semibold">Aayushman Sharma</span>,
-              a Frontend Software Engineer with over{" "}
+               a Software Engineer with over{" "}
               <span className="font-semibold">
                 2 years of professional experience{" "}
               </span>
@@ -156,11 +156,11 @@ const About = () => {
             </p>
 
             <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
-              I specialize in React and Next.js, with strong experience in
-              TypeScript, state management, testing, and interactive UI
-              development. I’ve worked on government systems, AI-powered
-              platforms, dashboards, and e-commerce applications—focusing on
-              clean code, performance, and user experience.
+              I specialize in React and Next.js on the frontend, with working
+              knowledge of Node.js, Express, and PostgreSQL on the backend.
+              I&apos;ve worked on government systems, AI-powered platforms,
+              dashboards, and e-commerce applications—focusing on clean code,
+              performance, and user experience.
             </p>
 
             {/* CTA */}

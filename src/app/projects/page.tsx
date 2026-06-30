@@ -138,8 +138,8 @@ const ProjectsPage = () => {
               <div className="lg:col-span-5">
                 <p className="projects-desc opacity-0 text-slate-600 dark:text-slate-300 text-base md:text-lg max-w-xl leading-relaxed font-normal">
                   A focused archive of production apps, client systems, and
-                  personal experiments across React, Next.js, TypeScript, and
-                  interactive frontend engineering.
+                   personal experiments across React, Next.js, TypeScript, and
+                   full-stack web development.
                 </p>
                 <div className="projects-desc opacity-0 mt-6 grid grid-cols-3 text-sm">
                   <div className="py-3">

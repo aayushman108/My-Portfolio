@@ -31,20 +31,19 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Aayushman | Frontend Engineer & React Expert",
+    default: "Aayushman | Software Engineer",
     template: "%s | Aayushman",
   },
   description:
-    "Frontend Engineer & React Expert with 2+ years of experience building scalable applications. Specialist in Next.js, TypeScript, and high-performance UI/UX. Experienced in international collaborations and open to opportunities in Japan.",
+    "Software Engineer with 2+ years of experience building scalable web applications. Specialist in React, Next.js, and TypeScript with working knowledge of Node.js, Express, and PostgreSQL. Experienced in international collaborations and open to opportunities in Japan.",
   keywords: [
     "Aayushman",
     "Aayushman Sharma",
     "Frontend Developer",
-    "Frontend Expert",
     "React Developer",
-    "React Specialist",
     "Next.js Developer",
-    "Frontend Software Engineer",
+    "Software Engineer",
+    "Full Stack Developer",
     "TypeScript Engineer",
     "Javascript Developer",
     "Web Performance Expert",
@@ -69,9 +68,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://portfolio.aayushmansharma.com.np",
-    title: "Aayushman | Frontend Engineer & React Expert",
+    title: "Aayushman | Software Engineer",
     description:
-      "Explore the portfolio of Aayushman, featuring high-performance web applications, modern UI/UX design, and expertise in React and Next.js.",
+      "Explore the portfolio of Aayushman, featuring high-performance web applications, modern UI/UX design, and full-stack development expertise in React, Next.js, and Node.js.",
     siteName: "Aayushman Portfolio",
     images: [
       {
@@ -84,9 +83,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aayushman | Frontend Engineer & React Expert",
+    title: "Aayushman | Software Engineer",
     description:
-      "Frontend Software Engineer specializing in React and Next.js. Check out my latest projects and work experience.",
+      "Software Engineer specializing in React, Next.js, and Node.js. Check out my latest projects and work experience.",
     images: ["/og-image.png"],
     creator: "@aayushman108",
   },
@@ -130,13 +129,13 @@ const personSchema = {
     "https://github.com/aayushman108",
     "https://www.linkedin.com/in/aayushman-sharma-a8abbb277/",
   ],
-  jobTitle: "Frontend Software Engineer",
+  jobTitle: "Software Engineer",
   worksFor: {
     "@type": "Organization",
     name: "Freelance",
   },
   description:
-    "Frontend Software Engineer with 2+ years of experience building scalable applications. Specialist in Next.js, TypeScript, and high-performance UI/UX.",
+    "Software Engineer with 2+ years of experience building scalable applications. Specialist in React, Next.js, and TypeScript with backend experience in Node.js and PostgreSQL.",
   knowsAbout: [
     "React",
     "Next.js",
@@ -165,7 +164,7 @@ const websiteSchema = {
   url: "https://portfolio.aayushmansharma.com.np",
   name: "Aayushman Portfolio",
   description:
-    "Portfolio of Aayushman Sharma — Frontend Software Engineer specializing in React, Next.js, and TypeScript.",
+    "Portfolio of Aayushman Sharma — Software Engineer specializing in React, Next.js, TypeScript, and Node.js.",
   publisher: {
     "@id": "https://portfolio.aayushmansharma.com.np/#person",
   },
@@ -181,7 +180,7 @@ const faqSchema = {
       name: "What's your experience?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "I have over two years of professional experience as a Frontend Software Engineer, specializing in React, Next.js, and TypeScript to build scalable and reliable web applications for international clients.",
+        text: "I have over two years of professional experience as a Software Engineer, specializing in React, Next.js, and TypeScript to build scalable and reliable web applications for international clients.",
       },
     },
     {

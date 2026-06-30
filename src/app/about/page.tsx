@@ -58,19 +58,14 @@ const expertise = [
       "Integrating OAuth-based authentication, payment gateway workflows, and RESTful APIs into seamless, secure user journeys.",
   },
   {
-    title: "UI/UX Fidelity",
-    description:
-      "Translating Figma designs into pixel-perfect, accessible (a11y) interfaces with fluid motion and high design fidelity.",
-  },
-  {
     title: "Engineering Quality",
     description:
       "Writing clean, testable code (Vitest/RTL) that scales in large, collaborative production codebases.",
   },
   {
-    title: "Backend Foundation",
+    title: "Backend Capability",
     description:
-      "Working knowledge of Node.js, Express, and PostgreSQL, facilitating smooth integration and effective communication with backend teams.",
+      "Hands-on experience with Node.js, Express, and PostgreSQL — building REST APIs, database schemas, and server logic that pairs with frontend architecture.",
   },
 ];
 
@@ -103,7 +98,7 @@ const quickStats = [
   {
     icon: <FaBriefcase size={20} />,
     label: "Current Role",
-    value: "Associate Frontend Software Engineer",
+    value: "Associate Software Engineer",
     sub: "Codniv Innovations",
   },
   {
@@ -128,13 +123,13 @@ const quickStats = [
 
 const numericalStats = [
   {
-    number: "2+",
+    number: "2.5+",
     label: "Years of Experience",
     description:
-      "Building scalable, high-performance web applications using React & Next.js.",
+      "Building scalable, high-performance web applications using React, Next.js, Node.js, and PostgreSQL.",
   },
   {
-    number: "15+",
+    number: "9+",
     label: "Projects Completed",
     description:
       "From large-scale corporate systems to personal web apps and experiments.",
@@ -155,18 +150,18 @@ const numericalStats = [
 const timelineData = [
   {
     type: "experience",
-    role: "Associate Frontend Software Engineer",
+    role: "Associate Software Engineer",
     company: "Codniv Innovations Pvt. Ltd.",
     location: "Kathmandu, Nepal",
     period: "Feb 2024 – Present",
     description:
-      "Spearheading frontend development of scalable CRM systems, HR dashboards, real-time communication modules, and automated billing workflows.",
+      "Leading frontend development of scalable CRM systems, HR dashboards, and real-time communication modules, while contributing to backend APIs and database architecture.",
     details: [
       "Built scalable survey and dashboard systems using React and Redux Toolkit, handling large datasets with optimized performance and precision.",
       "Designed a reusable component-driven UI architecture, streamlining development and ensuring design system fidelity.",
       "Integrated Stripe-based subscription billing systems and Socket.IO-powered real-time messaging modules.",
       "Contributed to a cohesive multi-platform ecosystem encompassing Next.js web and React Native mobile applications.",
-      "Wrote robust unit and integration tests using Vitest and React Testing Library to deliver highly stable frontend codebases.",
+      "Wrote robust unit and integration tests using Vitest and React Testing Library to deliver highly stable, production-grade codebases.",
     ],
   },
   {
@@ -180,18 +175,6 @@ const timelineData = [
     details: [
       "Acquired full-stack experience using TypeScript, React, Node.js, Express, and PostgreSQL.",
       "Developed fully responsive web applications, browser-based games, and RESTful APIs under Agile/Scrum workflows.",
-    ],
-  },
-  {
-    type: "education",
-    role: "Bachelor of Mechanical Engineering",
-    company: "Pulchowk Campus, Institute of Engineering (IOE)",
-    location: "Tribhuvan University, Nepal",
-    period: "2018 – 2023",
-    description:
-      "Leveraged computational methods, systems architecture, and mathematical frameworks to transition into software engineering.",
-    details: [
-      "Applied advanced analytical methods, structured logic, and procedural algorithms directly to software engineering and complex state management workflows.",
     ],
   },
 ];
@@ -282,8 +265,6 @@ const AboutPage = () => {
         "-=0.4",
       );
 
-      gsap.set(".metric-number", { textContent: 0 });
-
       introTl.fromTo(
         ".metric-card",
         { opacity: 0, y: 24 },
@@ -295,19 +276,6 @@ const AboutPage = () => {
           ease: "power3.out",
         },
         "-=0.25",
-      );
-
-      introTl.to(
-        ".metric-number",
-        {
-          textContent: (_index: number, el: HTMLElement) =>
-            `${el.dataset.value}${el.dataset.suffix}`,
-          duration: 1.0,
-          ease: "power3.out",
-          snap: { textContent: 1 },
-          stagger: 0.08,
-        },
-        "<",
       );
 
       // 2. ScrollTrigger for Expertise Section Header
@@ -530,14 +498,15 @@ const AboutPage = () => {
                 >
                   <div className="about-intro-text opacity-0 translate-y-20 space-y-5 text-slate-600 dark:text-slate-300 text-base md:text-lg leading-relaxed font-normal">
                     <p>
-                      Frontend software engineer building high-performance,
-                      production-ready web applications for complex workflows,
-                      dashboards, and product teams.
+                      Software engineer with deep frontend expertise in React,
+                      Next.js, and TypeScript, backed by solid experience in
+                      Node.js, Express, and PostgreSQL — building
+                      production-ready applications from UI to database.
                     </p>
                     <p>
                       I care about clean architecture, responsive interaction,
-                      accessible UI, and details that make software feel sharp
-                      and trustworthy.
+                      accessible UI, and backend code that integrates without
+                      friction.
                     </p>
                   </div>
                 </div>
@@ -579,11 +548,7 @@ const AboutPage = () => {
                 key={index}
                 className="metric-card opacity-0 group py-6 pr-4 md:py-8 md:pr-8 [&:nth-child(2n)]:pl-4 md:[&:nth-child(2n)]:pl-8 lg:[&:nth-child(n+2)]:pl-8 lg:[&:nth-child(2n)]:pl-8"
               >
-                <div
-                  className="metric-number text-4xl md:text-5xl font-black text-rose-600 dark:text-rose-300 mb-2"
-                  data-value={stat.number.replace(/\D/g, "")}
-                  data-suffix={stat.number.replace(/\d/g, "")}
-                >
+                <div className="metric-number text-4xl md:text-5xl font-black text-rose-600 dark:text-rose-300 mb-2">
                   {stat.number}
                 </div>
                 <h3 className="text-xs font-semibold tracking-wider uppercase text-slate-500 dark:text-slate-400 mb-2">
@@ -633,119 +598,6 @@ const AboutPage = () => {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-
-        {/* Professional Journey / Timeline Section */}
-        <div className="timeline-section pb-6 md:pb-8 mb-8 md:mb-10 border-b border-cyan-900/10 dark:border-white/10">
-          <div className="flex items-center gap-3 mb-6 md:mb-8">
-            <div
-              style={{
-                clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
-              }}
-            >
-              <span className="timeline-header-text-reveal translate-y-10 block text-sm font-bold tracking-widest uppercase text-cyan-700 dark:text-cyan-300">
-                Professional Journey
-              </span>
-            </div>
-            <div className="flex-1 h-px bg-linear-to-r from-cyan-500/50 via-violet-500/30 to-transparent" />
-          </div>
-
-          <div className="relative pl-6 sm:pl-8 border-l-2 border-cyan-200/80 dark:border-cyan-900/50 ml-4 sm:ml-6 space-y-10 timeline-container">
-            {timelineData.map((item, index) => {
-              const isExpanded = expandedTimelineItems[index] ?? false;
-              return (
-                <div key={index} className="timeline-item opacity-0 relative">
-                  {/* Timeline node */}
-                  <div
-                    className={`absolute -left-[39px] sm:-left-[47px] top-1.5 w-8 h-8 rounded-full border-2 ${
-                      item.type === "experience"
-                        ? "border-cyan-500 text-cyan-600 dark:text-cyan-300"
-                        : "border-rose-500 text-rose-600 dark:text-rose-300"
-                    } bg-[#fbfcff] dark:bg-[#050509] flex items-center justify-center z-10`}
-                  >
-                    {item.type === "experience" ? (
-                      <FaBriefcase className="text-xs" />
-                    ) : (
-                      <FaGraduationCap className="text-sm" />
-                    )}
-                  </div>
-
-                  {/* Content card */}
-                  <div className="group pb-8 border-b border-cyan-900/10 dark:border-white/10">
-                    <div className="flex flex-wrap items-start justify-between gap-4">
-                      <div>
-                        <h3 className="text-xl font-bold text-slate-950 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">
-                          {item.role}
-                        </h3>
-                        <div className="flex flex-wrap items-center gap-2 mt-1">
-                          <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
-                            {item.company}
-                          </span>
-                          <span className="text-slate-300 dark:text-white/20 hidden sm:inline">
-                            &bull;
-                          </span>
-                          <span className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1">
-                            <FaMapMarkerAlt className="text-[10px]" />{" "}
-                            {item.location}
-                          </span>
-                        </div>
-                      </div>
-
-                      <span className="inline-flex items-center gap-1.5 text-xs text-slate-700 dark:text-slate-300 bg-cyan-50/80 dark:bg-cyan-950/25 px-3 py-1.5 rounded-full font-semibold border border-cyan-200/80 dark:border-cyan-700/40">
-                        <FaCalendarAlt size={10} className="text-cyan-500" />
-                        {item.period}
-                      </span>
-                    </div>
-
-                    <p className="text-sm md:text-base text-slate-600 dark:text-slate-300 mt-4 leading-relaxed font-normal">
-                      {item.description}
-                    </p>
-
-                    {/* Expandable Details */}
-                    {item.details && item.details.length > 0 && (
-                      <div className="mt-4 pt-4 border-t border-cyan-900/10 dark:border-white/10">
-                        <button
-                          onClick={() => toggleTimelineItem(index)}
-                          className="flex items-center gap-2 text-sm font-semibold text-cyan-600 dark:text-cyan-300 hover:text-cyan-800 dark:hover:text-cyan-200 transition-colors focus:outline-none cursor-pointer"
-                        >
-                          <span>
-                            {isExpanded
-                              ? "Hide Details"
-                              : "View Key Contributions & Achievements"}
-                          </span>
-                          {isExpanded ? (
-                            <FaChevronUp size={10} />
-                          ) : (
-                            <FaChevronDown size={10} />
-                          )}
-                        </button>
-
-                        <div
-                          className={`mt-4 space-y-2.5 overflow-hidden transition-all duration-500 ease-in-out ${
-                            isExpanded
-                              ? "max-h-[1000px] opacity-100"
-                              : "max-h-0 opacity-0"
-                          }`}
-                        >
-                          {item.details.map((detail, detailIdx) => (
-                            <div
-                              key={detailIdx}
-                              className="flex items-start gap-3"
-                            >
-                              <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-cyan-500 shrink-0" />
-                              <span className="text-sm md:text-[15px] text-slate-600 dark:text-slate-300 leading-relaxed font-normal font-sans">
-                                {detail}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
           </div>
         </div>
 
@@ -800,8 +652,8 @@ const AboutPage = () => {
                 Let&apos;s Connect
               </h3>
               <p className="cta-desc opacity-0 text-white/70 text-base sm:text-lg max-w-xl mx-auto lg:mx-0">
-                I&apos;m always open to discussing frontend architecture,
-                performance optimization, or remote collaborations.
+                I&apos;m always open to discussing web architecture, performance
+                optimization, or remote collaborations.
               </p>
             </div>
             <div className="cta-links flex flex-col sm:flex-row items-center justify-center lg:justify-end gap-4 sm:gap-6 w-full lg:w-auto">
