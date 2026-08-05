@@ -13,6 +13,21 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(!isHome);
 
   useEffect(() => {
+    if (!isOpen) return;
+    const lenis = getLenis();
+    lenis?.stop();
+    const prevBodyOverflow = document.body.style.overflow;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    return () => {
+      lenis?.start();
+      document.body.style.overflow = prevBodyOverflow;
+      document.documentElement.style.overflow = prevHtmlOverflow;
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
     if (pathname === "/projects") return;
     const onScroll = () => {
       if (!isHome) {
@@ -74,12 +89,12 @@ const Navbar = () => {
             <Link
               href="/"
               className={`text-xl font-black tracking-tight flex items-center gap-1 transition-colors duration-300 ${
-                scrolled ? "text-gray-900" : "text-white"
+                scrolled || isOpen ? "text-gray-900" : "text-white"
               } group`}
             >
               <span
                 className={`w-2 h-2 rounded-full transition-colors duration-300 group-hover:bg-emerald-600 ${
-                  scrolled ? "bg-gray-900" : "bg-white"
+                  scrolled || isOpen ? "bg-gray-900" : "bg-white"
                 }`}
               />
               Aayushman.
@@ -110,8 +125,8 @@ const Navbar = () => {
             {/* Mobile Menu Button */}
             <div className="md:hidden flex items-center gap-4">
               <button
-                className={`focus:outline-none p-2 transition-colors duration-300 ${
-                  scrolled ? "text-gray-900" : "text-white"
+                className={`focus:outline-none p-2 rounded-full transition-colors duration-300 ${
+                  scrolled || isOpen ? "text-gray-900" : "text-white"
                 }`}
                 onClick={() => setIsOpen(!isOpen)}
                 aria-label={isOpen ? "Close menu" : "Open menu"}
@@ -126,22 +141,24 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 z-40 bg-white/95 backdrop-blur-xl transition-all duration-500 md:hidden flex flex-col items-center justify-center space-y-8 ${
+        className={`fixed inset-0 z-40 bg-white/95 backdrop-blur-xl transition-all duration-500 md:hidden flex flex-col overflow-y-auto overscroll-contain ${
           isOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         }`}
       >
-        {navLinks.map((link) => (
-          <Link
-            key={link.name}
-            href={link.href}
-            onClick={(e) => handleNavClick(e, link.href)}
-            className="text-3xl font-bold text-gray-900 hover:text-emerald-600 transition-colors"
-          >
-            {link.name}
-          </Link>
-        ))}
+        <div className="m-auto flex flex-col items-center gap-8 py-16">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
+              className="text-3xl font-bold text-gray-900 hover:text-emerald-600 transition-colors"
+            >
+              {link.name}
+            </Link>
+          ))}
+        </div>
       </div>
     </>
   );
