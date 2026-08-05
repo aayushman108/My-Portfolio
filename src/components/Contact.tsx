@@ -1,9 +1,3 @@
-"use client";
-
-import { useRef } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   FaEnvelope,
   FaLinkedin,
@@ -13,49 +7,7 @@ import {
 } from "react-icons/fa";
 import { SectionHeader } from "./SectionHeader";
 
-gsap.registerPlugin(ScrollTrigger);
-
 const Contact = () => {
-  const containerRef = useRef(null);
-
-  useGSAP(
-    () => {
-      gsap.fromTo(
-        ".contact-content",
-        { opacity: 0, y: 60 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          delay: 0.8, // Wait for header to finish animating
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 70%",
-          },
-        },
-      );
-
-      gsap.fromTo(
-        ".contact-link",
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.1,
-          delay: 1.0, // Wait for header and left content to finish animating
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".contact-links",
-            start: "top 80%",
-          },
-        },
-      );
-    },
-    { scope: containerRef },
-  );
-
   const socialLinks = [
     {
       icon: <FaGithub size={20} />,
@@ -92,11 +44,9 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      ref={containerRef}
       aria-label="Contact information"
-      className="section-padding bg-[#fbfcff] dark:bg-[#050509] relative overflow-hidden"
+      className="section-padding bg-[#f8fcf9] dark:bg-[#050509] relative overflow-hidden"
     >
-      <div className="absolute inset-0 bg-[linear-gradient(125deg,rgba(14,165,233,0.08),transparent_30%),linear-gradient(305deg,rgba(244,63,94,0.09),transparent_34%)] dark:bg-[linear-gradient(125deg,rgba(34,211,238,0.1),transparent_30%),linear-gradient(305deg,rgba(251,113,133,0.1),transparent_34%)] pointer-events-none" />
 
       <div className="section-container">
         {/* Header */}
@@ -128,10 +78,10 @@ const Contact = () => {
                 href="mailto:dev.aayushmansharma@gmail.com"
                 className="group inline-flex items-center gap-4 max-w-full"
               >
-                <span className="text-base md:text-2xl font-bold text-slate-950 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors duration-300 underline underline-offset-8 decoration-2 decoration-cyan-300/60 dark:decoration-cyan-700/60 group-hover:decoration-cyan-600 dark:group-hover:decoration-cyan-300 break-all md:break-normal">
+                <span className="text-base md:text-2xl font-bold text-slate-950 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-300 transition-colors duration-300 break-all md:break-normal">
                   dev.aayushmansharma@gmail.com
                 </span>
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-cyan-300 dark:border-cyan-700 flex items-center justify-center group-hover:bg-cyan-600 dark:group-hover:bg-cyan-300 group-hover:border-cyan-600 dark:group-hover:border-cyan-300 transition-all duration-300">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-emerald-300 dark:border-emerald-700 flex items-center justify-center group-hover:bg-emerald-600 dark:group-hover:bg-emerald-300 group-hover:border-emerald-600 dark:group-hover:border-emerald-300 transition-all duration-300">
                   <svg
                     className="w-4 h-4 md:w-5 md:h-5 text-gray-400 transition-all duration-300 group-hover:text-white group-hover:rotate-45"
                     fill="none"
@@ -152,8 +102,8 @@ const Contact = () => {
 
           {/* Right: Social Links */}
           <div className="contact-links">
-            <h3 className="text-sm font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400 mb-8">
-              Connect With Me
+            <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-8">
+              Connect with me
             </h3>
 
             <div className="space-y-0">
@@ -163,7 +113,7 @@ const Contact = () => {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`contact-link group flex items-center justify-between py-6 border-t border-cyan-900/10 dark:border-white/10 last:border-b transition-colors duration-300 hover:bg-cyan-50/70 dark:hover:bg-cyan-950/20 ${link.color}`}
+                  className={`contact-link group flex items-center justify-between py-6 border-t border-emerald-900/10 dark:border-white/10 last:border-b transition-colors duration-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/20 ${link.color}`}
                 >
                   <div className="flex items-center gap-4">
                     <span className="text-gray-400 group-hover:text-current transition-colors duration-300">
@@ -202,7 +152,7 @@ const Contact = () => {
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_16px_rgba(52,211,153,0.9)] animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-emerald-400" />
               <span className="text-sm text-slate-500 dark:text-slate-400">
                 Available for freelance work
               </span>

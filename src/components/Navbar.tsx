@@ -1,129 +1,143 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
-import { useTheme } from "next-themes";
+import { usePathname } from "next/navigation";
+import { FaBars, FaTimes } from "react-icons/fa";
+import { getLenis } from "./SmoothScroll";
 
 const Navbar = () => {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const [scrolled, setScrolled] = useState(!isHome);
 
   useEffect(() => {
-    // Wrap in a micro-task/timeout to avoid the "cascading render" warning
-    // while still ensuring hydration safety for next-themes
-    const timer = setTimeout(() => {
-      setMounted(true);
-    }, 0);
-
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+    if (pathname === "/projects") return;
+    const onScroll = () => {
+      if (!isHome) {
+        setScrolled(true);
+        return;
+      }
+      const hero = document.getElementById("home");
+      const heroHeight = hero ? hero.offsetHeight : window.innerHeight;
+      setScrolled(window.scrollY > heroHeight - 80);
     };
-
-    window.addEventListener("scroll", handleScroll);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
     return () => {
-      clearTimeout(timer);
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
     };
-  }, []);
+  }, [isHome, pathname]);
+
+  if (pathname === "/projects") return null;
 
   const navLinks = [
-    { name: "About", href: "/about" },
-    { name: "Projects", href: "/projects" },
-    { name: "Contact", href: "/contact" },
+    { name: "About", href: "/#about" },
+    { name: "Projects", href: "/#projects" },
+    { name: "Contact", href: "/#contact" },
   ];
+
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    if (!isHome) return;
+    e.preventDefault();
+    setIsOpen(false);
+    const target = href.split("#")[1];
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.scrollTo(`#${target}`, { duration: 1.2 });
+    } else {
+      document.getElementById(target)?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <>
-    <nav
-      className="fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none"
-      aria-label="Main navigation"
-    >
-      <div
-        className={`pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] ${
-          scrolled
-            ? "mt-6 w-[95%] md:w-[90%] max-w-3xl rounded-full bg-white/70 dark:bg-black/70 backdrop-blur-xl border border-black/5 dark:border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.2)] py-3 px-6"
-            : "mt-0 w-full bg-transparent py-8 px-6 border-transparent"
-        }`}
-        style={{
-          willChange: "width, padding, margin, background-color",
-          backfaceVisibility: "hidden",
-        }}
+      <nav
+        className="fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none"
+        aria-label="Main navigation"
       >
-        <div className="flex justify-between items-center section-container">
-          {/* Logo */}
-          <Link
-            href="/"
-            className="text-xl font-black tracking-tight flex items-center gap-1 text-gray-900 dark:text-white group"
-          >
-            <span className="w-2 h-2 rounded-full bg-gray-900 dark:bg-white group-hover:bg-purple-600 dark:group-hover:bg-purple-400 transition-colors duration-300" />
-            Aayushman.
-          </Link>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-1">
-            <div className="flex items-center bg-gray-100/50 dark:bg-white/5 rounded-full p-1 pr-2 mr-2">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="px-4 py-1.5 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-white dark:hover:bg-white/10 rounded-full transition-all duration-300"
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </div>
-            
-            {mounted && (
-              <button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="p-2.5 rounded-full bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors focus:outline-none"
-                aria-label="Toggle Theme"
-              >
-                {theme === "dark" ? <FaSun size={16} /> : <FaMoon size={16} />}
-              </button>
-            )}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-4">
-            {mounted && (
-              <button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="p-2 rounded-full bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/20 transition-all focus:outline-none"
-                aria-label="Toggle Theme"
-              >
-                {theme === "dark" ? <FaSun size={18} /> : <FaMoon size={18} />}
-              </button>
-            )}
-            
-            <button
-              className="text-gray-900 dark:text-white focus:outline-none p-2"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label={isOpen ? "Close menu" : "Open menu"}
-              aria-expanded={isOpen}
+        <div
+          className="pointer-events-auto w-full bg-transparent py-8 px-6 border-transparent"
+          style={{
+            willChange: "background-color",
+            backfaceVisibility: "hidden",
+          }}
+        >
+          <div className="flex justify-between items-center section-container">
+            {/* Logo */}
+            <Link
+              href="/"
+              className={`text-xl font-black tracking-tight flex items-center gap-1 transition-colors duration-300 ${
+                scrolled ? "text-gray-900" : "text-white"
+              } group`}
             >
-              {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-            </button>
+              <span
+                className={`w-2 h-2 rounded-full transition-colors duration-300 group-hover:bg-emerald-600 ${
+                  scrolled ? "bg-gray-900" : "bg-white"
+                }`}
+              />
+              Aayushman.
+            </Link>
+
+            {/* Desktop Menu */}
+            <div className="hidden md:flex items-center gap-1">
+              <div
+                className={`flex items-center rounded-full p-1 pr-2 mr-2 transition-colors duration-300 bg-transparent border border-transparent`}
+              >
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className={`px-4 py-1.5 text-sm font-medium rounded-full transition-all duration-300 ${
+                      scrolled
+                        ? "text-gray-600 hover:text-gray-900 hover:bg-white"
+                        : "text-emerald-100 hover:text-white hover:bg-white/10"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden flex items-center gap-4">
+              <button
+                className={`focus:outline-none p-2 transition-colors duration-300 ${
+                  scrolled ? "text-gray-900" : "text-white"
+                }`}
+                onClick={() => setIsOpen(!isOpen)}
+                aria-label={isOpen ? "Close menu" : "Open menu"}
+                aria-expanded={isOpen}
+              >
+                {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
 
       {/* Mobile Menu Overlay */}
-      <div 
-        className={`fixed inset-0 z-40 bg-white/95 dark:bg-black/95 backdrop-blur-xl transition-all duration-500 md:hidden flex flex-col items-center justify-center space-y-8 ${
-          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+      <div
+        className={`fixed inset-0 z-40 bg-white/95 backdrop-blur-xl transition-all duration-500 md:hidden flex flex-col items-center justify-center space-y-8 ${
+          isOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         }`}
       >
         {navLinks.map((link) => (
           <Link
             key={link.name}
             href={link.href}
-            className="text-3xl font-bold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
-            onClick={() => setIsOpen(false)}
+            onClick={(e) => handleNavClick(e, link.href)}
+            className="text-3xl font-bold text-gray-900 hover:text-emerald-600 transition-colors"
           >
             {link.name}
           </Link>

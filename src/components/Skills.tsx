@@ -1,9 +1,3 @@
-"use client";
-
-import { useRef } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   FaReact,
   FaHtml5,
@@ -54,51 +48,9 @@ const skillCategories = [
 ];
 
 const Skills = () => {
-  const containerRef = useRef(null);
-
-  useGSAP(
-    () => {
-      gsap.registerPlugin(ScrollTrigger);
-
-      gsap.fromTo(
-        ".skills-footer",
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 40%", // Trigger when scrolled further down
-          },
-        }
-      );
-
-      gsap.fromTo(
-        ".skill-category",
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.15,
-          delay: 0.8, // Wait for header to finish animating
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".skills-grid",
-            start: "top 75%",
-          },
-        }
-      );
-    },
-    { scope: containerRef }
-  );
-
   return (
     <section
       id="skills"
-      ref={containerRef}
       className="section-padding bg-white dark:bg-black relative overflow-hidden"
     >
       {/* Minimal background accent */}
@@ -118,7 +70,7 @@ const Skills = () => {
         {/* Skills Grid */}
         <div className="skills-grid grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
           {skillCategories.map((category, categoryIndex) => (
-            <div key={categoryIndex} className="skill-category">
+            <div key={categoryIndex}>
               {/* Category Header */}
               <div className="flex items-center gap-3 mb-6">
                 <span className="text-3xl font-black text-gray-200 dark:text-gray-800">
@@ -150,7 +102,7 @@ const Skills = () => {
         </div>
 
         {/* Bottom Stats/Experience */}
-        <div className="skills-footer mt-20 pt-12 border-t border-gray-200 dark:border-gray-800">
+        <div className="mt-20 pt-12 border-t border-gray-200 dark:border-gray-800">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
               { value: "2+", label: "Years Experience" },

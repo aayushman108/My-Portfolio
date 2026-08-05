@@ -2,10 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
-import { ThemeProvider } from "@/components/theme-provider";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
-import PageLoader from "@/components/PageLoader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,10 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#000000" },
-  ],
+  themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -258,43 +253,15 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
-
-        {/* Fallback for no-JS crawlers: ensure content is visible without JavaScript */}
-        <noscript>
-          <style
-            dangerouslySetInnerHTML={{
-              __html: `
-                #transition-overlay { display: none !important; }
-                #page-content { opacity: 1 !important; transform: none !important; }
-                .hero-cta-btn, .hero-globe, .hero-fade-label, .hero-fade-subtitle, .hero-fade-bottom,
-                .about-content, .about-stat, .skill-item, .contact-content, .contact-link,
-                .questions-header, .question-item, .questions-footer, .cta-content,
-                .section-text-reveal, .section-description, .section-right-element,
-                .page-header, .project-card {
-                  opacity: 1 !important;
-                  transform: none !important;
-                }
-              `,
-            }}
-          />
-        </noscript>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <PageLoader />
-          <SmoothScroll>
-            <CustomCursor />
-            <Navbar />
-            {children}
-          </SmoothScroll>
-        </ThemeProvider>
+        <SmoothScroll>
+          <CustomCursor />
+          <Navbar />
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );

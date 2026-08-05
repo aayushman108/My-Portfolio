@@ -10,284 +10,77 @@ import {
   FaSpinner,
   FaRocket,
   FaInfoCircle,
+  FaBuilding,
+  FaLandmark,
+  FaDraftingCompass,
+  FaShoppingCart,
+  FaChartLine,
+  FaUserPlus,
+  FaHeart,
+  FaUsers,
 } from "react-icons/fa";
-import { useRef, useState } from "react";
+import type { IconType } from "react-icons";
+import { useState } from "react";
 import { Modal } from "./Modal";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
-
 type IProjectCardProps = {
   project: Project;
 };
 
-export function ProjectCardForHomePage({ project }: IProjectCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  useGSAP(
-    () => {
-      gsap.fromTo(
-        cardRef.current,
-        { opacity: 0, y: 60 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: cardRef.current,
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-        },
-      );
-    },
-    { scope: cardRef },
-  );
-
-  return (
-    <div
-      ref={cardRef}
-      key={project.id}
-      className="project-card group block border-t border-cyan-900/10 dark:border-white/10 relative opacity-0 transition-colors duration-500 hover:border-cyan-400/50 dark:hover:border-cyan-300/40"
-    >
-      <Link
-        href={project.live}
-        className="absolute inset-0 z-20"
-        aria-label={`View ${project.title}`}
-      />
-
-      <div className="py-6 lg:py-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-8 lg:gap-16 items-center">
-          {/* Image */}
-          <div className="lg:col-span-6">
-            <div className="relative aspect-video rounded-xl overflow-hidden bg-slate-100 dark:bg-zinc-800 shadow-[0_24px_70px_rgba(15,23,42,0.12)] dark:shadow-[0_24px_70px_rgba(0,0,0,0.42)] transition-all duration-500 group-hover:shadow-[0_30px_90px_rgba(14,165,233,0.28)]">
-              {project.image ? (
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-              ) : (
-                <div className="w-full h-full bg-linear-to-br from-purple-500/10 to-blue-500/10 dark:from-purple-900/20 dark:to-blue-900/20" />
-              )}
-
-              {/* Project Number */}
-              <span className="absolute top-4 left-4 text-5xl md:text-6xl font-black text-white/30 leading-none z-10 transition-colors duration-500 group-hover:text-white/50">
-                {String(project.id).padStart(2, "0")}
-              </span>
-
-              {/* Year Badge */}
-              <div className="absolute top-4 right-4 px-3 py-1.5 bg-white/90 dark:bg-black/80 backdrop-blur-sm rounded-full text-xs font-bold text-slate-950 dark:text-white z-10 border border-white/60 dark:border-white/10">
-                {project.year}
-              </div>
-            </div>
-          </div>
-
-          {/* Content */}
-          <div className="lg:col-span-4">
-            <div className="flex items-center gap-3 mb-3 flex-wrap">
-              <span className="text-xs font-bold tracking-wider uppercase text-cyan-600 dark:text-cyan-300">
-                {project.type} Project
-              </span>
-              <span className="w-1 h-1 rounded-full bg-gray-400" />
-              <span className="text-xs font-medium tracking-wider uppercase text-gray-500 dark:text-gray-400">
-                {project.category}
-              </span>
-              <span className="w-1 h-1 rounded-full bg-gray-400" />
-              <span
-                className={`px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase border flex items-center gap-1.5 ${
-                  project.status === "Completed"
-                    ? "bg-emerald-100/50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800/30"
-                    : "bg-amber-100/50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800/30"
-                }`}
-              >
-                {project.status === "In-Progress" && (
-                  <span className="relative flex h-1.5 w-1.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-500"></span>
-                  </span>
-                )}
-                {project.status === "In-Progress"
-                  ? "In Progress"
-                  : project.status}
-              </span>
-            </div>
-
-            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-950 dark:text-white mb-4 transition-colors duration-300 group-hover:text-cyan-600 dark:group-hover:text-cyan-300">
-              {project.title}
-            </h3>
-
-            <p className="text-slate-600 dark:text-slate-300 text-base md:text-lg leading-relaxed mb-6 max-w-xl line-clamp-3">
-              {project.description}
-            </p>
-
-            {/* Tech Stack */}
-            <div className="flex flex-wrap gap-2 mb-6">
-              {project.tech.map((t) => (
-                <span
-                  key={t}
-                  className="px-3 py-1 text-xs font-medium rounded-full bg-white/80 dark:bg-white/[0.06] text-slate-600 dark:text-slate-300 border border-cyan-900/10 dark:border-white/10 shadow-[0_8px_20px_rgba(15,23,42,0.04)]"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-
-            {/* PROJECT LINKS */}
-            {project.type === "Personal" && (
-              <div className="flex items-center gap-3 mt-4 relative z-30">
-                <Link
-                  href={project.github}
-                  className="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2 text-sm font-medium rounded-full border border-slate-300 dark:border-white/20 text-slate-700 dark:text-slate-300 hover:border-slate-950 dark:hover:border-white hover:bg-slate-950 dark:hover:bg-white hover:text-white dark:hover:text-black transition-all duration-300"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaGithub className="text-base" />
-                  <span className="hidden sm:inline">Code</span>
-                </Link>
-                <Link
-                  href={project.live}
-                  className="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2 text-sm font-medium rounded-full border border-cyan-500 dark:border-cyan-300 text-cyan-600 dark:text-cyan-300 hover:bg-cyan-600 dark:hover:bg-cyan-300 hover:text-white dark:hover:text-black transition-all duration-300"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaExternalLinkAlt className="text-xs" />
-                  <span className="hidden sm:inline">Live Demo</span>
-                </Link>
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsModalOpen(true);
-                  }}
-                  className="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2 text-sm font-medium rounded-full border border-rose-500 dark:border-rose-300 text-rose-600 dark:text-rose-300 hover:bg-rose-600 dark:hover:bg-rose-300 hover:text-white dark:hover:text-black transition-all duration-300 cursor-pointer"
-                >
-                  <FaInfoCircle className="text-base" />
-                  <span className="hidden sm:inline">Details</span>
-                </button>
-              </div>
-            )}
-          </div>
-
-          {/* Arrow */}
-          <div className="hidden lg:flex col-span-2 items-center justify-end">
-            <div className="w-14 h-14 rounded-full border-2 border-cyan-900/10 dark:border-white/15 flex items-center justify-center bg-white/70 dark:bg-white/[0.06] transition-all duration-500 group-hover:border-cyan-500 dark:group-hover:border-cyan-300 group-hover:bg-cyan-500 dark:group-hover:bg-cyan-300 group-hover:shadow-[0_18px_42px_rgba(14,165,233,0.35)]">
-              <svg
-                className="w-5 h-5 text-gray-400 transition-all duration-500 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M7 17L17 7M17 7H7M17 7v10"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-      <ProjectDetailsModal
-        project={project}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
-    </div>
-  );
-}
+const PROJECT_ICONS: Record<string, IconType> = {
+  "MIS - Government of Nepal": FaLandmark,
+  "Engineering Consultancy Website": FaDraftingCompass,
+  "E-Commerce Platform": FaShoppingCart,
+  "AI Financial Analysis Platform": FaChartLine,
+  "Business Onboarding Platform": FaUserPlus,
+  "Matrimonial Platform": FaHeart,
+  "Human Resource Management Platform": FaUsers,
+};
 
 export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const PlaceholderIcon = PROJECT_ICONS[project.title] ?? FaBuilding;
 
   return (
-    <div
-      ref={cardRef}
-      key={project.id}
-      className="project-card group opacity-0"
-    >
+    <div key={project.id} className="group">
       {/* Image Container */}
-      <div className="relative aspect-video rounded-2xl overflow-hidden bg-white/80 dark:bg-white/[0.04] border border-cyan-900/10 dark:border-white/10 mb-6 transition-all duration-500 group-hover:border-cyan-300 dark:group-hover:border-cyan-300/40 group-hover:shadow-[0_24px_70px_rgba(14,165,233,0.18)]">
+      <div className="relative aspect-video rounded-2xl overflow-hidden bg-white/80 dark:bg-white/[0.04] border border-emerald-900/10 dark:border-white/10 mb-6 transition-colors duration-500 group-hover:border-emerald-300 dark:group-hover:border-emerald-300/40">
         {project.image ? (
           <Image
             src={project.image}
             alt={project.title}
             fill
-            sizes="(max-width: 768px) 100vw, 50vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
         ) : (
-          <div className="w-full h-full bg-[linear-gradient(135deg,rgba(14,165,233,0.16),rgba(244,63,94,0.12)),linear-gradient(to_right,rgba(15,23,42,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.05)_1px,transparent_1px)] dark:bg-[linear-gradient(135deg,rgba(34,211,238,0.16),rgba(251,113,133,0.12)),linear-gradient(to_right,rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-size-[auto,40px_40px,40px_40px] flex items-center justify-center">
-            <span className="text-6xl md:text-7xl font-black text-white/80 dark:text-white/20">
-              {String(project.id).padStart(2, "0")}
-            </span>
+          <div className="w-full h-full bg-white/80 dark:bg-white/[0.04] flex items-center justify-center">
+            <PlaceholderIcon className="text-5xl md:text-6xl text-emerald-600/30 dark:text-emerald-300/20" />
           </div>
         )}
 
         {/* Year Badge */}
-        <div className="absolute top-4 right-4 px-3 py-1.5 bg-white/90 dark:bg-black/80 backdrop-blur-sm rounded-full text-xs font-bold text-slate-950 dark:text-white border border-white/60 dark:border-white/10">
+        <div className="absolute top-4 right-4 px-2.5 py-1 bg-white/90 dark:bg-black/80 backdrop-blur-sm rounded-full text-[10px] font-bold text-slate-950 dark:text-white border border-white/60 dark:border-white/10">
           {project.year}
         </div>
 
         {/* Project Number */}
-        <span className="absolute top-4 left-4 text-5xl font-black text-white/35 leading-none">
+        <span className="absolute top-4 left-4 text-3xl font-black text-white/35 leading-none">
           {String(project.id).padStart(2, "0")}
         </span>
-
-        {/* Hover Actions */}
-        {project.type === "Personal" && (
-          <div className="absolute bottom-4 right-4 flex gap-3 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-            <Link
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 bg-white/20 backdrop-blur-md rounded-full hover:bg-white/30 transition-colors border border-white/20 cursor-pointer"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <FaGithub className="text-white text-lg" />
-            </Link>
-            <Link
-              href={project.live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 bg-white/20 backdrop-blur-md rounded-full hover:bg-white/30 transition-colors border border-white/20 cursor-pointer"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <FaExternalLinkAlt className="text-white text-lg" />
-            </Link>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-                setIsModalOpen(true);
-              }}
-              className="p-3 bg-white/20 backdrop-blur-md rounded-full hover:bg-white/30 transition-colors border border-white/20 cursor-pointer"
-            >
-              <FaInfoCircle className="text-white text-lg" />
-            </button>
-          </div>
-        )}
       </div>
 
       {/* Content */}
       <div className="space-y-4">
         {/* Meta */}
-        <div className="flex items-center gap-3 flex-wrap">
-          <span className="px-2 py-1 rounded-md bg-cyan-50 dark:bg-cyan-950/25 text-[10px] font-bold tracking-wider uppercase text-cyan-700 dark:text-cyan-300 border border-cyan-200/80 dark:border-cyan-700/40">
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="px-1.5 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950/25 text-[9px] font-bold tracking-wider uppercase text-emerald-700 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-700/40">
             {project.type}
           </span>
-          <span className="text-xs font-medium tracking-wider uppercase text-slate-500 dark:text-slate-400">
+          <span className="text-[9px] font-medium tracking-wider uppercase text-slate-500 dark:text-slate-400">
             {project.category}
           </span>
           <span
-            className={`px-2 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase border flex items-center gap-1.5 ${
+            className={`px-1.5 py-0.5 rounded-md text-[9px] font-bold tracking-wider uppercase border flex items-center gap-1.5 ${
               project.status === "Completed"
                 ? "bg-emerald-100/50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800/30"
                 : "bg-amber-100/50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800/30"
@@ -304,21 +97,21 @@ export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
         </div>
 
         {/* Title */}
-        <h2 className="text-2xl md:text-3xl font-bold text-slate-950 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors duration-300">
+        <h2 className="text-xl md:text-2xl font-bold text-slate-950 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-300 transition-colors duration-300">
           {project.title}
         </h2>
 
         {/* Description */}
-        <p className="text-slate-600 dark:text-slate-300 text-base md:text-lg leading-relaxed line-clamp-3">
+        <p className="text-sm md:text-base text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3">
           {project.description}
         </p>
 
         {/* Tech Stack */}
-        <div className="flex flex-wrap gap-2 pt-2">
+        <div className="flex flex-wrap gap-1.5 pt-2">
           {project.tech.map((t) => (
             <span
               key={t}
-              className="px-3 py-1.5 text-xs font-medium rounded-full border border-cyan-900/10 dark:border-white/10 bg-white/60 dark:bg-white/[0.04] text-slate-600 dark:text-slate-300 hover:border-cyan-400 dark:hover:border-cyan-300 transition-colors cursor-default"
+              className="px-2 py-0.5 text-[10px] font-medium rounded-full border border-emerald-900/10 dark:border-white/10 bg-white/60 dark:bg-white/[0.04] text-slate-600 dark:text-slate-300 hover:border-emerald-400 dark:hover:border-emerald-300 transition-colors cursor-default"
             >
               {t}
             </span>
@@ -326,24 +119,24 @@ export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
         </div>
 
         {/* Links */}
-        {project.type === "Personal" && (
-          <div className="flex items-center gap-3 pt-4">
+        {project.type === "Personal" ? (
+          <div className="flex items-center gap-2 pt-4">
             <Link
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2 text-sm font-medium rounded-full border border-slate-300 dark:border-white/20 text-slate-700 dark:text-slate-300 hover:border-slate-950 dark:hover:border-white hover:bg-slate-950 dark:hover:bg-white hover:text-white dark:hover:text-black transition-all duration-300"
+              className="inline-flex items-center justify-center gap-1.5 p-1.5 sm:px-3 sm:py-1 text-[11px] font-medium rounded-full border border-slate-300 dark:border-white/20 text-slate-700 dark:text-slate-300 hover:border-slate-950 dark:hover:border-white hover:bg-slate-950 dark:hover:bg-white hover:text-white dark:hover:text-black transition-all duration-300"
             >
-              <FaGithub className="text-base" />
+              <FaGithub className="text-xs" />
               <span className="hidden sm:inline">Code</span>
             </Link>
             <Link
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2 text-sm font-medium rounded-full border border-cyan-500 dark:border-cyan-300 text-cyan-600 dark:text-cyan-300 hover:bg-cyan-600 dark:hover:bg-cyan-300 hover:text-white dark:hover:text-black transition-all duration-300"
+              className="inline-flex items-center justify-center gap-1.5 p-1.5 sm:px-3 sm:py-1 text-[11px] font-medium rounded-full border border-emerald-500 dark:border-emerald-300 text-emerald-600 dark:text-emerald-300 hover:bg-emerald-600 dark:hover:bg-emerald-300 hover:text-white dark:hover:text-black transition-all duration-300"
             >
-              <FaExternalLinkAlt className="text-xs" />
+              <FaExternalLinkAlt className="text-[9px]" />
               <span className="hidden sm:inline">Live Demo</span>
             </Link>
             <button
@@ -351,9 +144,22 @@ export function ProjectCardForProjectsPage({ project }: IProjectCardProps) {
                 e.preventDefault();
                 setIsModalOpen(true);
               }}
-              className="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2 text-sm font-medium rounded-full border border-rose-500 dark:border-rose-300 text-rose-600 dark:text-rose-300 hover:bg-rose-600 dark:hover:bg-rose-300 hover:text-white dark:hover:text-black transition-all duration-300 cursor-pointer"
+              className="inline-flex items-center justify-center gap-1.5 p-1.5 sm:px-3 sm:py-1 text-[11px] font-medium rounded-full bg-emerald-600 dark:bg-emerald-300 text-white dark:text-black hover:bg-emerald-700 dark:hover:bg-emerald-200 transition-all duration-300 cursor-pointer"
             >
-              <FaInfoCircle className="text-base" />
+              <FaInfoCircle className="text-xs" />
+              <span className="hidden sm:inline">Details</span>
+            </button>
+          </div>
+        ) : (
+          <div className="flex items-center gap-2 pt-4">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setIsModalOpen(true);
+              }}
+              className="inline-flex items-center justify-center gap-1.5 p-1.5 sm:px-3 sm:py-1 text-[11px] font-medium rounded-full bg-emerald-600 dark:bg-emerald-300 text-white dark:text-black hover:bg-emerald-700 dark:hover:bg-emerald-200 transition-all duration-300 cursor-pointer"
+            >
+              <FaInfoCircle className="text-xs" />
               <span className="hidden sm:inline">Details</span>
             </button>
           </div>
@@ -382,7 +188,9 @@ function ProjectDetailsModal({
       isOpen={isOpen}
       onClose={onClose}
       title={project.title}
-      subtitle="Project Features"
+      subtitle={
+        project.type === "Company" ? "Project Overview" : "Project Features"
+      }
       headerRight={
         <span
           className={`px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase border flex items-center gap-1.5 ${
@@ -401,47 +209,53 @@ function ProjectDetailsModal({
         </span>
       }
     >
-      {/* Description and Links Top Section */}
-      <div className="mb-8">
-        <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-base md:text-lg mb-6">
-          {project.description}
-        </p>
-
-        {project.type === "Personal" && (
-          <div className="flex flex-wrap items-center gap-3">
-            <Link
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-xl border border-gray-300 dark:border-zinc-700 text-gray-700 dark:text-gray-300 hover:border-gray-900 dark:hover:border-white hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black transition-all duration-300 bg-white dark:bg-zinc-800/50 cursor-pointer"
-            >
-              <FaGithub className="text-lg" />
-              <span>Source Code</span>
-            </Link>
-            <Link
-              href={project.live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-xl border border-purple-500 dark:border-purple-400 text-purple-600 dark:text-purple-400 hover:bg-purple-600 dark:hover:bg-purple-400 hover:text-white dark:hover:text-black transition-all duration-300 bg-purple-50 dark:bg-purple-900/10 cursor-pointer"
-            >
-              <FaExternalLinkAlt className="text-base" />
-              <span>Live Demo</span>
-            </Link>
-          </div>
-        )}
-      </div>
-
-      <hr className="border-gray-200 dark:border-zinc-800/80 mb-8" />
-
-      {!project.features ? (
-        <div className="text-center py-10 border-2 border-dashed border-gray-200 dark:border-zinc-800 rounded-xl">
-          <FaInfoCircle className="text-4xl text-gray-300 dark:text-zinc-700 mx-auto mb-3" />
-          <p className="text-gray-500 dark:text-gray-400 font-medium">
-            Detailed feature list is currently being updated.
+      {project.type === "Company" ? (
+        <div>
+          <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-base md:text-lg">
+            {project.description}
           </p>
         </div>
       ) : (
-        <div className="space-y-8">
+        <>
+          {/* Description and Links Top Section */}
+          <div className="mb-8">
+            <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-base md:text-lg mb-6">
+              {project.description}
+            </p>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <Link
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-xl border border-gray-300 dark:border-zinc-700 text-gray-700 dark:text-gray-300 hover:border-gray-900 dark:hover:border-white hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black transition-all duration-300 bg-white dark:bg-zinc-800/50 cursor-pointer"
+              >
+                <FaGithub className="text-lg" />
+                <span>Source Code</span>
+              </Link>
+              <Link
+                href={project.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-xl border border-purple-500 dark:border-purple-400 text-purple-600 dark:text-purple-400 hover:bg-purple-600 dark:hover:bg-purple-400 hover:text-white dark:hover:text-black transition-all duration-300 bg-purple-50 dark:bg-purple-900/10 cursor-pointer"
+              >
+                <FaExternalLinkAlt className="text-base" />
+                <span>Live Demo</span>
+              </Link>
+            </div>
+          </div>
+
+          <hr className="border-gray-200 dark:border-zinc-800/80 mb-8" />
+
+          {!project.features ? (
+            <div className="text-center py-10 border-2 border-dashed border-gray-200 dark:border-zinc-800 rounded-xl">
+              <FaInfoCircle className="text-4xl text-gray-300 dark:text-zinc-700 mx-auto mb-3" />
+              <p className="text-gray-500 dark:text-gray-400 font-medium">
+                Detailed feature list is currently being updated.
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-8">
           {/* Current Features */}
           {project.features.current && project.features.current.length > 0 && (
             <section>
@@ -455,7 +269,7 @@ function ProjectDetailsModal({
                     key={idx}
                     className="flex items-start gap-3 p-3.5 rounded-xl bg-gray-50 dark:bg-zinc-800/50 border border-gray-100 dark:border-zinc-800/80 hover:border-emerald-200 dark:hover:border-emerald-900/50 transition-colors"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0" />
                     <span className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
                       {feature}
                     </span>
@@ -505,7 +319,7 @@ function ProjectDetailsModal({
                     key={idx}
                     className="flex items-start gap-3 p-3.5 rounded-xl bg-purple-50/30 dark:bg-purple-900/10 border border-purple-100 dark:border-purple-900/20 hover:border-purple-200 dark:hover:border-purple-900/40 transition-colors"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-purple-500 mt-2 shrink-0 shadow-[0_0_8px_rgba(168,85,247,0.5)]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-purple-500 mt-2 shrink-0" />
                     <span className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
                       {feature}
                     </span>
@@ -515,6 +329,8 @@ function ProjectDetailsModal({
             </section>
           )}
         </div>
+      )}
+        </>
       )}
     </Modal>
   );

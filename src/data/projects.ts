@@ -113,16 +113,21 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 4,
-    title: "Government Welfare Management System",
+    title: "MIS - Government of Nepal",
     description:
       "Government-led web application designed to digitize and manage data related to poor households across Nepal, supporting large-scale surveys, data processing, and household-level queries for inclusive welfare monitoring.",
     tech: [
       "React",
+      "TypeScript",
       "Redux Toolkit",
       "Recharts",
       "Leaflet",
       "React Testing Library",
       "Vitest",
+      "Node.js",
+      "Express",
+      "PostgreSQL",
+      "Knex.js",
     ],
     github: "#",
     live: "#",
@@ -137,7 +142,7 @@ export const PROJECTS: Project[] = [
     title: "Engineering Consultancy Website",
     description:
       "Corporate website for an engineering consultancy firm showcasing company information, services, projects, milestones, and interactive map-based project visualization.",
-    tech: ["Next.js", "Redux Toolkit", "Recharts", "Leaflet", "Strapi CMS"],
+    tech: ["Next.js", "TypeScript", "Redux Toolkit", "Recharts", "Leaflet", "Strapi CMS"],
     github: "#",
     live: "#",
     year: "2024",
@@ -151,7 +156,7 @@ export const PROJECTS: Project[] = [
     title: "E-Commerce Platform",
     description:
       "E-commerce platform offering online shopping features, promotional sections, community forums, and content-driven experiences for users.",
-    tech: ["Next.js", "Redux Toolkit"],
+    tech: ["Next.js", "TypeScript", "Redux Toolkit", "Node.js", "Express", "PostgreSQL", "Knex.js"],
     github: "#",
     live: "#",
     year: "2024",
@@ -165,7 +170,7 @@ export const PROJECTS: Project[] = [
     title: "AI Financial Analysis Platform",
     description:
       "AI-powered financial analysis platform that extracts insights from financial documents, enabling intelligent queries related to revenue, statements, and risk assessment.",
-    tech: ["Next.js", "Redux Toolkit", "Clerk Authentication"],
+    tech: ["Next.js", "TypeScript", "Redux Toolkit", "Clerk Authentication"],
     github: "#",
     live: "#",
     year: "2024",
@@ -179,7 +184,7 @@ export const PROJECTS: Project[] = [
     title: "Business Onboarding Platform",
     description:
       "A full-stack platform designed to help businesses onboard and grow through digital marketing services. It provides structured onboarding flows, service exploration, pricing plans, and seamless payment gateway integration.",
-    tech: ["Next.js", "Node.js", "Express", "PostgreSQL"],
+    tech: ["Next.js", "TypeScript", "Node.js", "Express", "MongoDB"],
     github: "#",
     live: "#",
     year: "2025",
@@ -203,7 +208,7 @@ export const PROJECTS: Project[] = [
     title: "Matrimonial Platform",
     description:
       "A matchmaking platform enabling users to discover potential partners through intelligent suggestions, real-time chat, and advanced search capabilities.",
-    tech: ["Next.js", "Node.js", "Express", "PostgreSQL"],
+    tech: ["Next.js", "TypeScript", "Node.js", "Express", "PostgreSQL", "Knex.js"],
     github: "#",
     live: "#",
     year: "2026",
@@ -221,5 +226,19 @@ export const PROJECTS: Project[] = [
       inProgress: [],
       planned: [],
     },
+  },
+  {
+    id: 10,
+    title: "Human Resource Management Platform",
+    description:
+      "A human resource management platform supporting contract management, company events, and employee timesheet tracking for streamlined workforce administration.",
+    tech: ["React", "TypeScript", "Redux Toolkit"],
+    github: "#",
+    live: "#",
+    year: "2024",
+    category: "Web App",
+    type: "Company",
+    image: undefined,
+    status: "Completed",
   },
 ];

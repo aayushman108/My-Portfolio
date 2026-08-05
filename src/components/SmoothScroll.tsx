@@ -5,6 +5,12 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+let lenisInstance: Lenis | null = null;
+
+export function getLenis(): Lenis | null {
+  return lenisInstance;
+}
+
 export default function SmoothScroll({
   children,
 }: {
@@ -22,6 +28,8 @@ export default function SmoothScroll({
       infinite: false,
     });
 
+    lenisInstance = lenis;
+
     lenis.on("scroll", ScrollTrigger.update);
 
     gsap.ticker.add((time) => {
@@ -31,6 +39,7 @@ export default function SmoothScroll({
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      lenisInstance = null;
       lenis.destroy();
       gsap.ticker.remove(lenis.raf);
     };

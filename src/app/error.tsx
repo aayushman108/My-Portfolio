@@ -19,9 +19,6 @@ export default function Error({
   return (
     <div className="fixed inset-0 w-screen h-screen bg-white dark:bg-black flex flex-col items-center justify-center z-200 px-6 text-center transition-colors duration-500">
 
-      {/* Glow Effect */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-purple-600/5 dark:bg-purple-600/10 blur-[120px] -z-10 rounded-full" />
-
       <div className="flex flex-col items-center max-w-xl relative animate-in fade-in zoom-in duration-700">
         <div className="w-20 h-20 rounded-2xl bg-gray-100 dark:bg-white/5 flex items-center justify-center mb-10 border border-gray-200 dark:border-white/10 backdrop-blur-sm">
           <FaExclamationTriangle className="text-purple-600 dark:text-purple-500 text-3xl animate-pulse" />
@@ -38,7 +35,7 @@ export default function Error({
         <div className="flex flex-col sm:flex-row items-center gap-4">
           <button
             onClick={() => reset()}
-            className="group flex items-center gap-3 px-10 py-4 bg-gray-900 dark:bg-purple-600 text-white rounded-full font-semibold hover:bg-purple-600 dark:hover:bg-purple-500 transition-all duration-300 shadow-xl shadow-gray-900/10 dark:shadow-purple-600/20"
+            className="group flex items-center gap-3 px-10 py-4 bg-gray-900 dark:bg-purple-600 text-white rounded-full font-semibold hover:bg-purple-600 dark:hover:bg-purple-500 transition-colors duration-300"
           >
             <FaRedo className="text-sm group-hover:rotate-180 transition-transform duration-700" />
             <span>Try Again</span>
