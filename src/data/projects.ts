@@ -79,40 +79,40 @@ export const PROJECTS: Project[] = [
   //     planned: ["Social Media Sharing", "Leaderboards", "Community Forums"],
   //   },
   // },
+  // {
+  //   id: 3,
+  //   title: "Annapurna",
+  //   description:
+  //     "A       modern restaurant web application focused on delivering an immersive dining experience through a visually rich and responsive UI. Built with a scalable architecture to support future backend integration and operational automation.",
+  //   tech: ["Next.js", "TypeScript", "Tailwind CSS", "GSAP"],
+  //   github: "https://github.com/aayushman108/Restaurant-app",
+  //   live: "https://annapurnafoodz.netlify.app",
+  //   year: "2026",
+  //   category: "Web App",
+  //   type: "Personal",
+  //   image: "/images/restaurant.png",
+  //   status: "In-Progress",
+  //   features: {
+  //     current: [
+  //       "Responsive UI across devices",
+  //       "Interactive Digital Menu",
+  //       "Smooth animations",
+  //       "Multi-page navigation (Home, About, Contact, Book a Table)",
+  //     ],
+  //     inProgress: [],
+  //     planned: [
+  //       "Backend API Integration (Express + PostgreSQL)",
+  //       "Table Reservation System",
+  //       "Contact Form API",
+  //       "Online Payment Gateway Integration",
+  //       "Admin Dashboard for Restaurant Management",
+  //       "Order Management System",
+  //       "User Authentication & Roles",
+  //     ],
+  //   },
+  // },
   {
-    id: 3,
-    title: "Annapurna",
-    description:
-      "A       modern restaurant web application focused on delivering an immersive dining experience through a visually rich and responsive UI. Built with a scalable architecture to support future backend integration and operational automation.",
-    tech: ["Next.js", "TypeScript", "Tailwind CSS", "GSAP"],
-    github: "https://github.com/aayushman108/Restaurant-app",
-    live: "https://annapurnafoodz.netlify.app",
-    year: "2026",
-    category: "Web App",
-    type: "Personal",
-    image: "/images/restaurant.png",
-    status: "In-Progress",
-    features: {
-      current: [
-        "Responsive UI across devices",
-        "Interactive Digital Menu",
-        "Smooth animations",
-        "Multi-page navigation (Home, About, Contact, Book a Table)",
-      ],
-      inProgress: [],
-      planned: [
-        "Backend API Integration (Express + PostgreSQL)",
-        "Table Reservation System",
-        "Contact Form API",
-        "Online Payment Gateway Integration",
-        "Admin Dashboard for Restaurant Management",
-        "Order Management System",
-        "User Authentication & Roles",
-      ],
-    },
-  },
-  {
-    id: 4,
+    id: 2,
     title: "MIS - Government of Nepal",
     description:
       "Government-led web application designed to digitize and manage data related to poor households across Nepal, supporting large-scale surveys, data processing, and household-level queries for inclusive welfare monitoring.",
@@ -138,11 +138,18 @@ export const PROJECTS: Project[] = [
     status: "Completed",
   },
   {
-    id: 5,
+    id: 3,
     title: "Engineering Consultancy Website",
     description:
       "Corporate website for an engineering consultancy firm showcasing company information, services, projects, milestones, and interactive map-based project visualization.",
-    tech: ["Next.js", "TypeScript", "Redux Toolkit", "Recharts", "Leaflet", "Strapi CMS"],
+    tech: [
+      "Next.js",
+      "TypeScript",
+      "Redux Toolkit",
+      "Recharts",
+      "Leaflet",
+      "Strapi CMS",
+    ],
     github: "#",
     live: "#",
     year: "2024",
@@ -152,11 +159,19 @@ export const PROJECTS: Project[] = [
     status: "Completed",
   },
   {
-    id: 6,
+    id: 4,
     title: "E-Commerce Platform",
     description:
       "E-commerce platform offering online shopping features, promotional sections, community forums, and content-driven experiences for users.",
-    tech: ["Next.js", "TypeScript", "Redux Toolkit", "Node.js", "Express", "PostgreSQL", "Knex.js"],
+    tech: [
+      "Next.js",
+      "TypeScript",
+      "Redux Toolkit",
+      "Node.js",
+      "Express",
+      "PostgreSQL",
+      "Knex.js",
+    ],
     github: "#",
     live: "#",
     year: "2024",
@@ -166,7 +181,7 @@ export const PROJECTS: Project[] = [
     status: "Completed",
   },
   {
-    id: 7,
+    id: 5,
     title: "AI Financial Analysis Platform",
     description:
       "AI-powered financial analysis platform that extracts insights from financial documents, enabling intelligent queries related to revenue, statements, and risk assessment.",
@@ -180,7 +195,7 @@ export const PROJECTS: Project[] = [
     status: "Completed",
   },
   {
-    id: 8,
+    id: 6,
     title: "Business Onboarding Platform",
     description:
       "A full-stack platform designed to help businesses onboard and grow through digital marketing services. It provides structured onboarding flows, service exploration, pricing plans, and seamless payment gateway integration.",
@@ -204,11 +219,18 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    id: 9,
+    id: 7,
     title: "Matrimonial Platform",
     description:
       "A matchmaking platform enabling users to discover potential partners through intelligent suggestions, real-time chat, and advanced search capabilities.",
-    tech: ["Next.js", "TypeScript", "Node.js", "Express", "PostgreSQL", "Knex.js"],
+    tech: [
+      "Next.js",
+      "TypeScript",
+      "Node.js",
+      "Express",
+      "PostgreSQL",
+      "Knex.js",
+    ],
     github: "#",
     live: "#",
     year: "2026",
@@ -228,7 +250,7 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    id: 10,
+    id: 8,
     title: "Human Resource Management Platform",
     description:
       "A human resource management platform supporting contract management, company events, and employee timesheet tracking for streamlined workforce administration.",
